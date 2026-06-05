@@ -1,0 +1,407 @@
+:root {
+  --bg: #14143a;
+  --bg-2: #1e1e52;
+  --panel: #232366;
+  --border: #4a4a8a;
+  --border-soft: #34346e;
+  --text: #e4e7ff;
+  --text-dim: #9aa0d8;
+  --accent: #7c8cff;
+  --avail: #3a7a4e;
+  --avail-bg: rgba(74, 200, 120, 0.14);
+  --danger: #d06a6a;
+  --gold: #c9a84c;
+  --radius: 10px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 50% 0%, var(--bg-2), var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+sj-app {
+  display: block;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 12px 14px 40px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--accent);
+  color: #0c0c28;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.secondary:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 2px 12px;
+}
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+}
+.header-btns {
+  display: flex;
+  gap: 8px;
+}
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  color: var(--text);
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+}
+.icon-btn:hover {
+  border-color: var(--accent);
+}
+
+/* ---------- Setup ---------- */
+.setup {
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+}
+.setup h1 {
+  color: var(--gold);
+  margin: 0 0 4px;
+}
+.setup .tagline {
+  color: var(--text-dim);
+  margin: 0 0 20px;
+}
+.setup fieldset {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  margin: 0 0 16px;
+  padding: 12px;
+}
+.setup legend {
+  color: var(--text-dim);
+  padding: 0 8px;
+}
+.choice-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.choice {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+}
+.choice.selected {
+  background: var(--accent);
+  color: #0c0c28;
+  border-color: var(--accent);
+  font-weight: 700;
+}
+.names {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+.names input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 9px 12px;
+  font: inherit;
+}
+
+/* ---------- Status bar ---------- */
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.players {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.player-chip {
+  border: 1px solid var(--border-soft);
+  background: var(--bg-2);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+.player-chip .pscore {
+  font-weight: 700;
+  color: var(--text);
+  margin-left: 6px;
+}
+.player-chip.current {
+  border-color: var(--gold);
+  color: var(--text);
+  box-shadow: 0 0 0 1px var(--gold) inset;
+}
+.turn-info {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+.turn-info strong {
+  color: var(--text);
+}
+
+/* ---------- Dice tray ---------- */
+.tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.dice {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.die {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: linear-gradient(160deg, #f4f6ff, #c9d2ff);
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 8px;
+  gap: 2px;
+  position: relative;
+}
+.die:disabled {
+  opacity: 0.55;
+}
+.die.held {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(201, 168, 76, 0.6);
+}
+.die.empty {
+  background: var(--bg);
+  border-style: dashed;
+}
+.die .pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1a2a6a;
+  align-self: center;
+  justify-self: center;
+}
+/* pip-paikat 3x3-ruudukossa */
+.p1 { grid-area: 1 / 1; }
+.p2 { grid-area: 1 / 3; }
+.p3 { grid-area: 2 / 1; }
+.p4 { grid-area: 2 / 2; }
+.p5 { grid-area: 2 / 3; }
+.p6 { grid-area: 3 / 1; }
+.p7 { grid-area: 3 / 3; }
+.die .held-tag {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.62rem;
+  color: var(--gold);
+}
+
+/* ---------- Scorecard ---------- */
+sj-scorecard {
+  display: block;
+  overflow-x: auto; /* varmuus kapeimmille näytöille */
+}
+.scorecard {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.scorecard th,
+.scorecard td {
+  border: 1px solid var(--border-soft);
+  padding: 6px 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.scorecard thead th {
+  background: var(--panel);
+  color: var(--text);
+}
+.scorecard .row-label {
+  text-align: left;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.scorecard tr.section-lower td.row-label {
+  color: var(--text);
+}
+.cell {
+  min-width: 42px;
+  height: 30px;
+}
+.cell.filled {
+  color: var(--text);
+  font-weight: 600;
+}
+.cell.zero {
+  color: var(--text-dim);
+}
+.cell.avail {
+  background: var(--avail-bg);
+  color: #bff0cf;
+  cursor: pointer;
+  font-weight: 700;
+}
+.cell.avail:hover {
+  background: var(--avail);
+  color: #fff;
+}
+.cell.pending {
+  background: rgba(201, 168, 76, 0.22);
+  color: #ffe9ad;
+  font-weight: 700;
+  box-shadow: 0 0 0 2px var(--gold) inset;
+}
+.cell.colsum {
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 700;
+}
+.scorecard tr.subtotal td,
+.scorecard tr.total td {
+  background: var(--panel);
+  font-weight: 700;
+  color: var(--text);
+}
+.scorecard tr.total td {
+  font-size: 1rem;
+}
+.dev {
+  font-size: 0.7rem;
+  margin-left: 4px;
+}
+.dev.pos { color: #8fe0a8; }
+.dev.neg { color: var(--danger); }
+
+/* ---------- Overlay (rules / settings / game over) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 24, 0.7);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 10;
+}
+.overlay .panel {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  max-width: 520px;
+  max-height: 80vh;
+  overflow: auto;
+}
+.overlay h2 {
+  margin-top: 0;
+  color: var(--gold);
+}
+.overlay .panel ul {
+  line-height: 1.5;
+}
+.overlay .actions {
+  margin-top: 18px;
+  text-align: right;
+}
+.banner {
+  text-align: center;
+}
+.banner .trophy {
+  font-size: 2.4rem;
+}
+
+@media (max-width: 560px) {
+  sj-app { padding: 10px 8px 32px; }
+  .die { width: 46px; height: 46px; }
+  .die .pip { width: 8px; height: 8px; }
+  .scorecard th, .scorecard td { padding: 4px 4px; font-size: 0.78rem; }
+  .app-header h1 { font-size: 1.25rem; }
+}
+
+/* Pienet puhelimet (~360–375 px): tiivis tulokortti mahtuu ilman vaakavieritystä. */
+@media (max-width: 400px) {
+  sj-app { padding: 8px 5px 28px; }
+  .die { width: 40px; height: 40px; padding: 6px; }
+  .die .pip { width: 7px; height: 7px; }
+  .tray { gap: 10px; padding: 12px; }
+  .primary, .secondary { padding: 11px 14px; font-size: 0.98rem; }
+  .scorecard th, .scorecard td { padding: 3px 2px; font-size: 0.7rem; }
+  .scorecard .row-label { font-size: 0.68rem; }
+  .cell { min-width: 26px; }
+  .dev { font-size: 0.6rem; margin-left: 2px; }
+}
