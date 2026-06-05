@@ -21,6 +21,15 @@ export class DiceTray extends HTMLElement {
     this.render();
   }
 
+  /** Deterministinen "pöydälle heitetty" -asento nopalle (kierto + pieni siirtymä). */
+  private scatter(index: number, value: number): string {
+    const seed = (index * 92821 + value * 13219) >>> 0;
+    const rot = (seed % 37) - 18; // -18..18 astetta
+    const dx = ((seed >> 6) % 17) - 8; // -8..8 px
+    const dy = ((seed >> 11) % 15) - 7; // -7..7 px
+    return `transform: rotate(${rot}deg) translate(${dx}px, ${dy}px);`;
+  }
+
   private render(): void {
     const v = this.view;
     if (!v) return;
@@ -31,7 +40,10 @@ export class DiceTray extends HTMLElement {
         const held = d.held ? " held" : "";
         const tag = d.held ? `<span class="held-tag">${T.held}</span>` : "";
         const dis = v.hasRolled && !v.isOver ? "" : " disabled";
-        return `<button class="die${held}" data-die="${i}"${dis} aria-label="noppa ${d.value}">${pips}${tag}</button>`;
+        // Lukitsemattomat nopat heitetään "pöydälle" sekamelskaan; lukitut pysyvät suorassa.
+        // Sekoitus on deterministinen (indeksi + arvo) → ei hypi lukittaessa, vaan vain heitettäessä.
+        const style = d.held ? "" : ` style="${this.scatter(i, d.value)}"`;
+        return `<button class="die${held}" data-die="${i}"${dis}${style} aria-label="noppa ${d.value}">${pips}${tag}</button>`;
       })
       .join("");
 
