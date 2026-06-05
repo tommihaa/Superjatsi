@@ -393,6 +393,43 @@ sj-scorecard {
   font-size: 2.4rem;
 }
 
+/* Pelialueen kääre: pystyssä pino, vaakatasossa kahden palstan asettelu. */
+.play {
+  display: block;
+}
+
+/* Puhelin vaakatasossa: vasen ohjainpalsta + oikea vierivä tulokortti.
+   Rajattu matalaan korkeuteen, jottei vaikuta korkeaan työpöytänäkymään. */
+@media (orientation: landscape) and (max-height: 600px) {
+  sj-app { padding: 8px 10px 14px; }
+  .app-header { padding: 2px 2px 8px; }
+  .app-header h1 { font-size: 1.15rem; }
+
+  .play {
+    display: grid;
+    grid-template-columns: minmax(180px, 34%) 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .play-left {
+    position: sticky;
+    top: 6px;
+    align-self: start;
+  }
+  .status { margin-bottom: 8px; }
+  .tray { margin-bottom: 0; padding: 10px; gap: 8px; }
+  .tray .dice { gap: 10px; min-height: 0; padding: 4px; }
+  .die { width: 42px; height: 42px; }
+  .die .pip { width: 7px; height: 7px; }
+
+  /* Tulokortti vierii omassa palstassaan, nopat pysyvät näkyvissä vasemmalla. */
+  sj-scorecard {
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+  }
+  .scorecard th, .scorecard td { padding: 3px 5px; font-size: 0.74rem; }
+}
+
 @media (max-width: 560px) {
   sj-app { padding: 10px 8px 32px; }
   .die { width: 46px; height: 46px; }

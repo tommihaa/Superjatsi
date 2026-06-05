@@ -94,19 +94,30 @@ export class App extends HTMLElement {
 
     this.append(document.createElement("sj-header") as AppHeader);
 
+    // Pelialue: vasen sarake = ohjaimet (vuorotila + nopat), oikea = tulokortti.
+    // CSS järjestää tämän pystyssä pinoksi ja vaakatasossa kahdeksi palstaksi.
+    const play = document.createElement("div");
+    play.className = "play";
+
+    const left = document.createElement("div");
+    left.className = "play-left";
+
     const status = document.createElement("sj-status-bar") as StatusBar;
     status.data = view;
-    this.append(status);
+    left.append(status);
 
     if (!view.isOver) {
       const tray = document.createElement("sj-dice-tray") as DiceTray;
       tray.data = view;
-      this.append(tray);
+      left.append(tray);
     }
+    play.append(left);
 
     const card = document.createElement("sj-scorecard") as ScorecardView;
     card.data = view;
-    this.append(card);
+    play.append(card);
+
+    this.append(play);
 
     if (view.isOver) this.append(this.gameOverOverlay(view.winners));
     else if (this.overlay) this.append(this.infoOverlay(this.overlay));
