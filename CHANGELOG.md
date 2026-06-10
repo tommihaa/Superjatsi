@@ -3,6 +3,13 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.2.1] – 2026-06-10
+
+### Muutettu
+- **Noppatarjotin kahteen vyöhykkeeseen**: heitetyt nopat asettuvat hajalleen omalle
+  "pöytäalueelleen" (deterministiset ankkuripaikat + arvosta riippuva siirtymä ja kierto),
+  lukitut nopat siirtyvät suoraan riviin pöydän alle. Aiemmin kaikki olivat samassa rivissä.
+
 ## [0.2.0] – 2026-06-10
 
 ### Lisätty

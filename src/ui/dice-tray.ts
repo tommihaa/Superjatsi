@@ -21,31 +21,58 @@ export class DiceTray extends HTMLElement {
     this.render();
   }
 
-  /** Deterministinen "pöydälle heitetty" -asento nopalle (kierto + pieni siirtymä). */
+  /**
+   * Deterministinen "pöydälle heitetty" -asento nopalle: kullakin nopalla on oma
+   * ankkurialue pöydällä (ei päällekkäisyyttä) ja arvosta riippuva satunnaisen
+   * näköinen poikkeama + kierto. Sama indeksi + arvo → sama asento, eli nopat
+   * eivät hypi lukittaessa, vaan vain heitettäessä.
+   */
   private scatter(index: number, value: number): string {
+    const anchors = [
+      { x: 4, y: 10 },
+      { x: 36, y: 46 },
+      { x: 64, y: 6 },
+      { x: 76, y: 44 },
+      { x: 16, y: 50 },
+      { x: 48, y: 14 },
+    ];
+    const a = anchors[index % anchors.length];
     const seed = (index * 92821 + value * 13219) >>> 0;
-    const rot = (seed % 37) - 18; // -18..18 astetta
-    const dx = ((seed >> 6) % 17) - 8; // -8..8 px
-    const dy = ((seed >> 11) % 15) - 7; // -7..7 px
-    return `transform: rotate(${rot}deg) translate(${dx}px, ${dy}px);`;
+    const rot = (seed % 51) - 25; // -25..25 astetta
+    const dx = ((seed >> 6) % 11) - 5; // -5..5 %-yksikköä
+    const dy = ((seed >> 11) % 13) - 6; // -6..6 %-yksikköä
+    const x = Math.min(78, Math.max(0, a.x + dx));
+    const y = Math.min(55, Math.max(0, a.y + dy));
+    return `left:${x}%; top:${y}%; transform: rotate(${rot}deg);`;
   }
 
   private render(): void {
     const v = this.view;
     if (!v) return;
-    const dieHtml = v.dice
-      .map((d, i) => {
-        if (d.value === 0) return `<button class="die empty" disabled aria-label="tyhjä noppa"></button>`;
-        const pips = PIPS[d.value].map((p) => `<span class="pip ${p}"></span>`).join("");
-        const held = d.held ? " held" : "";
-        const tag = d.held ? `<span class="held-tag">${T.held}</span>` : "";
-        const dis = v.hasRolled && !v.isOver ? "" : " disabled";
-        // Lukitsemattomat nopat heitetään "pöydälle" sekamelskaan; lukitut pysyvät suorassa.
-        // Sekoitus on deterministinen (indeksi + arvo) → ei hypi lukittaessa, vaan vain heitettäessä.
-        const style = d.held ? "" : ` style="${this.scatter(i, d.value)}"`;
-        return `<button class="die${held}" data-die="${i}"${dis}${style} aria-label="noppa ${d.value}">${pips}${tag}</button>`;
-      })
-      .join("");
+    const dis = v.hasRolled && !v.isOver ? "" : " disabled";
+
+    // Heitetyt nopat hajallaan "pöydällä", lukitut (ja tyhjät) suorassa rivissä alla.
+    const thrown: string[] = [];
+    const rowDice: string[] = [];
+    v.dice.forEach((d, i) => {
+      if (d.value === 0) {
+        rowDice.push(`<button class="die empty" disabled aria-label="tyhjä noppa"></button>`);
+        return;
+      }
+      const pips = PIPS[d.value].map((p) => `<span class="pip ${p}"></span>`).join("");
+      if (d.held) {
+        rowDice.push(
+          `<button class="die held" data-die="${i}"${dis} aria-label="noppa ${d.value}, lukittu">${pips}<span class="held-tag">${T.held}</span></button>`,
+        );
+      } else {
+        thrown.push(
+          `<button class="die" data-die="${i}"${dis} style="${this.scatter(i, d.value)}" aria-label="noppa ${d.value}">${pips}</button>`,
+        );
+      }
+    });
+    const dieHtml =
+      (thrown.length ? `<div class="table">${thrown.join("")}</div>` : "") +
+      (rowDice.length ? `<div class="dice-row">${rowDice.join("")}</div>` : "");
 
     const rollLabel = v.rollsUsed === 0 ? T.roll : T.rollAgain;
     const rollDis = v.canRoll ? "" : " disabled";
@@ -60,7 +87,7 @@ export class DiceTray extends HTMLElement {
 
     this.innerHTML = `
       <div class="tray">
-        <div class="dice">${dieHtml}</div>
+        ${dieHtml}
         ${actions}
       </div>`;
 
