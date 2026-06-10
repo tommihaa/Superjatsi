@@ -5,6 +5,7 @@ import "./dice-tray";
 import "./scorecard-view";
 
 import { GameState } from "../domain/game";
+import { HighscoreStore } from "../domain/highscores";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
@@ -15,7 +16,7 @@ import type { StatusBar } from "./status-bar";
 import type { DiceTray } from "./dice-tray";
 import type { ScorecardView } from "./scorecard-view";
 
-type Overlay = "rules" | "settings" | null;
+type Overlay = "rules" | "settings" | "scores" | null;
 
 // <sj-app>: juurikomponentti. Omistaa GameStaten ja persistoinnin, orkestroi
 // lapsikomponentit ja kuuntelee niiden eventtejä (delegoituna tähän kerran).
@@ -23,6 +24,9 @@ export class App extends HTMLElement {
   private game: GameState | null = null;
   private overlay: Overlay = null;
   private readonly persistence = new GamePersistence(window.localStorage);
+  private readonly highscores = new HighscoreStore(window.localStorage);
+  /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
+  private newRanks: number[] = [];
 
   connectedCallback(): void {
     this.bindEvents();
@@ -40,6 +44,7 @@ export class App extends HTMLElement {
       this.game = new GameState(names, diceCount);
       this.persist();
       this.overlay = null;
+      this.newRanks = [];
       this.render();
     });
     this.addEventListener("roll", () => this.mutate((g) => g.roll()));
@@ -54,6 +59,7 @@ export class App extends HTMLElement {
     this.addEventListener("cancel-commit", () => this.mutate((g) => g.cancel()));
     this.addEventListener("open-rules", () => this.setOverlay("rules"));
     this.addEventListener("open-settings", () => this.setOverlay("settings"));
+    this.addEventListener("open-highscores", () => this.setOverlay("scores"));
     this.addEventListener("new-game", () => {
       this.persistence.clear();
       this.game = null;
@@ -65,9 +71,20 @@ export class App extends HTMLElement {
   /** Suorita pelitilan muutos, tallenna ja piirrä uudelleen. */
   private mutate(fn: (g: GameState) => void): void {
     if (!this.game) return;
+    const wasOver = this.game.isOver();
     fn(this.game);
+    if (!wasOver && this.game.isOver()) this.recordHighscores();
     this.persist();
     this.render();
+  }
+
+  /** Kirjaa päättyneen pelin kaikkien pelaajien loppusummat ennätyslistalle. */
+  private recordHighscores(): void {
+    if (!this.game) return;
+    this.newRanks = this.highscores.submit(
+      this.game.diceCount,
+      this.game.players.map((p) => ({ name: p.name, score: p.card.grandTotal() })),
+    );
   }
 
   private persist(): void {
@@ -125,14 +142,20 @@ export class App extends HTMLElement {
 
   private gameOverOverlay(winners: string[]): HTMLElement {
     const msg = winners.length === 1 ? T.winner(winners[0]) : T.winnerTie(winners.join(", "));
+    const scores = this.game
+      ? `<h3 class="hs-title">${T.highscoresFor(this.game.diceCount)}</h3>
+         ${this.highscoreListHtml(this.game.diceCount, this.newRanks)}`
+      : "";
     return this.overlayEl(
       `<div class="banner"><div class="trophy">🏆</div><h2>${T.gameOver}</h2><p>${msg}</p></div>
+       ${scores}
        <div class="actions"><button class="primary" data-close="new">${T.playAgain}</button></div>`,
       false,
     );
   }
 
-  private infoOverlay(kind: "rules" | "settings"): HTMLElement {
+  private infoOverlay(kind: "rules" | "settings" | "scores"): HTMLElement {
+    if (kind === "scores") return this.highscoreOverlay();
     const body =
       kind === "rules"
         ? `<h2>${T.rules}</h2>
@@ -146,6 +169,46 @@ export class App extends HTMLElement {
            </ul>`
         : `<h2>${T.settings}</h2><p>${T.settingsComing}</p>`;
     return this.overlayEl(`${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`, true);
+  }
+
+  private highscoreOverlay(): HTMLElement {
+    const diceCount = this.game?.diceCount ?? 6;
+    const hasScores = this.highscores.list(diceCount).length > 0;
+    const clearBtn = hasScores
+      ? `<button class="secondary" data-act="clear-hs">${T.clearHighscores}</button> `
+      : "";
+    const ov = this.overlayEl(
+      `<h2>${T.highscoresFor(diceCount)}</h2>
+       ${this.highscoreListHtml(diceCount, [])}
+       <div class="actions">${clearBtn}<button class="primary" data-close="x">${T.close}</button></div>`,
+      true,
+    );
+    ov.querySelector('[data-act="clear-hs"]')?.addEventListener("click", () => {
+      if (window.confirm(T.clearHighscoresConfirm)) {
+        this.highscores.clear();
+        this.newRanks = [];
+        this.render();
+      }
+    });
+    return ov;
+  }
+
+  /** Top 10 -lista tauluna; highlight = juuri listalle päässeiden indeksit. */
+  private highscoreListHtml(diceCount: DiceCount, highlight: number[]): string {
+    const entries = this.highscores.list(diceCount);
+    if (entries.length === 0) return `<p class="hs-empty">${T.noHighscores}</p>`;
+    const rows = entries
+      .map(
+        (e, i) =>
+          `<tr${highlight.includes(i) ? ' class="hs-new"' : ""}>
+             <td class="hs-rank">${i + 1}.</td>
+             <td class="hs-name">${e.name}</td>
+             <td class="hs-score">${e.score}</td>
+             <td class="hs-date">${e.date}</td>
+           </tr>`,
+      )
+      .join("");
+    return `<table class="hs-table"><tbody>${rows}</tbody></table>`;
   }
 
   private overlayEl(innerHtml: string, dismissable: boolean): HTMLElement {

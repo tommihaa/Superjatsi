@@ -21,3 +21,4 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 ## Valmis (ks. CHANGELOG)
 - [x] Domain + 42 testiä, UI, 5/6 nopan variantti, kaksivaihekirjaus, responsiivinen layout,
       localStorage, GitHub + Vercel-auto-deploy, URL https://tommi-superjatsi.vercel.app.
+- [x] Ennätykset top 10 per variantti (0.2.0): localStorage, 🏆-nappi, ★-korostus loppunäytössä.

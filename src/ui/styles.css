@@ -393,6 +393,50 @@ sj-scorecard {
   font-size: 2.4rem;
 }
 
+/* ---------- Ennätykset ---------- */
+.hs-title {
+  margin: 18px 0 8px;
+  color: var(--gold);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.hs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.hs-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.hs-rank {
+  color: var(--text-dim);
+  width: 2em;
+  text-align: right;
+}
+.hs-score {
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.hs-date {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.hs-new td {
+  background: var(--avail-bg);
+}
+.hs-new .hs-name::after {
+  content: " ★";
+  color: var(--gold);
+}
+.hs-empty {
+  color: var(--text-dim);
+}
+
 /* Pelialueen kääre: pystyssä pino, vaakatasossa kahden palstan asettelu. */
 .play {
   display: block;

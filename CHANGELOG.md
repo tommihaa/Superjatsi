@@ -3,9 +3,14 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
-## [Julkaisematon]
+## [0.2.0] – 2026-06-10
 
-_(Ei avoimia muutoksia.)_
+### Lisätty
+- **Ennätykset (top 10)**: pelin loppusummat tallentuvat paikalliseen ennätyslistaan
+  (localStorage, ei mitään verkkoon). Lista per variantti (5 ja 6 noppaa erikseen),
+  merkintä = nimi + pisteet + päivä. Uudet ennätykset korostetaan ★:llä loppunäytössä.
+  Headerin 🏆-nappi avaa listan kesken pelin; listan voi tyhjentää (vahvistuskysymys).
+- 9 uutta testiä (`highscores.test.ts`) — yhteensä 51.
 
 ## [0.1.0] – 2026-06-05
 

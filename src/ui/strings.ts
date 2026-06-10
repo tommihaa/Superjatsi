@@ -47,4 +47,11 @@ export const T = {
   winner: (name: string) => `Voittaja: ${name}`,
   winnerTie: (names: string) => `Tasapeli: ${names}`,
   playAgain: "Pelaa uudelleen",
+
+  // Highscores
+  highscores: "Ennätykset",
+  highscoresFor: (n: number) => `Ennätykset · ${n} noppaa`,
+  noHighscores: "Ei vielä ennätyksiä — pelaa peli loppuun!",
+  clearHighscores: "Tyhjennä ennätykset",
+  clearHighscoresConfirm: "Tyhjennetäänkö kaikki ennätykset? Tätä ei voi perua.",
 } as const;
