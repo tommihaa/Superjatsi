@@ -6,6 +6,7 @@ import "./scorecard-view";
 
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
+import { SetupPrefs } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
@@ -25,6 +26,7 @@ export class App extends HTMLElement {
   private overlay: Overlay = null;
   private readonly persistence = new GamePersistence(window.localStorage);
   private readonly highscores = new HighscoreStore(window.localStorage);
+  private readonly setupPrefs = new SetupPrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
 
@@ -42,6 +44,7 @@ export class App extends HTMLElement {
     this.addEventListener("start", (e) => {
       const { diceCount, names } = (e as CustomEvent).detail as { diceCount: DiceCount; names: string[] };
       this.game = new GameState(names, diceCount);
+      this.setupPrefs.save({ names });
       this.persist();
       this.overlay = null;
       this.newRanks = [];
@@ -103,7 +106,9 @@ export class App extends HTMLElement {
     this.replaceChildren();
 
     if (!this.game) {
-      this.append(document.createElement("sj-setup") as Setup);
+      const setup = document.createElement("sj-setup") as Setup;
+      setup.defaults = this.setupPrefs.load();
+      this.append(setup);
       return;
     }
 

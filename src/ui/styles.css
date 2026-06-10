@@ -215,7 +215,9 @@ button {
 /* "Pöytä", jolle heitetyt (lukitsemattomat) nopat asettuvat hajalleen. */
 .table {
   position: relative;
-  width: 100%;
+  /* Puolet tarjottimen leveydestä, mutta vähintään noppien vaatima tila. */
+  width: max(50%, 220px);
+  max-width: 100%;
   height: 150px;
   background: var(--bg);
   border: 1px solid var(--border-soft);

@@ -3,6 +3,15 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.3.0] – 2026-06-10
+
+### Lisätty
+- **Aloitusnäytön muisti**: pelaajien nimet ja pelaajamäärä tallentuvat localStorageen
+  (`domain/prefs.ts`, SetupPrefs) ja esitäytetään seuraavalla kerralla. 5 uutta testiä (yht. 56).
+
+### Muutettu
+- Heitettyjen noppien pöytäalue kavennettu puoleen tarjottimen leveydestä (keskitetty).
+
 ## [0.2.1] – 2026-06-10
 
 ### Muutettu

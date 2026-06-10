@@ -31,7 +31,8 @@ Loppusumma = sarakkeiden summa, suurin voittaa. Tarkat säännöt: [SUPERJATSI.m
   Pieni/Suuri/**Täys**suora, Sattuma, Jatsi (50) ja **Superjatsi** (100, 6 noppaa).
 - **Kaksivaiheinen kirjaus:** klikkaus = väliaikainen, **Vahvista** siirtää vuoron, **Peru** peruu.
 - Heitetyt nopat "sekamelskana", lukitut suorassa rivissä.
-- **localStorage**-tallennus: kesken jäänyt peli palautuu sivun latauksessa.
+- **localStorage**-tallennus: kesken jäänyt peli palautuu sivun latauksessa;
+  pelaajien nimet ja määrä muistetaan seuraavaan peliin.
 - **Ennätykset (top 10)** per variantti — vain laitteen omaan localStorageen, ei verkkoon.
 - **Responsiivinen:** pysty = pino, vaaka (puhelin) = kaksipalstainen (ohjaimet + vierivä tulokortti).
 

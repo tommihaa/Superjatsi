@@ -10,6 +10,14 @@ export class Setup extends HTMLElement {
   private playerCount = 2;
   private names: string[] = [];
 
+  /** Edellisen pelin valinnat esitäyttöön (app lataa localStoragesta). */
+  set defaults(d: { names: string[] } | null) {
+    if (!d || d.names.length === 0) return;
+    this.names = [...d.names];
+    this.playerCount = Math.min(MAX_PLAYERS, d.names.length);
+    if (this.isConnected) this.render();
+  }
+
   connectedCallback(): void {
     this.render();
   }

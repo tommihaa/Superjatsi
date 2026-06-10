@@ -32,16 +32,16 @@ export class DiceTray extends HTMLElement {
       { x: 4, y: 10 },
       { x: 36, y: 46 },
       { x: 64, y: 6 },
-      { x: 76, y: 44 },
+      { x: 70, y: 44 },
       { x: 16, y: 50 },
-      { x: 48, y: 14 },
+      { x: 44, y: 14 },
     ];
     const a = anchors[index % anchors.length];
     const seed = (index * 92821 + value * 13219) >>> 0;
     const rot = (seed % 51) - 25; // -25..25 astetta
     const dx = ((seed >> 6) % 11) - 5; // -5..5 %-yksikköä
     const dy = ((seed >> 11) % 13) - 6; // -6..6 %-yksikköä
-    const x = Math.min(78, Math.max(0, a.x + dx));
+    const x = Math.min(72, Math.max(0, a.x + dx));
     const y = Math.min(55, Math.max(0, a.y + dy));
     return `left:${x}%; top:${y}%; transform: rotate(${rot}deg);`;
   }
