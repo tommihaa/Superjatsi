@@ -30,7 +30,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 
 ## [0.1.0] – 2026-06-05
 
-Ensimmäinen julkaisu. Pelattavissa: https://tommi-superjatsi.vercel.app
+Ensimmäinen julkaisu. Pelattavissa: https://tommi-taysi.vercel.app
 
 ### Lisätty
 - **Pelimoottori (domain)**: nopat, pisteytys, sarakerajoitteet (strategiakuvio:

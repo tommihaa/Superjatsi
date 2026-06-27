@@ -1,4 +1,4 @@
-# Superjatsi — säännöt (sopimus)
+# Täysi — säännöt (sopimus)
 
 Tämä on pelin **sopimusdokumentti** (Anti-slop: sopimus ennen toteutusta). Domain-koodi
 toteuttaa nämä säännöt; jos sääntö muuttuu, se muutetaan ensin tähän ja vahvistetaan.

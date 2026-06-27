@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Web-pohjainen maxi-jatsi (Superjatsi) paikalliseen moninpeliin",
+  "description": "Web-pohjainen maxi-jatsi (Täysi) paikalliseen moninpeliin",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",

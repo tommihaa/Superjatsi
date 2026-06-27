@@ -2,7 +2,7 @@
 // kieliriippuvaisella haulla; komponentit eivät sisällä kovakoodattuja merkkijonoja.
 
 export const T = {
-  title: "Superjatsi",
+  title: "Täysi",
   tagline: "Maxi-jatsi paikalliseen moninpeliin",
 
   // Setup
