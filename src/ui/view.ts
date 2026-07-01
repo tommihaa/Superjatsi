@@ -1,6 +1,6 @@
-import { COLUMN_IDS } from "../domain/columns";
+import { COLUMN_IDS, OrderedColumn } from "../domain/columns";
 import type { GameState } from "../domain/game";
-import type { ColumnId, DiceCount, RowId } from "../domain/types";
+import type { ColumnId, DiceCount, Move, RowId } from "../domain/types";
 
 // Domainista johdettu, serialisoitava näkymämalli. UI-komponentit lukevat vain tätä
 // eivätkä koskaan kutsu domainia suoraan (yksisuuntainen datavirta).
@@ -20,6 +20,10 @@ export interface CellView {
   score: number;
   /** Tämä solu on väliaikaisesti kirjattu ja odottaa vahvistusta. */
   pending: boolean;
+  /** Kirjaus olisi poltto (0 pistettä) — piirretään eri tyylillä kuin pisteellinen. */
+  burn: boolean;
+  /** ALAS/YLÖS: tämä on järjestyksen seuraava täytettävä solu (indikaattori). */
+  orderNext: boolean;
 }
 export interface RowView {
   id: RowId;
@@ -39,6 +43,8 @@ export interface BoardView {
   rows: RowView[];
   summary: Record<ColumnId, ColumnSummary>;
   grandTotal: number;
+  /** Sarakkeet joihin ei tällä heittomäärällä voi enää kirjata (himmennys). */
+  dimmedColumns: ColumnId[];
 }
 export interface GameView {
   diceCount: DiceCount;
@@ -58,19 +64,37 @@ export interface GameView {
 
 export function buildView(game: GameState): GameView {
   const card = game.currentCard();
-  const moves = new Map<string, number>();
-  for (const m of game.availableMoves()) moves.set(`${m.columnId}/${m.rowId}`, m.score);
+  const moves = new Map<string, Move>();
+  for (const m of game.availableMoves()) moves.set(`${m.columnId}/${m.rowId}`, m);
+
+  // ALAS/YLÖS: järjestyksen seuraava rivi näkyy indikaattorina jo ennen heittoa.
+  const nextRows = new Map<ColumnId, RowId | null>();
+  for (const col of game.columns) {
+    if (col instanceof OrderedColumn) {
+      nextRows.set(col.id, col.nextRow(card.filledRows(col.id), game.rowOrder));
+    }
+  }
+
+  // Sarakkeet joiden heittoraja on ylittynyt tällä vuorolla → himmennetään.
+  // Pending-tilassa ei himmennetä (koko kortti on jo "lukossa" vahvistukseen asti).
+  const dimmedColumns =
+    game.rollsUsed > 0 && !game.hasPending() && !game.isOver()
+      ? game.columns.filter((c) => game.rollsUsed > c.maxRolls).map((c) => c.id)
+      : [];
 
   const rows: RowView[] = card.rows.map((r) => {
     const cells = {} as Record<ColumnId, CellView>;
     for (const col of COLUMN_IDS) {
       const key = `${col}/${r.id}`;
       const isPending = game.pending?.columnId === col && game.pending?.rowId === r.id;
+      const mv = moves.get(key);
       cells[col] = {
         value: card.get(col, r.id),
-        available: moves.has(key),
-        score: moves.get(key) ?? 0,
+        available: mv !== undefined,
+        score: mv?.score ?? 0,
         pending: isPending,
+        burn: mv !== undefined && (mv.burn === true || mv.score === 0),
+        orderNext: nextRows.get(col) === r.id,
       };
     }
     return { id: r.id, label: r.label, section: r.section, cells, sum: card.rowSum(r.id) };
@@ -99,6 +123,6 @@ export function buildView(game: GameState): GameView {
     dice: game.dice.values.map((value, i) => ({ value, held: game.dice.held[i] })),
     isOver: game.isOver(),
     winners: game.winners().map((p) => p.name),
-    board: { columns: COLUMN_IDS, rows, summary, grandTotal: card.grandTotal() },
+    board: { columns: COLUMN_IDS, rows, summary, grandTotal: card.grandTotal(), dimmedColumns },
   };
 }

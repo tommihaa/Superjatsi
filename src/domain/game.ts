@@ -72,11 +72,21 @@ export class GameState {
         }
       }
     }
+    if (moves.length > 0) return moves;
+    // Anti-jumi (SUPERJATSI.md "Polttaminen"): kun mikään kirjaus ei ole sallittu
+    // (jäljellä vain I/II-soluja ja heittoraja ylittyi), avoimet solut saa silti
+    // polttaa. Heittomäärä leikataan sarakkeen rajaan, jolloin sarakkeen oma
+    // järjestys-/rajoitelogiikka pätee muuten ennallaan.
+    for (const col of this.columns) {
+      const filled = card.filledRows(col.id);
+      for (const rowId of this.rowOrder) {
+        if (filled.has(rowId)) continue;
+        if (col.canWrite(rowId, filled, Math.min(this.rollsUsed, col.maxRolls), this.rowOrder)) {
+          moves.push({ columnId: col.id, rowId, score: 0, burn: true });
+        }
+      }
+    }
     return moves;
-  }
-
-  private isMoveAllowed(columnId: ColumnId, rowId: RowId): boolean {
-    return this.availableMoves().some((m) => m.columnId === columnId && m.rowId === rowId);
   }
 
   /**
@@ -85,10 +95,11 @@ export class GameState {
    */
   commit(columnId: ColumnId, rowId: RowId, opts: { burn?: boolean } = {}): void {
     if (this.pending) throw new Error("Edellinen kirjaus odottaa vahvistusta");
-    if (!this.isMoveAllowed(columnId, rowId)) {
+    const move = this.availableMoves().find((m) => m.columnId === columnId && m.rowId === rowId);
+    if (!move) {
       throw new Error(`Siirto ${columnId}/${rowId} ei ole sallittu nyt`);
     }
-    const value = opts.burn ? 0 : scoreFor(rowId, this.dice.values, this.diceCount);
+    const value = opts.burn || move.burn ? 0 : scoreFor(rowId, this.dice.values, this.diceCount);
     this.currentCard().set(columnId, rowId, value);
     this.pending = { columnId, rowId };
   }
@@ -130,7 +141,9 @@ export class GameState {
   }
 
   isOver(): boolean {
-    return this.players.every((p) => p.card.isComplete());
+    // Pending-kirjaus on jo kortissa, mutta peli ei ole ohi ennen kuin viimeinenkin
+    // kirjaus on vahvistettu — muuten Vahvista/Peru-vaihe ohittuisi viimeisellä solulla.
+    return this.pending === null && this.players.every((p) => p.card.isComplete());
   }
 
   /** Voittaja(t) suurimmalla loppusummalla; tasapelissä useampi. */

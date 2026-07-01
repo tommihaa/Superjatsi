@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { HighscoreStore, TOP_N } from "../src/domain/highscores";
+import { HighscoreStore, TOP_N, localToday } from "../src/domain/highscores";
 import type { StorageLike } from "../src/domain/storage";
 
 class MockStorage implements StorageLike {
@@ -20,6 +20,16 @@ const fixedDay = () => "2026-06-10";
 function makeStore(backend = new MockStorage()): HighscoreStore {
   return new HighscoreStore(backend, "superjatsi:highscores", fixedDay);
 }
+
+describe("localToday", () => {
+  it("antaa paikallisen päivän, ei UTC-päivää (keskiyön jälkeen Suomessa)", () => {
+    // 2026-07-02 klo 01:30 paikallista aikaa: toISOString antaisi UTC:ssä
+    // (itään Greenwichistä) edellisen päivän — localToday ei saa antaa.
+    const night = new Date(2026, 6, 2, 1, 30);
+    expect(localToday(night)).toBe("2026-07-02");
+    expect(localToday(new Date(2026, 0, 5, 12, 0))).toBe("2026-01-05"); // nollatäyttö
+  });
+});
 
 describe("HighscoreStore", () => {
   it("tyhjä alku → tyhjä lista molemmille varianteille", () => {

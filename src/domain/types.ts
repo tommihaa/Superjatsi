@@ -48,6 +48,8 @@ export interface Move {
   rowId: RowId;
   /** Ehdotuspisteet nykyisillä nopilla jos solu täytetään. */
   score: number;
+  /** Solu on kirjattavissa vain polttona (0) — heittoraja on ylittynyt. */
+  burn?: boolean;
 }
 
 /** Serialisoitava tilannekuva persistointia varten. */

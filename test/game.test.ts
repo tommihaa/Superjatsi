@@ -81,6 +81,82 @@ describe("GameState — vuoro ja heitot", () => {
   });
 });
 
+describe("GameState — anti-jumi (poltto heittorajan yli)", () => {
+  /** Täytä kaikki solut arvolla 5 paitsi listatut. */
+  function fillAllExcept(g: GameState, open: Array<[string, string]>): void {
+    const card = g.players[0].card;
+    for (const col of COLUMN_IDS) {
+      for (const row of g.rowOrder) {
+        if (open.some(([c, r]) => c === col && r === row)) continue;
+        card.set(col, row, 5);
+      }
+    }
+  }
+
+  it("vain I-soluja auki + 3 heittoa → avoimet solut saa polttaa (ei jumia)", () => {
+    const g = new GameState(["A"], 6, rng4);
+    fillAllExcept(g, [["I", "ones"], ["I", "pair"]]);
+    g.roll();
+    g.roll();
+    g.roll();
+    const moves = g.availableMoves();
+    expect(moves.length).toBe(2); // molemmat avoimet I-solut polttona
+    expect(moves.every((m) => m.burn === true && m.score === 0)).toBe(true);
+
+    g.commit("I", "ones", {});
+    g.confirm();
+    expect(g.players[0].card.get("I", "ones")).toBe(0); // poltto, ei noppapisteitä
+  });
+
+  it("heittorajan sisällä I-solu kirjautuu normaalisti pistein (ei burn-lippua)", () => {
+    const g = new GameState(["A"], 6, rng4);
+    fillAllExcept(g, [["I", "fours"]]);
+    g.roll();
+    const moves = g.availableMoves();
+    expect(moves).toEqual([{ columnId: "I", rowId: "fours", score: 24 }]); // 6×4
+  });
+
+  it("poltto-fallback kunnioittaa ALAS-järjestystä", () => {
+    const g = new GameState(["A"], 6, rng4);
+    // Auki: I/ones (heittoraja ylittyy) — ALAS-sarake kokonaan auki.
+    const card = g.players[0].card;
+    for (const col of COLUMN_IDS) {
+      if (col === "ALAS") continue;
+      for (const row of g.rowOrder) {
+        if (col === "I" && row === "ones") continue;
+        card.set(col, row, 5);
+      }
+    }
+    g.roll();
+    g.roll();
+    // ALAS on normaalisti kirjattavissa → EI fallbackia, I/ones ei tarjolla.
+    const moves = g.availableMoves();
+    expect(moves.some((m) => m.columnId === "I")).toBe(false);
+    expect(moves.filter((m) => m.columnId === "ALAS").length).toBe(1); // vain seuraava rivi
+  });
+});
+
+describe("GameState — pelin viimeinen kirjaus vaatii vahvistuksen", () => {
+  it("isOver on false pending-tilassa; peru palauttaa pelin, vahvistus päättää", () => {
+    const g = new GameState(["A"], 6, rng4);
+    const card = g.players[0].card;
+    for (const col of COLUMN_IDS) {
+      for (const row of g.rowOrder) {
+        if (col === "III" && row === "chance") continue;
+        card.set(col, row, 5);
+      }
+    }
+    g.roll();
+    g.commit("III", "chance", {});
+    expect(g.isOver()).toBe(false); // kortti täynnä, mutta vahvistus puuttuu
+    g.cancel();
+    expect(g.isOver()).toBe(false);
+    g.commit("III", "chance", {});
+    g.confirm();
+    expect(g.isOver()).toBe(true);
+  });
+});
+
 describe("GameState — koko peli loppuun", () => {
   function playToEnd(players: string[], dice: 5 | 6): GameState {
     const g = new GameState(players, dice, rng4);

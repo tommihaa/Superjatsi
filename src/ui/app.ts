@@ -17,7 +17,7 @@ import type { StatusBar } from "./status-bar";
 import type { DiceTray } from "./dice-tray";
 import type { ScorecardView } from "./scorecard-view";
 
-type Overlay = "rules" | "settings" | "scores" | null;
+type Overlay = "rules" | "scores" | null;
 
 // <sj-app>: juurikomponentti. Omistaa GameStaten ja persistoinnin, orkestroi
 // lapsikomponentit ja kuuntelee niiden eventtejä (delegoituna tähän kerran).
@@ -61,9 +61,11 @@ export class App extends HTMLElement {
     this.addEventListener("confirm-commit", () => this.mutate((g) => g.confirm()));
     this.addEventListener("cancel-commit", () => this.mutate((g) => g.cancel()));
     this.addEventListener("open-rules", () => this.setOverlay("rules"));
-    this.addEventListener("open-settings", () => this.setOverlay("settings"));
     this.addEventListener("open-highscores", () => this.setOverlay("scores"));
     this.addEventListener("new-game", () => {
+      // Kesken olevan pelin hylkääminen on peruuttamaton → varmistus
+      // (symmetrisesti ennätysten tyhjennyksen kanssa).
+      if (this.game && !this.game.isOver() && !window.confirm(T.newGameConfirm)) return;
       this.persistence.clear();
       this.game = null;
       this.overlay = null;
@@ -146,7 +148,13 @@ export class App extends HTMLElement {
   }
 
   private gameOverOverlay(winners: string[]): HTMLElement {
-    const msg = winners.length === 1 ? T.winner(winners[0]) : T.winnerTie(winners.join(", "));
+    // Yksinpelissä ei ole voittajaa vaan tulos.
+    const solo = this.game?.players.length === 1;
+    const msg = solo
+      ? T.soloResult(this.game!.players[0].card.grandTotal())
+      : winners.length === 1
+        ? T.winner(winners[0])
+        : T.winnerTie(winners.join(", "));
     const scores = this.game
       ? `<h3 class="hs-title">${T.highscoresFor(this.game.diceCount)}</h3>
          ${this.highscoreListHtml(this.game.diceCount, this.newRanks)}`
@@ -159,20 +167,18 @@ export class App extends HTMLElement {
     );
   }
 
-  private infoOverlay(kind: "rules" | "settings" | "scores"): HTMLElement {
+  private infoOverlay(kind: "rules" | "scores"): HTMLElement {
     if (kind === "scores") return this.highscoreOverlay();
-    const body =
-      kind === "rules"
-        ? `<h2>${T.rules}</h2>
+    const body = `<h2>${T.rules}</h2>
            <ul>
              <li><b>Sarakkeet:</b> I = 1 heitto, II = ≤2, III = ≤3 (vapaa rivijärjestys).
-                 ALAS täytetään ylhäältä alas, YLÖS alhaalta ylös.</li>
+                 ALAS täytetään ylhäältä alas, YLÖS alhaalta ylös (↓/↑ näyttää seuraavan rivin).</li>
              <li><b>Heitot:</b> 3 per vuoro, nopat saa lukita klikkaamalla.</li>
              <li><b>Yläbonus:</b> +50 kun yläosa ylittää kynnyksen (63 / 84).</li>
-             <li><b>Polttaminen:</b> klikkaa ruutua jonka arvo on 0 uhrataksesi rivin.</li>
+             <li><b>Polttaminen:</b> punertava 0-ruutu uhraa rivin. Jos mikään kirjaus ei ole
+                 sallittu, avoimet ruudut saa aina polttaa.</li>
              <li><b>Loppusumma</b> = sarakkeiden summa. Suurin voittaa.</li>
-           </ul>`
-        : `<h2>${T.settings}</h2><p>${T.settingsComing}</p>`;
+           </ul>`;
     return this.overlayEl(`${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`, true);
   }
 

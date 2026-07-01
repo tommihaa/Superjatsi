@@ -3,6 +3,44 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.4.0] – 2026-07-02
+
+### Lisätty
+- **Jalometallinopat**: nopan sävy tummasta puusta kultaan silmäluvun mukaan
+  (`.die.v1`–`.v6`), pipit vaaleat tummilla sävyillä ja tummat vaaleilla. Lukituksen
+  kultareuna säilyy erottuvana (määrittelyjärjestys varmistettu).
+- **ALAS/YLÖS-indikaattori**: järjestyksen seuraava täytettävä rivi näkyy nuolena
+  (↓/↑) jo ennen heittoa — vuoron voi suunnitella etukäteen.
+- **Uusi peli -varmistus**: ↺ kysyy vahvistuksen kun peli on kesken (symmetrisesti
+  ennätysten tyhjennyksen kanssa). Päättyneen pelin jälkeen ei kysytä.
+- Projektin `CLAUDE.md` (arkkitehtuuri- ja työtapaohjeet agenttisessioille).
+
+### Muutettu
+- **Poltto erottuu kirjauksesta**: 0 pisteen klikattava solu piirretään punertavana ja
+  vaisumpana, pisteellinen vihreänä kuten ennen. Sääntö-overlayn poltto-kohta päivitetty.
+- **Sarakehimmennys**: sarake jonka heittoraja on ylittynyt tällä vuorolla (I 2. heiton
+  jälkeen, I+II 3:n) himmennetään otsikkoa myöten — näkee heti mitä heitto maksoi.
+- **Yksinpelin loppuruutu**: "Voittaja: X" → "Tulos: N pistettä".
+- ⚙ Asetukset-nappi piilotettu kunnes asetuksia oikeasti on (oli "tulossa"-placeholder).
+
+## [0.3.1] – 2026-07-02
+
+### Korjattu
+- **Soft-lock**: peli saattoi jumittua pysyvästi, jos avoinna oli enää vain I/II-sarakkeen
+  soluja ja heittoraja ylittyi (ei kirjattavaa, ei heittoja — tila myös persistoitui).
+  Nyt avoimet solut saa tällöin polttaa heittorajasta riippumatta; pelaajalla on aina
+  vähintään yksi laillinen siirto (anti-jumi-sääntö kirjattu SUPERJATSI.md:hen).
+- **Viimeinen kirjaus ohitti Vahvista/Peru-vaiheen**: pelin viimeisen solun klikkaus
+  päätti pelin ja kirjasi ennätyksen heti ilman vahvistusmahdollisuutta. Nyt `isOver()`
+  ei ole tosi pending-tilassa → myös viimeinen kirjaus vahvistetaan tai perutaan.
+- **Ennätyspäivä oli UTC-päivä**: `toISOString()` kirjasi Suomessa klo 00–03 pelatut
+  pelit edelliselle päivälle. Nyt paikallinen päivä (`localToday`).
+- **Heitetyt nopat saattoivat mennä päällekkäin** pöydällä (%-ankkurit vs. px-kokoiset
+  nopat kapealla pöydällä). Pöytä on nyt 3-palstainen gridi: jokainen noppa omassa
+  ruudussaan + pieni deterministinen kierto/siirtymä ("heitetty" ilme säilyy), lukitun
+  nopan tilalle jää näkymätön haamupaikka → muut nopat eivät liiku lukittaessa.
+- 5 uutta testiä (yht. 61); package.json-versio synkattu muutoslokiin.
+
 ## [0.3.0] – 2026-06-10
 
 ### Lisätty

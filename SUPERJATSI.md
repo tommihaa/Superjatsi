@@ -60,9 +60,14 @@ valitaan **paras** mahdollinen kombinaatio nopista.
 Minkä tahansa **avoimen** rivin saa merkitä nollaksi (polttaa). ALAS/YLÖS-sarakkeissa
 poltto kohdistuu järjestyksen seuraavaan riviin ja vie järjestystä eteenpäin.
 
+**Anti-jumi-sääntö:** jos heittojen jälkeen mikään kirjaus ei ole sallittu (jäljellä on
+vain I/II-soluja ja sarakkeen heittoraja on ylittynyt), avoimet solut saa silti polttaa.
+Pelaajalla on siis aina vähintään yksi laillinen siirto — peli ei voi jumittua.
+
 ## Pelin kulku
 
 Pelaajat vuorottelevat. Peli päättyy kun jokaisen pelaajan kaikki solut on täytetty.
+Myös pelin **viimeinen** kirjaus vahvistetaan (Vahvista/Peru) ennen pelin päättymistä.
 Suurin loppusumma voittaa.
 
 ## Persistointi

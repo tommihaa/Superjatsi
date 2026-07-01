@@ -22,28 +22,17 @@ export class DiceTray extends HTMLElement {
   }
 
   /**
-   * Deterministinen "pöydälle heitetty" -asento nopalle: kullakin nopalla on oma
-   * ankkurialue pöydällä (ei päällekkäisyyttä) ja arvosta riippuva satunnaisen
-   * näköinen poikkeama + kierto. Sama indeksi + arvo → sama asento, eli nopat
-   * eivät hypi lukittaessa, vaan vain heitettäessä.
+   * Deterministinen "pöydälle heitetty" -ilme nopalle: jokaisella nopalla on oma
+   * gridi-ruutunsa pöydällä (päällekkäisyys mahdotonta millä tahansa leveydellä),
+   * ja arvosta riippuva pieni kierto + siirtymä ruudun sisällä. Sama indeksi +
+   * arvo → sama asento, eli nopat eivät hypi lukittaessa, vaan vain heitettäessä.
    */
-  private scatter(index: number, value: number): string {
-    const anchors = [
-      { x: 4, y: 10 },
-      { x: 36, y: 46 },
-      { x: 64, y: 6 },
-      { x: 70, y: 44 },
-      { x: 16, y: 50 },
-      { x: 44, y: 14 },
-    ];
-    const a = anchors[index % anchors.length];
+  private jitter(index: number, value: number): string {
     const seed = (index * 92821 + value * 13219) >>> 0;
-    const rot = (seed % 51) - 25; // -25..25 astetta
-    const dx = ((seed >> 6) % 11) - 5; // -5..5 %-yksikköä
-    const dy = ((seed >> 11) % 13) - 6; // -6..6 %-yksikköä
-    const x = Math.min(72, Math.max(0, a.x + dx));
-    const y = Math.min(55, Math.max(0, a.y + dy));
-    return `left:${x}%; top:${y}%; transform: rotate(${rot}deg);`;
+    const rot = (seed % 25) - 12; // -12..12 astetta
+    const dx = ((seed >> 6) % 11) - 5; // -5..5 px
+    const dy = ((seed >> 11) % 9) - 4; // -4..4 px
+    return `transform: rotate(${rot}deg) translate(${dx}px, ${dy}px);`;
   }
 
   private render(): void {
@@ -51,27 +40,34 @@ export class DiceTray extends HTMLElement {
     if (!v) return;
     const dis = v.hasRolled && !v.isOver ? "" : " disabled";
 
-    // Heitetyt nopat hajallaan "pöydällä", lukitut (ja tyhjät) suorassa rivissä alla.
+    // Heitetyt nopat "pöydällä", lukitut (ja tyhjät) suorassa rivissä alla.
+    // Lukitun nopan tilalle jää pöytään näkymätön haamupaikka, jotta muut
+    // nopat eivät siirry lukittaessa.
     const thrown: string[] = [];
     const rowDice: string[] = [];
+    let thrownCount = 0;
     v.dice.forEach((d, i) => {
       if (d.value === 0) {
         rowDice.push(`<button class="die empty" disabled aria-label="tyhjä noppa"></button>`);
         return;
       }
       const pips = PIPS[d.value].map((p) => `<span class="pip ${p}"></span>`).join("");
+      // Jalometalli-ilme: sävy tummasta puusta kultaan silmäluvun mukaan (v1..v6).
+      const tone = `v${d.value}`;
       if (d.held) {
+        thrown.push(`<span class="die ghost" aria-hidden="true"></span>`);
         rowDice.push(
-          `<button class="die held" data-die="${i}"${dis} aria-label="noppa ${d.value}, lukittu">${pips}<span class="held-tag">${T.held}</span></button>`,
+          `<button class="die held ${tone}" data-die="${i}"${dis} aria-label="noppa ${d.value}, lukittu">${pips}<span class="held-tag">${T.held}</span></button>`,
         );
       } else {
+        thrownCount++;
         thrown.push(
-          `<button class="die" data-die="${i}"${dis} style="${this.scatter(i, d.value)}" aria-label="noppa ${d.value}">${pips}</button>`,
+          `<button class="die ${tone}" data-die="${i}"${dis} style="${this.jitter(i, d.value)}" aria-label="noppa ${d.value}">${pips}</button>`,
         );
       }
     });
     const dieHtml =
-      (thrown.length ? `<div class="table">${thrown.join("")}</div>` : "") +
+      (thrownCount ? `<div class="table">${thrown.join("")}</div>` : "") +
       (rowDice.length ? `<div class="dice-row">${rowDice.join("")}</div>` : "");
 
     const rollLabel = v.rollsUsed === 0 ? T.roll : T.rollAgain;

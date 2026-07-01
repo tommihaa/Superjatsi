@@ -20,18 +20,32 @@ export class ScorecardView extends HTMLElement {
     this.render();
   }
 
-  private cellHtml(rowId: string, col: ColumnId, c: BoardView["rows"][number]["cells"][ColumnId]): string {
+  private cellHtml(
+    rowId: string,
+    col: ColumnId,
+    c: BoardView["rows"][number]["cells"][ColumnId],
+    dimmed: boolean,
+  ): string {
     if (c.pending) {
       return `<td class="cell pending">${c.value}</td>`;
     }
     if (c.available) {
-      return `<td class="cell avail" data-col="${col}" data-row="${rowId}">${c.score}</td>`;
+      // Poltto (0 p) piirretään punertavana ja himmeämpänä kuin pisteellinen kirjaus,
+      // jotta uhraus erottuu hyvästä siirrosta yhdellä silmäyksellä.
+      const burn = c.burn ? " burn" : "";
+      return `<td class="cell avail${burn}" data-col="${col}" data-row="${rowId}">${c.score}</td>`;
     }
+    const dim = dimmed ? " dim" : "";
     if (c.value !== null) {
       const zero = c.value === 0 ? " zero" : "";
-      return `<td class="cell filled${zero}">${c.value}</td>`;
+      return `<td class="cell filled${zero}${dim}">${c.value}</td>`;
     }
-    return `<td class="cell"></td>`;
+    if (c.orderNext) {
+      // ALAS/YLÖS: seuraava pakkorivi näkyy nuolena jo ennen heittoa.
+      const arrow = col === "ALAS" ? "↓" : "↑";
+      return `<td class="cell next-order${dim}" aria-label="${T.nextInOrder}">${arrow}</td>`;
+    }
+    return `<td class="cell${dim}"></td>`;
   }
 
   private devHtml(dev: number): string {
@@ -45,17 +59,18 @@ export class ScorecardView extends HTMLElement {
     const v = this.view;
     if (!v) return;
     const b = v.board;
+    const isDim = (c: ColumnId) => b.dimmedColumns.includes(c);
 
     const head =
       `<th class="row-label"></th>` +
-      b.columns.map((c) => `<th>${COL_LABEL[c]}</th>`).join("") +
+      b.columns.map((c) => `<th${isDim(c) ? ' class="dim"' : ""}>${COL_LABEL[c]}</th>`).join("") +
       `<th>${T.colSum}</th>`;
 
     const rowHtml = (section: "upper" | "lower") =>
       b.rows
         .filter((r) => r.section === section)
         .map((r) => {
-          const cells = b.columns.map((c) => this.cellHtml(r.id, c, r.cells[c])).join("");
+          const cells = b.columns.map((c) => this.cellHtml(r.id, c, r.cells[c], isDim(c))).join("");
           return `<tr class="section-${section}"><td class="row-label">${r.label}</td>${cells}<td class="cell colsum">${r.sum}</td></tr>`;
         })
         .join("");

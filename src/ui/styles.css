@@ -212,20 +212,28 @@ button {
   padding: 16px;
   margin-bottom: 14px;
 }
-/* "Pöytä", jolle heitetyt (lukitsemattomat) nopat asettuvat hajalleen. */
+/* "Pöytä", jolle heitetyt (lukitsemattomat) nopat asettuvat. Gridi takaa ettei
+   nopat mene päällekkäin millään leveydellä; heitetty ilme tulee nopan omasta
+   pienestä kierrosta/siirtymästä ruudun sisällä (dice-tray.ts jitter). */
 .table {
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: center;
+  align-items: center;
+  row-gap: 16px;
   /* Puolet tarjottimen leveydestä, mutta vähintään noppien vaatima tila. */
   width: max(50%, 220px);
   max-width: 100%;
-  height: 150px;
+  min-height: 150px;
+  padding: 14px 8px;
   background: var(--bg);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius);
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.35);
 }
-.table .die {
-  position: absolute;
+/* Lukitun nopan haamupaikka pöydällä: pitää muut nopat aloillaan. */
+.table .die.ghost {
+  visibility: hidden;
 }
 /* Lukitut nopat (ja tyhjät paikat ennen heittoa) suorassa rivissä. */
 .dice-row {
@@ -263,6 +271,20 @@ button {
 .die.empty {
   background: var(--bg);
   border-style: dashed;
+}
+/* Jalometalli-ilme: sävy tummasta puusta kultaan silmäluvun mukaan (v1..v6).
+   Pipit vaaleat tummilla sävyillä (1–3), tummat vaaleilla (4–6). */
+.die.v1 { background: linear-gradient(160deg, #6a5138, #4b3823); border-color: #83684a; }
+.die.v2 { background: linear-gradient(160deg, #7c6244, #59452c); border-color: #957a55; }
+.die.v3 { background: linear-gradient(160deg, #8f7350, #685135); border-color: #a88a60; }
+.die.v4 { background: linear-gradient(160deg, #a68750, #7d6539); border-color: #bb9e69; }
+.die.v5 { background: linear-gradient(160deg, #c09d51, #967939); border-color: #d2b273; }
+.die.v6 { background: linear-gradient(160deg, #ddbd62, #b0903e); border-color: #e8cf87; }
+.die.v1 .pip, .die.v2 .pip, .die.v3 .pip { background: #f0e6d2; }
+.die.v4 .pip, .die.v5 .pip, .die.v6 .pip { background: #33260f; }
+/* Lukituksen kulta voittaa metallisävyn reunan (sama spesifisyys → järjestys ratkaisee). */
+.die.held {
+  border-color: var(--gold);
 }
 .die .pip {
   width: 10px;
@@ -342,6 +364,28 @@ sj-scorecard {
 .cell.avail:hover {
   background: var(--avail);
   color: #fff;
+}
+/* Poltto (0 p): punertava ja vaisumpi kuin pisteellinen kirjaus — uhraus
+   erottuu hyvästä siirrosta yhdellä silmäyksellä. */
+.cell.avail.burn {
+  background: rgba(226, 75, 74, 0.1);
+  color: #d99090;
+  font-weight: 400;
+}
+.cell.avail.burn:hover {
+  background: rgba(226, 75, 74, 0.35);
+  color: #ffd9d9;
+}
+/* ALAS/YLÖS: järjestyksen seuraava täytettävä rivi näkyy nuolena ennen heittoa. */
+.cell.next-order {
+  color: var(--accent);
+  opacity: 0.55;
+  font-size: 0.8rem;
+}
+/* Sarake jonka heittoraja on ylittynyt tällä vuorolla. */
+.scorecard th.dim,
+.scorecard td.dim {
+  opacity: 0.35;
 }
 .cell.pending {
   background: rgba(201, 168, 76, 0.22);
@@ -476,7 +520,7 @@ sj-scorecard {
   }
   .status { margin-bottom: 8px; }
   .tray { margin-bottom: 0; padding: 10px; gap: 8px; }
-  .tray .table { height: 104px; }
+  .tray .table { min-height: 104px; row-gap: 10px; padding: 8px 6px; }
   .tray .dice-row { gap: 10px; padding: 2px 4px 16px; }
   .die { width: 42px; height: 42px; }
   .die .pip { width: 7px; height: 7px; }
@@ -503,7 +547,7 @@ sj-scorecard {
   .die { width: 40px; height: 40px; padding: 6px; }
   .die .pip { width: 7px; height: 7px; }
   .tray { gap: 10px; padding: 12px; }
-  .table { height: 116px; }
+  .table { min-height: 116px; row-gap: 10px; padding: 10px 6px; }
   .primary, .secondary { padding: 11px 14px; font-size: 0.98rem; }
   .scorecard th, .scorecard td { padding: 3px 2px; font-size: 0.7rem; }
   .scorecard .row-label { font-size: 0.68rem; }

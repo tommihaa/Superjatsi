@@ -27,11 +27,19 @@ const DEFAULT_KEY = "superjatsi:highscores";
 const DATA_VERSION = 1;
 export const TOP_N = 10;
 
+/** Paikallinen päivä YYYY-MM-DD — EI toISOString(), joka antaisi UTC-päivän
+ *  (Suomessa klo 00–03 pelatut pelit kirjautuisivat edelliselle päivälle). */
+export function localToday(now: Date = new Date()): string {
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const d = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${m}-${d}`;
+}
+
 export class HighscoreStore {
   constructor(
     private readonly backend: StorageLike,
     private readonly key: string = DEFAULT_KEY,
-    private readonly today: () => string = () => new Date().toISOString().slice(0, 10),
+    private readonly today: () => string = localToday,
   ) {}
 
   /** Ennätykset parhaasta huonoimpaan; tasapisteissä vanhempi edellä. */

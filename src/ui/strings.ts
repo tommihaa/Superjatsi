@@ -16,9 +16,8 @@ export const T = {
 
   // Header
   rules: "Säännöt",
-  settings: "Asetukset",
-  settingsComing: "Asetukset tulossa myöhemmin.",
   close: "Sulje",
+  newGameConfirm: "Aloitetaanko uusi peli? Kesken oleva peli menetetään.",
 
   // Status / turn
   turnOf: (name: string) => `Vuorossa: ${name}`,
@@ -37,6 +36,7 @@ export const T = {
 
   // Scorecard
   colSum: "=",
+  nextInOrder: "seuraava täytettävä rivi",
   bonus: "Bonus",
   upperSum: "Yläsumma",
   lowerSum: "Alasumma",
@@ -44,6 +44,7 @@ export const T = {
 
   // Game over
   gameOver: "Peli päättyi",
+  soloResult: (score: number) => `Tulos: ${score} pistettä`,
   winner: (name: string) => `Voittaja: ${name}`,
   winnerTie: (names: string) => `Tasapeli: ${names}`,
   playAgain: "Pelaa uudelleen",
