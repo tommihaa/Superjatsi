@@ -108,10 +108,13 @@ export class App extends HTMLElement {
   private render(): void {
     this.replaceChildren();
 
+    const main = document.createElement("main");
+
     if (!this.game) {
       const setup = document.createElement("sj-setup") as Setup;
       setup.defaults = this.setupPrefs.load();
-      this.append(setup);
+      main.append(setup);
+      this.append(main);
       if (this.overlay) this.append(this.infoOverlay(this.overlay));
       return;
     }
@@ -143,7 +146,8 @@ export class App extends HTMLElement {
     card.data = view;
     play.append(card);
 
-    this.append(play);
+    main.append(play);
+    this.append(main);
 
     if (view.isOver) this.append(this.gameOverOverlay(view.winners));
     else if (this.overlay) this.append(this.infoOverlay(this.overlay));

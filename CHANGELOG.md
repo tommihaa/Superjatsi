@@ -5,6 +5,10 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 
 ## [Julkaisematon]
 
+### Korjattu
+- **Puuttuva `main`-landmark** (Lighthouse-accessibility-huomautus): `sj-app`:in
+  sisältö kääritään nyt `<main>`-elementtiin sekä setup- että peli-/game-over-näkymässä.
+
 ### Muutettu
 - **Nimi palautettu Täysi → Superjatsi**: brändi, otsikko, manifest ja URL
   (https://tommi-superjatsi.vercel.app) vaihdettu takaisin. Nimitörmäys pistekategorian
