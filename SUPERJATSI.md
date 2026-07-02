@@ -48,6 +48,8 @@ k = 4 kuudella nopalla → 84). Kynnyksen täyttyessä **+50**.
 | Pieni suora | 1-2-3-4-5 | 15 |
 | Suuri suora | 2-3-4-5-6 | 20 |
 | Täyssuora *(vain 6 noppaa)* | 1-2-3-4-5-6 | 21 |
+| Huvila *(vain 6 noppaa)* | 3 + 3 samaa (2 eri kolmikkoa) | kaikkien 6 nopan summa |
+| Torni *(vain 6 noppaa)* | 4 + 2 samaa (2 eri silmälukua) | kaikkien 6 nopan summa |
 | Sattuma | mikä tahansa | kaikkien noppien summa |
 | Jatsi | 5 samaa | 50 |
 | Superjatsi *(vain 6 noppaa)* | 6 samaa | 100 |

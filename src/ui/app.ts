@@ -11,6 +11,7 @@ import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
 import { buildView } from "./view";
+import { downloadRecapImage } from "./recap-image";
 import type { AppHeader } from "./header";
 import type { Setup } from "./setup";
 import type { StatusBar } from "./status-bar";
@@ -111,6 +112,7 @@ export class App extends HTMLElement {
       const setup = document.createElement("sj-setup") as Setup;
       setup.defaults = this.setupPrefs.load();
       this.append(setup);
+      if (this.overlay) this.append(this.infoOverlay(this.overlay));
       return;
     }
 
@@ -159,12 +161,19 @@ export class App extends HTMLElement {
       ? `<h3 class="hs-title">${T.highscoresFor(this.game.diceCount)}</h3>
          ${this.highscoreListHtml(this.game.diceCount, this.newRanks)}`
       : "";
-    return this.overlayEl(
+    const ov = this.overlayEl(
       `<div class="banner"><div class="trophy">🏆</div><h2>${T.gameOver}</h2><p>${msg}</p></div>
        ${scores}
-       <div class="actions"><button class="primary" data-close="new">${T.playAgain}</button></div>`,
+       <div class="actions">
+         <button class="secondary" data-act="download-recap">${T.downloadImage}</button>
+         <button class="primary" data-close="new">${T.playAgain}</button>
+       </div>`,
       false,
     );
+    ov.querySelector('[data-act="download-recap"]')?.addEventListener("click", () => {
+      if (this.game) downloadRecapImage(this.game);
+    });
+    return ov;
   }
 
   private infoOverlay(kind: "rules" | "scores"): HTMLElement {
@@ -175,7 +184,7 @@ export class App extends HTMLElement {
                  ALAS täytetään ylhäältä alas, YLÖS alhaalta ylös (↓/↑ näyttää seuraavan rivin).</li>
              <li><b>Heitot:</b> 3 per vuoro, nopat saa lukita klikkaamalla.</li>
              <li><b>Yläbonus:</b> +50 kun yläosa ylittää kynnyksen (63 / 84).</li>
-             <li><b>Polttaminen:</b> punertava 0-ruutu uhraa rivin. Jos mikään kirjaus ei ole
+             <li><b>Polttaminen:</b> 0 p:n kirjaus uhraa rivin. Jos mikään kirjaus ei ole
                  sallittu, avoimet ruudut saa aina polttaa.</li>
              <li><b>Loppusumma</b> = sarakkeiden summa. Suurin voittaa.</li>
            </ul>`;

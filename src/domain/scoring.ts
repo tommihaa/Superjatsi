@@ -44,6 +44,28 @@ function nOfAKind(c: number[], n: number): number {
   return v * n;
 }
 
+function huvila(c: number[]): number {
+  // Kaksi eri kolmikkoa (käyttää kaikki 6 noppaa). Yksi silmäluku voi
+  // muodostaa vain yhden kolmikon, joten neljä+kaksi ei kelpaa (se on Torni).
+  const triples: number[] = [];
+  for (let v = 6; v >= 1; v--) if (c[v] >= 3) triples.push(v);
+  if (triples.length < 2) return 0;
+  return (triples[0] + triples[1]) * 3;
+}
+
+function torni(c: number[]): number {
+  // Paras nelikkö + erillinen pari (eri silmäluvut).
+  let best = 0;
+  for (let f = 6; f >= 1; f--) {
+    if (c[f] < 4) continue;
+    for (let p = 6; p >= 1; p--) {
+      if (p === f || c[p] < 2) continue;
+      best = Math.max(best, f * 4 + p * 2);
+    }
+  }
+  return best;
+}
+
 function fullHouse(c: number[]): number {
   // Paras kolmikko + erillinen pari (eri silmäluvut). 6 nopalla esim. 3+3 kelpaa.
   let best = 0;
@@ -87,6 +109,10 @@ export function scoreFor(rowId: RowId, dice: number[], _diceCount: DiceCount): n
       return nOfAKind(c, 3);
     case "fourKind":
       return nOfAKind(c, 4);
+    case "huvila":
+      return huvila(c);
+    case "torni":
+      return torni(c);
     case "fullHouse":
       return fullHouse(c);
     case "smallStraight":

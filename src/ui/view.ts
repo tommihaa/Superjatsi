@@ -20,8 +20,6 @@ export interface CellView {
   score: number;
   /** Tämä solu on väliaikaisesti kirjattu ja odottaa vahvistusta. */
   pending: boolean;
-  /** Kirjaus olisi poltto (0 pistettä) — piirretään eri tyylillä kuin pisteellinen. */
-  burn: boolean;
   /** ALAS/YLÖS: tämä on järjestyksen seuraava täytettävä solu (indikaattori). */
   orderNext: boolean;
 }
@@ -93,7 +91,6 @@ export function buildView(game: GameState): GameView {
         available: mv !== undefined,
         score: mv?.score ?? 0,
         pending: isPending,
-        burn: mv !== undefined && (mv.burn === true || mv.score === 0),
         orderNext: nextRows.get(col) === r.id,
       };
     }

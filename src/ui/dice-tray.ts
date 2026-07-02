@@ -45,7 +45,6 @@ export class DiceTray extends HTMLElement {
     // nopat eivät siirry lukittaessa.
     const thrown: string[] = [];
     const rowDice: string[] = [];
-    let thrownCount = 0;
     v.dice.forEach((d, i) => {
       if (d.value === 0) {
         rowDice.push(`<button class="die empty" disabled aria-label="tyhjä noppa"></button>`);
@@ -60,15 +59,17 @@ export class DiceTray extends HTMLElement {
           `<button class="die held ${tone}" data-die="${i}"${dis} aria-label="noppa ${d.value}, lukittu">${pips}<span class="held-tag">${T.held}</span></button>`,
         );
       } else {
-        thrownCount++;
         thrown.push(
           `<button class="die ${tone}" data-die="${i}"${dis} style="${this.jitter(i, d.value)}" aria-label="noppa ${d.value}">${pips}</button>`,
         );
       }
     });
+    // Molemmat rivit pidetään aina renderöitynä (vaikka tyhjänä) — muuten niiden
+    // mount/unmount hyppäyttää tarjottimen korkeutta esim. ensimmäisen heiton tai
+    // "kaikki lukossa" -tilanteen kohdalla (ks. .table min-height ja .dice-row).
     const dieHtml =
-      (thrownCount ? `<div class="table">${thrown.join("")}</div>` : "") +
-      (rowDice.length ? `<div class="dice-row">${rowDice.join("")}</div>` : "");
+      `<div class="table">${thrown.join("")}</div>` +
+      `<div class="dice-row">${rowDice.join("")}</div>`;
 
     const rollLabel = v.rollsUsed === 0 ? T.roll : T.rollAgain;
     const rollDis = v.canRoll ? "" : " disabled";

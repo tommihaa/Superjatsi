@@ -52,7 +52,10 @@ export class Setup extends HTMLElement {
 
     this.innerHTML = `
       <div class="setup">
-        <h1>${T.title}</h1>
+        <div class="setup-head">
+          <h1>${T.title}</h1>
+          <button class="icon-btn" data-act="scores" title="${T.highscores}" aria-label="${T.highscores}">🏆</button>
+        </div>
         <p class="tagline">${T.tagline}</p>
         <fieldset>
           <legend>${T.diceCount}</legend>
@@ -83,6 +86,9 @@ export class Setup extends HTMLElement {
         this.names[Number(inp.dataset.name)] = inp.value;
       }),
     );
+    this.querySelector('[data-act="scores"]')!.addEventListener("click", () => {
+      this.dispatchEvent(new CustomEvent("open-highscores", { bubbles: true }));
+    });
     this.querySelector(".start")!.addEventListener("click", () => {
       const names = Array.from({ length: this.playerCount }, (_, i) => this.nameAt(i));
       this.dispatchEvent(

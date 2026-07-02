@@ -16,8 +16,11 @@
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     <title>Täysi</title>
     <script>
-      // Service workerin rekisteröinti → asennettavuus + offline.
-      if ("serviceWorker" in navigator) {
+      // Service workerin rekisteröinti → asennettavuus + offline. Vain tuotannossa:
+      // devissä (vite dev, ei-hashatut /src/*-URLit) cache-first SW jäisi tarjoilemaan
+      // vanhoja lähdetiedostoja jokaisen muutoksen jälkeen.
+      const isDev = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+      if ("serviceWorker" in navigator && !isDev) {
         window.addEventListener("load", () => {
           navigator.serviceWorker.register("/sw.js").catch(() => {});
         });

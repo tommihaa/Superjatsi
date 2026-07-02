@@ -3,6 +3,41 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.4.2] – 2026-07-02
+
+### Korjattu
+- **Tarjottimen hyppiminen heittojen välissä**: noppa-alue ("pöytä") ja lukkorivi
+  renderöidään nyt aina (vaikka tyhjänä) reservoidulla korkeudella, eivät enää
+  mountaudu/unmountaudu heiton mukaan — pelialue ei enää hyppää ensimmäisen heiton
+  tai "kaikki lukossa" -tilanteen kohdalla. Jäljelle jäänyt pienempi hyppy (pöydän
+  `min-height` oli 12 px liian pieni todelliseen 2-rivin noppasisältöön nähden,
+  150→162 px) korjattu myös — Heitä uudelleen- ja Vahvista-napit pysyvät nyt
+  täsmälleen samalla korkeudella heiton yli.
+- **Ennätykset eivät näkyneet aloitusnäytöllä**: `sj-header` (ja sen 🏆-nappi)
+  puuttui kokonaan aloitusnäytöltä, joten ennätyksiä pääsi katsomaan vain kesken
+  pelin tai pelin päätyttyä. Aloitusnäytölle lisätty oma 🏆-nappi.
+- **PWA-service worker jäi tarjoilemaan vanhaa devissä**: cache-first SW rekisteröityi
+  myös `npm run dev` -ympäristössä ja jätti vanhat `/src/*`-lähdetiedostot välimuistiin
+  jokaisen koodimuutoksen yli. SW rekisteröidään nyt vain tuotannossa (ei localhost).
+
+### Lisätty
+- **"Lataa kuva tuloksesta"** peli päättyessä: Canvas-piirretty PNG-yhteenveto
+  (pelaajat paremmuusjärjestyksessä + loppusumma), ei ulkoisia riippuvuuksia
+  (`src/ui/recap-image.ts`). Ei tallennu pysyvästi ennätyslistalle — vain
+  ladattavissa/jaettavissa pelin päättyessä.
+- **Kaksi uutta maxi-yhdistelmää** (vain 6 nopan Superjatsi-variantti), sijoitettu
+  Täyssuoran ja Sattuman väliin (kanoninen Maxi-Yatzy-järjestys): **Huvila**
+  (2 eri kolmikkoa, pisteet = kaikkien 6 nopan summa) ja **Torni** (nelikkö + eri
+  silmäluvun pari, pisteet = kaikkien 6 nopan summa). Sopimus päivitetty ensin
+  `SUPERJATSI.md`:hen.
+
+### Muutettu
+- **Poltto-erotteluväri poistettu**: 0 p:n kirjattavissa olevat solut (ml. anti-jumi-poltto)
+  ovat yhä klikattavia, mutta eivät enää saa mitään korostusväriä eikä numerotekstiä
+  (ei vihreää eikä vanhaa punertavaa `.cell.avail.burn`-tyyliä). Vain pisteellinen solu
+  (`score > 0`) merkitään vihreällä ja näyttää ehdotuspisteet — selkeyspäätös: yksi
+  väri erottuu yksiselitteisesti "tästä saa pisteitä".
+
 ## [0.4.1] – 2026-07-02
 
 ### Lisätty

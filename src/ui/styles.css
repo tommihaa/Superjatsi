@@ -109,6 +109,17 @@ button {
   padding: 24px;
   text-align: center;
 }
+.setup-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+.setup-head .icon-btn {
+  position: absolute;
+  right: 0;
+}
 .setup h1 {
   color: var(--gold);
   margin: 0 0 4px;
@@ -224,7 +235,10 @@ button {
   /* Puolet tarjottimen leveydestä, mutta vähintään noppien vaatima tila. */
   width: max(50%, 220px);
   max-width: 100%;
-  min-height: 150px;
+  /* 2 riviä 58px noppia + row-gap + padding + reuna = todellinen täysi korkeus.
+     Vastattava tarkasti, ettei laatikko silti kasva ensimmäisellä heitolla
+     (aiempi 150px oli liian pieni → 12px hyppy tyhjästä täyteen pöytään). */
+  min-height: 162px;
   padding: 14px 8px;
   background: var(--bg);
   border: 1px solid var(--border-soft);
@@ -242,6 +256,7 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  min-height: 82px; /* nopan korkeus + padding, ettei rivi romahda tyhjänä */
   padding: 4px 6px 20px; /* alas tilaa held-tagille */
 }
 .die {
@@ -355,26 +370,20 @@ sj-scorecard {
 .cell.zero {
   color: var(--text-dim);
 }
+/* Kirjattavissa oleva solu on aina klikattava, mutta vain pisteellinen (score > 0)
+   korostetaan vihreällä — 0 p:n vaihtoehdot (ml. anti-jumi-poltto) jätetään
+   merkkaamatta kokonaan, jotta vihreä erottuu yksiselitteisesti "tästä saa pisteitä". */
 .cell.avail {
+  cursor: pointer;
+}
+.cell.avail.scored {
   background: var(--avail-bg);
   color: #bff0cf;
-  cursor: pointer;
   font-weight: 700;
 }
-.cell.avail:hover {
+.cell.avail.scored:hover {
   background: var(--avail);
   color: #fff;
-}
-/* Poltto (0 p): punertava ja vaisumpi kuin pisteellinen kirjaus — uhraus
-   erottuu hyvästä siirrosta yhdellä silmäyksellä. */
-.cell.avail.burn {
-  background: rgba(226, 75, 74, 0.1);
-  color: #d99090;
-  font-weight: 400;
-}
-.cell.avail.burn:hover {
-  background: rgba(226, 75, 74, 0.35);
-  color: #ffd9d9;
 }
 /* ALAS/YLÖS: järjestyksen seuraava täytettävä rivi näkyy nuolena ennen heittoa. */
 .cell.next-order {
@@ -520,8 +529,8 @@ sj-scorecard {
   }
   .status { margin-bottom: 8px; }
   .tray { margin-bottom: 0; padding: 10px; gap: 8px; }
-  .tray .table { min-height: 104px; row-gap: 10px; padding: 8px 6px; }
-  .tray .dice-row { gap: 10px; padding: 2px 4px 16px; }
+  .tray .table { min-height: 112px; row-gap: 10px; padding: 8px 6px; }
+  .tray .dice-row { gap: 10px; padding: 2px 4px 16px; min-height: 62px; }
   .die { width: 42px; height: 42px; }
   .die .pip { width: 7px; height: 7px; }
 

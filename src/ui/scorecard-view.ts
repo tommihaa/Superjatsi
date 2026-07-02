@@ -30,10 +30,13 @@ export class ScorecardView extends HTMLElement {
       return `<td class="cell pending">${c.value}</td>`;
     }
     if (c.available) {
-      // Poltto (0 p) piirretään punertavana ja himmeämpänä kuin pisteellinen kirjaus,
-      // jotta uhraus erottuu hyvästä siirrosta yhdellä silmäyksellä.
-      const burn = c.burn ? " burn" : "";
-      return `<td class="cell avail${burn}" data-col="${col}" data-row="${rowId}">${c.score}</td>`;
+      // Vain pisteellinen (score > 0) korostetaan vihreällä ja näyttää ehdotuspisteet.
+      // 0 p:n vaihtoehdot (ml. anti-jumi-poltto) pysyvät klikattavina mutta ilman
+      // väriä tai tekstiä — ei mitään merkkiä, jotta vihreä+numero erottuu
+      // yksiselitteisesti "tästä saa pisteitä" -merkkinä.
+      const scored = c.score > 0 ? " scored" : "";
+      const text = c.score > 0 ? c.score : "";
+      return `<td class="cell avail${scored}" data-col="${col}" data-row="${rowId}">${text}</td>`;
     }
     const dim = dimmed ? " dim" : "";
     if (c.value !== null) {

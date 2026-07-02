@@ -18,6 +18,8 @@ export const ALL_ROWS: readonly RowDef[] = [
   { id: "smallStraight", label: "Pieni suora", section: "lower" },
   { id: "largeStraight", label: "Suuri suora", section: "lower" },
   { id: "fullStraight", label: "Täyssuora", section: "lower", sixOnly: true },
+  { id: "huvila", label: "Huvila", section: "lower", sixOnly: true },
+  { id: "torni", label: "Torni", section: "lower", sixOnly: true },
   { id: "chance", label: "Sattuma", section: "lower" },
   { id: "yatzy", label: "Jatsi", section: "lower" },
   { id: "superyatzy", label: "Superjatsi", section: "lower", sixOnly: true },

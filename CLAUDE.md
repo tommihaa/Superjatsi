@@ -42,6 +42,7 @@ yksi laillinen siirto (anti-jumi-poltto).
 ## Muista
 
 - Kulta (`--gold`) on varattu lukitus-/pending-tilalle — älä käytä sitä muuhun korostukseen.
-- Vihreä = kirjattavissa oleva solu; poltto (0 p) piirretään punertavana (`.cell.avail.burn`).
+- Vihreä = kirjattavissa oleva solu, myös 0 p:n vaihtoehdot (ml. anti-jumi-poltto) — ei
+  erillistä punaista poltto-tyyliä UI:ssa (tietoinen selkeys-päätös, ks. CHANGELOG).
 - Nopat: jalometalli-sävy silmäluvun mukaan (`.die.v1`–`.v6`), heitetyt gridi-"pöydällä"
   haamupaikkoineen (nopat eivät saa liikkua lukittaessa eivätkä mennä päällekkäin).

@@ -48,6 +48,7 @@ export const T = {
   winner: (name: string) => `Voittaja: ${name}`,
   winnerTie: (names: string) => `Tasapeli: ${names}`,
   playAgain: "Pelaa uudelleen",
+  downloadImage: "Lataa kuva tuloksesta",
 
   // Highscores
   highscores: "Ennätykset",

@@ -2,10 +2,6 @@
 
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
-## Harkinnassa (pelisäännöt)
-- [ ] Maxi-yhdistelmät: Kolmoispari jo mukana — lisäksi mahdollisesti **Torni** (kuusiluku)
-      ja **3+3-täyskäsi**, jos halutaan laajentaa alaosaa.
-
 ## UI / UX
 - [ ] Äänet (heitto, lukitus, kirjaus, voitto) — kevyt SFX-moduuli.
 - [ ] Asetukset-overlay: ratasnappi palautetaan headeriin kun sisältöä on (esim. äänet
@@ -18,6 +14,10 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.4.2: tarjottimen layout-hyppy korjattu, ennätykset näkyviin aloitusnäytölle,
+      dev-SW-cache-bugi korjattu (SW vain tuotannossa), poltto-erotteluväri poistettu
+      (vihreä vain pisteelliselle), "Lataa kuva tuloksesta" -painike lopputulokseen,
+      uudet maxi-yhdistelmät Huvila + Torni (6 nopan variantti).
 - [x] 0.4.1: PWA-asennettavuus (manifest + service worker + ikonit).
 - [x] 0.4.0: poltto punertavana, ALAS/YLÖS-nuoli-indikaattori, sarakehimmennys,
       Uusi peli -varmistus, yksinpelin "Tulos: N", jalometallinopat, CLAUDE.md.

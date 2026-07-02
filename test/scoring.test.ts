@@ -30,6 +30,16 @@ describe("scoring — parit ja samat", () => {
     expect(scoreFor("fourKind", [6, 6, 6, 6, 1, 2], 6)).toBe(24);
     expect(scoreFor("fourKind", [6, 6, 6, 1, 2, 3], 6)).toBe(0);
   });
+  it("Huvila = kahden eri kolmikon summa (6 noppaa)", () => {
+    expect(scoreFor("huvila", [3, 3, 3, 5, 5, 5], 6)).toBe(24); // 3×3 + 5×3
+    expect(scoreFor("huvila", [4, 4, 4, 4, 2, 2], 6)).toBe(0); // nelikkö+pari = Torni, ei Huvila
+    expect(scoreFor("huvila", [6, 6, 6, 6, 6, 6], 6)).toBe(0); // yksi luku ei kelpaa kahdeksi kolmikoksi
+  });
+  it("Torni = nelikön + parin summa (paras, eri silmäluvut)", () => {
+    expect(scoreFor("torni", [4, 4, 4, 4, 2, 2], 6)).toBe(20); // 4×4 + 2×2
+    expect(scoreFor("torni", [3, 3, 3, 5, 5, 5], 6)).toBe(0); // 3+3 = Huvila, ei Torni
+    expect(scoreFor("torni", [6, 6, 6, 6, 6, 6], 6)).toBe(0); // sama luku ei kelpaa
+  });
   it("Täyskäsi = kolmikon + parin summa (paras 6 nopalla)", () => {
     expect(scoreFor("fullHouse", [5, 5, 5, 2, 2, 1], 6)).toBe(19);
     expect(scoreFor("fullHouse", [3, 3, 3, 6, 6, 6], 6)).toBe(24); // 6×3 + 3×2

@@ -16,6 +16,8 @@ export type RowId =
   | "threePairs"
   | "threeKind"
   | "fourKind"
+  | "huvila"
+  | "torni"
   | "fullHouse"
   | "smallStraight"
   | "largeStraight"
