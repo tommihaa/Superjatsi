@@ -3,6 +3,14 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.4.1] – 2026-07-02
+
+### Lisätty
+- **PWA-asennettavuus**: `manifest.webmanifest` + service worker (`public/sw.js`,
+  network-first navigointi / cache-first assetit, offline-appishell) + noppa-aiheiset
+  ikonit (`build/gen_icons.mjs`, 192/512/512-maskable). Asennettavissa työpöydälle ja
+  mobiiliin, toimii ilman verkkoyhteyttä lataamisen jälkeen.
+
 ## [0.4.0] – 2026-07-02
 
 ### Lisätty
