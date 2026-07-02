@@ -117,7 +117,7 @@ export function downloadRecapImage(game: GameState): void {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `taysi-tulos-${localToday()}.png`;
+    a.download = `superjatsi-tulos-${localToday()}.png`;
     a.click();
     URL.revokeObjectURL(url);
   });

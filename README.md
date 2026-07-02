@@ -1,10 +1,10 @@
-# Täysi 🎲
+# Superjatsi 🎲
 
 Web-pohjainen **maxi-jatsi** (5 tai 6 noppaa) paikalliseen pass-and-play-moninpeliin.
 Puhdas, kirjastoton toteutus: **Vite + TypeScript + Web Components**. Ei Reactia, ei
 raskaita riippuvuuksia, ei tilejä eikä tietokantaa.
 
-- **Pelaa:** https://tommi-taysi.vercel.app
+- **Pelaa:** https://tommi-superjatsi.vercel.app
 - **Repo:** https://github.com/tommihaa/Superjatsi (yksityinen)
 - **Muutosloki:** [CHANGELOG.md](CHANGELOG.md) · **Tulossa:** [TODO.md](TODO.md) · **Säännöt:** [SUPERJATSI.md](SUPERJATSI.md)
 
@@ -59,7 +59,7 @@ npm run build    # tyypintarkistus (tsc) + tuotantobuild
 ## Julkaisu
 
 Kytketty Vercel-tuotantoon, GitHub-auto-deploy päällä: **`git push` main-haaraan → automaattinen
-tuotantodeploy** osoitteeseen https://tommi-taysi.vercel.app.
+tuotantodeploy** osoitteeseen https://tommi-superjatsi.vercel.app.
 
 ## Lisenssi
 

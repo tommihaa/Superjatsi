@@ -1,8 +1,8 @@
-# Täysi (repo: Superjatsi)
+# Superjatsi
 
 Web-pohjainen maxi-jatsi paikalliseen pass-and-play-moninpeliin (1–6 pelaajaa, 5/6 noppaa).
-Pelin nimi on **Täysi**; "superjatsi" elää teknisenä nimenä (paketti, localStorage-avaimet
-`superjatsi:*`, pistekategoria Superjatsi = 6 samaa) — älä nimeä näitä uudelleen.
+Pelin nimi on **Superjatsi**; sama nimi kantaa myös pistekategoria "Superjatsi" (6 samaa) —
+tietoinen nimitörmäys, hyväksytty käyttäjän toimesta.
 
 ## Tech ja komennot
 
@@ -34,7 +34,7 @@ yksi laillinen siirto (anti-jumi-poltto).
 - Päivitä `CHANGELOG.md` (Keep a Changelog, SemVer — pidä `package.json`-versio synkassa)
   ja `TODO.md` ennen pushia; valmiit TODO-kohdat siirtyvät CHANGELOGiin.
 - **Julkaisu = `git push` mainiin** → Vercel-git-integraatio deployaa tuotantoon
-  (https://tommi-taysi.vercel.app) automaattisesti. Ei erillistä CLI-deployta.
+  (https://tommi-superjatsi.vercel.app) automaattisesti. Ei erillistä CLI-deployta.
   Odota ~30–60 s ennen tuotannon todennusta (bundle-grep). Pushaa vain käyttäjän
   selvällä julkaisukuittauksella.
 - Domain-muutokset vaativat Vitest-testit; UI todennetaan preview-selaimella.

@@ -3,6 +3,13 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [Julkaisematon]
+
+### Muutettu
+- **Nimi palautettu Täysi → Superjatsi**: brändi, otsikko, manifest ja URL
+  (https://tommi-superjatsi.vercel.app) vaihdettu takaisin. Nimitörmäys pistekategorian
+  "Superjatsi" (6 samaa) kanssa hyväksytty tietoisesti — ei muutosta pelilogiikkaan.
+
 ## [0.4.2] – 2026-07-02
 
 ### Korjattu
