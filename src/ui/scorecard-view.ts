@@ -35,8 +35,11 @@ export class ScorecardView extends HTMLElement {
       // väriä tai tekstiä — ei mitään merkkiä, jotta vihreä+numero erottuu
       // yksiselitteisesti "tästä saa pisteitä" -merkkinä.
       const scored = c.score > 0 ? " scored" : "";
+      // Maksimipisteiden apuri: tähti kertoo ehdotuksen olevan kategorian paras
+      // mahdollinen (esim. suora, jossa muuta pistemäärää ei ole olemassakaan).
+      const max = c.isMax ? " max" : "";
       const text = c.score > 0 ? c.score : "";
-      return `<td class="cell avail${scored}" data-col="${col}" data-row="${rowId}">${text}</td>`;
+      return `<td class="cell avail${scored}${max}" data-col="${col}" data-row="${rowId}" title="${c.isMax ? T.maxScore : ""}">${text}</td>`;
     }
     const dim = dimmed ? " dim" : "";
     if (c.value !== null) {
@@ -74,7 +77,8 @@ export class ScorecardView extends HTMLElement {
         .filter((r) => r.section === section)
         .map((r) => {
           const cells = b.columns.map((c) => this.cellHtml(r.id, c, r.cells[c], isDim(c))).join("");
-          return `<tr class="section-${section}"><td class="row-label">${r.label}</td>${cells}<td class="cell colsum">${r.sum}</td></tr>`;
+          const title = r.description ? ` title="${r.description}"` : "";
+          return `<tr class="section-${section}"><td class="row-label"${title}>${r.label}</td>${cells}<td class="cell colsum">${r.sum}</td></tr>`;
         })
         .join("");
 

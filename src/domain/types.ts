@@ -39,6 +39,8 @@ export interface RowDef {
   face?: number;
   /** Vain 6 nopan variantissa mukana. */
   sixOnly?: boolean;
+  /** Lyhyt kombivaatimuksen selite hover-tooltipiä varten (alaosan rivit). */
+  description?: string;
 }
 
 /** Yhden solun tila: null = tyhjä, luku = kirjattu (0 = poltettu). */

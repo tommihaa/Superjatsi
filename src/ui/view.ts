@@ -1,5 +1,6 @@
 import { COLUMN_IDS, OrderedColumn } from "../domain/columns";
 import type { GameState } from "../domain/game";
+import { maxScoreFor } from "../domain/scoring";
 import type { ColumnId, DiceCount, Move, RowId } from "../domain/types";
 
 // Domainista johdettu, serialisoitava näkymämalli. UI-komponentit lukevat vain tätä
@@ -22,11 +23,15 @@ export interface CellView {
   pending: boolean;
   /** ALAS/YLÖS: tämä on järjestyksen seuraava täytettävä solu (indikaattori). */
   orderNext: boolean;
+  /** Ehdotuspisteet ovat kategorian teoreettinen maksimi (vain kun available). */
+  isMax: boolean;
 }
 export interface RowView {
   id: RowId;
   label: string;
   section: "upper" | "lower";
+  /** Lyhyt kombivaatimuksen selite hover-tooltipiä varten (jos määritelty). */
+  description?: string;
   cells: Record<ColumnId, CellView>;
   sum: number;
 }
@@ -86,15 +91,24 @@ export function buildView(game: GameState): GameView {
       const key = `${col}/${r.id}`;
       const isPending = game.pending?.columnId === col && game.pending?.rowId === r.id;
       const mv = moves.get(key);
+      const score = mv?.score ?? 0;
       cells[col] = {
         value: card.get(col, r.id),
         available: mv !== undefined,
-        score: mv?.score ?? 0,
+        score,
         pending: isPending,
         orderNext: nextRows.get(col) === r.id,
+        isMax: score > 0 && score === maxScoreFor(r.id, game.diceCount),
       };
     }
-    return { id: r.id, label: r.label, section: r.section, cells, sum: card.rowSum(r.id) };
+    return {
+      id: r.id,
+      label: r.label,
+      section: r.section,
+      ...(r.description !== undefined ? { description: r.description } : {}),
+      cells,
+      sum: card.rowSum(r.id),
+    };
   });
 
   const summary = {} as Record<ColumnId, ColumnSummary>;

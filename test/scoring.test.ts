@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { scoreFor } from "../src/domain/scoring";
+import { maxScoreFor, scoreFor } from "../src/domain/scoring";
 
 describe("scoring — yläosa", () => {
   it("laskee silmäluvun summan", () => {
@@ -55,8 +55,8 @@ describe("scoring — suorat", () => {
   it("Suuri suora 2-3-4-5-6 = 20", () => {
     expect(scoreFor("largeStraight", [2, 3, 4, 5, 6, 1], 6)).toBe(20);
   });
-  it("Täyssuora 1-2-3-4-5-6 = 21", () => {
-    expect(scoreFor("fullStraight", [1, 2, 3, 4, 5, 6], 6)).toBe(21);
+  it("Täyssuora 1-2-3-4-5-6 = 25 (21 + 4 harvinaisuusbonusta)", () => {
+    expect(scoreFor("fullStraight", [1, 2, 3, 4, 5, 6], 6)).toBe(25);
     expect(scoreFor("fullStraight", [1, 2, 3, 4, 5, 5], 6)).toBe(0);
   });
 });
@@ -81,5 +81,21 @@ describe("scoring — absurdit syötteet", () => {
     expect(scoreFor("pair", [], 6)).toBe(0);
     expect(scoreFor("chance", [], 6)).toBe(0);
     expect(scoreFor("yatzy", [], 6)).toBe(0);
+  });
+});
+
+describe("scoring — maxScoreFor", () => {
+  it("suorien maksimi on ainoa mahdollinen pistemäärä", () => {
+    expect(maxScoreFor("smallStraight", 6)).toBe(15);
+    expect(maxScoreFor("largeStraight", 6)).toBe(20);
+    expect(maxScoreFor("fullStraight", 6)).toBe(25);
+  });
+  it("yläosan maksimi skaalautuu noppamäärän mukaan", () => {
+    expect(maxScoreFor("sixes", 5)).toBe(30);
+    expect(maxScoreFor("sixes", 6)).toBe(36);
+  });
+  it("jatsien maksimi on kiinteä pistemäärä", () => {
+    expect(maxScoreFor("yatzy", 6)).toBe(50);
+    expect(maxScoreFor("superyatzy", 6)).toBe(100);
   });
 });

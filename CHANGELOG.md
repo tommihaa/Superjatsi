@@ -5,6 +5,22 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 
 ## [Julkaisematon]
 
+### Lisätty
+- **Kategorioiden hover-selitteet**: alaosan rivien nimillä (Pari, Huvila, Torni,
+  suorat, ym.) on nyt hover/title-tooltip joka kertoo lyhyesti kombivaatimuksen.
+- **Maksimipisteapuri**: kirjattavissa oleva ruutu saa pienen tähtimerkinnän kun
+  ehdotuspisteet ovat kategorian teoreettinen maksimi — erityisen näkyvä suorilla,
+  joissa ainoa mahdollinen pistemäärä on aina tämä maksimi.
+
+### Muutettu
+- **Täyssuora 21 → 25** (+4 harvinaisuusbonusta): kuuden nopan täyssuora on niin
+  harvinainen, että se palkitaan nyt erikseen.
+- **Yläbonus 6 nopalla 50 → 100**: kynnyksen (84) täyttyessä 6 nopan variantissa
+  bonus on nyt 100 (5 nopan 63/+50-sääntö ennallaan).
+- **Heitä/Vahvista/Peru-napit venytetty tulokortin levyisiksi**: ohjaimet ja
+  pisteruudukko rajautuvat nyt samaan reunaan sen sijaan että napit olisivat
+  kapeampia ja keskitettyjä.
+
 ### Korjattu
 - **Puuttuva `main`-landmark** (Lighthouse-accessibility-huomautus): `sj-app`:in
   sisältö kääritään nyt `<main>`-elementtiin sekä setup- että peli-/game-over-näkymässä.

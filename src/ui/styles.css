@@ -222,6 +222,18 @@ button {
   border-radius: var(--radius);
   padding: 16px;
   margin-bottom: 14px;
+  width: 100%;
+}
+/* Heitä/Vahvista/Peru venytetään tarjottimen (siis tulokortin) koko leveydelle,
+   jotta ohjaimet ja pisteruudukko rajautuvat samaan reunaan. */
+.tray .roll {
+  width: 100%;
+}
+.tray .confirm-actions {
+  width: 100%;
+}
+.tray .confirm-actions button {
+  flex: 1;
 }
 /* "Pöytä", jolle heitetyt (lukitsemattomat) nopat asettuvat. Gridi takaa ettei
    nopat mene päällekkäin millään leveydellä; heitetty ilme tulee nopan omasta
@@ -384,6 +396,20 @@ sj-scorecard {
 .cell.avail.scored:hover {
   background: var(--avail);
   color: #fff;
+}
+/* Maksimipisteapuri: pieni tähti kertoo ehdotuksen olevan kategorian teoreettinen
+   maksimi (esim. suorat, joissa muuta pistemäärää ei ole olemassakaan). */
+.cell.avail.max {
+  position: relative;
+}
+.cell.avail.max::after {
+  content: "★";
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  font-size: 0.55rem;
+  line-height: 1;
+  color: var(--accent);
 }
 /* ALAS/YLÖS: järjestyksen seuraava täytettävä rivi näkyy nuolena ennen heittoa. */
 .cell.next-order {

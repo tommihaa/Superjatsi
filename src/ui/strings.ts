@@ -37,6 +37,7 @@ export const T = {
   // Scorecard
   colSum: "=",
   nextInOrder: "seuraava täytettävä rivi",
+  maxScore: "Kategorian maksimipisteet",
   bonus: "Bonus",
   upperSum: "Yläsumma",
   lowerSum: "Alasumma",

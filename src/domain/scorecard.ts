@@ -2,19 +2,20 @@ import { COLUMN_IDS } from "./columns";
 import { rowsForVariant } from "./categories";
 import type { CellValue, ColumnId, DiceCount, RowDef, RowId } from "./types";
 
-const UPPER_BONUS = 50;
-
 // Yhden pelaajan tulokortti. Jokainen sarake on itsenäinen "minijatsi" omalla
 // yläbonuksellaan; pelin loppusumma on sarakkeiden summa.
 export class Scorecard {
   readonly rows: readonly RowDef[];
   /** Yläbonuksen kynnys: k×21, missä k=3 (5 noppaa) tai k=4 (6 noppaa). */
   readonly bonusThreshold: number;
+  /** Yläbonuksen arvo: 6 nopalla (kynnys 84) korotettu 100:aan, muuten 50. */
+  private readonly bonusValue: number;
   private readonly cells = new Map<ColumnId, Map<RowId, CellValue>>();
 
   constructor(readonly diceCount: DiceCount) {
     this.rows = rowsForVariant(diceCount);
     this.bonusThreshold = (diceCount === 6 ? 4 : 3) * 21;
+    this.bonusValue = diceCount === 6 ? 100 : 50;
     for (const col of COLUMN_IDS) {
       const m = new Map<RowId, CellValue>();
       for (const r of this.rows) m.set(r.id, null);
@@ -58,7 +59,7 @@ export class Scorecard {
   }
 
   upperBonus(col: ColumnId): number {
-    return this.upperSubtotal(col) >= this.bonusThreshold ? UPPER_BONUS : 0;
+    return this.upperSubtotal(col) >= this.bonusThreshold ? this.bonusValue : 0;
   }
 
   /** Juokseva poikkeama odotusarvosta: Σ(kirjattu − silmäluku×k) täytetyille yläsoluille. */

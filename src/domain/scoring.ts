@@ -120,12 +120,63 @@ export function scoreFor(rowId: RowId, dice: number[], _diceCount: DiceCount): n
     case "largeStraight":
       return hasAll(c, [2, 3, 4, 5, 6]) ? 20 : 0;
     case "fullStraight":
-      return hasAll(c, [1, 2, 3, 4, 5, 6]) ? 21 : 0;
+      // Harvinaisuusbonus: 21 peruspistettä + 4 = 25.
+      return hasAll(c, [1, 2, 3, 4, 5, 6]) ? 25 : 0;
     case "chance":
       return sum(dice);
     case "yatzy":
       return highestWithAtLeast(c, 5) > 0 ? 50 : 0;
     case "superyatzy":
       return highestWithAtLeast(c, 6) > 0 ? 100 : 0;
+  }
+}
+
+/**
+ * Kategorian teoreettinen maksimipistemäärä nykyisellä noppamäärällä. Käytetään
+ * apurina näyttämään milloin nykyinen ehdotus on jo paras mahdollinen (esim.
+ * suorat, joissa ainoa mahdollinen pistemäärä on aina tämä maksimi).
+ */
+export function maxScoreFor(rowId: RowId, diceCount: DiceCount): number {
+  switch (rowId) {
+    case "ones":
+      return 1 * diceCount;
+    case "twos":
+      return 2 * diceCount;
+    case "threes":
+      return 3 * diceCount;
+    case "fours":
+      return 4 * diceCount;
+    case "fives":
+      return 5 * diceCount;
+    case "sixes":
+      return 6 * diceCount;
+    case "pair":
+      return 6 * 2;
+    case "twoPairs":
+      return (6 + 5) * 2;
+    case "threePairs":
+      return (6 + 5 + 4) * 2;
+    case "threeKind":
+      return 6 * 3;
+    case "fourKind":
+      return 6 * 4;
+    case "huvila":
+      return (6 + 5) * 3;
+    case "torni":
+      return 6 * 4 + 5 * 2;
+    case "fullHouse":
+      return 6 * 3 + 5 * 2;
+    case "smallStraight":
+      return 15;
+    case "largeStraight":
+      return 20;
+    case "fullStraight":
+      return 25;
+    case "chance":
+      return 6 * diceCount;
+    case "yatzy":
+      return 50;
+    case "superyatzy":
+      return 100;
   }
 }

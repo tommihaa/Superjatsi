@@ -19,12 +19,18 @@ describe("Scorecard — bonuskynnys", () => {
 });
 
 describe("Scorecard — yläbonus ja poikkeama", () => {
-  it("antaa +50 kun kynnys täyttyy täsmälleen (k×silmäluku)", () => {
+  it("antaa +100 kun 6 nopan kynnys (84) täyttyy täsmälleen (k×silmäluku)", () => {
     const card = new Scorecard(6);
     for (const { row, face } of UPPER) card.set("I", row, face * 4);
     expect(card.upperSubtotal("I")).toBe(84);
-    expect(card.upperBonus("I")).toBe(50);
+    expect(card.upperBonus("I")).toBe(100);
     expect(card.upperDeviation("I")).toBe(0);
+  });
+  it("antaa +50 kun 5 nopan kynnys (63) täyttyy täsmälleen", () => {
+    const card = new Scorecard(5);
+    for (const { row, face } of UPPER) card.set("I", row, face * 3);
+    expect(card.upperSubtotal("I")).toBe(63);
+    expect(card.upperBonus("I")).toBe(50);
   });
   it("ei bonusta kynnyksen alle, ja poikkeama on negatiivinen", () => {
     const card = new Scorecard(6);
@@ -43,9 +49,9 @@ describe("Scorecard — yläbonus ja poikkeama", () => {
 describe("Scorecard — summat", () => {
   it("columnTotal = yläosa + bonus + alaosa", () => {
     const card = new Scorecard(6);
-    for (const { row, face } of UPPER) card.set("I", row, face * 4); // 84 + 50
+    for (const { row, face } of UPPER) card.set("I", row, face * 4); // 84 + 100
     card.set("I", "chance", 20);
-    expect(card.columnTotal("I")).toBe(84 + 50 + 20);
+    expect(card.columnTotal("I")).toBe(84 + 100 + 20);
   });
   it("rowSum summaa rivin sarakkeiden yli", () => {
     const card = new Scorecard(6);

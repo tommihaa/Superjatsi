@@ -34,7 +34,8 @@ kun pelaaja kirjaa tuloksen johonkin avoimeen soluun (tai polttaa rivin).
 Ykköset, Kakkoset, Kolmoset, Neloset, Vitoset, Kutoset — pisteet = täsmäävien noppien summa.
 
 **Yläbonus (per sarake):** kynnys = `silmäluku × k` summattuna (k = 3 viidellä nopalla → 63;
-k = 4 kuudella nopalla → 84). Kynnyksen täyttyessä **+50**.
+k = 4 kuudella nopalla → 84). Kynnyksen täyttyessä **+50** (5 noppaa) tai **+100**
+(6 noppaa, kynnys 84).
 
 ### Alaosa
 | Kategoria | Ehto | Pisteet |
@@ -47,7 +48,7 @@ k = 4 kuudella nopalla → 84). Kynnyksen täyttyessä **+50**.
 | Täyskäsi | 3 + 2 samaa | kaikkien 5 ko. nopan summa |
 | Pieni suora | 1-2-3-4-5 | 15 |
 | Suuri suora | 2-3-4-5-6 | 20 |
-| Täyssuora *(vain 6 noppaa)* | 1-2-3-4-5-6 | 21 |
+| Täyssuora *(vain 6 noppaa)* | 1-2-3-4-5-6 | 25 *(21 + 4 harvinaisuusbonusta)* |
 | Huvila *(vain 6 noppaa)* | 3 + 3 samaa (2 eri kolmikkoa) | kaikkien 6 nopan summa |
 | Torni *(vain 6 noppaa)* | 4 + 2 samaa (2 eri silmälukua) | kaikkien 6 nopan summa |
 | Sattuma | mikä tahansa | kaikkien noppien summa |

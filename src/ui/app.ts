@@ -187,7 +187,8 @@ export class App extends HTMLElement {
              <li><b>Sarakkeet:</b> I = 1 heitto, II = ≤2, III = ≤3 (vapaa rivijärjestys).
                  ALAS täytetään ylhäältä alas, YLÖS alhaalta ylös (↓/↑ näyttää seuraavan rivin).</li>
              <li><b>Heitot:</b> 3 per vuoro, nopat saa lukita klikkaamalla.</li>
-             <li><b>Yläbonus:</b> +50 kun yläosa ylittää kynnyksen (63 / 84).</li>
+             <li><b>Yläbonus:</b> yläosa ylittää kynnyksen 63 (5 noppaa) → +50, tai
+                 84 (6 noppaa) → +100.</li>
              <li><b>Polttaminen:</b> 0 p:n kirjaus uhraa rivin. Jos mikään kirjaus ei ole
                  sallittu, avoimet ruudut saa aina polttaa.</li>
              <li><b>Loppusumma</b> = sarakkeiden summa. Suurin voittaa.</li>
