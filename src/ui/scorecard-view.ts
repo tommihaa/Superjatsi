@@ -16,6 +16,7 @@ export class ScorecardView extends HTMLElement {
 
   private cellHtml(
     rowId: string,
+    rowLabel: string,
     col: ColumnId,
     c: BoardView["rows"][number]["cells"][ColumnId],
     dimmed: boolean,
@@ -33,7 +34,8 @@ export class ScorecardView extends HTMLElement {
       // mahdollinen (esim. suora, jossa muuta pistemäärää ei ole olemassakaan).
       const max = c.isMax ? " max" : "";
       const text = c.score > 0 ? c.score : "";
-      return `<td class="cell avail${scored}${max}" data-col="${col}" data-row="${rowId}" title="${c.isMax ? T.maxScore : ""}">${text}</td>`;
+      const aria = T.cellCommitLabel(rowLabel, T.colLabel[col], c.score);
+      return `<td class="cell avail${scored}${max}" data-col="${col}" data-row="${rowId}" role="button" tabindex="0" aria-label="${aria}" title="${c.isMax ? T.maxScore : ""}">${text}</td>`;
     }
     const dim = dimmed ? " dim" : "";
     if (c.value !== null) {
@@ -72,7 +74,7 @@ export class ScorecardView extends HTMLElement {
       b.rows
         .filter((r) => r.section === section)
         .map((r) => {
-          const cells = b.columns.map((c) => this.cellHtml(r.id, c, r.cells[c], isDim(c))).join("");
+          const cells = b.columns.map((c) => this.cellHtml(r.id, r.label, c, r.cells[c], isDim(c))).join("");
           const title = r.description ? ` title="${r.description}"` : "";
           return `<tr class="section-${section}"><td class="row-label"${title}>${r.label}</td>${cells}<td class="cell colsum">${r.sum}</td></tr>`;
         })
@@ -110,13 +112,21 @@ export class ScorecardView extends HTMLElement {
       </table>`;
 
     this.querySelectorAll<HTMLTableCellElement>(".cell.avail").forEach((td) => {
-      td.addEventListener("click", () => {
+      const emit = () => {
         this.dispatchEvent(
           new CustomEvent("commit", {
             bubbles: true,
             detail: { columnId: td.dataset.col, rowId: td.dataset.row },
           }),
         );
+      };
+      td.addEventListener("click", emit);
+      // role="button" ei tuo näppäinaktivointia ilmaiseksi — Enter/Space käsin.
+      td.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          emit();
+        }
       });
     });
   }

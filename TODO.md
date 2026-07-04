@@ -3,16 +3,14 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## UI / UX
-- [ ] Keskiarvoseuranta (idea 4.7, esikuva ystävän VBScript-jatsi): ennätyslistan
+- [ ] Keskiarvoseuranta (idea 4.7, esikuva ystävän VBScript-jatsi) — ODOTTAA:
+      tehdään siinä vaiheessa kun peliä aletaan jakaa muille (Tommin päätös 4.7).
+      Ennätyslistan
       rinnalle pelaajakohtainen keskiarvo, johon jokainen aloitettu peli lasketaan.
       Kesken jätetty peli painaa keskiarvoa alas → kannustaa pelaamaan loppuun ja
       yrittämään parhaansa (top 10 mittaa vain huippuja, keskiarvo johdonmukaisuutta).
       Avoimet designkysymykset: keskeytyksen arvo (0 vai siihen asti kertynyt summa),
       per nimi + variantti, koko historia vai liukuva ikkuna, yksinpeli vs monipeli.
-- [ ] Loppunäytön tulostaulukko kaikille pelaajille (nyt voittajabanneri).
-- [ ] Näppäimistösaavutettavuus: tulokortin klikattavat solut ovat `<td>`-elementtejä
-      ilman tabindexiä/roolia — role="button" + tabindex + Enter/Space, sekä
-      `:focus-visible`-tyylit napeille ja nopille.
 - [ ] Äänet (heitto, lukitus, kirjaus, voitto) — kevyt SFX-moduuli.
 - [ ] Asetukset-overlay: ratasnappi palautetaan headeriin kun sisältöä on (esim. äänet
       päälle/pois, noppateema). Nappi poistettu 0.4.0:ssa placeholderina.
@@ -23,6 +21,10 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.7.0: loppunäytön tulostaulukko kaikille pelaajille (voittaja korostettuna,
+      tasapisteet jakavat sijan) ja näppäimistösaavutettavuus (solut role="button"
+      + tabindex + Enter/Space, focus-visible-tyylit, fokus Vahvista-nappiin
+      kirjauksen jälkeen).
 - [x] 0.6.0: vuoronvaihtoruutu pass-and-playhin ("Anna laite pelaajalle X" + Aloita
       vuoro) ja edellisen siirron kuittaus samassa ruudussa (kirjaus/poltto);
       hover-selitteet Bonus- ja Yläsumma-riveille; kaksiportainen tähtimyrsky

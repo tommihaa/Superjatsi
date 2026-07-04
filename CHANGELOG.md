@@ -3,6 +3,21 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.7.0] – 2026-07-04
+
+### Lisätty
+- **Loppunäytön tulostaulukko**: monipelin päätyttyä kaikki pelaajat listataan
+  pistejärjestyksessä (sija, nimi, lopputulos), voittajarivi(t) korostettuna.
+  Tasapisteet jakavat saman sijan. Yksinpelissä näytetään edelleen vain
+  "Tulos: N pistettä".
+- **Näppäimistösaavutettavuus**: tulokortin kirjattavat solut ovat nyt
+  fokusoitavia (`role="button"` + `tabindex`) ja aktivoitavissa Enterillä tai
+  välilyönnillä; saavutettavuusnimi kertoo rivin, sarakkeen ja pisteet
+  ("Kirjaa Sattuma, sarake III: 22 pistettä" / poltossa "Polta ..."). Napeille,
+  nopille ja soluille näkyvä `:focus-visible`-fokusrengas (accent-väri).
+  Kirjauksen jälkeen fokus siirtyy Vahvista-nappiin, jottei se katoa kortin
+  uudelleenpiirrossa.
+
 ## [0.6.0] – 2026-07-04
 
 ### Lisätty

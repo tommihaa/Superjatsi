@@ -60,6 +60,10 @@ export const T = {
     YLOS: "Täytetään alhaalta ylös järjestyksessä",
   } as Record<string, string>,
   nextInOrder: "seuraava täytettävä rivi",
+  cellCommitLabel: (row: string, col: string, score: number) =>
+    score > 0
+      ? `Kirjaa ${row}, sarake ${col}: ${score} pistettä`
+      : `Polta ${row}, sarake ${col}`,
   maxScore: "Kategorian maksimipisteet",
   bonus: "Bonus",
   bonusInfo: (threshold: number, value: number) =>
@@ -77,6 +81,7 @@ export const T = {
   winner: (name: string) => `Voittaja: ${name}`,
   winnerTie: (names: string) => `Tasapeli: ${names}`,
   playAgain: "Pelaa uudelleen",
+  finalStandings: "Lopputulokset",
   downloadImage: "Lataa kuva tuloksesta",
 
   // Highscores

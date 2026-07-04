@@ -182,6 +182,10 @@ export class App extends HTMLElement {
     }
 
     const view = buildView(this.game);
+    // Kirjaus tyhjentää ja rakentaa DOM:n uusiksi → näppäimistöfokus katoaisi.
+    // Kun pending-tila alkaa, fokus siirretään Vahvista-nappiin (renderin lopussa,
+    // kun nappi on kiinnitetty dokumenttiin).
+    const becamePending = view.hasPending && !this.lastView?.hasPending;
     this.lastView = view;
 
     this.append(document.createElement("sj-header") as AppHeader);
@@ -212,9 +216,11 @@ export class App extends HTMLElement {
     main.append(play);
     this.append(main);
 
-    if (view.isOver) this.append(this.gameOverOverlay(view.winners));
+    if (view.isOver) this.append(this.gameOverOverlay(view));
     else if (this.handoff) this.append(this.handoffOverlay(view));
     else if (this.overlay) this.append(this.infoOverlay(this.overlay));
+
+    if (becamePending) this.querySelector<HTMLButtonElement>("button.confirm")?.focus();
   }
 
   /** Vuoronvaihtoruutu: kuittaus edellisestä kirjauksesta + "Anna laite pelaajalle X".
@@ -242,20 +248,25 @@ export class App extends HTMLElement {
     return ov;
   }
 
-  private gameOverOverlay(winners: string[]): HTMLElement {
+  private gameOverOverlay(view: GameView): HTMLElement {
     // Yksinpelissä ei ole voittajaa vaan tulos.
-    const solo = this.game?.players.length === 1;
+    const solo = view.players.length === 1;
     const msg = solo
-      ? T.soloResult(this.game!.players[0].card.grandTotal())
-      : winners.length === 1
-        ? T.winner(winners[0])
-        : T.winnerTie(winners.join(", "));
+      ? T.soloResult(view.players[0].total)
+      : view.winners.length === 1
+        ? T.winner(view.winners[0])
+        : T.winnerTie(view.winners.join(", "));
+    // Monipelissä kaikkien pelaajien tulostaulukko (yksinpelissä redundantti).
+    const standings = solo
+      ? ""
+      : `<h3 class="hs-title">${T.finalStandings}</h3>${this.standingsHtml(view)}`;
     const scores = this.game
       ? `<h3 class="hs-title">${T.highscoresFor(this.game.diceCount)}</h3>
          ${this.highscoreListHtml(this.game.diceCount, this.newRanks)}`
       : "";
     const ov = this.overlayEl(
       `<div class="banner"><div class="trophy">🏆</div><h2>${T.gameOver}</h2><p>${msg}</p></div>
+       ${standings}
        ${scores}
        <div class="actions">
          <button class="secondary" data-act="download-recap">${T.downloadImage}</button>
@@ -320,6 +331,24 @@ export class App extends HTMLElement {
       });
     });
     return ov;
+  }
+
+  /** Loppunäytön tulostaulukko: kaikki pelaajat pistejärjestyksessä, voittaja(t)
+   *  korostettuna. Tasapisteet jakavat saman sijan (kilpailujärjestys). */
+  private standingsHtml(view: GameView): string {
+    const sorted = [...view.players].sort((a, b) => b.total - a.total);
+    const rows = sorted
+      .map((p, i) => {
+        const rank = sorted.findIndex((q) => q.total === p.total) + 1;
+        const win = i === 0 || p.total === sorted[0].total ? ' class="result-win"' : "";
+        return `<tr${win}>
+             <td class="hs-rank">${rank}.</td>
+             <td class="hs-name">${p.name}</td>
+             <td class="hs-score">${p.total}</td>
+           </tr>`;
+      })
+      .join("");
+    return `<table class="hs-table result-table"><tbody>${rows}</tbody></table>`;
   }
 
   /** Top 10 -lista tauluna; highlight = juuri listalle päässeiden indeksit. */
