@@ -3,7 +3,7 @@ import { COLUMN_IDS, createColumns, type ColumnRule } from "./columns";
 import { DiceSet, defaultRng, type Rng } from "./dice";
 import { Scorecard } from "./scorecard";
 import { scoreFor } from "./scoring";
-import type { ColumnId, DiceCount, GameSnapshot, Move, PendingCommit, RowId } from "./types";
+import type { ColumnId, DiceCount, GameSnapshot, LastMove, Move, PendingCommit, RowId } from "./types";
 
 export const MAX_ROLLS = 3;
 const SNAPSHOT_VERSION = 1;
@@ -24,6 +24,9 @@ export class GameState {
   currentPlayerIndex = 0;
   /** Väliaikainen kirjaus joka odottaa vahvistusta tai peruutusta. */
   pending: PendingCommit | null = null;
+  /** Viimeisin vahvistettu kirjaus. Transientti (ei snapshotissa):
+   *  käytetään vain heti vahvistuksen jälkeen vuoronvaihdon kuittaukseen. */
+  lastMove: LastMove | null = null;
 
   constructor(
     playerNames: string[],
@@ -111,6 +114,13 @@ export class GameState {
   /** Vahvista väliaikainen kirjaus ja siirrä vuoro seuraavalle. */
   confirm(): void {
     if (!this.pending) throw new Error("Ei vahvistettavaa kirjausta");
+    const { columnId, rowId } = this.pending;
+    this.lastMove = {
+      player: this.currentPlayer().name,
+      columnId,
+      rowId,
+      score: this.currentCard().get(columnId, rowId) ?? 0,
+    };
     this.pending = null;
     this.endTurn();
   }

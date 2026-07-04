@@ -10,7 +10,8 @@ import { SetupPrefs } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
-import { buildView } from "./view";
+import { buildView, type GameView } from "./view";
+import { glowCells, starStorm } from "./effects";
 import { downloadRecapImage } from "./recap-image";
 import type { AppHeader } from "./header";
 import type { Setup } from "./setup";
@@ -32,6 +33,11 @@ export class App extends HTMLElement {
   private newRanks: number[] = [];
   /** Ennätysoverlayn valittu varianttivälilehti (null = pelin/oletuksen mukaan). */
   private hsTab: DiceCount | null = null;
+  /** Vuoronvaihtoruutu näkyvissä (pass-and-play: "Anna laite pelaajalle X").
+   *  UI-tila, ei persistoidu — reloadin jälkeen seuraava pelaaja jatkaa suoraan. */
+  private handoff = false;
+  /** Viimeksi renderöity näkymä (tähtimyrskyn liipaisu heiton jälkeen). */
+  private lastView: GameView | null = null;
 
   connectedCallback(): void {
     this.bindEvents();
@@ -51,9 +57,18 @@ export class App extends HTMLElement {
       this.persist();
       this.overlay = null;
       this.newRanks = [];
+      this.handoff = false;
       this.render();
     });
-    this.addEventListener("roll", () => this.mutate((g) => g.roll()));
+    this.addEventListener("roll", () => {
+      this.mutate((g) => g.roll());
+      // Juhla vain heiton jälkeen — ei uudelleenrenderöinneissä (lukitus ym.),
+      // jottei sama käsi juhli montaa kertaa. TOP = sade + hehku, GREAT = hehku.
+      if (this.lastView?.celebration) {
+        if (this.lastView.celebration === "top") starStorm();
+        glowCells(this, this.lastView.celebrationCells);
+      }
+    });
     this.addEventListener("toggle-hold", (e) =>
       this.mutate((g) => g.toggleHold((e as CustomEvent).detail.index)),
     );
@@ -61,7 +76,17 @@ export class App extends HTMLElement {
       const { columnId, rowId } = (e as CustomEvent).detail;
       this.mutate((g) => g.commit(columnId, rowId, {}));
     });
-    this.addEventListener("confirm-commit", () => this.mutate((g) => g.confirm()));
+    this.addEventListener("confirm-commit", () => {
+      if (!this.game) return;
+      const multiplayer = this.game.players.length > 1;
+      this.mutate((g) => g.confirm());
+      // Monipelissä laite vaihtaa kättä → väliruutu estää vahinkoklikkaukset
+      // ja näyttää kuittauksen juuri vahvistetusta kirjauksesta.
+      if (multiplayer && this.game && !this.game.isOver()) {
+        this.handoff = true;
+        this.render();
+      }
+    });
     this.addEventListener("cancel-commit", () => this.mutate((g) => g.cancel()));
     this.addEventListener("open-rules", () => this.setOverlay("rules"));
     this.addEventListener("open-highscores", () => this.setOverlay("scores"));
@@ -80,6 +105,7 @@ export class App extends HTMLElement {
     this.persistence.clear();
     this.game = null;
     this.overlay = null;
+    this.handoff = false;
     this.render();
   }
 
@@ -156,6 +182,7 @@ export class App extends HTMLElement {
     }
 
     const view = buildView(this.game);
+    this.lastView = view;
 
     this.append(document.createElement("sj-header") as AppHeader);
 
@@ -186,7 +213,33 @@ export class App extends HTMLElement {
     this.append(main);
 
     if (view.isOver) this.append(this.gameOverOverlay(view.winners));
+    else if (this.handoff) this.append(this.handoffOverlay(view));
     else if (this.overlay) this.append(this.infoOverlay(this.overlay));
+  }
+
+  /** Vuoronvaihtoruutu: kuittaus edellisestä kirjauksesta + "Anna laite pelaajalle X".
+   *  Ei sulkeudu taustaa klikkaamalla — tarkoitus on estää vahinkoklikkaukset. */
+  private handoffOverlay(view: GameView): HTMLElement {
+    const lm = view.lastMove;
+    const recap = lm
+      ? `<p class="handoff-recap">${
+          lm.score > 0
+            ? T.recapScored(lm.player, lm.rowLabel, lm.score, T.colLabel[lm.columnId])
+            : T.recapBurned(lm.player, lm.rowLabel, T.colLabel[lm.columnId])
+        }</p>`
+      : "";
+    const ov = document.createElement("div");
+    ov.className = "overlay handoff-overlay";
+    ov.innerHTML = `<div class="panel handoff">
+        ${recap}
+        <h2>${T.handoffTitle(view.currentName)}</h2>
+        <div class="actions"><button class="primary" data-act="start-turn">${T.startTurn}</button></div>
+      </div>`;
+    ov.querySelector('[data-act="start-turn"]')!.addEventListener("click", () => {
+      this.handoff = false;
+      this.render();
+    });
+    return ov;
   }
 
   private gameOverOverlay(winners: string[]): HTMLElement {

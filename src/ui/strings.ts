@@ -35,8 +35,23 @@ export const T = {
   confirmHint: "Vahvista kirjaus tai peru",
   yes: "Kyllä",
 
+  // Vuoronvaihto (pass-and-play)
+  handoffTitle: (name: string) => `Anna laite pelaajalle ${name}`,
+  recapScored: (player: string, row: string, score: number, col: string) =>
+    `${player} kirjasi ${row} ${score} p sarakkeeseen ${col}`,
+  recapBurned: (player: string, row: string, col: string) =>
+    `${player} poltti rivin ${row} sarakkeessa ${col}`,
+  startTurn: "Aloita vuoro",
+
   // Scorecard
   colSum: "=",
+  colLabel: {
+    I: "I",
+    II: "II",
+    III: "III",
+    ALAS: "ALAS",
+    YLOS: "YLÖS",
+  } as Record<string, string>,
   colInfo: {
     I: "Enintään 1 heitto, vapaa rivijärjestys",
     II: "Enintään 2 heittoa, vapaa rivijärjestys",
@@ -47,7 +62,12 @@ export const T = {
   nextInOrder: "seuraava täytettävä rivi",
   maxScore: "Kategorian maksimipisteet",
   bonus: "Bonus",
+  bonusInfo: (threshold: number, value: number) =>
+    `Sarakkeen yläosa yhteensä vähintään ${threshold} p → +${value} p`,
   upperSum: "Yläsumma",
+  upperSumInfo: (k: number, threshold: number) =>
+    `Vihreä +/punainen - näyttää eron bonustahtiin: bonus vaatii keskimäärin ${k} samaa per rivi. ` +
+    `Jos luku on lopussa vähintään 0, yläosa ylsi kynnykseen ${threshold} p.`,
   lowerSum: "Alasumma",
   grandTotal: "LOPPUTULOS",
 

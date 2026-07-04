@@ -2,13 +2,7 @@ import { T } from "./strings";
 import type { ColumnId } from "../domain/types";
 import type { BoardView, GameView } from "./view";
 
-const COL_LABEL: Record<ColumnId, string> = {
-  I: "I",
-  II: "II",
-  III: "III",
-  ALAS: "ALAS",
-  YLOS: "YLÖS",
-};
+// Sarakeotsikot tulevat keskitetysti strings.ts:stä (T.colLabel).
 
 // <sj-scorecard>: nykyisen pelaajan matriisitulokortti. Klikattavat (available) solut
 // emittoivat "commit"-eventin. Pelitila tulee valmiina GameView'na.
@@ -70,7 +64,7 @@ export class ScorecardView extends HTMLElement {
     const head =
       `<th class="row-label"></th>` +
       b.columns
-        .map((c) => `<th${isDim(c) ? ' class="dim"' : ""} title="${T.colInfo[c]}">${COL_LABEL[c]}</th>`)
+        .map((c) => `<th${isDim(c) ? ' class="dim"' : ""} title="${T.colInfo[c]}">${T.colLabel[c]}</th>`)
         .join("") +
       `<th>${T.colSum}</th>`;
 
@@ -84,15 +78,17 @@ export class ScorecardView extends HTMLElement {
         })
         .join("");
 
+    // Bonustahti k samaa per rivi: domainin invariantti kynnys = k×21 (scorecard.ts).
+    const bonusPace = b.bonusThreshold / 21;
     const subtotalRow =
-      `<tr class="subtotal"><td class="row-label">${T.upperSum}</td>` +
+      `<tr class="subtotal"><td class="row-label" title="${T.upperSumInfo(bonusPace, b.bonusThreshold)}">${T.upperSum}</td>` +
       b.columns
         .map((c) => `<td>${b.summary[c].subtotal}${this.devHtml(b.summary[c].deviation)}</td>`)
         .join("") +
       `<td></td></tr>`;
 
     const bonusRow =
-      `<tr class="subtotal"><td class="row-label">${T.bonus}</td>` +
+      `<tr class="subtotal"><td class="row-label" title="${T.bonusInfo(b.bonusThreshold, b.bonusValue)}">${T.bonus}</td>` +
       b.columns.map((c) => `<td>${b.summary[c].bonus || ""}</td>`).join("") +
       `<td></td></tr>`;
 

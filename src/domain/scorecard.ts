@@ -9,7 +9,7 @@ export class Scorecard {
   /** Yläbonuksen kynnys: k×21, missä k=3 (5 noppaa) tai k=4 (6 noppaa). */
   readonly bonusThreshold: number;
   /** Yläbonuksen arvo: 6 nopalla (kynnys 84) korotettu 100:aan, muuten 50. */
-  private readonly bonusValue: number;
+  readonly bonusValue: number;
   private readonly cells = new Map<ColumnId, Map<RowId, CellValue>>();
 
   constructor(readonly diceCount: DiceCount) {

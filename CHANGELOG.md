@@ -3,6 +3,38 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.6.0] – 2026-07-04
+
+### Lisätty
+- **Vuoronvaihtoruutu pass-and-playhin**: monipelissä kirjauksen vahvistuksen
+  jälkeen näytetään väliruutu "Anna laite pelaajalle X" ja Aloita vuoro -nappi.
+  Estää vahinkoklikkaukset laitteen vaihtaessa kättä. Yksinpelissä ruutua ei näytetä.
+- **Edellisen siirron kuittaus vuoronvaihtoruudussa**: esim. "Tommi kirjasi Talo
+  28 p sarakkeeseen II" tai poltossa "Tommi poltti rivin Talo sarakkeessa I".
+  Domain tallettaa viimeisimmän vahvistetun kirjauksen (`lastMove`, transientti:
+  ei persistoidu, kuittaus näkyy vain heti vahvistuksen jälkeen).
+- **Bonusrivin hover-selite**: kertoo variantin mukaisen ehdon, esim.
+  "Sarakkeen yläosa yhteensä vähintään 84 p → +100 p". Kynnys ja arvo tulevat
+  domainista (Scorecard), eivät kovakoodattuna UI:hin.
+- **Yläsumman hover-selite**: selittää +/- -tahtiluvun (ero bonustahtiin,
+  keskimäärin 3 tai 4 samaa per rivi variantin mukaan).
+- **Tähtimyrsky erinomaisesta heitosta, kaksi porrasta.** Rajat kalibroitu
+  simulaatiolla (300 yksinpeliä, ~74 000 heittoa) niin ettei pelistä tule
+  jatkuvaa myrskyshowta; porras määräytyy käden harvinaisuuden, ei kombon
+  nimen mukaan:
+  - **Huippu** (tähtisade + ★-solujen hehku, ~6 krt/yksinpeli): Täyssuora,
+    Jatsi, Superjatsi, Huvila, Torni sekä maksimeina Täyskäsi (666 55),
+    Neljä samaa (6666) ja Kolme paria (66 55 44).
+  - **Erinomainen** (pelkkä hehku, ~10 krt/yksinpeli): Pieni tai Suuri suora,
+    Kolme paria, yläbonuksen varmistava kirjaus tai vähintään 3 ★-maksimiriviä
+    samassa heitossa. Hehku kohdistuu juhlan aiheuttaneisiin soluihin.
+  - Laukeaa vain heitosta (kerran per heitto), väri on ★-merkin accent (kulta
+    pysyy lukituksen värinä), `prefers-reduced-motion` kytkee efektin pois.
+
+### Muutettu
+- Sarakeotsikoiden tekstit (I/II/III/ALAS/YLÖS) keskitetty `strings.ts`:ään
+  (aiemmin kovakoodattu tulokorttikomponenttiin).
+
 ## [0.5.0] – 2026-07-04
 
 ### Lisätty

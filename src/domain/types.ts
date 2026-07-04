@@ -62,6 +62,16 @@ export interface PendingCommit {
   rowId: RowId;
 }
 
+/** Viimeisin vahvistettu kirjaus (vuoronvaihtoruudun kuittausta varten).
+ *  Transientti: ei persistoida — kuittaus näytetään vain heti vahvistuksen jälkeen. */
+export interface LastMove {
+  player: string;
+  columnId: ColumnId;
+  rowId: RowId;
+  /** Kirjattu arvo; 0 = poltto. */
+  score: number;
+}
+
 export interface GameSnapshot {
   version: number;
   diceCount: DiceCount;

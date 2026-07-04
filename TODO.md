@@ -3,11 +3,12 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## UI / UX
-- [ ] Vuoronvaihtoruutu pass-and-playhin: "Anna laite pelaajalle X" -väliruutu
-      kirjauksen vahvistuksen jälkeen (vrt. Jaon TurnPrompt) — estää vahinkoklikkaukset
-      ja antaa edelliselle pelaajalle hetken nähdä kirjauksensa.
-- [ ] Edellisen siirron kuittaus vuoronvaihdon yhteydessä (esim. "Tommi kirjasi
-      Talo 28 p sarakkeeseen II") — luonteva paikka vuoronvaihtoruudussa.
+- [ ] Keskiarvoseuranta (idea 4.7, esikuva ystävän VBScript-jatsi): ennätyslistan
+      rinnalle pelaajakohtainen keskiarvo, johon jokainen aloitettu peli lasketaan.
+      Kesken jätetty peli painaa keskiarvoa alas → kannustaa pelaamaan loppuun ja
+      yrittämään parhaansa (top 10 mittaa vain huippuja, keskiarvo johdonmukaisuutta).
+      Avoimet designkysymykset: keskeytyksen arvo (0 vai siihen asti kertynyt summa),
+      per nimi + variantti, koko historia vai liukuva ikkuna, yksinpeli vs monipeli.
 - [ ] Loppunäytön tulostaulukko kaikille pelaajille (nyt voittajabanneri).
 - [ ] Näppäimistösaavutettavuus: tulokortin klikattavat solut ovat `<td>`-elementtejä
       ilman tabindexiä/roolia — role="button" + tabindex + Enter/Space, sekä
@@ -22,6 +23,10 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.6.0: vuoronvaihtoruutu pass-and-playhin ("Anna laite pelaajalle X" + Aloita
+      vuoro) ja edellisen siirron kuittaus samassa ruudussa (kirjaus/poltto);
+      hover-selitteet Bonus- ja Yläsumma-riveille; kaksiportainen tähtimyrsky
+      erinomaisesta heitosta (rajat kalibroitu simulaatiolla).
 - [x] 0.5.0: yksinpelin hionta: sarakeotsikoiden tooltipit, heittoanimaatio,
       kiinteä Vahvista/Peru-alapalkki pystymobiilissa, teemadialogit window.confirmin
       tilalle, ennätysten 5/6-välilehdet, sticky-otsikkorivi vaakamobiilissa.

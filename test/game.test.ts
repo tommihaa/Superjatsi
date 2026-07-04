@@ -81,6 +81,43 @@ describe("GameState — vuoro ja heitot", () => {
   });
 });
 
+describe("GameState — lastMove (vuoronvaihdon kuittaus)", () => {
+  it("on aluksi null ja tallentuu vasta confirmissa", () => {
+    const g = new GameState(["Tommi", "B"], 6, rng4);
+    expect(g.lastMove).toBeNull();
+    g.roll();
+    g.commit("III", "fours", {});
+    expect(g.lastMove).toBeNull(); // pending ei vielä kirjaa
+    g.confirm();
+    expect(g.lastMove).toEqual({ player: "Tommi", columnId: "III", rowId: "fours", score: 24 });
+  });
+
+  it("cancel ei muuta lastMovea", () => {
+    const g = new GameState(["A", "B"], 6, rng4);
+    g.roll();
+    g.commit("III", "fours", {});
+    g.cancel();
+    expect(g.lastMove).toBeNull();
+  });
+
+  it("poltto näkyy score 0:na", () => {
+    const g = new GameState(["A", "B"], 6, rng4);
+    g.roll();
+    g.commit("III", "yatzy", { burn: true });
+    g.confirm();
+    expect(g.lastMove).toEqual({ player: "A", columnId: "III", rowId: "yatzy", score: 0 });
+  });
+
+  it("ei persistoidu snapshotin yli (transientti)", () => {
+    const g = new GameState(["A", "B"], 6, rng4);
+    g.roll();
+    g.commit("III", "fours", {});
+    g.confirm();
+    const restored = GameState.fromSnapshot(g.toSnapshot(), rng4);
+    expect(restored.lastMove).toBeNull();
+  });
+});
+
 describe("GameState — anti-jumi (poltto heittorajan yli)", () => {
   /** Täytä kaikki solut arvolla 5 paitsi listatut. */
   function fillAllExcept(g: GameState, open: Array<[string, string]>): void {

@@ -521,6 +521,51 @@ sj-scorecard {
 .banner {
   text-align: center;
 }
+
+/* ---------- Juhlaefektit (erinomainen heitto) ---------- */
+.star-storm {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  overflow: hidden;
+}
+.storm-star {
+  position: absolute;
+  top: -5%;
+  color: var(--accent);
+  text-shadow: 0 0 6px rgba(124, 140, 255, 0.8);
+  animation: storm-fall linear forwards;
+}
+@keyframes storm-fall {
+  to {
+    transform: translateY(110vh) rotate(240deg);
+    opacity: 0.15;
+  }
+}
+.cell.avail.max-glow {
+  animation: max-glow-pulse 0.5s ease-in-out 3;
+}
+@keyframes max-glow-pulse {
+  50% {
+    background: rgba(124, 140, 255, 0.35);
+    box-shadow: 0 0 10px 2px rgba(124, 140, 255, 0.55);
+    color: #fff;
+  }
+}
+/* ---------- Vuoronvaihtoruutu (pass-and-play) ---------- */
+.handoff-overlay .panel.handoff {
+  text-align: center;
+  min-width: min(340px, 90vw);
+}
+.handoff-recap {
+  margin: 0 0 14px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.handoff-overlay .actions {
+  text-align: center;
+}
 .banner .trophy {
   font-size: 2.4rem;
 }

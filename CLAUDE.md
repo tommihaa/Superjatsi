@@ -26,7 +26,9 @@ Vite + TypeScript + Web Components (light DOM). **Ei Reactia, ei ajonaikaisia ri
 ## Sopimus ennen toteutusta
 
 `SUPERJATSI.md` on pelisääntöjen **sopimusdokumentti**. Sääntömuutos kirjataan ensin sinne
-ja vahvistetaan käyttäjällä, vasta sitten koodiin. Invariantti: pelaajalla on aina vähintään
+ja vahvistetaan käyttäjällä, vasta sitten koodiin. Toinen suunta on yhtä tärkeä: jos tilanne
+(bugi, pelitestilöytö, ideakysymys) rikkoo sopimusta, nosta eksplisiittisesti pohdittavaksi
+korjataanko koodi vai muutetaanko sopimusta — kumpikaan ei ole automaattisesti oikeassa. Invariantti: pelaajalla on aina vähintään
 yksi laillinen siirto (anti-jumi-poltto).
 
 ## Dokumentaatio ja julkaisu
