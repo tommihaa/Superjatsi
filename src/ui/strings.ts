@@ -33,9 +33,17 @@ export const T = {
   confirm: "Vahvista",
   cancel: "Peru",
   confirmHint: "Vahvista kirjaus tai peru",
+  yes: "Kyllä",
 
   // Scorecard
   colSum: "=",
+  colInfo: {
+    I: "Enintään 1 heitto, vapaa rivijärjestys",
+    II: "Enintään 2 heittoa, vapaa rivijärjestys",
+    III: "Enintään 3 heittoa, vapaa rivijärjestys",
+    ALAS: "Täytetään ylhäältä alas järjestyksessä",
+    YLOS: "Täytetään alhaalta ylös järjestyksessä",
+  } as Record<string, string>,
   nextInOrder: "seuraava täytettävä rivi",
   maxScore: "Kategorian maksimipisteet",
   bonus: "Bonus",
@@ -54,6 +62,7 @@ export const T = {
   // Highscores
   highscores: "Ennätykset",
   highscoresFor: (n: number) => `Ennätykset · ${n} noppaa`,
+  diceTab: (n: number) => `${n} noppaa`,
   noHighscores: "Ei vielä ennätyksiä — pelaa peli loppuun!",
   clearHighscores: "Tyhjennä ennätykset",
   clearHighscoresConfirm: "Tyhjennetäänkö kaikki ennätykset? Tätä ei voi perua.",

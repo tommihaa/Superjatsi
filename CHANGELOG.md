@@ -3,7 +3,7 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
-## [Julkaisematon]
+## [0.5.0] – 2026-07-04
 
 ### Lisätty
 - **Kategorioiden hover-selitteet**: alaosan rivien nimillä (Pari, Huvila, Torni,
@@ -11,8 +11,28 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - **Maksimipisteapuri**: kirjattavissa oleva ruutu saa pienen tähtimerkinnän kun
   ehdotuspisteet ovat kategorian teoreettinen maksimi — erityisen näkyvä suorilla,
   joissa ainoa mahdollinen pistemäärä on aina tämä maksimi.
+- **Sarakeotsikoiden selitteet**: I/II/III/ALAS/YLÖS-otsikoilla on nyt
+  hover/title-tooltip joka kertoo sarakkeen heittorajan tai täyttöjärjestyksen.
+- **Heittoanimaatio**: heitetyt nopat "laskeutuvat" pöytään lyhyellä pyörähdyksellä
+  ja pienellä porrastuksella. Lukituksen toggle ei käynnistä animaatiota, ja
+  `prefers-reduced-motion` kytkee sen pois.
+- **Ennätysoverlayn varianttivälilehdet**: 5 ja 6 nopan listat ovat nyt molemmat
+  katsottavissa välilehdistä, myös aloitusnäytön 🏆-napista.
 
 ### Muutettu
+- **Varmistukset teeman mukaisiksi**: Uusi peli- ja ennätysten tyhjennys
+  -varmistukset käyttävät nyt pelin omaa overlay-dialogia selaimen
+  `window.confirm`in sijaan.
+- **Vahvista/Peru kiinteänä alapalkkina pystymobiilissa**: vahvistusnapit pysyvät
+  ruudun alalaidassa käden ulottuvilla, vaikka noppatarjotin olisi vierinyt
+  näkyvistä pending-solua valittaessa. Tarjottimen korkeus ei muutu (vakiokorkuinen
+  actions-slot).
+- **Sarakeotsikot pysyvät näkyvissä vaakamobiilissa**: tulokortin otsikkorivi on
+  sticky vieritettäessä (border-collapse → separate vain tässä leiskassa, jotta
+  sticky toimii ilman reunojen tuplaantumista).
+- **Nimi palautettu Täysi → Superjatsi**: brändi, otsikko, manifest ja URL
+  (https://tommi-superjatsi.vercel.app) vaihdettu takaisin. Nimitörmäys pistekategorian
+  "Superjatsi" (6 samaa) kanssa hyväksytty tietoisesti — ei muutosta pelilogiikkaan.
 - **Täyssuora 21 → 25** (+4 harvinaisuusbonusta): kuuden nopan täyssuora on niin
   harvinainen, että se palkitaan nyt erikseen.
 - **Yläbonus 6 nopalla 50 → 100**: kynnyksen (84) täyttyessä 6 nopan variantissa
@@ -24,11 +44,6 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 ### Korjattu
 - **Puuttuva `main`-landmark** (Lighthouse-accessibility-huomautus): `sj-app`:in
   sisältö kääritään nyt `<main>`-elementtiin sekä setup- että peli-/game-over-näkymässä.
-
-### Muutettu
-- **Nimi palautettu Täysi → Superjatsi**: brändi, otsikko, manifest ja URL
-  (https://tommi-superjatsi.vercel.app) vaihdettu takaisin. Nimitörmäys pistekategorian
-  "Superjatsi" (6 samaa) kanssa hyväksytty tietoisesti — ei muutosta pelilogiikkaan.
 
 ## [0.4.2] – 2026-07-02
 

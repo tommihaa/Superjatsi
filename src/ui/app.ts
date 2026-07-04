@@ -30,6 +30,8 @@ export class App extends HTMLElement {
   private readonly setupPrefs = new SetupPrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
+  /** Ennätysoverlayn valittu varianttivälilehti (null = pelin/oletuksen mukaan). */
+  private hsTab: DiceCount | null = null;
 
   connectedCallback(): void {
     this.bindEvents();
@@ -66,12 +68,43 @@ export class App extends HTMLElement {
     this.addEventListener("new-game", () => {
       // Kesken olevan pelin hylkääminen on peruuttamaton → varmistus
       // (symmetrisesti ennätysten tyhjennyksen kanssa).
-      if (this.game && !this.game.isOver() && !window.confirm(T.newGameConfirm)) return;
-      this.persistence.clear();
-      this.game = null;
-      this.overlay = null;
-      this.render();
+      if (this.game && !this.game.isOver()) {
+        this.showConfirm(T.newGameConfirm, () => this.resetToSetup());
+        return;
+      }
+      this.resetToSetup();
     });
+  }
+
+  private resetToSetup(): void {
+    this.persistence.clear();
+    this.game = null;
+    this.overlay = null;
+    this.render();
+  }
+
+  /** Teeman mukainen varmistusdialogi window.confirmin tilalle. Kelluu muiden
+   *  overlayjen päällä (esim. ennätysten tyhjennys ennätysoverlaysta). */
+  private showConfirm(message: string, onYes: () => void): void {
+    const ov = document.createElement("div");
+    ov.className = "overlay confirm-overlay";
+    ov.innerHTML = `<div class="panel">
+        <p class="confirm-msg">${message}</p>
+        <div class="actions">
+          <button class="secondary" data-c="no">${T.cancel}</button>
+          <button class="primary" data-c="yes">${T.yes}</button>
+        </div>
+      </div>`;
+    const close = () => ov.remove();
+    ov.querySelector('[data-c="no"]')!.addEventListener("click", close);
+    ov.addEventListener("click", (e) => {
+      if (e.target === ov) close();
+    });
+    ov.querySelector('[data-c="yes"]')!.addEventListener("click", () => {
+      close();
+      onYes();
+    });
+    this.append(ov);
   }
 
   /** Suorita pelitilan muutos, tallenna ja piirrä uudelleen. */
@@ -102,6 +135,9 @@ export class App extends HTMLElement {
 
   private setOverlay(o: Overlay): void {
     this.overlay = o;
+    // Välilehtivalinta ei säily overlayn sulkemisen yli — seuraava avaus
+    // palaa oletukseen (pelin variantti tai 6).
+    if (o !== "scores") this.hsTab = null;
     this.render();
   }
 
@@ -197,23 +233,38 @@ export class App extends HTMLElement {
   }
 
   private highscoreOverlay(): HTMLElement {
-    const diceCount = this.game?.diceCount ?? 6;
+    const diceCount = this.hsTab ?? this.game?.diceCount ?? 6;
+    // Varianttivälilehdet: kummankin noppamäärän lista on aina katsottavissa,
+    // myös aloitusnäytöltä (oletus = käynnissä olevan pelin variantti tai 6).
+    const tabs = ([5, 6] as DiceCount[])
+      .map(
+        (n) =>
+          `<button class="choice${n === diceCount ? " selected" : ""}" data-hs-tab="${n}">${T.diceTab(n)}</button>`,
+      )
+      .join("");
     const hasScores = this.highscores.list(diceCount).length > 0;
     const clearBtn = hasScores
       ? `<button class="secondary" data-act="clear-hs">${T.clearHighscores}</button> `
       : "";
     const ov = this.overlayEl(
-      `<h2>${T.highscoresFor(diceCount)}</h2>
+      `<h2>${T.highscores}</h2>
+       <div class="choice-row hs-tabs">${tabs}</div>
        ${this.highscoreListHtml(diceCount, [])}
        <div class="actions">${clearBtn}<button class="primary" data-close="x">${T.close}</button></div>`,
       true,
     );
+    ov.querySelectorAll<HTMLButtonElement>("[data-hs-tab]").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        this.hsTab = Number(btn.dataset.hsTab) as DiceCount;
+        this.render();
+      }),
+    );
     ov.querySelector('[data-act="clear-hs"]')?.addEventListener("click", () => {
-      if (window.confirm(T.clearHighscoresConfirm)) {
+      this.showConfirm(T.clearHighscoresConfirm, () => {
         this.highscores.clear();
         this.newRanks = [];
         this.render();
-      }
+      });
     });
     return ov;
   }
@@ -247,6 +298,7 @@ export class App extends HTMLElement {
           this.game = null;
         }
         this.overlay = null;
+        this.hsTab = null;
         this.render();
       });
     });

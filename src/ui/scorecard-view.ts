@@ -69,7 +69,9 @@ export class ScorecardView extends HTMLElement {
 
     const head =
       `<th class="row-label"></th>` +
-      b.columns.map((c) => `<th${isDim(c) ? ' class="dim"' : ""}>${COL_LABEL[c]}</th>`).join("") +
+      b.columns
+        .map((c) => `<th${isDim(c) ? ' class="dim"' : ""} title="${T.colInfo[c]}">${COL_LABEL[c]}</th>`)
+        .join("") +
       `<th>${T.colSum}</th>`;
 
     const rowHtml = (section: "upper" | "lower") =>
