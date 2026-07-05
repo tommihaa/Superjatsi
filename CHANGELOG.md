@@ -21,6 +21,9 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - **Asetukset-overlay palasi**: ratasnappi (⚙) headerissa, sisältönä äänet
   päälle/pois. Valinta persistoituu (`superjatsi:sound`, oletus päällä);
   päälle kytkeminen soittaa ääninäytteen.
+- **Noppavariantti muistetaan**: aloitusnäyttö esivalitsee edellisen pelin
+  5/6-variantin (sama `superjatsi:setup`-avain kuin nimillä ja pelaajamäärällä;
+  vanha tallenne ilman varianttia kelpaa yhä).
 
 ## [0.8.0] – 2026-07-05
 

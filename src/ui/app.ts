@@ -58,7 +58,7 @@ export class App extends HTMLElement {
     this.addEventListener("start", (e) => {
       const { diceCount, names } = (e as CustomEvent).detail as { diceCount: DiceCount; names: string[] };
       this.game = new GameState(names, diceCount);
-      this.setupPrefs.save({ names });
+      this.setupPrefs.save({ names, diceCount });
       this.persist();
       this.overlay = null;
       this.newRanks = [];

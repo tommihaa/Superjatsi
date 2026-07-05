@@ -11,10 +11,11 @@ export class Setup extends HTMLElement {
   private names: string[] = [];
 
   /** Edellisen pelin valinnat esitäyttöön (app lataa localStoragesta). */
-  set defaults(d: { names: string[] } | null) {
+  set defaults(d: { names: string[]; diceCount?: DiceCount } | null) {
     if (!d || d.names.length === 0) return;
     this.names = [...d.names];
     this.playerCount = Math.min(MAX_PLAYERS, d.names.length);
+    if (d.diceCount !== undefined) this.diceCount = d.diceCount;
     if (this.isConnected) this.render();
   }
 

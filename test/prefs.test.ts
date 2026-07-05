@@ -16,10 +16,22 @@ class MockStorage implements StorageLike {
 }
 
 describe("SetupPrefs", () => {
-  it("tallennus → lataus säilyttää nimet (round-trip)", () => {
+  it("tallennus → lataus säilyttää nimet ja variantin (round-trip)", () => {
     const p = new SetupPrefs(new MockStorage());
-    p.save({ names: ["Tommi", "Aino", "Pelaaja 3"] });
-    expect(p.load()).toEqual({ names: ["Tommi", "Aino", "Pelaaja 3"] });
+    p.save({ names: ["Tommi", "Aino", "Pelaaja 3"], diceCount: 5 });
+    expect(p.load()).toEqual({ names: ["Tommi", "Aino", "Pelaaja 3"], diceCount: 5 });
+  });
+
+  it("vanha tallenne ilman varianttia kelpaa (nimet ilman diceCountia)", () => {
+    const backend = new MockStorage();
+    backend.setItem("superjatsi:setup", JSON.stringify({ version: 1, names: ["A", "B"] }));
+    expect(new SetupPrefs(backend).load()).toEqual({ names: ["A", "B"] });
+  });
+
+  it("tuntematon variantti pudotetaan, nimet säilyvät", () => {
+    const backend = new MockStorage();
+    backend.setItem("superjatsi:setup", JSON.stringify({ version: 1, names: ["A"], diceCount: 7 }));
+    expect(new SetupPrefs(backend).load()).toEqual({ names: ["A"] });
   });
 
   it("puuttuva tallennus → null", () => {

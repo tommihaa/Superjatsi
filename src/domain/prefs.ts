@@ -1,11 +1,14 @@
 import type { StorageLike } from "./storage";
+import type { DiceCount } from "./types";
 
-// Aloitusnäytön valintojen (pelaajien nimet → määrä) muistaminen yli session.
-// Sama kaava kuin GamePersistence/HighscoreStore: injektoitava backend,
-// turvallinen lataus. Vain localStorage — ei mitään verkkoon.
+// Aloitusnäytön valintojen (pelaajien nimet → määrä, noppavariantti) muistaminen
+// yli session. Sama kaava kuin GamePersistence/HighscoreStore: injektoitava
+// backend, turvallinen lataus. Vain localStorage — ei mitään verkkoon.
 
 export interface SetupDefaults {
   names: string[];
+  /** Puuttuu vanhoista tallenteista (ennen 0.9.0) — setup pitää silloin oletuksensa. */
+  diceCount?: DiceCount;
 }
 
 const DEFAULT_KEY = "superjatsi:setup";
@@ -28,10 +31,14 @@ export class SetupPrefs {
     const raw = this.backend.getItem(this.key);
     if (!raw) return null;
     try {
-      const data = JSON.parse(raw) as { version?: number; names?: unknown };
+      const data = JSON.parse(raw) as { version?: number; names?: unknown; diceCount?: unknown };
       if (data.version !== DATA_VERSION || !Array.isArray(data.names)) return null;
       const names = data.names.filter((n): n is string => typeof n === "string").slice(0, MAX_PLAYERS);
-      return names.length > 0 ? { names } : null;
+      if (names.length === 0) return null;
+      // Variantti vain jos se on tunnettu arvo — muu roska ei kaada eikä välity.
+      return data.diceCount === 5 || data.diceCount === 6
+        ? { names, diceCount: data.diceCount }
+        : { names };
     } catch {
       return null;
     }
