@@ -7,12 +7,13 @@ import "./scorecard-view";
 import { AverageStore, type AverageEntry } from "../domain/averages";
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
-import { SetupPrefs } from "../domain/prefs";
+import { SetupPrefs, SoundPrefs } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
 import { buildView, type GameView } from "./view";
 import { glowCells, starStorm } from "./effects";
+import { setSfxEnabled, sfx } from "./sfx";
 import { downloadRecapImage } from "./recap-image";
 import type { AppHeader } from "./header";
 import type { Setup } from "./setup";
@@ -20,7 +21,7 @@ import type { StatusBar } from "./status-bar";
 import type { DiceTray } from "./dice-tray";
 import type { ScorecardView } from "./scorecard-view";
 
-type Overlay = "rules" | "scores" | null;
+type Overlay = "rules" | "scores" | "settings" | null;
 
 // <sj-app>: juurikomponentti. Omistaa GameStaten ja persistoinnin, orkestroi
 // lapsikomponentit ja kuuntelee niiden eventtejä (delegoituna tähän kerran).
@@ -31,6 +32,7 @@ export class App extends HTMLElement {
   private readonly highscores = new HighscoreStore(window.localStorage);
   private readonly averages = new AverageStore(window.localStorage);
   private readonly setupPrefs = new SetupPrefs(window.localStorage);
+  private readonly soundPrefs = new SoundPrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
   /** Ennätysoverlayn valittu varianttivälilehti (null = pelin/oletuksen mukaan). */
@@ -42,6 +44,7 @@ export class App extends HTMLElement {
   private lastView: GameView | null = null;
 
   connectedCallback(): void {
+    setSfxEnabled(this.soundPrefs.load());
     this.bindEvents();
     this.game = this.persistence.load();
     if (this.game?.isOver()) {
@@ -64,16 +67,23 @@ export class App extends HTMLElement {
     });
     this.addEventListener("roll", () => {
       this.mutate((g) => g.roll());
+      sfx.roll();
       // Juhla vain heiton jälkeen — ei uudelleenrenderöinneissä (lukitus ym.),
       // jottei sama käsi juhli montaa kertaa. TOP = sade + hehku, GREAT = hehku.
+      // Juhlaääni rämähdyksen perään pienellä viiveellä, etteivät ne puuroudu.
       if (this.lastView?.celebration) {
-        if (this.lastView.celebration === "top") starStorm();
+        const top = this.lastView.celebration === "top";
+        if (top) starStorm();
         glowCells(this, this.lastView.celebrationCells);
+        setTimeout(() => (top ? sfx.celebrationTop() : sfx.celebrationGreat()), 300);
       }
     });
-    this.addEventListener("toggle-hold", (e) =>
-      this.mutate((g) => g.toggleHold((e as CustomEvent).detail.index)),
-    );
+    this.addEventListener("toggle-hold", (e) => {
+      const i = (e as CustomEvent).detail.index as number;
+      this.mutate((g) => g.toggleHold(i));
+      if (this.game?.dice.held[i]) sfx.hold();
+      else sfx.release();
+    });
     this.addEventListener("commit", (e) => {
       const { columnId, rowId } = (e as CustomEvent).detail;
       this.mutate((g) => g.commit(columnId, rowId, {}));
@@ -81,17 +91,31 @@ export class App extends HTMLElement {
     this.addEventListener("confirm-commit", () => {
       if (!this.game) return;
       const multiplayer = this.game.players.length > 1;
+      // Bonuksen ylitys on laskettava ennen vahvistusta (pending-tieto nollautuu).
+      const bonusSecured = this.bonusJustSecured();
       this.mutate((g) => g.confirm());
+      this.playCommitSound(bonusSecured);
+      if (this.game.isOver()) {
+        // Voittofanfaari kuittausäänen jälkeen; ennätyshelähdys fanfaarin perään.
+        setTimeout(() => sfx.win(), 500);
+        if (this.newRanks.length > 0) setTimeout(() => sfx.record(), 1500);
+        return;
+      }
       // Monipelissä laite vaihtaa kättä → väliruutu estää vahinkoklikkaukset
       // ja näyttää kuittauksen juuri vahvistetusta kirjauksesta.
-      if (multiplayer && this.game && !this.game.isOver()) {
+      if (multiplayer) {
         this.handoff = true;
         this.render();
+        setTimeout(() => sfx.handoff(), 400);
       }
     });
-    this.addEventListener("cancel-commit", () => this.mutate((g) => g.cancel()));
+    this.addEventListener("cancel-commit", () => {
+      this.mutate((g) => g.cancel());
+      sfx.cancel();
+    });
     this.addEventListener("open-rules", () => this.setOverlay("rules"));
     this.addEventListener("open-highscores", () => this.setOverlay("scores"));
+    this.addEventListener("open-settings", () => this.setOverlay("settings"));
     this.addEventListener("new-game", () => {
       // Kesken olevan pelin hylkääminen on peruuttamaton → varmistus
       // (symmetrisesti ennätysten tyhjennyksen kanssa).
@@ -101,6 +125,30 @@ export class App extends HTMLElement {
       }
       this.resetToSetup();
     });
+  }
+
+  /** Varmistuuko yläbonus juuri vahvistettavalla kirjauksella? Pending-arvo on
+   *  jo kortissa, joten verrataan välisummaa ilman sitä ja sen kanssa. */
+  private bonusJustSecured(): boolean {
+    const g = this.game;
+    if (!g?.pending) return false;
+    const { columnId, rowId } = g.pending;
+    const card = g.currentCard();
+    if (card.rows.find((r) => r.id === rowId)?.section !== "upper") return false;
+    const sub = card.upperSubtotal(columnId);
+    const val = card.get(columnId, rowId) ?? 0;
+    return val > 0 && sub >= card.bonusThreshold && sub - val < card.bonusThreshold;
+  }
+
+  /** Vahvistetun kirjauksen ääni, yksi per kirjaus tärkeysjärjestyksessä:
+   *  Superjatsi (nimikkohetki) > bonuksen varmistuminen > kuittaus / poltto. */
+  private playCommitSound(bonusSecured: boolean): void {
+    const lm = this.game?.lastMove;
+    if (!lm) return;
+    if (lm.score > 0 && lm.rowId === "superyatzy") sfx.superjatsi();
+    else if (bonusSecured) sfx.bonus();
+    else if (lm.score > 0) sfx.confirm();
+    else sfx.burn();
   }
 
   private resetToSetup(): void {
@@ -291,8 +339,9 @@ export class App extends HTMLElement {
     return ov;
   }
 
-  private infoOverlay(kind: "rules" | "scores"): HTMLElement {
+  private infoOverlay(kind: "rules" | "scores" | "settings"): HTMLElement {
     if (kind === "scores") return this.highscoreOverlay();
+    if (kind === "settings") return this.settingsOverlay();
     const body = `<h2>${T.rules}</h2>
            <ul>
              <li><b>Sarakkeet:</b> I = 1 heitto, II = ≤2, III = ≤3 (vapaa rivijärjestys).
@@ -305,6 +354,32 @@ export class App extends HTMLElement {
              <li><b>Loppusumma</b> = sarakkeiden summa. Suurin voittaa.</li>
            </ul>`;
     return this.overlayEl(`${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`, true);
+  }
+
+  /** Asetukset: toistaiseksi vain äänikytkin (ratas palasi headeriin tämän myötä). */
+  private settingsOverlay(): HTMLElement {
+    const enabled = this.soundPrefs.load();
+    const btn = (value: boolean, label: string) =>
+      `<button class="choice${value === enabled ? " selected" : ""}" data-snd="${value ? "on" : "off"}">${label}</button>`;
+    const ov = this.overlayEl(
+      `<h2>${T.settings}</h2>
+       <div class="settings-row">
+         <span class="settings-label">${T.sounds}</span>
+         <div class="choice-row">${btn(true, T.soundsOn)}${btn(false, T.soundsOff)}</div>
+       </div>
+       <div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`,
+      true,
+    );
+    ov.querySelectorAll<HTMLButtonElement>("[data-snd]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const on = b.dataset.snd === "on";
+        this.soundPrefs.save(on);
+        setSfxEnabled(on);
+        if (on) sfx.confirm(); // ääninäyte: kuulet heti että äänet toimivat
+        this.render();
+      }),
+    );
+    return ov;
   }
 
   private highscoreOverlay(): HTMLElement {

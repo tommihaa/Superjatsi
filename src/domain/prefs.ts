@@ -9,6 +9,7 @@ export interface SetupDefaults {
 }
 
 const DEFAULT_KEY = "superjatsi:setup";
+const SOUND_KEY = "superjatsi:sound";
 const DATA_VERSION = 1;
 const MAX_PLAYERS = 6;
 
@@ -33,6 +34,30 @@ export class SetupPrefs {
       return names.length > 0 ? { names } : null;
     } catch {
       return null;
+    }
+  }
+}
+
+/** Ääniasetuksen persistointi. Oletus = päällä (myös puuttuva/rikkinäinen
+ *  tallennus), koska äänet ovat osa peruskokemusta ja pois-kytkin on helppo. */
+export class SoundPrefs {
+  constructor(
+    private readonly backend: StorageLike,
+    private readonly key: string = SOUND_KEY,
+  ) {}
+
+  save(enabled: boolean): void {
+    this.backend.setItem(this.key, JSON.stringify({ version: DATA_VERSION, enabled }));
+  }
+
+  load(): boolean {
+    const raw = this.backend.getItem(this.key);
+    if (!raw) return true;
+    try {
+      const data = JSON.parse(raw) as { version?: number; enabled?: unknown };
+      return data.version === DATA_VERSION && typeof data.enabled === "boolean" ? data.enabled : true;
+    } catch {
+      return true;
     }
   }
 }

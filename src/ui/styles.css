@@ -641,6 +641,18 @@ sj-scorecard {
   margin: 0 0 14px;
 }
 
+/* Asetukset-overlay: nimiö vasemmalla, valintanapit oikealla. */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 16px 0;
+}
+.settings-label {
+  font-weight: 600;
+}
+
 /* Pelialueen kääre: pystyssä pino, vaakatasossa kahden palstan asettelu. */
 .play {
   display: block;

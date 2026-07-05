@@ -3,6 +3,25 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.9.0] – 2026-07-05
+
+### Lisätty
+- **Äänet**: kevyt SFX-moduuli (`sfx.ts`), kaikki äänet syntetisoidaan Web
+  Audiolla ajonaikaisesti — ei äänitiedostoja. Ydinsilmukka lyhyenä ja hiljaisena
+  (heiton rämähdys satunnaisvariaatiolla, lukitus/vapautus eri suuntiin,
+  kirjauskuittaus, peru käänteisenä), merkkihetket näyttävämpinä (tähtimyrskyn
+  TOP-fanfaari ja GREAT-kimallus, Superjatsi-kirjauksen oma signature,
+  yläbonuksen varmistumisen kilahdus, voittofanfaari + ennätyshelähdys,
+  vuoronvaihdon huomiomerkkiääni).
+  - **Poltolla oma matala laskeva sävy** (toteava, ei rankaiseva). Tietoinen
+    poikkeama visuaalisesta linjasta, jossa polttoa ei erotella värillä —
+    päätetty erikseen 5.7.
+  - Yksi ääni per kirjaus tärkeysjärjestyksessä: Superjatsi > bonuksen
+    varmistuminen > kuittaus/poltto.
+- **Asetukset-overlay palasi**: ratasnappi (⚙) headerissa, sisältönä äänet
+  päälle/pois. Valinta persistoituu (`superjatsi:sound`, oletus päällä);
+  päälle kytkeminen soittaa ääninäytteen.
+
 ## [0.8.0] – 2026-07-05
 
 ### Lisätty

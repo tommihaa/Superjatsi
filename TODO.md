@@ -3,16 +3,17 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## UI / UX
-- [ ] Äänet (heitto, lukitus, kirjaus, voitto) — kevyt SFX-moduuli.
-- [ ] Asetukset-overlay: ratasnappi palautetaan headeriin kun sisältöä on (esim. äänet
-      päälle/pois, noppateema). Nappi poistettu 0.4.0:ssa placeholderina.
 - [ ] Sääntö-overlayn laajennus / pelin sisäinen muutosloki (kuten Jako-projektissa).
+- [ ] Asetukset-overlayn laajennus: noppateema (overlay itse palautettu 0.9.0:ssa).
 
 ## Tekninen
 - [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään — kielituki myöhemmin.
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.9.0: äänet (Web Audio -synteesi, ei tiedostoja: ydinsilmukka hiljaisena,
+      merkkihetket näyttävinä, poltolle oma matala sävy) + asetukset-overlay
+      ratasnappeineen (äänet päälle/pois, persistoituu).
 - [x] 0.8.0: keskiarvoseuranta (per nimi + variantti; keskeytys kirjautuu
       kertyneellä summalla; koko historia + viimeisten 20 liukuva keskiarvo
       rinnakkain; kaikki pelit ja pelaajat mukaan — designpäätökset 5.7).

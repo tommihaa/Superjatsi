@@ -19,6 +19,12 @@ export const T = {
   close: "Sulje",
   newGameConfirm: "Aloitetaanko uusi peli? Kesken oleva peli menetetään.",
 
+  // Asetukset
+  settings: "Asetukset",
+  sounds: "Äänet",
+  soundsOn: "Päällä",
+  soundsOff: "Pois",
+
   // Status / turn
   turnOf: (name: string) => `Vuorossa: ${name}`,
   rollsLeft: (n: number) => (n === 1 ? "1 heitto jäljellä" : `${n} heittoa jäljellä`),
