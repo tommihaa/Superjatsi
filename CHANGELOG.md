@@ -18,6 +18,15 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
     päätetty erikseen 5.7.
   - Yksi ääni per kirjaus tärkeysjärjestyksessä: Superjatsi > bonuksen
     varmistuminen > kuittaus/poltto.
+  - **Torvisointi** (Tommin palaute 6.7 kuuntelun jälkeen): TOP-tähtimyrsky,
+    Superjatsi-signature ja voittofanfaari käyttävät nyt vaskimaista
+    torviääntä (kaksi hieman detunettua sahalaita-oskillaattoria alipäästö-
+    suodattimen läpi + lyhyt attack-ramppi) siniaaltopiippausten sijaan.
+  - **Ennätysääni vasta kokeneelle pelaajalle** (Tommin linjaus 6.7): uuden
+    ennätyksen helähdys soi vain kun listalle päässeellä pelaajalla on
+    vähintään 15 peliä takanaan (samassa variantissa) — muuten aloittelijan
+    lähes joka peli olisi "ennätys" ja ääni jankuttaisi. ★-korostus näkyy
+    listalla silti aina, vain ääni on portitettu.
 - **Asetukset-overlay palasi**: ratasnappi (⚙) headerissa, sisältönä äänet
   päälle/pois. Valinta persistoituu (`superjatsi:sound`, **oletus pois**:
   äänet ovat valinnainen lisä, jonka pelaaja kytkee itse); päälle kytkeminen

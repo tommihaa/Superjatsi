@@ -23,6 +23,11 @@ import type { ScorecardView } from "./scorecard-view";
 
 type Overlay = "rules" | "scores" | "settings" | null;
 
+/** Ennätysäänen kynnys (Tommin linjaus 6.7): aloittelijalle lähes joka peli on
+ *  "ennätys" (top 10 täyttymässä) — ääni jankuttaisi. Vasta kun listalle päässeellä
+ *  pelaajalla on riittävästi historiaa, on ennätys harvinainen tarpeeksi juhlittavaksi. */
+const RECORD_SOUND_MIN_GAMES = 15;
+
 // <sj-app>: juurikomponentti. Omistaa GameStaten ja persistoinnin, orkestroi
 // lapsikomponentit ja kuuntelee niiden eventtejä (delegoituna tähän kerran).
 export class App extends HTMLElement {
@@ -35,6 +40,11 @@ export class App extends HTMLElement {
   private readonly soundPrefs = new SoundPrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
+  /** Soitetaanko ennätysääni: vain kun listalle päässeellä pelaajalla on takanaan
+   *  riittävästi pelejä. Aloittelijalla lähes joka peli on "ennätys" (top 10 vasta
+   *  täyttymässä), joten ääni jankuttaisi — ★-korostus näkyy silti aina.
+   *  Raja Tommin linjauksesta 6.7 ("vasta 10–20 pelin jälkeen"). */
+  private recordSoundEligible = false;
   /** Ennätysoverlayn valittu varianttivälilehti (null = pelin/oletuksen mukaan). */
   private hsTab: DiceCount | null = null;
   /** Vuoronvaihtoruutu näkyvissä (pass-and-play: "Anna laite pelaajalle X").
@@ -96,9 +106,10 @@ export class App extends HTMLElement {
       this.mutate((g) => g.confirm());
       this.playCommitSound(bonusSecured);
       if (this.game.isOver()) {
-        // Voittofanfaari kuittausäänen jälkeen; ennätyshelähdys fanfaarin perään.
+        // Voittofanfaari kuittausäänen jälkeen; ennätyshelähdys fanfaarin perään
+        // (vain kokeneelle — ks. recordSoundEligible).
         setTimeout(() => sfx.win(), 500);
-        if (this.newRanks.length > 0) setTimeout(() => sfx.record(), 1500);
+        if (this.recordSoundEligible) setTimeout(() => sfx.record(), 1500);
         return;
       }
       // Monipelissä laite vaihtaa kättä → väliruutu estää vahinkoklikkaukset
@@ -209,6 +220,13 @@ export class App extends HTMLElement {
     const results = this.game.players.map((p) => ({ name: p.name, score: p.card.grandTotal() }));
     this.newRanks = this.highscores.submit(this.game.diceCount, results);
     this.averages.record(this.game.diceCount, results);
+    // Pelimäärät luetaan keskiarvoista tämän pelin kirjauksen jälkeen (per nimi
+    // + variantti, keskeytetyt mukana) — sama historia jota ennätyksetkin mittaavat.
+    const entries = this.highscores.list(this.game.diceCount);
+    const games = new Map(this.averages.list(this.game.diceCount).map((e) => [e.name, e.games]));
+    this.recordSoundEligible = this.newRanks.some(
+      (r) => (games.get(entries[r]?.name) ?? 0) >= RECORD_SOUND_MIN_GAMES,
+    );
   }
 
   private persist(): void {
