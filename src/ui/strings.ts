@@ -89,6 +89,12 @@ export const T = {
   highscoresFor: (n: number) => `Ennätykset · ${n} noppaa`,
   diceTab: (n: number) => `${n} noppaa`,
   noHighscores: "Ei vielä ennätyksiä — pelaa peli loppuun!",
-  clearHighscores: "Tyhjennä ennätykset",
-  clearHighscoresConfirm: "Tyhjennetäänkö kaikki ennätykset? Tätä ei voi perua.",
+  clearHighscores: "Tyhjennä ennätykset ja keskiarvot",
+  clearHighscoresConfirm: "Tyhjennetäänkö kaikki ennätykset ja keskiarvot? Tätä ei voi perua.",
+
+  // Keskiarvot
+  averages: "Keskiarvot",
+  avgValue: (v: number) => v.toFixed(1).replace(".", ","),
+  gamesCount: (n: number) => (n === 1 ? "1 peli" : `${n} peliä`),
+  recentAvg: (n: number) => `viim. ${n}:`,
 } as const;

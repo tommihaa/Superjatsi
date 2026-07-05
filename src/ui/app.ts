@@ -4,6 +4,7 @@ import "./status-bar";
 import "./dice-tray";
 import "./scorecard-view";
 
+import { AverageStore, type AverageEntry } from "../domain/averages";
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
 import { SetupPrefs } from "../domain/prefs";
@@ -28,6 +29,7 @@ export class App extends HTMLElement {
   private overlay: Overlay = null;
   private readonly persistence = new GamePersistence(window.localStorage);
   private readonly highscores = new HighscoreStore(window.localStorage);
+  private readonly averages = new AverageStore(window.localStorage);
   private readonly setupPrefs = new SetupPrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
@@ -102,6 +104,16 @@ export class App extends HTMLElement {
   }
 
   private resetToSetup(): void {
+    // Kesken jätetty peli kirjataan keskiarvoihin kertyneellä summalla — vain
+    // pelaajilta jotka ehtivät kirjata jotain (tyhjä aloitus ei paina nollalla).
+    // Loppuun pelattu on jo kirjattu mutate():ssa pelin päättyessä.
+    if (this.game && !this.game.isOver()) {
+      const played = this.game.players.filter((p) => !p.card.isEmpty());
+      this.averages.record(
+        this.game.diceCount,
+        played.map((p) => ({ name: p.name, score: p.card.grandTotal() })),
+      );
+    }
     this.persistence.clear();
     this.game = null;
     this.overlay = null;
@@ -143,13 +155,12 @@ export class App extends HTMLElement {
     this.render();
   }
 
-  /** Kirjaa päättyneen pelin kaikkien pelaajien loppusummat ennätyslistalle. */
+  /** Kirjaa päättyneen pelin loppusummat ennätyslistalle ja keskiarvoihin. */
   private recordHighscores(): void {
     if (!this.game) return;
-    this.newRanks = this.highscores.submit(
-      this.game.diceCount,
-      this.game.players.map((p) => ({ name: p.name, score: p.card.grandTotal() })),
-    );
+    const results = this.game.players.map((p) => ({ name: p.name, score: p.card.grandTotal() }));
+    this.newRanks = this.highscores.submit(this.game.diceCount, results);
+    this.averages.record(this.game.diceCount, results);
   }
 
   private persist(): void {
@@ -306,14 +317,22 @@ export class App extends HTMLElement {
           `<button class="choice${n === diceCount ? " selected" : ""}" data-hs-tab="${n}">${T.diceTab(n)}</button>`,
       )
       .join("");
+    const averages = this.averages.list(diceCount);
+    // Keskiarvo-osio näytetään vasta kun kirjattavaa on — tyhjänä se vain veisi tilaa.
+    const avgSection =
+      averages.length > 0
+        ? `<h3 class="hs-title">${T.averages}</h3>${this.averageListHtml(averages)}`
+        : "";
     const hasScores = this.highscores.list(diceCount).length > 0;
-    const clearBtn = hasScores
-      ? `<button class="secondary" data-act="clear-hs">${T.clearHighscores}</button> `
-      : "";
+    const clearBtn =
+      hasScores || averages.length > 0
+        ? `<button class="secondary" data-act="clear-hs">${T.clearHighscores}</button> `
+        : "";
     const ov = this.overlayEl(
       `<h2>${T.highscores}</h2>
        <div class="choice-row hs-tabs">${tabs}</div>
        ${this.highscoreListHtml(diceCount, [])}
+       ${avgSection}
        <div class="actions">${clearBtn}<button class="primary" data-close="x">${T.close}</button></div>`,
       true,
     );
@@ -326,6 +345,7 @@ export class App extends HTMLElement {
     ov.querySelector('[data-act="clear-hs"]')?.addEventListener("click", () => {
       this.showConfirm(T.clearHighscoresConfirm, () => {
         this.highscores.clear();
+        this.averages.clear();
         this.newRanks = [];
         this.render();
       });
@@ -349,6 +369,27 @@ export class App extends HTMLElement {
       })
       .join("");
     return `<table class="hs-table result-table"><tbody>${rows}</tbody></table>`;
+  }
+
+  /** Keskiarvotaulu: koko historian keskiarvo + viimeisimpien pelien liukuva
+   *  keskiarvo rinnakkain (trendin suunta). Liukuva näytetään vasta kun pelejä
+   *  on enemmän kuin ikkunassa — sitä ennen se olisi identtinen. */
+  private averageListHtml(entries: AverageEntry[]): string {
+    const rows = entries
+      .map((e) => {
+        const recent =
+          e.games > e.recentCount
+            ? `${T.recentAvg(e.recentCount)} ${T.avgValue(e.recentAverage)}`
+            : "";
+        return `<tr>
+             <td class="hs-name">${e.name}</td>
+             <td class="hs-score">${T.avgValue(e.average)}</td>
+             <td class="avg-meta">${T.gamesCount(e.games)}</td>
+             <td class="avg-meta">${recent}</td>
+           </tr>`;
+      })
+      .join("");
+    return `<table class="hs-table avg-table"><tbody>${rows}</tbody></table>`;
   }
 
   /** Top 10 -lista tauluna; highlight = juuri listalle päässeiden indeksit. */

@@ -93,6 +93,16 @@ export class Scorecard {
     return COLUMN_IDS.reduce((acc, col) => acc + (this.get(col, row) ?? 0), 0);
   }
 
+  /** Yhtään solua ei ole vielä täytetty. Keskeytetty peli kirjataan keskiarvoon
+   *  vain jos pelaaja ehti kirjata jotain — vahingossa aloitettu tyhjä peli
+   *  ei saa painaa keskiarvoa nollalla. */
+  isEmpty(): boolean {
+    for (const col of COLUMN_IDS) {
+      for (const r of this.rows) if (this.get(col, r.id) !== null) return false;
+    }
+    return true;
+  }
+
   isComplete(): boolean {
     for (const col of COLUMN_IDS) {
       for (const r of this.rows) if (this.get(col, r.id) === null) return false;

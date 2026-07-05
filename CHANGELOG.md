@@ -3,6 +3,22 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.8.0] – 2026-07-05
+
+### Lisätty
+- **Keskiarvoseuranta** (esikuva: ystävän VBScript-jatsi): jokainen aloitettu
+  peli lasketaan pelaajan keskiarvoon. Loppuun pelattu kirjautuu lopputuloksella,
+  kesken jätetty (Uusi peli kesken pelin) siihen asti kertyneellä summalla —
+  keskeyttäminen ei siis koskaan tuota enempää kuin loppuun pelaaminen. Top 10
+  mittaa huippuja, keskiarvo johdonmukaisuutta.
+  - Kirjaus per pelaajan nimi + variantti (5/6 noppaa erikseen, kuten ennätykset).
+  - Näkyy Ennätykset-overlayssa top 10:n alla: koko historian keskiarvo,
+    pelimäärä sekä viimeisten 20 pelin liukuva keskiarvo (näytetään kun pelejä
+    on yli 20 — kertoo trendin suunnan).
+  - Vahingossa aloitettu tyhjä peli (ei yhtään kirjausta) ei kirjaudu.
+  - Tyhjennysnappi tyhjentää nyt sekä ennätykset että keskiarvot (teksti
+    päivitetty vastaavasti).
+
 ## [0.7.0] – 2026-07-04
 
 ### Lisätty

@@ -624,6 +624,13 @@ sj-scorecard {
 .hs-empty {
   color: var(--text-dim);
 }
+/* Keskiarvotaulun sivutiedot (pelimäärä, liukuva keskiarvo). */
+.avg-meta {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: right;
+  white-space: nowrap;
+}
 /* Loppunäytön tulostaulukko: voittajarivi(t) korostetaan samalla vihreällä
    kuin uudet ennätykset (kulta on varattu lukitukselle). */
 .result-table .result-win td {

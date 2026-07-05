@@ -3,14 +3,6 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## UI / UX
-- [ ] Keskiarvoseuranta (idea 4.7, esikuva ystävän VBScript-jatsi) — ODOTTAA:
-      tehdään siinä vaiheessa kun peliä aletaan jakaa muille (Tommin päätös 4.7).
-      Ennätyslistan
-      rinnalle pelaajakohtainen keskiarvo, johon jokainen aloitettu peli lasketaan.
-      Kesken jätetty peli painaa keskiarvoa alas → kannustaa pelaamaan loppuun ja
-      yrittämään parhaansa (top 10 mittaa vain huippuja, keskiarvo johdonmukaisuutta).
-      Avoimet designkysymykset: keskeytyksen arvo (0 vai siihen asti kertynyt summa),
-      per nimi + variantti, koko historia vai liukuva ikkuna, yksinpeli vs monipeli.
 - [ ] Äänet (heitto, lukitus, kirjaus, voitto) — kevyt SFX-moduuli.
 - [ ] Asetukset-overlay: ratasnappi palautetaan headeriin kun sisältöä on (esim. äänet
       päälle/pois, noppateema). Nappi poistettu 0.4.0:ssa placeholderina.
@@ -21,6 +13,9 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.8.0: keskiarvoseuranta (per nimi + variantti; keskeytys kirjautuu
+      kertyneellä summalla; koko historia + viimeisten 20 liukuva keskiarvo
+      rinnakkain; kaikki pelit ja pelaajat mukaan — designpäätökset 5.7).
 - [x] 0.7.0: loppunäytön tulostaulukko kaikille pelaajille (voittaja korostettuna,
       tasapisteet jakavat sijan) ja näppäimistösaavutettavuus (solut role="button"
       + tabindex + Enter/Space, focus-visible-tyylit, fokus Vahvista-nappiin
