@@ -19,8 +19,9 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
   - Yksi ääni per kirjaus tärkeysjärjestyksessä: Superjatsi > bonuksen
     varmistuminen > kuittaus/poltto.
 - **Asetukset-overlay palasi**: ratasnappi (⚙) headerissa, sisältönä äänet
-  päälle/pois. Valinta persistoituu (`superjatsi:sound`, oletus päällä);
-  päälle kytkeminen soittaa ääninäytteen.
+  päälle/pois. Valinta persistoituu (`superjatsi:sound`, **oletus pois**:
+  äänet ovat valinnainen lisä, jonka pelaaja kytkee itse); päälle kytkeminen
+  soittaa ääninäytteen.
 - **Noppavariantti muistetaan**: aloitusnäyttö esivalitsee edellisen pelin
   5/6-variantin (sama `superjatsi:setup`-avain kuin nimillä ja pelaajamäärällä;
   vanha tallenne ilman varianttia kelpaa yhä).

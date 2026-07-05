@@ -45,8 +45,9 @@ export class SetupPrefs {
   }
 }
 
-/** Ääniasetuksen persistointi. Oletus = päällä (myös puuttuva/rikkinäinen
- *  tallennus), koska äänet ovat osa peruskokemusta ja pois-kytkin on helppo. */
+/** Ääniasetuksen persistointi. Oletus = POIS (myös puuttuva/rikkinäinen
+ *  tallennus): äänet ovat valinnainen lisä, jonka pelaaja kytkee itse
+ *  asetuksista (Tommin päätös 6.7.2026). */
 export class SoundPrefs {
   constructor(
     private readonly backend: StorageLike,
@@ -59,12 +60,12 @@ export class SoundPrefs {
 
   load(): boolean {
     const raw = this.backend.getItem(this.key);
-    if (!raw) return true;
+    if (!raw) return false;
     try {
       const data = JSON.parse(raw) as { version?: number; enabled?: unknown };
-      return data.version === DATA_VERSION && typeof data.enabled === "boolean" ? data.enabled : true;
+      return data.version === DATA_VERSION && typeof data.enabled === "boolean" ? data.enabled : false;
     } catch {
-      return true;
+      return false;
     }
   }
 }

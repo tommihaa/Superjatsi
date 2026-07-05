@@ -13,7 +13,8 @@
 //   polttoa värillä) — päätetty käyttäjän kanssa 5.7.2026.
 
 let ctx: AudioContext | null = null;
-let on = true;
+// Oletus pois — app kytkee SoundPrefsin mukaan käynnistyksessä (oletus sielläkin pois).
+let on = false;
 
 /** Kytkin asetuksista (SoundPrefs). Pois = yksikään ääni ei soi eikä
  *  AudioContextia edes luoda. */

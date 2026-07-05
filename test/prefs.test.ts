@@ -63,25 +63,25 @@ describe("SetupPrefs", () => {
 });
 
 describe("SoundPrefs", () => {
-  it("oletus on päällä kun tallennusta ei ole", () => {
-    expect(new SoundPrefs(new MockStorage()).load()).toBe(true);
+  it("oletus on pois kun tallennusta ei ole", () => {
+    expect(new SoundPrefs(new MockStorage()).load()).toBe(false);
   });
 
   it("tallennus → lataus säilyttää valinnan (round-trip)", () => {
     const p = new SoundPrefs(new MockStorage());
-    p.save(false);
-    expect(p.load()).toBe(false);
     p.save(true);
     expect(p.load()).toBe(true);
+    p.save(false);
+    expect(p.load()).toBe(false);
   });
 
-  it("rikkinäinen tai vääränmuotoinen tallennus → oletus päällä, ei kaatumista", () => {
+  it("rikkinäinen tai vääränmuotoinen tallennus → oletus pois, ei kaatumista", () => {
     const backend = new MockStorage();
     backend.setItem("superjatsi:sound", "{ rikki");
-    expect(new SoundPrefs(backend).load()).toBe(true);
-    backend.setItem("superjatsi:sound", JSON.stringify({ version: 99, enabled: false }));
-    expect(new SoundPrefs(backend).load()).toBe(true);
-    backend.setItem("superjatsi:sound", JSON.stringify({ version: 1, enabled: "ei" }));
-    expect(new SoundPrefs(backend).load()).toBe(true);
+    expect(new SoundPrefs(backend).load()).toBe(false);
+    backend.setItem("superjatsi:sound", JSON.stringify({ version: 99, enabled: true }));
+    expect(new SoundPrefs(backend).load()).toBe(false);
+    backend.setItem("superjatsi:sound", JSON.stringify({ version: 1, enabled: "kyllä" }));
+    expect(new SoundPrefs(backend).load()).toBe(false);
   });
 });
