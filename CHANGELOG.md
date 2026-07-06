@@ -3,6 +3,16 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.12.0] – 2026-07-07
+
+### Muutettu
+- **Aloitusnäyttö olettaa 5 noppaa kapealla näytöllä.** Puhelimessa (leveys ≤ 560px, sama
+  raja kuin CSS:n portrait-breakpoint) noppavariantin oletus on nyt 5 noppaa aiemman 6:n
+  sijaan, koska 6 noppaa ahtautuu pienelle ruudulle (noppatarjotin rivittyy, tulokortti
+  korkeampi). Valinnan alle ilmestyy hienovarainen suositusvihje. 6 noppaa on yhä yhden
+  napautuksen päässä, ja aiemmin tallennettu valinta voittaa oletuksen aina. Leveällä
+  näytöllä oletus säilyy 6:na. Ei sääntömuutosta, vain UI-oletus.
+
 ## [0.11.0] – 2026-07-07
 
 ### Lisätty

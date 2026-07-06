@@ -162,6 +162,12 @@ button:focus-visible {
   justify-content: center;
   flex-wrap: wrap;
 }
+.field-hint {
+  margin: 8px 2px 0;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
 .choice {
   border: 1px solid var(--border);
   background: var(--bg);

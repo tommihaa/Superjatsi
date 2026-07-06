@@ -3,10 +3,15 @@ import type { DiceCount } from "../domain/types";
 
 const MAX_PLAYERS = 6;
 
+// Kapea näyttö = sama raja kuin CSS:n portrait-breakpoint. Puhelimessa 6 noppaa
+// ahtautuu (noppatarjotin rivittyy, kortti korkeampi), joten oletetaan 5 noppaa.
+const narrowScreen = (): boolean =>
+  typeof window !== "undefined" && window.matchMedia("(max-width: 560px)").matches;
+
 // <sj-setup>: aloitusnäyttö. Valitaan nopam. (5/6), pelaajamäärä (1–6) ja nimet.
 // Emittoi "start" detaililla { diceCount, names }.
 export class Setup extends HTMLElement {
-  private diceCount: DiceCount = 6;
+  private diceCount: DiceCount = narrowScreen() ? 5 : 6;
   private playerCount = 2;
   private names: string[] = [];
 
@@ -61,6 +66,7 @@ export class Setup extends HTMLElement {
         <fieldset>
           <legend>${T.diceCount}</legend>
           <div class="choice-row">${diceChoice}</div>
+          ${narrowScreen() ? `<p class="field-hint">${T.diceHintMobile}</p>` : ""}
         </fieldset>
         <fieldset>
           <legend>${T.players}</legend>

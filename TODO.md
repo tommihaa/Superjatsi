@@ -11,6 +11,8 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.12.0: aloitusnäyttö olettaa 5 noppaa kapealla näytöllä (≤560px) + suositusvihje;
+      tallennettu valinta ja 6 nopan valinta säilyvät (UI-oletus, ei sääntömuutosta).
 - [x] 0.11.0: efektit.html pysyväksi kehitystyökaluksi (äänet+visuaalit+teema+
       pikamykistys) + "Kokeile ääniä" -paneeli asetuksiin (sama kuvio Jakoon/Ituun).
 - [x] 0.10.0: ääniteema Torvi & kantele (kantele()-nypäisysynteesi + teemavalinta

@@ -10,6 +10,7 @@ export const T = {
   diceCount: "Noppia",
   fiveDice: "5 (Jatsi)",
   sixDice: "6 (Superjatsi)",
+  diceHintMobile: "📱 Puhelimessa 5 noppaa istuu näytölle mukavimmin",
   players: "Pelaajia",
   playerName: (i: number) => `Pelaaja ${i}`,
   start: "Aloita peli",
