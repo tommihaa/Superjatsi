@@ -3,6 +3,20 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.13.0] – 2026-07-06
+
+### Muutettu
+- **Torvi & kantele -teema: synteesistä oikeisiin ääninäytteisiin.** Aiempi Web Audio
+  -synteesi (sahalaita+alipäästösuodin torvelle, Karplus-Strong-kohinapurske kanteleelle)
+  kuulosti käyttäjän mukaan "80-luvun tietokonepelin latausäänille" eikä oikealta
+  soittimelta. Tilalle kaksi lyhyttä, vapaasti käytettävää ääninäytettä per soitin
+  (matala + korkea ankkuri, `public/sfx/*.wav`): kantele on aito 5-kielinen DIY-kantele
+  (Wikimedia Commons, CC0 1.0), torvi oikea käyrätorvi (University of Iowa Electronic
+  Music Studios, vapaa käyttö). Koodi valitsee kutakin nuottia varten lähimmän ankkurin
+  ja pitch-shiftaa sen — ei koko sävelalaa yhdestä näytteestä, ettei ääripäissä kuulostaisi
+  epäluonnolliselta. Kutsupaikat (hold/release/confirm/win/jne.) koskemattomia, vain
+  torvi/kantele-ääntä tuottava sisäosa vaihtui. Lähteet ja lisenssit: `public/sfx/CREDITS.md`.
+
 ## [0.12.0] – 2026-07-07
 
 ### Muutettu

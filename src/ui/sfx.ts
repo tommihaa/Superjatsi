@@ -1,7 +1,12 @@
-// Kevyt SFX-moduuli: kaikki äänet syntetisoidaan Web Audiolla ajonaikaisesti,
-// ei äänitiedostoja (nolla latauskuormaa, ei assettien hallintaa). AudioContext
-// luodaan laiskasti ensimmäisestä äänestä — kaikki liipaisimet ovat käyttäjän
-// klikkauksia, joten selainten autoplay-rajoitus ei estä toistoa.
+// Kevyt SFX-moduuli. Oletusteema syntetisoidaan Web Audiolla ajonaikaisesti,
+// ei äänitiedostoja. AudioContext luodaan laiskasti ensimmäisestä äänestä —
+// kaikki liipaisimet ovat käyttäjän klikkauksia, joten selainten autoplay-
+// rajoitus ei estä toistoa.
+//
+// Torvi-kannel-teema (7.7.2026 jälkeen) käyttää sen sijaan kahta oikeaa
+// äänitiedostoa (torvi + kantele, ks. `public/sfx/CREDITS.md` lisensseistä) —
+// synteesiversio (sahalaita+alipäästö / Karplus-Strong) kuulosti käyttäjän
+// mukaan "80-luvun tietokonepelin latausäänille", ei oikealta soittimelta.
 //
 // Äänisuunnittelun periaatteet:
 // - Ydinsilmukan äänet (heitto/lukitus/kirjaus) lyhyitä ja hiljaisia — ne soivat
@@ -23,6 +28,7 @@ let theme: SoundTheme = "oletus";
  *  AudioContextia edes luoda. */
 export function setSfxEnabled(v: boolean): void {
   on = v;
+  ensureSamplesLoaded();
 }
 
 /** Ääniteema (SoundPrefs). "torvi-kannel" korvaa ydinsilmukan piippaukset
@@ -30,6 +36,7 @@ export function setSfxEnabled(v: boolean): void {
  *  kummassakin teemassa, eivät muutu. */
 export function setTheme(v: SoundTheme): void {
   theme = v;
+  ensureSamplesLoaded();
 }
 
 function ac(): AudioContext | null {
@@ -40,6 +47,89 @@ function ac(): AudioContext | null {
   }
   if (ctx.state === "suspended") void ctx.resume();
   return ctx;
+}
+
+/** Yksi äänilähde useammalle sävelkorkeudelle: nauhoitettu näyte + sen mitattu
+ *  perustaajuus. `playSample` valitsee lähimmän ankkurin ja pitch-shiftaa vain
+ *  jäljelle jäävän, kuulolle luontevan välin — ei koko pelin sävelalaa yhdestä
+ *  näytteestä (kuulostaisi "possulta" ääripäissä). */
+interface SampleAnchor {
+  freq: number;
+  url: string;
+  buffer: AudioBuffer | null;
+}
+
+/** Aito 5-kielinen kantele (Tommin oma, DIY-rakennelma) — Wikimedia Commons,
+ *  "DIY kantele sample raw.ogg", CC0 1.0. Kaksi ankkuria: matala (käyttäjän
+ *  kuuntelemalla valitsema suosikkinäppäys) + korkea (sama nauhoitus, puhtaampi
+ *  yläsävel kuultu ja hyväksytty 6.7.2026). */
+const kanteleAnchors: SampleAnchor[] = [
+  { freq: 121.2, url: "/sfx/kantele-low.wav", buffer: null },
+  { freq: 457.1, url: "/sfx/kantele-high.wav", buffer: null },
+];
+
+/** Oikea käyrätorvi — University of Iowa Electronic Music Studios (MIS),
+ *  Horn.mf.C4B4.aiff, vapaasti käytettävissä ilman rajoituksia. Kaksi ankkuria
+ *  samasta kromaattisesta asteikosta (Eb4 + B4), molemmat kuultu ja hyväksytty. */
+const hornAnchors: SampleAnchor[] = [
+  { freq: 311.1, url: "/sfx/horn-low.wav", buffer: null },
+  { freq: 495.5, url: "/sfx/horn-high.wav", buffer: null },
+];
+
+let samplesRequested = false;
+
+/** Lataa & dekoodaa neljä näytettä kun torvi-kannel-teema on sekä valittu että
+ *  äänet päällä — ei ennen sitä (ei turhaa työtä oletusteemalla). */
+function ensureSamplesLoaded(): void {
+  if (samplesRequested || !on || theme !== "torvi-kannel") return;
+  samplesRequested = true;
+  const c = ac();
+  if (!c) return;
+  for (const anchor of [...kanteleAnchors, ...hornAnchors]) {
+    fetch(anchor.url)
+      .then((res) => res.arrayBuffer())
+      .then((data) => c.decodeAudioData(data))
+      .then((buf) => {
+        anchor.buffer = buf;
+      })
+      .catch(() => {
+        /* verkko/selainvirhe: näyte jää soittamatta, ei kaada muuta äänentoistoa */
+      });
+  }
+}
+
+function pickAnchor(anchors: SampleAnchor[], targetFreq: number): SampleAnchor | null {
+  let best: SampleAnchor | null = null;
+  let bestDist = Infinity;
+  for (const a of anchors) {
+    if (!a.buffer) continue;
+    const dist = Math.abs(Math.log2(targetFreq / a.freq));
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = a;
+    }
+  }
+  return best;
+}
+
+/** Soittaa lähimmän näyteankkurin pitch-shiftattuna kohdetaajuuteen. Verhokäyrä
+ *  (gain-node) toimii kuten aiemmin synteesissä — se rajaa äänen keston `dur`:iin
+ *  riippumatta näytteen omasta luonnollisesta häipymästä. */
+function playSample(anchors: SampleAnchor[], freq: number, { at = 0, dur = 0.3, gain = 0.12 }: ToneOpts = {}): void {
+  const c = ac();
+  if (!c) return;
+  const anchor = pickAnchor(anchors, freq);
+  if (!anchor || !anchor.buffer) return;
+  const t0 = c.currentTime + at;
+  const src = c.createBufferSource();
+  src.buffer = anchor.buffer;
+  src.playbackRate.value = freq / anchor.freq;
+  const g = c.createGain();
+  g.gain.setValueAtTime(gain, t0);
+  g.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+  src.connect(g).connect(c.destination);
+  src.start(t0);
+  src.stop(t0 + dur + 0.1);
 }
 
 interface ToneOpts {
@@ -69,75 +159,14 @@ function tone(freq: number, { at = 0, dur = 0.15, type = "sine", gain = 0.1, to 
   osc.stop(t0 + dur + 0.05);
 }
 
-/** Torviääneke fanfaareihin: kaksi hieman eri viritettyä sahalaita-oskillaattoria
- *  alipäästösuodattimen läpi (leveä, vaskimainen sointi) + lyhyt attack-ramppi
- *  ("huulistartti") — sine/triangle-piippausten sijaan. Tommin palaute 6.7:
- *  "torvensoittoa jäin kaipaamaan". */
-function horn(freq: number, { at = 0, dur = 0.3, gain = 0.09 }: { at?: number; dur?: number; gain?: number } = {}): void {
-  const c = ac();
-  if (!c) return;
-  const t0 = c.currentTime + at;
-  const g = c.createGain();
-  const lp = c.createBiquadFilter();
-  lp.type = "lowpass";
-  lp.frequency.setValueAtTime(freq * 4, t0);
-  g.gain.setValueAtTime(0.001, t0);
-  g.gain.linearRampToValueAtTime(gain, t0 + 0.04);
-  g.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
-  for (const detuneCents of [0, 6]) {
-    const osc = c.createOscillator();
-    osc.type = "sawtooth";
-    osc.frequency.setValueAtTime(freq, t0);
-    osc.detune.setValueAtTime(detuneCents, t0);
-    osc.connect(lp);
-    osc.start(t0);
-    osc.stop(t0 + dur + 0.05);
-  }
-  lp.connect(g).connect(c.destination);
+/** Torvi fanfaareihin: aito käyrätorvinäyte pitch-shiftattuna (ks. hornAnchors). */
+function horn(freq: number, opts: { at?: number; dur?: number; gain?: number } = {}): void {
+  playSample(hornAnchors, freq, { dur: 0.3, gain: 0.09, ...opts });
 }
 
-/** Kantele-nypäisy: Karplus-Strong-synteesi (nypätty kieli). Lyhyt kohinapurske
- *  syötetään DelayNode-silmukkaan, jonka paluuhaarassa alipäästösuodin tummentaa
- *  sointia joka kierroksella ja gain (~0.98) hidastaa häipymää — sama periaate
- *  kuin akustisessa kielessä (yliäänet vaimenevat nopeammin kuin perustaajuus).
- *  Tommin oma 5-kielinen kantele inspiraationa: taajuudet rajataan kutsujassa
- *  pieneen sävelvalikoimaan, jotta soitin kuulostaa johdonmukaiselta. */
-function kantele(freq: number, { at = 0, dur = 1.1, gain = 0.16 }: { at?: number; dur?: number; gain?: number } = {}): void {
-  const c = ac();
-  if (!c) return;
-  const t0 = c.currentTime + at;
-  const period = 1 / freq;
-  const bufferSize = Math.max(2, Math.round(c.sampleRate * period));
-  const buffer = c.createBuffer(1, bufferSize, c.sampleRate);
-  const data = buffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-
-  const src = c.createBufferSource();
-  src.buffer = buffer;
-  const delay = c.createDelay(1);
-  delay.delayTime.setValueAtTime(period, t0);
-  const lp = c.createBiquadFilter();
-  lp.type = "lowpass";
-  lp.frequency.setValueAtTime(freq * 3, t0);
-  const feedback = c.createGain();
-  feedback.gain.setValueAtTime(0.98, t0);
-  const out = c.createGain();
-  out.gain.setValueAtTime(gain, t0);
-  out.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
-
-  src.connect(delay);
-  delay.connect(lp);
-  lp.connect(feedback);
-  feedback.connect(delay); // silmukka: kieli soi kunnes gain vaimentaa sen
-  delay.connect(out).connect(c.destination);
-  src.start(t0);
-
-  setTimeout(
-    () => {
-      [src, delay, lp, feedback, out].forEach((n) => n.disconnect());
-    },
-    (dur + at + 0.15) * 1000,
-  );
+/** Kantele-nypäisy: aito kantelenäyte pitch-shiftattuna (ks. kanteleAnchors). */
+function kantele(freq: number, opts: { at?: number; dur?: number; gain?: number } = {}): void {
+  playSample(kanteleAnchors, freq, { dur: 1.1, gain: 0.16, ...opts });
 }
 
 export const sfx = {
