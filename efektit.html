@@ -1,0 +1,135 @@
+<!doctype html>
+<!-- Pysyvä kehitystyökalu (7.7.2026 alkaen, ent. aanet.html): äänien ja visuaalisten
+     efektien kuuntelu/katselusivu ilman että kaikkia pelitilanteita tarvitsee pelata
+     esiin. Ei osa tuotantobuildia (ei linkitetty index.html:stä) — toimii vain
+     dev-palvelimelta: http://localhost:5175/efektit.html -->
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Superjatsi · efektit</title>
+  <link rel="stylesheet" href="/src/ui/styles.css" />
+  <style>
+    body { font-family: system-ui, sans-serif; background: #1d2521; color: #e8e4d8; margin: 0; padding: 24px; }
+    h1 { font-size: 1.3rem; }
+    p  { color: #a8a394; max-width: 40rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; max-width: 60rem; }
+    button { padding: 12px 14px; border: 1px solid #4a554e; border-radius: 8px; background: #2a352f;
+             color: inherit; font-size: 0.95rem; cursor: pointer; text-align: left; }
+    button:hover { background: #354238; }
+    button b { display: block; margin-bottom: 2px; }
+    button small { color: #a8a394; }
+    h2 { font-size: 1rem; margin-top: 28px; color: #a8a394; }
+    .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 14px 0 20px; }
+    .theme-btn { background: #2a352f; }
+    .theme-btn.active { background: #4a6a54; border-color: #7cc8a0; }
+    #mute { background: #5a2f2f; border-color: #8a4a4a; font-weight: 600; }
+    #mute:hover { background: #6a3838; }
+    .demo-table { border-collapse: collapse; margin-top: 8px; }
+    .demo-table td { width: 60px; height: 44px; border: 1px solid #3a453e; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Superjatsi · efektit</h1>
+  <p>Jokainen nappi soittaa yhden pelitilanteen äänen tai näyttää yhden visuaalisen
+     efektin. Pysyvä kehitystyökalu — ei kuulu peliin eikä tuotantobuildiin.</p>
+
+  <div class="toolbar">
+    <strong>Ääniteema:</strong>
+    <button class="theme-btn active" data-theme="oletus">Oletus</button>
+    <button class="theme-btn" data-theme="torvi-kannel">Torvi &amp; kantele</button>
+    <button id="mute">🔇 Hiljennä</button>
+  </div>
+
+  <h2>Äänet (respektoi yllä valittua teemaa)</h2>
+  <div class="grid" id="grid"></div>
+
+  <h2>Yhdistelmät pelin viiveillä</h2>
+  <div class="grid" id="combos"></div>
+
+  <h2>Visuaaliset efektit</h2>
+  <p>Kolme dummy-solua alla demoaa <code>glowCells()</code>:ia — sama efekti joka
+     syttyy pelissä maksimikirjauksesta.</p>
+  <table class="demo-table">
+    <tbody>
+      <tr>
+        <td class="cell avail" data-col="c1" data-row="r1"></td>
+        <td class="cell avail" data-col="c2" data-row="r1"></td>
+        <td class="cell avail" data-col="c3" data-row="r1"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="grid" id="visuals" style="margin-top: 10px;"></div>
+
+  <script type="module">
+    import { sfx, setSfxEnabled, setTheme } from "/src/ui/sfx.ts";
+    import { starStorm, glowCells } from "/src/ui/effects.ts";
+    setSfxEnabled(true);
+
+    document.getElementById("mute").addEventListener("click", () => setSfxEnabled(false));
+
+    const themeBtns = [...document.querySelectorAll(".theme-btn")];
+    for (const b of themeBtns) {
+      b.addEventListener("click", () => {
+        setTheme(b.dataset.theme);
+        for (const other of themeBtns) other.classList.toggle("active", other === b);
+      });
+    }
+
+    const sounds = [
+      ["roll", "Heitto", "nopan rämähdys, satunnaisvariaatio"],
+      ["hold", "Lukitus", "napsahdus ylös"],
+      ["release", "Vapautus", "napsahdus alas"],
+      ["confirm", "Kirjaus", "pisteellinen vahvistus"],
+      ["burn", "Poltto", "oma matala laskeva sävy (0 p)"],
+      ["cancel", "Peru", "kuittaus käänteisenä"],
+      ["celebrationGreat", "GREAT-heitto", "kevyt kimallus"],
+      ["celebrationTop", "TOP-heitto", "tähtimyrskyn fanfaari"],
+      ["superjatsi", "Superjatsi kirjattu", "6 samaa, oma signature"],
+      ["bonus", "Yläbonus varmistui", "kellomainen kilahdus"],
+      ["handoff", "Vuoronvaihto", "huomiomerkkiääni (ding-dong)"],
+      ["win", "Voitto", "loppufanfaari"],
+      ["record", "Uusi ennätys", "nouseva helähdys"],
+    ];
+    const grid = document.getElementById("grid");
+    for (const [fn, name, desc] of sounds) {
+      const b = document.createElement("button");
+      b.innerHTML = `<b>${name}</b><small>${desc}</small>`;
+      b.addEventListener("click", () => sfx[fn]());
+      grid.append(b);
+    }
+
+    const combos = [
+      ["Heitto → TOP-juhla", "kuten pelissä: rämähdys + fanfaari 300 ms",
+        () => { sfx.roll(); setTimeout(() => sfx.celebrationTop(), 300); }],
+      ["Kirjaus → voitto → ennätys", "pelin päätösketju: 500 ms + 1500 ms",
+        () => { sfx.confirm(); setTimeout(() => sfx.win(), 500); setTimeout(() => sfx.record(), 1500); }],
+      ["Kirjaus → vuoronvaihto", "monipelin vuoronvaihto 400 ms kuittauksen jälkeen",
+        () => { sfx.confirm(); setTimeout(() => sfx.handoff(), 400); }],
+    ];
+    const cGrid = document.getElementById("combos");
+    for (const [name, desc, run] of combos) {
+      const b = document.createElement("button");
+      b.innerHTML = `<b>${name}</b><small>${desc}</small>`;
+      b.addEventListener("click", run);
+      cGrid.append(b);
+    }
+
+    const visuals = [
+      ["Tähtimyrsky", "koko näytön putoavat tähdet (~2 s)", () => starStorm()],
+      ["Soluhehku", "kolme sykäystä dummy-soluihin yllä (~1.5 s)",
+        () => glowCells(document, [
+          { columnId: "c1", rowId: "r1" },
+          { columnId: "c2", rowId: "r1" },
+          { columnId: "c3", rowId: "r1" },
+        ])],
+    ];
+    const vGrid = document.getElementById("visuals");
+    for (const [name, desc, run] of visuals) {
+      const b = document.createElement("button");
+      b.innerHTML = `<b>${name}</b><small>${desc}</small>`;
+      b.addEventListener("click", run);
+      vGrid.append(b);
+    }
+  </script>
+</body>
+</html>

@@ -4,13 +4,17 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 
 ## UI / UX
 - [ ] Sääntö-overlayn laajennus / pelin sisäinen muutosloki (kuten Jako-projektissa).
-- [ ] Asetukset-overlayn laajennus: noppateema (overlay itse palautettu 0.9.0:ssa).
+- [ ] Asetukset-overlayn laajennus: noppateema (ääniteema toteutettu 0.10.0:ssa).
 
 ## Tekninen
 - [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään — kielituki myöhemmin.
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.11.0: efektit.html pysyväksi kehitystyökaluksi (äänet+visuaalit+teema+
+      pikamykistys) + "Kokeile ääniä" -paneeli asetuksiin (sama kuvio Jakoon/Ituun).
+- [x] 0.10.0: ääniteema Torvi & kantele (kantele()-nypäisysynteesi + teemavalinta
+      asetuksiin, taaksepäinyhteensopiva SoundPrefs; sama kuvio Jakoon ja Ituun).
 - [x] 0.9.0: äänet (Web Audio -synteesi, ei tiedostoja: ydinsilmukka hiljaisena,
       merkkihetket näyttävinä, poltolle oma matala sävy) + asetukset-overlay
       ratasnappeineen (äänet päälle/pois, persistoituu).

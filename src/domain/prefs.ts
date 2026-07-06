@@ -45,27 +45,38 @@ export class SetupPrefs {
   }
 }
 
+export type SoundTheme = "oletus" | "torvi-kannel";
+
+export interface SoundSettings {
+  enabled: boolean;
+  theme: SoundTheme;
+}
+
 /** Ääniasetuksen persistointi. Oletus = POIS (myös puuttuva/rikkinäinen
  *  tallennus): äänet ovat valinnainen lisä, jonka pelaaja kytkee itse
- *  asetuksista (Tommin päätös 6.7.2026). */
+ *  asetuksista (Tommin päätös 6.7.2026). Teema (7.7.2026): "torvi-kannel"
+ *  valinnainen, oletusteema säilyy oletuksena. */
 export class SoundPrefs {
   constructor(
     private readonly backend: StorageLike,
     private readonly key: string = SOUND_KEY,
   ) {}
 
-  save(enabled: boolean): void {
-    this.backend.setItem(this.key, JSON.stringify({ version: DATA_VERSION, enabled }));
+  save(settings: SoundSettings): void {
+    this.backend.setItem(this.key, JSON.stringify({ version: DATA_VERSION, ...settings }));
   }
 
-  load(): boolean {
+  load(): SoundSettings {
     const raw = this.backend.getItem(this.key);
-    if (!raw) return false;
+    if (!raw) return { enabled: false, theme: "oletus" };
     try {
-      const data = JSON.parse(raw) as { version?: number; enabled?: unknown };
-      return data.version === DATA_VERSION && typeof data.enabled === "boolean" ? data.enabled : false;
+      const data = JSON.parse(raw) as { version?: number; enabled?: unknown; theme?: unknown };
+      if (data.version !== DATA_VERSION) return { enabled: false, theme: "oletus" };
+      const enabled = typeof data.enabled === "boolean" ? data.enabled : false;
+      const theme = data.theme === "torvi-kannel" ? "torvi-kannel" : "oletus";
+      return { enabled, theme };
     } catch {
-      return false;
+      return { enabled: false, theme: "oletus" };
     }
   }
 }

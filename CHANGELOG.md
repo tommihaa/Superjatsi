@@ -3,6 +3,30 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.11.0] – 2026-07-07
+
+### Lisätty
+- **`efektit.html` pysyväksi kehitystyökaluksi** (ent. tilapäinen `aanet.html`):
+  äänet + visuaaliset efektit (`starStorm`, `glowCells`) yhdellä sivulla, teemavalinta
+  ja pikamykistys mukana. Ei osa tuotantobuildia.
+- **"🔊 Kokeile ääniä" -paneeli Asetuksiin**: pelaaja voi kokeilla kaikkia 13 äänta-
+  pahtumaa paikan päällä (respektoi valittua teemaa) ja hiljentää äänet yhdellä
+  napilla ilman että täytyy etsiä erillistä asetusriviä.
+
+## [0.10.0] – 2026-07-07
+
+### Lisätty
+- **Ääniteema: Torvi & kantele.** Asetukset-overlayn äänet-riviin uusi valinta (näkyy
+  vain kun äänet ovat päällä): Oletus / Torvi & kantele. Uusi `kantele()`-ääneke
+  (Karplus-Strong-nypäisysynteesi: kohinapurske DelayNode-silmukan läpi, paluuhaarassa
+  alipäästösuodin + gain-häipymä) täydentää olemassa olevaa torviääntä (`horn()`).
+  Torvi-kannel-teemassa ydinsilmukan äänet (lukitus/vapautus/kuittaus/poltto/peru/
+  GREAT-kimallus/bonus/vuoronvaihto/ennätys) ovat kantele-nypäisyjä; harvinaiset
+  fanfaarit (TOP-tähtimyrsky, Superjatsi-signature, voitto) pysyvät torvena
+  kummassakin teemassa. `SoundPrefs` laajeni `theme`-kentällä (taaksepäinyhteensopiva:
+  vanha tallenne ilman kenttää → oletusteema). Sama torvi/kannel-suunnittelukuvio
+  toteutettiin myös Jakoon ja Ituun (kolme erillistä toteutusta, ei jaettua koodia).
+
 ## [0.9.0] – 2026-07-05
 
 ### Lisätty

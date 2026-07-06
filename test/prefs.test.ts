@@ -63,25 +63,37 @@ describe("SetupPrefs", () => {
 });
 
 describe("SoundPrefs", () => {
-  it("oletus on pois kun tallennusta ei ole", () => {
-    expect(new SoundPrefs(new MockStorage()).load()).toBe(false);
+  it("oletus on pois ja teema oletus kun tallennusta ei ole", () => {
+    expect(new SoundPrefs(new MockStorage()).load()).toEqual({ enabled: false, theme: "oletus" });
   });
 
-  it("tallennus → lataus säilyttää valinnan (round-trip)", () => {
+  it("tallennus → lataus säilyttää valinnan ja teeman (round-trip)", () => {
     const p = new SoundPrefs(new MockStorage());
-    p.save(true);
-    expect(p.load()).toBe(true);
-    p.save(false);
-    expect(p.load()).toBe(false);
+    p.save({ enabled: true, theme: "torvi-kannel" });
+    expect(p.load()).toEqual({ enabled: true, theme: "torvi-kannel" });
+    p.save({ enabled: false, theme: "oletus" });
+    expect(p.load()).toEqual({ enabled: false, theme: "oletus" });
   });
 
-  it("rikkinäinen tai vääränmuotoinen tallennus → oletus pois, ei kaatumista", () => {
+  it("rikkinäinen tai vääränmuotoinen tallennus → oletukset, ei kaatumista", () => {
     const backend = new MockStorage();
     backend.setItem("superjatsi:sound", "{ rikki");
-    expect(new SoundPrefs(backend).load()).toBe(false);
-    backend.setItem("superjatsi:sound", JSON.stringify({ version: 99, enabled: true }));
-    expect(new SoundPrefs(backend).load()).toBe(false);
+    expect(new SoundPrefs(backend).load()).toEqual({ enabled: false, theme: "oletus" });
+    backend.setItem("superjatsi:sound", JSON.stringify({ version: 99, enabled: true, theme: "torvi-kannel" }));
+    expect(new SoundPrefs(backend).load()).toEqual({ enabled: false, theme: "oletus" });
     backend.setItem("superjatsi:sound", JSON.stringify({ version: 1, enabled: "kyllä" }));
-    expect(new SoundPrefs(backend).load()).toBe(false);
+    expect(new SoundPrefs(backend).load()).toEqual({ enabled: false, theme: "oletus" });
+  });
+
+  it("vanha tallenne ilman theme-kenttää → teema oletus", () => {
+    const backend = new MockStorage();
+    backend.setItem("superjatsi:sound", JSON.stringify({ version: 1, enabled: true }));
+    expect(new SoundPrefs(backend).load()).toEqual({ enabled: true, theme: "oletus" });
+  });
+
+  it("tuntematon theme-arvo → oletus, enabled säilyy", () => {
+    const backend = new MockStorage();
+    backend.setItem("superjatsi:sound", JSON.stringify({ version: 1, enabled: true, theme: "roska" }));
+    expect(new SoundPrefs(backend).load()).toEqual({ enabled: true, theme: "oletus" });
   });
 });

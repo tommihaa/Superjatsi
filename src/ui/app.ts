@@ -7,13 +7,13 @@ import "./scorecard-view";
 import { AverageStore, type AverageEntry } from "../domain/averages";
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
-import { SetupPrefs, SoundPrefs } from "../domain/prefs";
+import { SetupPrefs, SoundPrefs, type SoundTheme } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
 import { buildView, type GameView } from "./view";
 import { glowCells, starStorm } from "./effects";
-import { setSfxEnabled, sfx } from "./sfx";
+import { setSfxEnabled, setTheme, sfx } from "./sfx";
 import { downloadRecapImage } from "./recap-image";
 import type { AppHeader } from "./header";
 import type { Setup } from "./setup";
@@ -54,7 +54,9 @@ export class App extends HTMLElement {
   private lastView: GameView | null = null;
 
   connectedCallback(): void {
-    setSfxEnabled(this.soundPrefs.load());
+    const sound = this.soundPrefs.load();
+    setSfxEnabled(sound.enabled);
+    setTheme(sound.theme);
     this.bindEvents();
     this.game = this.persistence.load();
     if (this.game?.isOver()) {
@@ -374,29 +376,68 @@ export class App extends HTMLElement {
     return this.overlayEl(`${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`, true);
   }
 
-  /** Asetukset: toistaiseksi vain äänikytkin (ratas palasi headeriin tämän myötä). */
+  /** Asetukset: äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */
   private settingsOverlay(): HTMLElement {
-    const enabled = this.soundPrefs.load();
+    const sound = this.soundPrefs.load();
     const btn = (value: boolean, label: string) =>
-      `<button class="choice${value === enabled ? " selected" : ""}" data-snd="${value ? "on" : "off"}">${label}</button>`;
+      `<button class="choice${value === sound.enabled ? " selected" : ""}" data-snd="${value ? "on" : "off"}">${label}</button>`;
+    const themeBtn = (value: SoundTheme, label: string) =>
+      `<button class="choice${value === sound.theme ? " selected" : ""}" data-theme="${value}">${label}</button>`;
     const ov = this.overlayEl(
       `<h2>${T.settings}</h2>
        <div class="settings-row">
          <span class="settings-label">${T.sounds}</span>
          <div class="choice-row">${btn(true, T.soundsOn)}${btn(false, T.soundsOff)}</div>
        </div>
+       ${
+         sound.enabled
+           ? `<div class="settings-row">
+                <span class="settings-label">${T.soundTheme}</span>
+                <div class="choice-row">${themeBtn("oletus", T.soundThemeDefault)}${themeBtn("torvi-kannel", T.soundThemeHornKantele)}</div>
+              </div>
+              <div class="settings-row">
+                <span class="settings-label">${T.trySounds}</span>
+                <div class="choice-row">
+                  <button class="choice" id="mute-sounds">${T.muteSounds}</button>
+                  ${Object.entries(T.sfxLabels)
+                    .map(([fn, label]) => `<button class="choice" data-try="${fn}">${label}</button>`)
+                    .join("")}
+                </div>
+              </div>`
+           : ""
+       }
        <div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`,
       true,
     );
     ov.querySelectorAll<HTMLButtonElement>("[data-snd]").forEach((b) =>
       b.addEventListener("click", () => {
         const on = b.dataset.snd === "on";
-        this.soundPrefs.save(on);
+        this.soundPrefs.save({ ...sound, enabled: on });
         setSfxEnabled(on);
         if (on) sfx.confirm(); // ääninäyte: kuulet heti että äänet toimivat
         this.render();
       }),
     );
+    ov.querySelectorAll<HTMLButtonElement>("[data-theme]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const chosen = b.dataset.theme as SoundTheme;
+        this.soundPrefs.save({ ...sound, theme: chosen });
+        setTheme(chosen);
+        sfx.confirm(); // ääninäyte uudella teemalla
+        this.render();
+      }),
+    );
+    ov.querySelectorAll<HTMLButtonElement>("[data-try]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const fn = b.dataset.try as keyof typeof sfx;
+        sfx[fn]();
+      }),
+    );
+    ov.querySelector<HTMLButtonElement>("#mute-sounds")?.addEventListener("click", () => {
+      this.soundPrefs.save({ ...sound, enabled: false });
+      setSfxEnabled(false);
+      this.render();
+    });
     return ov;
   }
 
