@@ -28,6 +28,14 @@ type Overlay = "rules" | "scores" | "settings" | null;
  *  pelaajalla on riittävästi historiaa, on ennätys harvinainen tarpeeksi juhlittavaksi. */
 const RECORD_SOUND_MIN_GAMES = 15;
 
+/** Vahinko-tuplaklikkauksen esto: tabletilla nopea kaksoisnapautus Heitä-nappiin
+ *  laukaisi kaksi erillistä click-eventtiä, jolloin yksi heitto "syötiin" vahingossa
+ *  (roll() on molemmilla kerroilla laillinen, joten domain ei sitä estä). Peräkkäiset
+ *  heittopyynnöt tämän ikkunan sisällä ohitetaan; ihminen ei ehdi harkittuun uusintaan
+ *  näin nopeasti, joten laillinen peli ei kärsi. Kytketty heittoanimaation kestoon
+ *  (.die.rolling ~0.32 s) hieman ylimitoitettuna. */
+const ROLL_COOLDOWN_MS = 400;
+
 // <sj-app>: juurikomponentti. Omistaa GameStaten ja persistoinnin, orkestroi
 // lapsikomponentit ja kuuntelee niiden eventtejä (delegoituna tähän kerran).
 export class App extends HTMLElement {
@@ -52,6 +60,8 @@ export class App extends HTMLElement {
   private handoff = false;
   /** Viimeksi renderöity näkymä (tähtimyrskyn liipaisu heiton jälkeen). */
   private lastView: GameView | null = null;
+  /** Viimeisimmän hyväksytyn heiton aikaleima (vahinko-tuplaklikkauksen esto). */
+  private lastRollAt = 0;
 
   connectedCallback(): void {
     const sound = this.soundPrefs.load();
@@ -69,15 +79,14 @@ export class App extends HTMLElement {
   private bindEvents(): void {
     this.addEventListener("start", (e) => {
       const { diceCount, names } = (e as CustomEvent).detail as { diceCount: DiceCount; names: string[] };
-      this.game = new GameState(names, diceCount);
-      this.setupPrefs.save({ names, diceCount });
-      this.persist();
-      this.overlay = null;
-      this.newRanks = [];
-      this.handoff = false;
-      this.render();
+      this.startGame(names, diceCount);
     });
     this.addEventListener("roll", () => {
+      // Ohita vahinko-tuplaklikkaus: kaksi peräkkäistä heittopyyntöä lyhyen ikkunan
+      // sisällä on käytännössä aina yksi tahaton kaksoisnapautus, ei kaksi heittoa.
+      const now = Date.now();
+      if (now - this.lastRollAt < ROLL_COOLDOWN_MS) return;
+      this.lastRollAt = now;
       this.mutate((g) => g.roll());
       sfx.roll();
       // Juhla vain heiton jälkeen — ei uudelleenrenderöinneissä (lukitus ym.),
@@ -138,6 +147,18 @@ export class App extends HTMLElement {
       }
       this.resetToSetup();
     });
+  }
+
+  /** Aloita uusi peli annetuilla pelaajilla ja noppamäärällä (aloitusnäytöstä tai
+   *  loppunäytön "Pelaa uudelleen" -pikauusinnasta samoilla asetuksilla). */
+  private startGame(names: string[], diceCount: DiceCount): void {
+    this.game = new GameState(names, diceCount);
+    this.setupPrefs.save({ names, diceCount });
+    this.persist();
+    this.overlay = null;
+    this.newRanks = [];
+    this.handoff = false;
+    this.render();
   }
 
   /** Varmistuuko yläbonus juuri vahvistettavalla kirjauksella? Pending-arvo on
@@ -343,18 +364,28 @@ export class App extends HTMLElement {
       ? `<h3 class="hs-title">${T.highscoresFor(this.game.diceCount)}</h3>
          ${this.highscoreListHtml(this.game.diceCount, this.newRanks)}`
       : "";
+    // Pelaajat ja noppamäärä talteen ennen kuin "Pelaa uudelleen" korvaa pelin.
+    const names = this.game?.players.map((p) => p.name) ?? [];
+    const diceCount = this.game?.diceCount;
     const ov = this.overlayEl(
       `<div class="banner"><div class="trophy">🏆</div><h2>${T.gameOver}</h2><p>${msg}</p></div>
        ${standings}
        ${scores}
        <div class="actions">
          <button class="secondary" data-act="download-recap">${T.downloadImage}</button>
-         <button class="primary" data-close="new">${T.playAgain}</button>
+         <button class="secondary" data-act="to-menu">${T.backToMenu}</button>
+         <button class="primary" data-act="play-again">${T.playAgain}</button>
        </div>`,
       false,
     );
     ov.querySelector('[data-act="download-recap"]')?.addEventListener("click", () => {
       if (this.game) downloadRecapImage(this.game);
+    });
+    // Valikkoon: nollaa aloitusnäyttöön (ennätykset on jo kirjattu pelin päättyessä).
+    ov.querySelector('[data-act="to-menu"]')?.addEventListener("click", () => this.resetToSetup());
+    // Pelaa uudelleen: aloita heti uusi peli samoilla pelaajilla ja noppamäärällä.
+    ov.querySelector('[data-act="play-again"]')?.addEventListener("click", () => {
+      if (diceCount) this.startGame(names, diceCount);
     });
     return ov;
   }
@@ -550,10 +581,6 @@ export class App extends HTMLElement {
     ov.innerHTML = `<div class="panel">${innerHtml}</div>`;
     ov.querySelectorAll<HTMLButtonElement>("[data-close]").forEach((btn) => {
       btn.addEventListener("click", () => {
-        if (btn.dataset.close === "new") {
-          this.persistence.clear();
-          this.game = null;
-        }
         this.overlay = null;
         this.hsTab = null;
         this.render();

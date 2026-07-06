@@ -3,6 +3,35 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.14.0] – 2026-07-07
+
+### Muutettu
+- **Loppunäytön "Pelaa uudelleen" aloittaa nyt heti uuden pelin** samoilla pelaajilla
+  ja noppamäärällä (ei enää kierrätä aloitusnäytön kautta). Rinnalle lisätty erillinen
+  **"Valikkoon"**-nappi, joka vie aloitusnäyttöön, jossa pelaajat, noppamäärän ja nimet
+  voi vaihtaa. Aiemmin ainoa nappi vei aina aloitusnäyttöön, mikä oli epäintuitiivista
+  (odotus: uusinta alkaa suoraan). Ennätykset kirjataan yhä pelin päättyessä, joten
+  kumpikaan reitti ei kadota tulosta.
+
+### Lisätty
+- **Napautettavat selitteet tulokortissa (kosketusnäytöt).** Sarakeotsikot (I/II/III),
+  Yläsumma- ja Bonus-rivit sekä alaosan yhdistelmärivit näyttivät selitteensä vain
+  `title=`-hover-tooltipissä, joka ei toimi kosketusnäytöllä. Nyt näitä voi napauttaa
+  (sama napauta-paljastaaksesi-malli kuin Jaossa ja Itussa): napautus avaa kelluvan
+  selitekuplan, uusi napautus tai napautus muualle / Esc sulkee sen. Pisteviiva vihjaa
+  napautettavuudesta, ja selite kulkee myös `aria-label`issa ruudunlukijalle. Hover
+  säilyy työpöytäbonuksena.
+
+### Korjattu
+- **Heitä-napin vahinko-tuplaklikkaus ei enää syö heittoa.** Tabletilla nopea
+  kaksoisnapautus Heitä-nappiin laukaisi kaksi erillistä click-eventtiä, jolloin
+  toinen napautus kulutti heiton vahingossa (molemmat heitot ovat domainissa laillisia,
+  joten sääntölogiikka ei sitä estänyt). Peräkkäiset heittopyynnöt 400 ms:n ikkunan
+  sisällä ohitetaan nyt (ROLL_COOLDOWN_MS, kytketty heittoanimaation kestoon); harkittu
+  uusintaheitto ei ehdi näin nopeasti, joten laillinen peli ei kärsi. Lisäksi napeille
+  `touch-action: manipulation`, joka poistaa kosketusnäytön kaksoisnapautus-zoomauksen
+  ~300 ms viiveen.
+
 ## [0.13.0] – 2026-07-06
 
 ### Muutettu

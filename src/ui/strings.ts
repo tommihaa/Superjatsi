@@ -108,6 +108,7 @@ export const T = {
   winner: (name: string) => `Voittaja: ${name}`,
   winnerTie: (names: string) => `Tasapeli: ${names}`,
   playAgain: "Pelaa uudelleen",
+  backToMenu: "Valikkoon",
   finalStandings: "Lopputulokset",
   downloadImage: "Lataa kuva tuloksesta",
 
