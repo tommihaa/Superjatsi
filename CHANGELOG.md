@@ -3,6 +3,21 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.15.0] – 2026-07-12
+
+### Muutettu
+- **Pystymobiilissa koko peli mahtuu näytölle ilman vieritystä.** Kapeilla pystynäytöillä
+  (leveys enintään 560 px) kaikki viisi noppaa asettuvat yhdelle riville, lukitustagit
+  jäävät pois (kultareunus ja alarivi kertovat lukituksen) ja paddingit tiivistyvät, jolloin
+  tulokortti Ykkösistä Lopputulokseen ja Heitä-nappi näkyvät kerralla. Matalille näytöille
+  (korkeus enintään 700 px) vielä tiiviimpi taso. Todennettu 375x812 ja 360x640: nolla
+  pystyvieritystä.
+
+### Korjattu
+- **Ajatusviivat pois käyttäjälle näkyvästä tekstistä.** Vuoron statusrivi ("Vuorossa: Pelaaja 1
+  · 2 heittoa jäljellä") käytti ajatusviivaa erottimena, nyt luetelmapiste; ennätysnäkymän
+  tyhjä-teksti käyttää kaksoispistettä. Ajatusviiva karsitaan suomenkielisestä UI-tekstistä.
+
 ## [0.14.0] – 2026-07-07
 
 ### Muutettu

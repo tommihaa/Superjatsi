@@ -773,3 +773,56 @@ sj-scorecard {
   .cell { min-width: 26px; }
   .dev { font-size: 0.6rem; margin-left: 2px; }
 }
+
+/* ---------- Pystymobiili-kompakti: 5 nopan peli mahtuu näytölle ilman vieritystä ----------
+   Budjetti (esim. 412x~740): header ~40 + status ~34 + tarjotin ~190 + tulokortti
+   18 riviä x ~23px ~414 + marginaalit ~30 = ~700. Keinot: nopat yhteen riviin
+   (pöytägridi 6 saraketta), held-tag pois (kulta reunus + alarivi kertoo lukituksen),
+   tiiviimmät paddingit. Tulee 560px-sääntöjen JÄLKEEN → voittaa järjestyksellä. */
+@media (max-width: 560px) and (orientation: portrait) {
+  sj-app { padding: 6px 8px 10px; }
+  .app-header { padding: 2px 2px 6px; }
+  .app-header h1 { font-size: 1.1rem; }
+  .icon-btn { width: 32px; height: 32px; font-size: 0.95rem; }
+  .status { margin-bottom: 8px; gap: 6px; }
+  .player-chip { padding: 3px 9px; font-size: 0.8rem; }
+  .turn-info { font-size: 0.85rem; }
+
+  .tray { padding: 8px; gap: 6px; margin-bottom: 8px; }
+  /* Kaikki heitetyt nopat yhteen riviin: 6 ruutua vierekkäin (ghost-paikat
+     pitävät nopat aloillaan kuten ennenkin). */
+  .table {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    width: 100%;
+    min-height: 62px; /* 1 rivi 44px noppia + padding + reuna */
+    row-gap: 6px;
+    padding: 7px 4px;
+  }
+  .dice-row { min-height: 50px; padding: 2px 4px; gap: 8px; }
+  .die { width: 44px; height: 44px; padding: 6px; }
+  .die .pip { width: 8px; height: 8px; }
+  .die .held-tag { display: none; }
+  .actions-slot { min-height: 40px; }
+  .tray .primary, .tray .secondary { padding: 8px 14px; font-size: 0.95rem; }
+
+  .scorecard th, .scorecard td { padding: 2px 3px; font-size: 0.74rem; line-height: 1.25; }
+  .cell { height: 22px; min-width: 30px; }
+  .scorecard tr.total td { font-size: 0.85rem; }
+}
+
+/* Matalat pystynäytöt (~640px, esim. 360x640): vielä tiiviimpi taso. */
+@media (max-width: 560px) and (orientation: portrait) and (max-height: 700px) {
+  sj-app { padding: 4px 6px 6px; }
+  .app-header h1 { font-size: 1rem; }
+  .icon-btn { width: 28px; height: 28px; font-size: 0.85rem; }
+  .status { margin-bottom: 6px; }
+  .turn-info { font-size: 0.8rem; }
+  .tray { margin-bottom: 6px; padding: 6px; gap: 5px; }
+  .table { min-height: 54px; padding: 5px 3px; }
+  .dice-row { min-height: 44px; }
+  .die { width: 38px; height: 38px; padding: 5px; }
+  .die .pip { width: 7px; height: 7px; }
+  .scorecard th, .scorecard td { padding: 1px 2px; font-size: 0.68rem; line-height: 1.2; }
+  .cell { height: 18px; }
+  .actions-slot { min-height: 36px; }
+}

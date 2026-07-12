@@ -116,7 +116,7 @@ export const T = {
   highscores: "Ennätykset",
   highscoresFor: (n: number) => `Ennätykset · ${n} noppaa`,
   diceTab: (n: number) => `${n} noppaa`,
-  noHighscores: "Ei vielä ennätyksiä — pelaa peli loppuun!",
+  noHighscores: "Ei vielä ennätyksiä: pelaa peli loppuun!",
   clearHighscores: "Tyhjennä ennätykset ja keskiarvot",
   clearHighscoresConfirm: "Tyhjennetäänkö kaikki ennätykset ja keskiarvot? Tätä ei voi perua.",
 

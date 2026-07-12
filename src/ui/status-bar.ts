@@ -29,7 +29,7 @@ export class StatusBar extends HTMLElement {
 
     const info = v.isOver
       ? ""
-      : `<div class="turn-info"><strong>${T.turnOf(v.currentName)}</strong> — ${this.turnInfo(v)}</div>`;
+      : `<div class="turn-info"><strong>${T.turnOf(v.currentName)}</strong> · ${this.turnInfo(v)}</div>`;
 
     this.innerHTML = `<div class="status"><div class="players">${chips}</div>${info}</div>`;
   }
