@@ -563,6 +563,97 @@ sj-scorecard {
   text-align: center;
 }
 
+/* ---------- Tietoja-overlay + versioleima ---------- */
+.overlay .panel h3 {
+  color: var(--gold);
+  margin: 1rem 0 0.35rem;
+}
+.overlay .panel h4 {
+  color: var(--gold);
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+.about-link:hover {
+  border-color: var(--gold);
+}
+.about-kofi {
+  border-color: #d9534f;
+  color: #ff9d99;
+}
+.about-kofi:hover {
+  background: #d9534f;
+  color: #fff;
+}
+.install {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.install-row {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.install-row:last-child {
+  border-bottom: 0;
+}
+.install-row b {
+  display: block;
+}
+.install-row span {
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.other-games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.other-game {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  min-width: 8rem;
+}
+.other-game:hover {
+  border-color: var(--gold);
+}
+.other-game b {
+  color: var(--gold);
+}
+.other-game span {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+.about-version,
+.setup-version {
+  margin-top: 1.25rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
 /* ---------- Juhlaefektit (erinomainen heitto) ---------- */
 .star-storm {
   position: fixed;

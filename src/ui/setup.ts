@@ -1,25 +1,27 @@
 import { T } from "./strings";
 import type { DiceCount } from "../domain/types";
 
-const MAX_PLAYERS = 6;
+// Versioleima: Vite `define` syöttää nämä build-aikana (ks. vite.config.ts).
+declare const __APP_VERSION__: string;
+declare const __BUILD_DATE__: string;
 
 // Kapea näyttö = sama raja kuin CSS:n portrait-breakpoint. Puhelimessa 6 noppaa
 // ahtautuu (noppatarjotin rivittyy, kortti korkeampi), joten oletetaan 5 noppaa.
 const narrowScreen = (): boolean =>
   typeof window !== "undefined" && window.matchMedia("(max-width: 560px)").matches;
 
-// <sj-setup>: aloitusnäyttö. Valitaan nopam. (5/6), pelaajamäärä (1–6) ja nimet.
-// Emittoi "start" detaililla { diceCount, names }.
+// <sj-setup>: aloitusnäyttö. Yksinpeli: valitaan noppamäärä (5/6) ja nimi.
+// Emittoi "start" detaililla { diceCount, names } (names on aina yhden mittainen).
+// Domain säilyy monipelikykyisenä (GameState hyväksyy N pelaajaa) tulevaa
+// verkko-moninpeliä varten, mutta paikallinen UI ajaa aina yhtä pelaajaa.
 export class Setup extends HTMLElement {
   private diceCount: DiceCount = narrowScreen() ? 5 : 6;
-  private playerCount = 2;
-  private names: string[] = [];
+  private playerName = "";
 
   /** Edellisen pelin valinnat esitäyttöön (app lataa localStoragesta). */
   set defaults(d: { names: string[]; diceCount?: DiceCount } | null) {
     if (!d || d.names.length === 0) return;
-    this.names = [...d.names];
-    this.playerCount = Math.min(MAX_PLAYERS, d.names.length);
+    this.playerName = d.names[0] ?? "";
     if (d.diceCount !== undefined) this.diceCount = d.diceCount;
     if (this.isConnected) this.render();
   }
@@ -28,8 +30,8 @@ export class Setup extends HTMLElement {
     this.render();
   }
 
-  private nameAt(i: number): string {
-    return this.names[i]?.trim() || T.playerName(i + 1);
+  private nameOrDefault(): string {
+    return this.playerName.trim() || T.playerName(1);
   }
 
   private render(): void {
@@ -41,20 +43,6 @@ export class Setup extends HTMLElement {
           }</button>`,
       )
       .join("");
-
-    const playerChoice = Array.from({ length: MAX_PLAYERS }, (_, k) => k + 1)
-      .map(
-        (n) =>
-          `<button class="choice${this.playerCount === n ? " selected" : ""}" data-players="${n}">${n}</button>`,
-      )
-      .join("");
-
-    const nameInputs = Array.from({ length: this.playerCount }, (_, i) => {
-      const val = this.names[i] ?? "";
-      return `<input type="text" maxlength="14" data-name="${i}" placeholder="${T.playerName(
-        i + 1,
-      )}" value="${val.replace(/"/g, "&quot;")}" />`;
-    }).join("");
 
     this.innerHTML = `
       <div class="setup">
@@ -69,11 +57,15 @@ export class Setup extends HTMLElement {
           ${narrowScreen() ? `<p class="field-hint">${T.diceHintMobile}</p>` : ""}
         </fieldset>
         <fieldset>
-          <legend>${T.players}</legend>
-          <div class="choice-row">${playerChoice}</div>
+          <legend>${T.nameLabel}</legend>
+          <div class="names">
+            <input type="text" maxlength="14" data-name aria-label="${T.nameLabel}" placeholder="${T.playerName(
+              1,
+            )}" value="${this.playerName.replace(/"/g, "&quot;")}" />
+          </div>
         </fieldset>
-        <div class="names">${nameInputs}</div>
         <button class="primary start">${T.start}</button>
+        <p class="setup-version">${T.version(__APP_VERSION__, __BUILD_DATE__)}</p>
       </div>`;
 
     this.querySelectorAll<HTMLButtonElement>("[data-dice]").forEach((b) =>
@@ -82,24 +74,18 @@ export class Setup extends HTMLElement {
         this.render();
       }),
     );
-    this.querySelectorAll<HTMLButtonElement>("[data-players]").forEach((b) =>
-      b.addEventListener("click", () => {
-        this.playerCount = Number(b.dataset.players);
-        this.render();
-      }),
-    );
-    this.querySelectorAll<HTMLInputElement>("[data-name]").forEach((inp) =>
-      inp.addEventListener("input", () => {
-        this.names[Number(inp.dataset.name)] = inp.value;
-      }),
-    );
+    this.querySelector<HTMLInputElement>("[data-name]")!.addEventListener("input", (e) => {
+      this.playerName = (e.target as HTMLInputElement).value;
+    });
     this.querySelector('[data-act="scores"]')!.addEventListener("click", () => {
       this.dispatchEvent(new CustomEvent("open-highscores", { bubbles: true }));
     });
     this.querySelector(".start")!.addEventListener("click", () => {
-      const names = Array.from({ length: this.playerCount }, (_, i) => this.nameAt(i));
       this.dispatchEvent(
-        new CustomEvent("start", { bubbles: true, detail: { diceCount: this.diceCount, names } }),
+        new CustomEvent("start", {
+          bubbles: true,
+          detail: { diceCount: this.diceCount, names: [this.nameOrDefault()] },
+        }),
       );
     });
   }

@@ -6,7 +6,12 @@ toteuttaa nämä säännöt; jos sääntö muuttuu, se muutetaan ensin tähän j
 ## Variantit
 
 Aloitusnäytöllä valitaan **5 noppaa** (perinteinen jatsi) tai **6 noppaa** (Superjatsi).
-1–6 pelaajaa, hot-seat (pass-and-play samalla laitteella).
+
+**Yksinpeli** (päätös 16.7.2026): peli on paikallisesti vain yhdelle pelaajalle. Pass-and-play
+poistettiin UI:sta, koska yksikin peli kestää n. 20 min, joten monen pelaajan hot-seat ei tule
+loppuun pelatuksi. Domain (`GameState`) säilyy N-pelaajakykyisenä tulevaa **verkko-moninpeliä**
+varten, mutta paikallinen UI ajaa aina yhtä pelaajaa. Aiempi hot-seat-vuoronvaihto (handoff)
+on git-historiassa palautettavissa.
 
 ## Tulokortti
 
@@ -69,9 +74,9 @@ Pelaajalla on siis aina vähintään yksi laillinen siirto — peli ei voi jumit
 
 ## Pelin kulku
 
-Pelaajat vuorottelevat. Peli päättyy kun jokaisen pelaajan kaikki solut on täytetty.
+Yksinpeli: pelaaja täyttää kaikki solut. Peli päättyy kun kortti on täynnä.
 Myös pelin **viimeinen** kirjaus vahvistetaan (Vahvista/Peru) ennen pelin päättymistä.
-Suurin loppusumma voittaa.
+Loppunäyttö näyttää tuloksen (ei voittajaa, kun pelaajia on yksi).
 
 ## Persistointi
 

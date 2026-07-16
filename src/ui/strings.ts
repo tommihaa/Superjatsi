@@ -3,7 +3,7 @@
 
 export const T = {
   title: "Superjatsi",
-  tagline: "Maxi-jatsi paikalliseen moninpeliin",
+  tagline: "Noppapeli yhdelle pelaajalle",
 
   // Setup
   newGame: "Uusi peli",
@@ -11,12 +11,13 @@ export const T = {
   fiveDice: "5 (Jatsi)",
   sixDice: "6 (Superjatsi)",
   diceHintMobile: "📱 Puhelimessa 5 noppaa istuu näytölle mukavimmin",
-  players: "Pelaajia",
+  nameLabel: "Nimi",
   playerName: (i: number) => `Pelaaja ${i}`,
   start: "Aloita peli",
 
   // Header
   rules: "Säännöt",
+  about: "Tietoja",
   close: "Sulje",
   newGameConfirm: "Aloitetaanko uusi peli? Kesken oleva peli menetetään.",
 
@@ -41,7 +42,6 @@ export const T = {
     celebrationTop: "TOP-heitto",
     superjatsi: "Superjatsi kirjattu",
     bonus: "Yläbonus",
-    handoff: "Vuoronvaihto",
     win: "Voitto",
     record: "Uusi ennätys",
   } as Record<string, string>,
@@ -61,14 +61,6 @@ export const T = {
   cancel: "Peru",
   confirmHint: "Vahvista kirjaus tai peru",
   yes: "Kyllä",
-
-  // Vuoronvaihto (pass-and-play)
-  handoffTitle: (name: string) => `Anna laite pelaajalle ${name}`,
-  recapScored: (player: string, row: string, score: number, col: string) =>
-    `${player} kirjasi ${row} ${score} p sarakkeeseen ${col}`,
-  recapBurned: (player: string, row: string, col: string) =>
-    `${player} poltti rivin ${row} sarakkeessa ${col}`,
-  startTurn: "Aloita vuoro",
 
   // Scorecard
   colSum: "=",
@@ -105,11 +97,8 @@ export const T = {
   // Game over
   gameOver: "Peli päättyi",
   soloResult: (score: number) => `Tulos: ${score} pistettä`,
-  winner: (name: string) => `Voittaja: ${name}`,
-  winnerTie: (names: string) => `Tasapeli: ${names}`,
   playAgain: "Pelaa uudelleen",
   backToMenu: "Valikkoon",
-  finalStandings: "Lopputulokset",
   downloadImage: "Lataa kuva tuloksesta",
 
   // Highscores
@@ -125,4 +114,52 @@ export const T = {
   avgValue: (v: number) => v.toFixed(1).replace(".", ","),
   gamesCount: (n: number) => (n === 1 ? "1 peli" : `${n} peliä`),
   recentAvg: (n: number) => `viim. ${n}:`,
+
+  // Tietoja (esittely + palautelinkit + muut pelit + PWA-asennusohje)
+  // Selkokieltä: lyhyet lauseet, yksi ajatus kerrallaan. Saavutettavuusrivi mukana.
+  aboutTitle: "Tietoja Superjatsista",
+  aboutParas: [
+    "Superjatsi on noppapeli. Heität noppia. Kirjaat tulokset kortin ruutuihin.",
+    "Pelaat yksin ja omassa tahdissasi. Yksi kuuden nopan peli voi kestää " +
+      "20-25 minuuttia. Yrität saada mahdollisimman paljon pisteitä.",
+    "Peli toimii näppäimistöllä, hiirellä ja kosketuksella.",
+    "Peli ei kerää sinusta mitään. Ei tiliä, ei mainoksia. Ennätyksesi tallentuvat " +
+      "vain sinun selaimeesi.",
+    "Peli on ilmainen ja tehty jaettavaksi. Voit lähettää palautetta. Voit myös " +
+      "tarjota tekijälle kahvit.",
+  ] as readonly string[],
+  aboutFeedback: "✉ Lähetä palautetta",
+  aboutKofi: "☕ Tue Ko-fissa",
+  otherGamesTitle: "Muut pelit",
+  otherGamesIntro: "Samalta tekijältä. Kaikki ilmaisia ja ilman mainoksia.",
+  otherGames: [
+    { name: "Itu", url: "https://tommi-itu.vercel.app", blurb: "suomen kielen sanapeli" },
+    { name: "Jako", url: "https://tommi-jako.vercel.app", blurb: "yhdeksän korttipeliä" },
+  ] as readonly { name: string; url: string; blurb: string }[],
+  installTitle: "Lisää Superjatsi aloitusnäytölle 📲",
+  installIntro:
+    "Lisää Superjatsi puhelimen aloitusnäytölle tai tietokoneen työpöydälle, niin se " +
+    "avautuu omasta kuvakkeestaan kuin sovellus, ilman selaimen palkkeja. Kerran avattu " +
+    "peli toimii myös ilman verkkoa.",
+  installGroups: [
+    {
+      title: "📱 Puhelin ja tabletti",
+      rows: [
+        ["Chrome · Brave · Edge · Opera (Android)", 'Valikko ⋮ → "Lisää aloitusnäyttöön" tai "Asenna sovellus".'],
+        ["Samsung Internet", 'Valikko ≡ → "Lisää sivu kohteeseen" → "Aloitusnäyttö".'],
+        ["Firefox (Android)", 'Valikko ⋮ → "Lisää aloitusnäyttöön".'],
+        ["Safari (iPhone/iPad)", 'Jaa-painike → "Lisää Koti-valikkoon".'],
+        ["Chrome ja muut (iPhone/iPad)", 'Jaa-painike → "Lisää Koti-valikkoon" (iOS sallii asennuksen vain Jaa-valikosta).'],
+      ],
+    },
+    {
+      title: "💻 Tietokone",
+      rows: [
+        ["Chrome · Edge · Brave · Opera · Vivaldi", 'Osoiterivin oikean reunan asennuskuvake ⊕ → "Asenna".'],
+        ["Safari (Mac)", 'Tiedosto-valikko → "Lisää Dockiin".'],
+        ["Firefox (tietokone)", "Ei tue asentamista. Lisää kirjanmerkki nopeaa avaamista varten."],
+      ],
+    },
+  ] as readonly { title: string; rows: readonly (readonly [string, string])[] }[],
+  version: (v: string, date: string) => `Superjatsi v${v} · ${date}`,
 } as const;

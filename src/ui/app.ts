@@ -21,7 +21,15 @@ import type { StatusBar } from "./status-bar";
 import type { DiceTray } from "./dice-tray";
 import type { ScorecardView } from "./scorecard-view";
 
-type Overlay = "rules" | "scores" | "settings" | null;
+type Overlay = "rules" | "about" | "scores" | "settings" | null;
+
+// Versioleima: Vite `define` syöttää nämä build-aikana (ks. vite.config.ts).
+declare const __APP_VERSION__: string;
+declare const __BUILD_DATE__: string;
+
+// Palaute- ja tukilinkit (sama tekijä kuin sisarpeleissä, linkit uudelleenkäytettäviä).
+const MAILTO = "mailto:no.jopas@gmail.com?subject=Superjatsi-palaute";
+const KOFI = "https://ko-fi.com/tommih";
 
 /** Ennätysäänen kynnys (Tommin linjaus 6.7): aloittelijalle lähes joka peli on
  *  "ennätys" (top 10 täyttymässä) — ääni jankuttaisi. Vasta kun listalle päässeellä
@@ -55,9 +63,6 @@ export class App extends HTMLElement {
   private recordSoundEligible = false;
   /** Ennätysoverlayn valittu varianttivälilehti (null = pelin/oletuksen mukaan). */
   private hsTab: DiceCount | null = null;
-  /** Vuoronvaihtoruutu näkyvissä (pass-and-play: "Anna laite pelaajalle X").
-   *  UI-tila, ei persistoidu — reloadin jälkeen seuraava pelaaja jatkaa suoraan. */
-  private handoff = false;
   /** Viimeksi renderöity näkymä (tähtimyrskyn liipaisu heiton jälkeen). */
   private lastView: GameView | null = null;
   /** Viimeisimmän hyväksytyn heiton aikaleima (vahinko-tuplaklikkauksen esto). */
@@ -111,7 +116,6 @@ export class App extends HTMLElement {
     });
     this.addEventListener("confirm-commit", () => {
       if (!this.game) return;
-      const multiplayer = this.game.players.length > 1;
       // Bonuksen ylitys on laskettava ennen vahvistusta (pending-tieto nollautuu).
       const bonusSecured = this.bonusJustSecured();
       this.mutate((g) => g.confirm());
@@ -121,14 +125,6 @@ export class App extends HTMLElement {
         // (vain kokeneelle — ks. recordSoundEligible).
         setTimeout(() => sfx.win(), 500);
         if (this.recordSoundEligible) setTimeout(() => sfx.record(), 1500);
-        return;
-      }
-      // Monipelissä laite vaihtaa kättä → väliruutu estää vahinkoklikkaukset
-      // ja näyttää kuittauksen juuri vahvistetusta kirjauksesta.
-      if (multiplayer) {
-        this.handoff = true;
-        this.render();
-        setTimeout(() => sfx.handoff(), 400);
       }
     });
     this.addEventListener("cancel-commit", () => {
@@ -136,6 +132,7 @@ export class App extends HTMLElement {
       sfx.cancel();
     });
     this.addEventListener("open-rules", () => this.setOverlay("rules"));
+    this.addEventListener("open-about", () => this.setOverlay("about"));
     this.addEventListener("open-highscores", () => this.setOverlay("scores"));
     this.addEventListener("open-settings", () => this.setOverlay("settings"));
     this.addEventListener("new-game", () => {
@@ -157,7 +154,6 @@ export class App extends HTMLElement {
     this.persist();
     this.overlay = null;
     this.newRanks = [];
-    this.handoff = false;
     this.render();
   }
 
@@ -199,7 +195,6 @@ export class App extends HTMLElement {
     this.persistence.clear();
     this.game = null;
     this.overlay = null;
-    this.handoff = false;
     this.render();
   }
 
@@ -317,7 +312,6 @@ export class App extends HTMLElement {
     this.append(main);
 
     if (view.isOver) this.append(this.gameOverOverlay(view));
-    else if (this.handoff) this.append(this.handoffOverlay(view));
     else if (this.overlay) this.append(this.infoOverlay(this.overlay));
 
     if (becamePending) this.querySelector<HTMLButtonElement>("button.confirm")?.focus();
@@ -325,41 +319,9 @@ export class App extends HTMLElement {
 
   /** Vuoronvaihtoruutu: kuittaus edellisestä kirjauksesta + "Anna laite pelaajalle X".
    *  Ei sulkeudu taustaa klikkaamalla — tarkoitus on estää vahinkoklikkaukset. */
-  private handoffOverlay(view: GameView): HTMLElement {
-    const lm = view.lastMove;
-    const recap = lm
-      ? `<p class="handoff-recap">${
-          lm.score > 0
-            ? T.recapScored(lm.player, lm.rowLabel, lm.score, T.colLabel[lm.columnId])
-            : T.recapBurned(lm.player, lm.rowLabel, T.colLabel[lm.columnId])
-        }</p>`
-      : "";
-    const ov = document.createElement("div");
-    ov.className = "overlay handoff-overlay";
-    ov.innerHTML = `<div class="panel handoff">
-        ${recap}
-        <h2>${T.handoffTitle(view.currentName)}</h2>
-        <div class="actions"><button class="primary" data-act="start-turn">${T.startTurn}</button></div>
-      </div>`;
-    ov.querySelector('[data-act="start-turn"]')!.addEventListener("click", () => {
-      this.handoff = false;
-      this.render();
-    });
-    return ov;
-  }
-
   private gameOverOverlay(view: GameView): HTMLElement {
-    // Yksinpelissä ei ole voittajaa vaan tulos.
-    const solo = view.players.length === 1;
-    const msg = solo
-      ? T.soloResult(view.players[0].total)
-      : view.winners.length === 1
-        ? T.winner(view.winners[0])
-        : T.winnerTie(view.winners.join(", "));
-    // Monipelissä kaikkien pelaajien tulostaulukko (yksinpelissä redundantti).
-    const standings = solo
-      ? ""
-      : `<h3 class="hs-title">${T.finalStandings}</h3>${this.standingsHtml(view)}`;
+    // Yksinpeli: ei voittajaa vaan tulos.
+    const msg = T.soloResult(view.players[0].total);
     const scores = this.game
       ? `<h3 class="hs-title">${T.highscoresFor(this.game.diceCount)}</h3>
          ${this.highscoreListHtml(this.game.diceCount, this.newRanks)}`
@@ -369,7 +331,6 @@ export class App extends HTMLElement {
     const diceCount = this.game?.diceCount;
     const ov = this.overlayEl(
       `<div class="banner"><div class="trophy">🏆</div><h2>${T.gameOver}</h2><p>${msg}</p></div>
-       ${standings}
        ${scores}
        <div class="actions">
          <button class="secondary" data-act="download-recap">${T.downloadImage}</button>
@@ -390,9 +351,10 @@ export class App extends HTMLElement {
     return ov;
   }
 
-  private infoOverlay(kind: "rules" | "scores" | "settings"): HTMLElement {
+  private infoOverlay(kind: "rules" | "about" | "scores" | "settings"): HTMLElement {
     if (kind === "scores") return this.highscoreOverlay();
     if (kind === "settings") return this.settingsOverlay();
+    if (kind === "about") return this.aboutOverlay();
     const body = `<h2>${T.rules}</h2>
            <ul>
              <li><b>Sarakkeet:</b> I = 1 heitto, II = ≤2, III = ≤3 (vapaa rivijärjestys).
@@ -405,6 +367,41 @@ export class App extends HTMLElement {
              <li><b>Loppusumma</b> = sarakkeiden summa. Suurin voittaa.</li>
            </ul>`;
     return this.overlayEl(`${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`, true);
+  }
+
+  /** Tietoja: pelin esittely + palaute-/Ko-fi-linkit + PWA-asennusohje + versioleima.
+   *  Puhtaasti UI-tekstiä (data strings.ts:ssä), ei domain-logiikkaa. */
+  private aboutOverlay(): HTMLElement {
+    const esc = (s: string) =>
+      s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!);
+    const paras = T.aboutParas.map((p) => `<p>${esc(p)}</p>`).join("");
+    const links = `
+      <div class="about-links">
+        <a class="about-link" href="${MAILTO}">${esc(T.aboutFeedback)}</a>
+        <a class="about-link about-kofi" href="${KOFI}" target="_blank" rel="noopener">${esc(T.aboutKofi)}</a>
+      </div>`;
+    const groups = T.installGroups
+      .map((g) => {
+        const rows = g.rows
+          .map(([browser, steps]) => `<div class="install-row"><b>${esc(browser)}</b><span>${esc(steps)}</span></div>`)
+          .join("");
+        return `<div class="install-group"><h4>${esc(g.title)}</h4>${rows}</div>`;
+      })
+      .join("");
+    const install = `<h3>${esc(T.installTitle)}</h3><p>${esc(T.installIntro)}</p><div class="install">${groups}</div>`;
+    const otherGames = `<h3>${esc(T.otherGamesTitle)}</h3><p>${esc(T.otherGamesIntro)}</p>
+      <div class="other-games">${T.otherGames
+        .map(
+          (g) =>
+            `<a class="other-game" href="${g.url}" target="_blank" rel="noopener"><b>${esc(g.name)}</b><span>${esc(g.blurb)}</span></a>`,
+        )
+        .join("")}</div>`;
+    const version = `<p class="about-version">${esc(T.version(__APP_VERSION__, __BUILD_DATE__))}</p>`;
+    return this.overlayEl(
+      `<h2>${esc(T.aboutTitle)}</h2>${paras}${links}${otherGames}${install}${version}` +
+        `<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`,
+      true,
+    );
   }
 
   /** Asetukset: äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */
@@ -516,24 +513,6 @@ export class App extends HTMLElement {
       });
     });
     return ov;
-  }
-
-  /** Loppunäytön tulostaulukko: kaikki pelaajat pistejärjestyksessä, voittaja(t)
-   *  korostettuna. Tasapisteet jakavat saman sijan (kilpailujärjestys). */
-  private standingsHtml(view: GameView): string {
-    const sorted = [...view.players].sort((a, b) => b.total - a.total);
-    const rows = sorted
-      .map((p, i) => {
-        const rank = sorted.findIndex((q) => q.total === p.total) + 1;
-        const win = i === 0 || p.total === sorted[0].total ? ' class="result-win"' : "";
-        return `<tr${win}>
-             <td class="hs-rank">${rank}.</td>
-             <td class="hs-name">${p.name}</td>
-             <td class="hs-score">${p.total}</td>
-           </tr>`;
-      })
-      .join("");
-    return `<table class="hs-table result-table"><tbody>${rows}</tbody></table>`;
   }
 
   /** Keskiarvotaulu: koko historian keskiarvo + viimeisimpien pelien liukuva

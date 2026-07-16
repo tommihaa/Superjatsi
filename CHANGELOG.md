@@ -3,6 +3,22 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.16.0] – 2026-07-16
+
+### Muutettu
+- **Superjatsi on nyt yksinpeli.** Pass-and-play (hot-seat) poistettiin, koska yksi kuuden
+  nopan peli kestää 20-25 minuuttia, joten monen pelaajan hot-seat ei tullut loppuun pelatuksi.
+  Aloitusnäytöltä poistui pelaajamäärävalinta (jäljellä yksi nimikenttä), ja pelistä poistuivat
+  vuoronvaihtoruutu sekä loppunäytön voittaja/tulostaulukko. Domain säilyy monipelikykyisenä
+  tulevaa verkko-moninpeliä varten; palautettavissa git-historiasta. (ks. SUPERJATSI.md)
+- Tagline: "Noppapeli yhdelle pelaajalle".
+
+### Lisätty
+- **Tietoja-näkymä** (headerin ℹ-nappi): selkokielinen esittely + saavutettavuustieto,
+  palaute- ja Ko-fi-linkit, "Muut pelit" -nosto (Itu, Jako) ja PWA-asennusohje
+  ("Lisää Superjatsi aloitusnäytölle").
+- **Versioleima** aloitusnäytön alalaitaan ja Tietoja-näkymään.
+
 ## [0.15.0] – 2026-07-12
 
 ### Muutettu
