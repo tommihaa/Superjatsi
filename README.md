@@ -1,6 +1,6 @@
 # Superjatsi 🎲
 
-Web-pohjainen **maxi-jatsi** (5 tai 6 noppaa) paikalliseen pass-and-play-moninpeliin.
+Web-pohjainen **maxi-jatsi** (5 tai 6 noppaa) yksinpelinä.
 Puhdas, kirjastoton toteutus: **Vite + TypeScript + Web Components**. Ei Reactia, ei
 raskaita riippuvuuksia, ei tilejä eikä tietokantaa.
 
@@ -25,7 +25,8 @@ Loppusumma = sarakkeiden summa, suurin voittaa. Tarkat säännöt: [SUPERJATSI.m
 ## Ominaisuudet
 
 - **5 / 6 nopan variantti** valittavissa aloitusnäytöllä (6 = Superjatsi).
-- **1–6 pelaajaa** hot-seat (pass-and-play).
+- **Yksinpeli:** oma tulos vastaan omat ennätykset. Domain on N-pelaajakykyinen tulevaa
+  verkko-moninpeliä varten, mutta käyttöliittymä ajaa yhtä pelaajaa (0.16.0).
 - 5 sarakerajoitetta + yläbonus per sarake (kynnys 63 / 84, +50) ja juokseva poikkeama.
 - Alaosa: Pari, Kaksi paria, **Kolme paria** (6 noppaa), Kolme/Neljä samaa, Täyskäsi,
   Pieni/Suuri/**Täys**suora, Sattuma, Jatsi (50) ja **Superjatsi** (100, 6 noppaa).

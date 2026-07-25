@@ -3,6 +3,17 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.16.2] – 2026-07-26
+
+### Korjattu
+- **Metateksti vastaa yksinpeliä.** `index.html`-metakuvaus, `manifest.webmanifest`in
+  `description`, `package.json`in `description`, `README.md` ja `CLAUDE.md` lupasivat yhä
+  pass-and-play-moninpeliä, jonka 0.16.0 poisti käyttöliittymästä. Uusi muotoilu:
+  "Web-pohjainen maxi-jatsi yksinpelinä. Offline, ei mainoksia eikä tiliä." Domain on yhä
+  N-pelaajakykyinen verkko-moninpeliä varten, ja se sanotaan nyt siellä missä se on totta
+  (kehittäjädokumentit), ei siellä missä se on lupaus (metakuvaus).
+- Sama vanhentunut lupaus poistettiin Pelit-portaalin alatunnisteesta.
+
 ## [0.16.1] – 2026-07-25
 
 ### Korjattu
