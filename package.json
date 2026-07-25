@@ -1,7 +1,7 @@
 {
   "name": "superjatsi",
   "private": true,
-  "version": "0.16.0",
+  "version": "0.16.1",
   "type": "module",
   "description": "Web-pohjainen maxi-jatsi (Superjatsi) paikalliseen moninpeliin",
   "scripts": {

@@ -3,6 +3,18 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.16.1] – 2026-07-25
+
+### Korjattu
+- Ajatusviivapassi: `index.html`-metakuvauksen ja `manifest.webmanifest`in `name`-kentän
+  ajatusviiva vaihdettu välipisteeksi. Manifestin nimi näkyy PWA-asennuksessa ja
+  kotivalikossa, joten se on käyttäjälle näkyvää tekstiä siinä missä UI-stringitkin.
+  `src/ui/strings.ts` oli jo puhdas 12.7.2026 korjauksen jäljiltä.
+
+### Tiedossa
+- Metakuvaus ja manifestin `description` lupaavat yhä pass-and-play-moninpeliä, vaikka
+  0.16.0 teki pelistä yksinpelin. Sanamuoto odottaa päätöstä (`Kaanon/TYOJONO.md`).
+
 ## [0.16.0] – 2026-07-16
 
 ### Muutettu
