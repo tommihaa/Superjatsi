@@ -5,7 +5,7 @@ Puhdas, kirjastoton toteutus: **Vite + TypeScript + Web Components**. Ei Reactia
 raskaita riippuvuuksia, ei tilejä eikä tietokantaa.
 
 - **Pelaa:** https://tommi-superjatsi.vercel.app
-- **Repo:** https://github.com/tommihaa/Superjatsi (yksityinen)
+- **Repo:** https://github.com/tommihaa/Superjatsi (julkinen)
 - **Muutosloki:** [CHANGELOG.md](CHANGELOG.md) · **Tulossa:** [TODO.md](TODO.md) · **Säännöt:** [SUPERJATSI.md](SUPERJATSI.md)
 
 ## Idea
