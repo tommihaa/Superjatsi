@@ -86,7 +86,6 @@
       ["celebrationTop", "TOP-heitto", "tähtimyrskyn fanfaari"],
       ["superjatsi", "Superjatsi kirjattu", "6 samaa, oma signature"],
       ["bonus", "Yläbonus varmistui", "kellomainen kilahdus"],
-      ["handoff", "Vuoronvaihto", "huomiomerkkiääni (ding-dong)"],
       ["win", "Voitto", "loppufanfaari"],
       ["record", "Uusi ennätys", "nouseva helähdys"],
     ];
@@ -103,8 +102,6 @@
         () => { sfx.roll(); setTimeout(() => sfx.celebrationTop(), 300); }],
       ["Kirjaus → voitto → ennätys", "pelin päätösketju: 500 ms + 1500 ms",
         () => { sfx.confirm(); setTimeout(() => sfx.win(), 500); setTimeout(() => sfx.record(), 1500); }],
-      ["Kirjaus → vuoronvaihto", "monipelin vuoronvaihto 400 ms kuittauksen jälkeen",
-        () => { sfx.confirm(); setTimeout(() => sfx.handoff(), 400); }],
     ];
     const cGrid = document.getElementById("combos");
     for (const [name, desc, run] of combos) {

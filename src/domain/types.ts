@@ -62,7 +62,7 @@ export interface PendingCommit {
   rowId: RowId;
 }
 
-/** Viimeisin vahvistettu kirjaus (vuoronvaihtoruudun kuittausta varten).
+/** Viimeisin vahvistettu kirjaus (kirjausäänen valintaa varten).
  *  Transientti: ei persistoida — kuittaus näytetään vain heti vahvistuksen jälkeen. */
 export interface LastMove {
   player: string;

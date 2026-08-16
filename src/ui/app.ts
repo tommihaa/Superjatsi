@@ -319,8 +319,8 @@ export class App extends HTMLElement {
     if (becamePending) this.querySelector<HTMLButtonElement>("button.confirm")?.focus();
   }
 
-  /** Vuoronvaihtoruutu: kuittaus edellisestä kirjauksesta + "Anna laite pelaajalle X".
-   *  Ei sulkeudu taustaa klikkaamalla — tarkoitus on estää vahinkoklikkaukset. */
+  /** Loppunäyttö: tulos, ennätyslista ja jatkonapit. Ei sulkeudu taustaa
+   *  klikkaamalla — tarkoitus on estää vahinkoklikkaukset. */
   private gameOverOverlay(view: GameView): HTMLElement {
     // Yksinpeli: ei voittajaa vaan tulos.
     const msg = T.soloResult(view.players[0].total);

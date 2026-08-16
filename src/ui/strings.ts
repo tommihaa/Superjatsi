@@ -54,7 +54,7 @@ export const T = {
         "0 p:n kirjaus uhraa rivin. Jos mikään kirjaus ei ole sallittu, avoimet ruudut saa " +
         "aina polttaa.",
     },
-    { label: "Loppusumma", text: "sarakkeiden summa. Suurin voittaa." },
+    { label: "Loppusumma", text: "kaikkien viiden sarakkeen summa, eli pelin tulos." },
   ] as readonly { label: string; text: string }[],
   glossaryTitle: "Sanasto",
   glossaryHint: "Napauta katkoviivalla merkittyä sanaa, niin selitys avautuu tekstin alle.",

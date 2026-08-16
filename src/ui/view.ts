@@ -64,10 +64,7 @@ export interface GameView {
   hasPending: boolean;
   dice: DiceView[];
   isOver: boolean;
-  winners: string[];
   board: BoardView;
-  /** Viimeisin vahvistettu kirjaus vuoronvaihdon kuittausta varten. */
-  lastMove: LastMoveView | null;
   /** Juhlaporras heiton jälkeen: "top" = tähtisade + hehku (harvinaiset huippukombot),
    *  "great" = pelkkä hehku. Rajat kalibroitu simulaatiolla (ks. CHANGELOG 0.6.0). */
   celebration: "top" | "great" | null;
@@ -78,14 +75,6 @@ export interface GameView {
 export interface CellRef {
   columnId: ColumnId;
   rowId: RowId;
-}
-
-export interface LastMoveView {
-  player: string;
-  rowLabel: string;
-  columnId: ColumnId;
-  /** Kirjattu arvo; 0 = poltto. */
-  score: number;
 }
 
 // Juhlaportaat kalibroitu simulaatiolla 4.7.2026 (300 yksinpeliä, ~74 000 heittoa):
@@ -211,7 +200,6 @@ export function buildView(game: GameState): GameView {
     hasPending: game.hasPending(),
     dice: game.dice.values.map((value, i) => ({ value, held: game.dice.held[i] })),
     isOver: game.isOver(),
-    winners: game.winners().map((p) => p.name),
     board: {
       columns: COLUMN_IDS,
       rows,
@@ -221,16 +209,6 @@ export function buildView(game: GameState): GameView {
       bonusThreshold: card.bonusThreshold,
       bonusValue: card.bonusValue,
     },
-    lastMove: game.lastMove
-      ? {
-          player: game.lastMove.player,
-          // Rivimääritykset ovat samat kaikilla pelaajilla → nykyisen kortin
-          // rivilista kelpaa myös edellisen pelaajan kirjauksen selitteeksi.
-          rowLabel: card.rows.find((r) => r.id === game.lastMove!.rowId)?.label ?? game.lastMove.rowId,
-          columnId: game.lastMove.columnId,
-          score: game.lastMove.score,
-        }
-      : null,
     celebration,
     celebrationCells,
   };

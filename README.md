@@ -20,7 +20,7 @@ Pelin ydin on **matriisitulokortti**, jossa jokaisella sarakkeella on oma rajoit
 | ALAS | pakko täyttää ylhäältä alas |
 | YLÖS | pakko täyttää alhaalta ylös |
 
-Loppusumma = sarakkeiden summa, suurin voittaa. Tarkat säännöt: [SUPERJATSI.md](SUPERJATSI.md).
+Loppusumma = sarakkeiden summa, eli pelin tulos. Tarkat säännöt: [SUPERJATSI.md](SUPERJATSI.md).
 
 ## Ominaisuudet
 

@@ -18,7 +18,18 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - **Sanasto-listanäkymä** sääntöikkunan lopussa, kategorioittain ryhmiteltynä. Lista on
   suljetun `details`-lohkon takana, jotta säännöt mahtuvat paneeliin ilman rullausta.
 
+### Poistettu
+- **Pass-and-play-ajan jäänteet.** 0.16.0 poisti vuoronvaihdon käyttöliittymästä, mutta osa
+  sen jäljistä jäi: vuoronvaihdon huomioääni `sfx.handoff()` ilman yhtäkään kutsujaa (ja sen
+  rivit `efektit.html`-kehitystyökalusta), vuoronvaihtoruudun ja monen pelaajan
+  tulostaulukon CSS-säännöt ilman vastaavaa merkintää, sekä näkymämallin kentät `winners` ja
+  `lastMove` ilman lukijaa. Domain pysyy N-pelaajakykyisenä verkkomoninpeliä varten, eli
+  `GameState.winners()` ja `GameState.lastMove` ovat ennallaan; `lastMove` on yhä käytössä
+  kirjausäänen valinnassa, ja sen selite kertoo nyt sen eikä vuoronvaihtoa.
+
 ### Muutettu
+- **Sääntöteksti ja README eivät enää lupaa voittajaa.** "Loppusumma = sarakkeiden summa,
+  suurin voittaa" oli tosi vain monen pelaajan pelissä; nyt loppusumma on pelin tulos.
 - Sääntötekstiin uusi Kombot-rivi, joka luettelee alaosan neljätoista kategoriaa. Muu
   sääntöteksti on sisällöltään ennallaan; siirto kovakoodatusta HTML-templaatista dataksi
   oli muodon muutos. Poikkeus: "täytetään ylhäältä alas" on nyt "ylhäältä alaspäin", koska

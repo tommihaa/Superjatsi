@@ -257,17 +257,6 @@ export const sfx = {
     tone(1760, { at: 0.12, dur: 0.3, gain: 0.04 });
   },
 
-  /** Vuoronvaihto: huomiomerkkiääni ("ding-dong") pelaajalle joka ei katso ruutua. */
-  handoff(): void {
-    if (theme === "torvi-kannel") {
-      kantele(660, { dur: 0.5, gain: 0.13 });
-      kantele(523, { at: 0.24, dur: 0.6, gain: 0.13 });
-      return;
-    }
-    tone(660, { dur: 0.26, gain: 0.08 });
-    tone(523, { at: 0.24, dur: 0.32, gain: 0.08 });
-  },
-
   /** Pelin päätös: torviloppufanfaari ("ta-ta-ta-taa"). */
   win(): void {
     [392, 523, 659, 784].forEach((f, i) => horn(f, { at: i * 0.14, dur: 0.26 }));
