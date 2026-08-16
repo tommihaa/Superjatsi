@@ -11,6 +11,8 @@ import { SetupPrefs, SoundPrefs, type SoundTheme } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
+import { findTerm } from "./glossary";
+import { glossaryListHtml, rulesListHtml, termNoteHtml } from "./glossary-view";
 import { buildView, type GameView } from "./view";
 import { glowCells, starStorm } from "./effects";
 import { setSfxEnabled, setTheme, sfx } from "./sfx";
@@ -355,18 +357,29 @@ export class App extends HTMLElement {
     if (kind === "scores") return this.highscoreOverlay();
     if (kind === "settings") return this.settingsOverlay();
     if (kind === "about") return this.aboutOverlay();
-    const body = `<h2>${T.rules}</h2>
-           <ul>
-             <li><b>Sarakkeet:</b> I = 1 heitto, II = ≤2, III = ≤3 (vapaa rivijärjestys).
-                 ALAS täytetään ylhäältä alas, YLÖS alhaalta ylös (↓/↑ näyttää seuraavan rivin).</li>
-             <li><b>Heitot:</b> 3 per vuoro, nopat saa lukita klikkaamalla.</li>
-             <li><b>Yläbonus:</b> yläosa ylittää kynnyksen 63 (5 noppaa) → +50, tai
-                 84 (6 noppaa) → +100.</li>
-             <li><b>Polttaminen:</b> 0 p:n kirjaus uhraa rivin. Jos mikään kirjaus ei ole
-                 sallittu, avoimet ruudut saa aina polttaa.</li>
-             <li><b>Loppusumma</b> = sarakkeiden summa. Suurin voittaa.</li>
-           </ul>`;
-    return this.overlayEl(`${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`, true);
+    const body =
+      `<h2>${T.rules}</h2>` +
+      rulesListHtml(T.rulesLines, T.terms) +
+      glossaryListHtml(T.terms, T.glossaryTitle, T.glossaryHint);
+    const ov = this.overlayEl(
+      `${body}<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`,
+      true,
+    );
+    // Termin napautus avaa selitteen sen rivin alle; toinen termi korvaa avoimen
+    // (speksin UX-konventio, Kaanon/TERMIMODUULI.md).
+    ov.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement | null)?.closest<HTMLElement>("button.term");
+      if (!btn) return;
+      const wasOpen = btn.classList.contains("open");
+      ov.querySelectorAll(".term-note").forEach((n) => n.remove());
+      ov.querySelectorAll("button.term.open").forEach((b) => b.classList.remove("open"));
+      if (wasOpen) return;
+      const entry = findTerm(btn.dataset.term ?? "", T.terms);
+      if (!entry) return;
+      btn.classList.add("open");
+      btn.closest("li")?.insertAdjacentHTML("beforeend", termNoteHtml(entry));
+    });
+    return ov;
   }
 
   /** Tietoja: pelin esittely + palaute-/Ko-fi-linkit + PWA-asennusohje + versioleima.

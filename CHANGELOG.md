@@ -3,6 +3,28 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.17.0] – 2026-08-16
+
+### Lisätty
+- **Termimoduuli sääntöikkunaan** (`Kaanon/TERMIMODUULI.md`, TERM_SCHEMA_VERSION 1).
+  Superjatsi on kolmas peli jossa moduuli on, Jaon ja Itun rinnalla. Neljä osaa:
+  moottori `src/ui/glossary.ts` (puhdas, ei DOM-viittauksia), sääntöteksti dataksi
+  `strings.ts`:n `rulesLines`-taulukkoon, renderöijä `src/ui/glossary-view.ts`
+  (vanilla-DOM, HTML-merkkijonoina kuten muut overlayt) ja 23 testiä.
+- **24 termiä kolmessa kategoriassa** (Tulokortti, Vuoro, Kombot). Selitteet on todennettu
+  käsin `SUPERJATSI.md`:tä vasten, eli niitä ei ole johdettu koodista. Termi näkyy
+  säännöissä katkoviiva-alleviivattuna, napautus avaa selitteen rivin alle, ja toinen
+  termi korvaa avoimen (jaettu UX-konventio sisarpelien kanssa).
+- **Sanasto-listanäkymä** sääntöikkunan lopussa, kategorioittain ryhmiteltynä. Lista on
+  suljetun `details`-lohkon takana, jotta säännöt mahtuvat paneeliin ilman rullausta.
+
+### Muutettu
+- Sääntötekstiin uusi Kombot-rivi, joka luettelee alaosan neljätoista kategoriaa. Muu
+  sääntöteksti on sisällöltään ennallaan; siirto kovakoodatusta HTML-templaatista dataksi
+  oli muodon muutos. Poikkeus: "täytetään ylhäältä alas" on nyt "ylhäältä alaspäin", koska
+  moottori on tarkoituksella case-insensitive ja suuntasana olisi korostunut ALAS-sarakkeen
+  nimenä.
+
 ## [0.16.2] – 2026-07-26
 
 ### Korjattu

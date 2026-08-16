@@ -563,6 +563,65 @@ sj-scorecard {
   text-align: center;
 }
 
+/* ---------- Termimoduuli: napautettavat termit + sanasto ----------
+   Korostus on katkoviiva-alleviivaus (jaettu UX-konventio, Kaanon/TERMIMODUULI.md).
+   Väri on --accent eikä --gold, koska kulta on varattu lukitus-/pending-tilalle. */
+.rules-list {
+  line-height: 1.6;
+}
+button.term {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--text);
+  text-decoration: underline dashed var(--accent) 1px;
+  text-underline-offset: 3px;
+}
+button.term:hover,
+button.term.open {
+  color: var(--accent);
+}
+.term-note {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0.5rem 0 0.2rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: 0.94rem;
+}
+.term-example {
+  color: var(--text-dim);
+}
+.gloss-details {
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 0.7rem;
+}
+.gloss-details > summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.gloss-hint {
+  color: var(--text-dim);
+  margin: 0 0 0.6rem;
+}
+.glossary {
+  display: grid;
+  gap: 0.9rem;
+}
+.gloss-term {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--border-soft);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
 /* ---------- Tietoja-overlay + versioleima ---------- */
 .overlay .panel h3 {
   color: var(--gold);

@@ -1,6 +1,8 @@
 // Kaikki UI-tekstit keskitetysti. i18n lisätään myöhemmin korvaamalla tämä
 // kieliriippuvaisella haulla; komponentit eivät sisällä kovakoodattuja merkkijonoja.
 
+import type { TermEntry } from "./glossary";
+
 export const T = {
   title: "Superjatsi",
   tagline: "Noppapeli yhdelle pelaajalle",
@@ -20,6 +22,222 @@ export const T = {
   about: "Tietoja",
   close: "Sulje",
   newGameConfirm: "Aloitetaanko uusi peli? Kesken oleva peli menetetään.",
+
+  // Säännöt: teksti on dataa eikä HTML-templaattia, jotta termimoduuli voi
+  // korostaa termit siitä (Kaanon/TERMIMODUULI.md). Sisältö on sama kuin
+  // ennen porttausta, ja kombot-rivi on ainoa lisäys.
+  rulesLines: [
+    {
+      label: "Sarakkeet",
+      text:
+        "I = 1 heitto, II = enintään 2, III = enintään 3 (vapaa rivijärjestys). " +
+        // "alas" ja "ylös" ovat tässä suuntasanoja, ja moottori on tarkoituksella
+        // case-insensitive, joten ne korostuisivat sarakkeiden niminä. Siksi
+        // suuntasanat ovat muodossa "alaspäin"/"ylöspäin" eivätkä osu kuvioihin.
+        "ALAS täytetään ylhäältä alaspäin, YLÖS alhaalta ylöspäin (↓/↑ näyttää seuraavan rivin).",
+    },
+    { label: "Heitot", text: "3 per vuoro, nopat saa lukita klikkaamalla." },
+    {
+      label: "Yläbonus",
+      text: "yläosa ylittää kynnyksen 63 (5 noppaa) → +50, tai 84 (6 noppaa) → +100.",
+    },
+    {
+      label: "Kombot",
+      text:
+        "alaosan rivit ovat Pari, Kaksi paria, Kolme paria, Kolme samaa, Neljä samaa, " +
+        "Täyskäsi, Pieni suora, Suuri suora, Täyssuora, Huvila, Torni, Sattuma, Jatsi ja " +
+        "Superjatsi. Viisi niistä vaatii kuusi noppaa.",
+    },
+    {
+      label: "Polttaminen",
+      text:
+        "0 p:n kirjaus uhraa rivin. Jos mikään kirjaus ei ole sallittu, avoimet ruudut saa " +
+        "aina polttaa.",
+    },
+    { label: "Loppusumma", text: "sarakkeiden summa. Suurin voittaa." },
+  ] as readonly { label: string; text: string }[],
+  glossaryTitle: "Sanasto",
+  glossaryHint: "Napauta katkoviivalla merkittyä sanaa, niin selitys avautuu tekstin alle.",
+  // Termistö: selitteet on todennettu käsin SUPERJATSI.md:tä vasten (K5).
+  // Kuuden nopan ehto sanotaan selitteessä eikä erillisenä kenttänä.
+  terms: [
+    {
+      term: "Sarake",
+      selitys:
+        "Tulokortissa on viisi pelisaraketta: I, II, III, ALAS ja YLÖS. Jokainen sarake on " +
+        "oma itsenäinen pelinsä omalla yläbonuksellaan.",
+      match: ["sarak*"],
+      kategoria: "Tulokortti",
+    },
+    {
+      term: "ALAS",
+      selitys: "Sarake, joka on pakko täyttää ylhäältä alas järjestyksessä. Kolme heittoa käytössä.",
+      match: ["ALAS"],
+      kategoria: "Tulokortti",
+      emoji: "↓",
+    },
+    {
+      term: "YLÖS",
+      selitys: "Sarake, joka on pakko täyttää alhaalta ylös järjestyksessä. Kolme heittoa käytössä.",
+      match: ["YLÖS"],
+      kategoria: "Tulokortti",
+      emoji: "↑",
+    },
+    {
+      term: "Yläosa",
+      selitys:
+        "Rivit Ykköset, Kakkoset, Kolmoset, Neloset, Vitoset ja Kutoset. Pisteet ovat " +
+        "täsmäävien noppien summa.",
+      match: ["yläosa*"],
+      kategoria: "Tulokortti",
+      esimerkki: "Kolme vitosta Vitoset-riville = 15 p.",
+    },
+    {
+      term: "Yläbonus",
+      selitys:
+        "Kun sarakkeen yläosa yltää kynnykseen, sarake saa lisäpisteet: 63 p viidellä " +
+        "nopalla → +50 p, 84 p kuudella nopalla → +100 p. Kynnys vastaa keskimäärin kolmea " +
+        "(5 noppaa) tai neljää (6 noppaa) samaa per rivi.",
+      match: ["yläbonus*", "bonuksen", "bonus"],
+      kategoria: "Tulokortti",
+    },
+    {
+      term: "Loppusumma",
+      selitys: "Sarakkeiden I, II, III, ALAS ja YLÖS yhteissumma.",
+      match: ["loppusumma*", "lopputulos"],
+      kategoria: "Tulokortti",
+    },
+    {
+      term: "Heitto",
+      selitys:
+        "Vuorolla on kolme heittoa. Heittojen välissä nopat saa lukita ja vapauttaa vapaasti. " +
+        "Sarake I hyväksyy kirjauksen vain ensimmäisen heiton jälkeen, sarake II kahden.",
+      match: ["heit*"],
+      kategoria: "Vuoro",
+    },
+    {
+      term: "Lukitseminen",
+      selitys:
+        "Nopan voi lukita klikkaamalla, jolloin se ei osallistu seuraavaan heittoon. " +
+        "Lukituksen saa purkaa saman vuoron aikana milloin tahansa.",
+      match: ["lukit*"],
+      kategoria: "Vuoro",
+    },
+    {
+      term: "Kirjaus",
+      selitys:
+        "Tuloksen merkitseminen valittuun ruutuun. Kirjaus päättää vuoron, ja se vahvistetaan " +
+        "erikseen: Vahvista tai Peru.",
+      match: ["kirjau*", "kirjat*", "kirjaa"],
+      kategoria: "Vuoro",
+    },
+    {
+      term: "Polttaminen",
+      selitys:
+        "Avoimen rivin saa merkitä nollaksi. ALAS- ja YLÖS-sarakkeissa poltto osuu " +
+        "järjestyksen seuraavaan riviin. Jos mikään kirjaus ei ole sallittu, avoimet ruudut " +
+        "saa aina polttaa, joten peli ei voi jumittua.",
+      match: ["polt*"],
+      kategoria: "Vuoro",
+    },
+    {
+      term: "Pari",
+      selitys: "Kaksi samaa silmälukua. Pisteet ovat parin silmien summa.",
+      match: ["pari*"],
+      kategoria: "Kombot",
+      esimerkki: "5 5 → 10 p.",
+    },
+    {
+      term: "Kaksi paria",
+      selitys: "Kaksi eri paria. Pisteet ovat molempien parien silmien summa.",
+      match: ["kaksi paria"],
+      kategoria: "Kombot",
+      esimerkki: "6 6 ja 3 3 → 18 p.",
+    },
+    {
+      term: "Kolme paria",
+      selitys: "Kolme eri paria, vain kuudella nopalla. Pisteet ovat kaikkien kuuden nopan summa.",
+      match: ["kolme paria"],
+      kategoria: "Kombot",
+      esimerkki: "6 6 5 5 2 2 → 26 p.",
+    },
+    {
+      term: "Kolme samaa",
+      selitys: "Kolme samaa silmälukua. Pisteet ovat kolmikon silmien summa.",
+      match: ["kolme samaa"],
+      kategoria: "Kombot",
+      esimerkki: "4 4 4 → 12 p.",
+    },
+    {
+      term: "Neljä samaa",
+      selitys: "Neljä samaa silmälukua. Pisteet ovat nelikön silmien summa.",
+      match: ["neljä samaa"],
+      kategoria: "Kombot",
+      esimerkki: "5 5 5 5 → 20 p.",
+    },
+    {
+      term: "Täyskäsi",
+      selitys: "Kolme samaa ja pari. Pisteet ovat näiden viiden nopan summa.",
+      match: ["täyskäsi", "täyskäden", "täyskättä"],
+      kategoria: "Kombot",
+      esimerkki: "3 3 3 ja 5 5 → 19 p.",
+    },
+    {
+      term: "Pieni suora",
+      selitys: "Silmäluvut 1-2-3-4-5. Kiinteät 15 p.",
+      match: ["pieni suora", "pienen suoran"],
+      kategoria: "Kombot",
+    },
+    {
+      term: "Suuri suora",
+      selitys: "Silmäluvut 2-3-4-5-6. Kiinteät 20 p.",
+      match: ["suuri suora", "suuren suoran"],
+      kategoria: "Kombot",
+    },
+    {
+      term: "Täyssuora",
+      selitys:
+        "Silmäluvut 1-2-3-4-5-6, vain kuudella nopalla. Kiinteät 25 p, eli noppien summa 21 " +
+        "ja 4 pistettä harvinaisuusbonusta.",
+      match: ["täyssuora*"],
+      kategoria: "Kombot",
+    },
+    {
+      term: "Huvila",
+      selitys:
+        "Kaksi eri kolmikkoa, vain kuudella nopalla. Pisteet ovat kaikkien kuuden nopan summa.",
+      match: ["huvila*"],
+      kategoria: "Kombot",
+      esimerkki: "3 3 3 ja 6 6 6 → 27 p.",
+    },
+    {
+      term: "Torni",
+      selitys:
+        "Neljä samaa ja pari eri silmäluvulla, vain kuudella nopalla. Pisteet ovat kaikkien " +
+        "kuuden nopan summa.",
+      match: ["torni*"],
+      kategoria: "Kombot",
+      esimerkki: "2 2 2 2 ja 6 6 → 20 p.",
+    },
+    {
+      term: "Sattuma",
+      selitys: "Mikä tahansa käsi. Pisteet ovat kaikkien noppien summa.",
+      match: ["sattuma*"],
+      kategoria: "Kombot",
+    },
+    {
+      term: "Jatsi",
+      selitys: "Viisi samaa silmälukua. Kiinteät 50 p.",
+      match: ["jatsi", "jatsin"],
+      kategoria: "Kombot",
+    },
+    {
+      term: "Superjatsi",
+      selitys: "Kuusi samaa silmälukua, vain kuudella nopalla. Kiinteät 100 p.",
+      match: ["superjatsi", "superjatsin"],
+      kategoria: "Kombot",
+    },
+  ] as readonly TermEntry[],
 
   // Asetukset
   settings: "Asetukset",
