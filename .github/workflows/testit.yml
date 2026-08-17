@@ -1,0 +1,33 @@
+name: Testit
+
+# Sama portti kuin Jaossa ja Itussa, ja peruste on tässä mitattu ansa eikä sattunut vika.
+# Kohdan 19 mittaus 17.8.2026: tsconfigin include kattaa testikansion mutta types on pelkkä
+# vite/client, joten ensimmäinen node:-importin sisältävä testi jättää testit vihreiksi ja
+# kaataa buildin. Itussa se laukesi (7d3f26e), täällä se on yhä latentti. Vain tsc näkee sen.
+#
+# Node 24 (npm 11) on sama kuin kehityskoneella. Jaossa mitattiin 17.8.2026, että Node 22:n
+# npm 10 rakentaa samasta lukkotiedostosta eri puun ja kaataa npm ci:n, joten portin ja
+# kehityskoneen npm-versio on osa lukkotiedoston sopimusta.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: testit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npx tsc --noEmit
