@@ -2,7 +2,8 @@
 
 Web-pohjainen maxi-jatsi, yksinpeli (5/6 noppaa). Domain on N-pelaajakykyinen (1–6 pelaajaa)
 nettimoninpeliä varten, mutta 0.16.0 poisti pass-and-playn käyttöliittymästä.
-Pelin nimi on **Superjatsi**; sama nimi kantaa myös pistekategoria "Superjatsi" (6 samaa), tietoinen nimitörmäys, hyväksytty käyttäjän toimesta.
+Pelin nimi on **Superjatsi**; sama nimi kantaa myös pistekategoria "Superjatsi" (6 samaa),
+tietoinen nimitörmäys, hyväksytty käyttäjän toimesta.
 
 ## Tech ja komennot
 
