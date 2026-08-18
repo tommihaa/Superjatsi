@@ -129,7 +129,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
   (matala + korkea ankkuri, `public/sfx/*.wav`): kantele on aito 5-kielinen DIY-kantele
   (Wikimedia Commons, CC0 1.0), torvi oikea käyrätorvi (University of Iowa Electronic
   Music Studios, vapaa käyttö). Koodi valitsee kutakin nuottia varten lähimmän ankkurin
-  ja pitch-shiftaa sen — ei koko sävelalaa yhdestä näytteestä, ettei ääripäissä kuulostaisi
+  ja pitch-shiftaa sen, ei koko sävelalaa yhdestä näytteestä, ettei ääripäissä kuulostaisi
   epäluonnolliselta. Kutsupaikat (hold/release/confirm/win/jne.) koskemattomia, vain
   torvi/kantele-ääntä tuottava sisäosa vaihtui. Lähteet ja lisenssit: `public/sfx/CREDITS.md`.
 
@@ -171,14 +171,14 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 
 ### Lisätty
 - **Äänet**: kevyt SFX-moduuli (`sfx.ts`), kaikki äänet syntetisoidaan Web
-  Audiolla ajonaikaisesti — ei äänitiedostoja. Ydinsilmukka lyhyenä ja hiljaisena
+  Audiolla ajonaikaisesti, ei äänitiedostoja. Ydinsilmukka lyhyenä ja hiljaisena
   (heiton rämähdys satunnaisvariaatiolla, lukitus/vapautus eri suuntiin,
   kirjauskuittaus, peru käänteisenä), merkkihetket näyttävämpinä (tähtimyrskyn
   TOP-fanfaari ja GREAT-kimallus, Superjatsi-kirjauksen oma signature,
   yläbonuksen varmistumisen kilahdus, voittofanfaari + ennätyshelähdys,
   vuoronvaihdon huomiomerkkiääni).
   - **Poltolla oma matala laskeva sävy** (toteava, ei rankaiseva). Tietoinen
-    poikkeama visuaalisesta linjasta, jossa polttoa ei erotella värillä —
+    poikkeama visuaalisesta linjasta, jossa polttoa ei erotella värillä,
     päätetty erikseen 5.7.
   - Yksi ääni per kirjaus tärkeysjärjestyksessä: Superjatsi > bonuksen
     varmistuminen > kuittaus/poltto.
@@ -188,7 +188,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
     suodattimen läpi + lyhyt attack-ramppi) siniaaltopiippausten sijaan.
   - **Ennätysääni vasta kokeneelle pelaajalle** (Tommin linjaus 6.7): uuden
     ennätyksen helähdys soi vain kun listalle päässeellä pelaajalla on
-    vähintään 15 peliä takanaan (samassa variantissa) — muuten aloittelijan
+    vähintään 15 peliä takanaan (samassa variantissa), muuten aloittelijan
     lähes joka peli olisi "ennätys" ja ääni jankuttaisi. ★-korostus näkyy
     listalla silti aina, vain ääni on portitettu.
 - **Asetukset-overlay palasi**: ratasnappi (⚙) headerissa, sisältönä äänet
@@ -204,13 +204,13 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 ### Lisätty
 - **Keskiarvoseuranta** (esikuva: ystävän VBScript-jatsi): jokainen aloitettu
   peli lasketaan pelaajan keskiarvoon. Loppuun pelattu kirjautuu lopputuloksella,
-  kesken jätetty (Uusi peli kesken pelin) siihen asti kertyneellä summalla —
-  keskeyttäminen ei siis koskaan tuota enempää kuin loppuun pelaaminen. Top 10
+  kesken jätetty (Uusi peli kesken pelin) siihen asti kertyneellä summalla.
+  Keskeyttäminen ei siis koskaan tuota enempää kuin loppuun pelaaminen. Top 10
   mittaa huippuja, keskiarvo johdonmukaisuutta.
   - Kirjaus per pelaajan nimi + variantti (5/6 noppaa erikseen, kuten ennätykset).
   - Näkyy Ennätykset-overlayssa top 10:n alla: koko historian keskiarvo,
     pelimäärä sekä viimeisten 20 pelin liukuva keskiarvo (näytetään kun pelejä
-    on yli 20 — kertoo trendin suunnan).
+    on yli 20, kertoo trendin suunnan).
   - Vahingossa aloitettu tyhjä peli (ei yhtään kirjausta) ei kirjaudu.
   - Tyhjennysnappi tyhjentää nyt sekä ennätykset että keskiarvot (teksti
     päivitetty vastaavasti).
@@ -268,7 +268,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - **Kategorioiden hover-selitteet**: alaosan rivien nimillä (Pari, Huvila, Torni,
   suorat, ym.) on nyt hover/title-tooltip joka kertoo lyhyesti kombivaatimuksen.
 - **Maksimipisteapuri**: kirjattavissa oleva ruutu saa pienen tähtimerkinnän kun
-  ehdotuspisteet ovat kategorian teoreettinen maksimi — erityisen näkyvä suorilla,
+  ehdotuspisteet ovat kategorian teoreettinen maksimi: erityisen näkyvä suorilla,
   joissa ainoa mahdollinen pistemäärä on aina tämä maksimi.
 - **Sarakeotsikoiden selitteet**: I/II/III/ALAS/YLÖS-otsikoilla on nyt
   hover/title-tooltip joka kertoo sarakkeen heittorajan tai täyttöjärjestyksen.
@@ -291,7 +291,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
   sticky toimii ilman reunojen tuplaantumista).
 - **Nimi palautettu Täysi → Superjatsi**: brändi, otsikko, manifest ja URL
   (https://tommi-superjatsi.vercel.app) vaihdettu takaisin. Nimitörmäys pistekategorian
-  "Superjatsi" (6 samaa) kanssa hyväksytty tietoisesti — ei muutosta pelilogiikkaan.
+  "Superjatsi" (6 samaa) kanssa hyväksytty tietoisesti, ei muutosta pelilogiikkaan.
 - **Täyssuora 21 → 25** (+4 harvinaisuusbonusta): kuuden nopan täyssuora on niin
   harvinainen, että se palkitaan nyt erikseen.
 - **Yläbonus 6 nopalla 50 → 100**: kynnyksen (84) täyttyessä 6 nopan variantissa
@@ -309,10 +309,10 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 ### Korjattu
 - **Tarjottimen hyppiminen heittojen välissä**: noppa-alue ("pöytä") ja lukkorivi
   renderöidään nyt aina (vaikka tyhjänä) reservoidulla korkeudella, eivät enää
-  mountaudu/unmountaudu heiton mukaan — pelialue ei enää hyppää ensimmäisen heiton
+  mountaudu/unmountaudu heiton mukaan, pelialue ei enää hyppää ensimmäisen heiton
   tai "kaikki lukossa" -tilanteen kohdalla. Jäljelle jäänyt pienempi hyppy (pöydän
   `min-height` oli 12 px liian pieni todelliseen 2-rivin noppasisältöön nähden,
-  150→162 px) korjattu myös — Heitä uudelleen- ja Vahvista-napit pysyvät nyt
+  150→162 px) korjattu myös: Heitä uudelleen- ja Vahvista-napit pysyvät nyt
   täsmälleen samalla korkeudella heiton yli.
 - **Ennätykset eivät näkyneet aloitusnäytöllä**: `sj-header` (ja sen 🏆-nappi)
   puuttui kokonaan aloitusnäytöltä, joten ennätyksiä pääsi katsomaan vain kesken
@@ -324,7 +324,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 ### Lisätty
 - **"Lataa kuva tuloksesta"** peli päättyessä: Canvas-piirretty PNG-yhteenveto
   (pelaajat paremmuusjärjestyksessä + loppusumma), ei ulkoisia riippuvuuksia
-  (`src/ui/recap-image.ts`). Ei tallennu pysyvästi ennätyslistalle — vain
+  (`src/ui/recap-image.ts`). Ei tallennu pysyvästi ennätyslistalle, vain
   ladattavissa/jaettavissa pelin päättyessä.
 - **Kaksi uutta maxi-yhdistelmää** (vain 6 nopan Superjatsi-variantti), sijoitettu
   Täyssuoran ja Sattuman väliin (kanoninen Maxi-Yatzy-järjestys): **Huvila**
@@ -336,7 +336,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - **Poltto-erotteluväri poistettu**: 0 p:n kirjattavissa olevat solut (ml. anti-jumi-poltto)
   ovat yhä klikattavia, mutta eivät enää saa mitään korostusväriä eikä numerotekstiä
   (ei vihreää eikä vanhaa punertavaa `.cell.avail.burn`-tyyliä). Vain pisteellinen solu
-  (`score > 0`) merkitään vihreällä ja näyttää ehdotuspisteet — selkeyspäätös: yksi
+  (`score > 0`) merkitään vihreällä ja näyttää ehdotuspisteet, selkeyspäätös: yksi
   väri erottuu yksiselitteisesti "tästä saa pisteitä".
 
 ## [0.4.1] – 2026-07-02
@@ -354,7 +354,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
   (`.die.v1`–`.v6`), pipit vaaleat tummilla sävyillä ja tummat vaaleilla. Lukituksen
   kultareuna säilyy erottuvana (määrittelyjärjestys varmistettu).
 - **ALAS/YLÖS-indikaattori**: järjestyksen seuraava täytettävä rivi näkyy nuolena
-  (↓/↑) jo ennen heittoa — vuoron voi suunnitella etukäteen.
+  (↓/↑) jo ennen heittoa, vuoron voi suunnitella etukäteen.
 - **Uusi peli -varmistus**: ↺ kysyy vahvistuksen kun peli on kesken (symmetrisesti
   ennätysten tyhjennyksen kanssa). Päättyneen pelin jälkeen ei kysytä.
 - Projektin `CLAUDE.md` (arkkitehtuuri- ja työtapaohjeet agenttisessioille).
@@ -363,7 +363,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - **Poltto erottuu kirjauksesta**: 0 pisteen klikattava solu piirretään punertavana ja
   vaisumpana, pisteellinen vihreänä kuten ennen. Sääntö-overlayn poltto-kohta päivitetty.
 - **Sarakehimmennys**: sarake jonka heittoraja on ylittynyt tällä vuorolla (I 2. heiton
-  jälkeen, I+II 3:n) himmennetään otsikkoa myöten — näkee heti mitä heitto maksoi.
+  jälkeen, I+II 3:n) himmennetään otsikkoa myöten, näkee heti mitä heitto maksoi.
 - **Yksinpelin loppuruutu**: "Voittaja: X" → "Tulos: N pistettä".
 - ⚙ Asetukset-nappi piilotettu kunnes asetuksia oikeasti on (oli "tulossa"-placeholder).
 
@@ -371,7 +371,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 
 ### Korjattu
 - **Soft-lock**: peli saattoi jumittua pysyvästi, jos avoinna oli enää vain I/II-sarakkeen
-  soluja ja heittoraja ylittyi (ei kirjattavaa, ei heittoja — tila myös persistoitui).
+  soluja ja heittoraja ylittyi (ei kirjattavaa, ei heittoja, tila myös persistoitui).
   Nyt avoimet solut saa tällöin polttaa heittorajasta riippumatta; pelaajalla on aina
   vähintään yksi laillinen siirto (anti-jumi-sääntö kirjattu SUPERJATSI.md:hen).
 - **Viimeinen kirjaus ohitti Vahvista/Peru-vaiheen**: pelin viimeisen solun klikkaus
@@ -408,7 +408,7 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
   (localStorage, ei mitään verkkoon). Lista per variantti (5 ja 6 noppaa erikseen),
   merkintä = nimi + pisteet + päivä. Uudet ennätykset korostetaan ★:llä loppunäytössä.
   Headerin 🏆-nappi avaa listan kesken pelin; listan voi tyhjentää (vahvistuskysymys).
-- 9 uutta testiä (`highscores.test.ts`) — yhteensä 51.
+- 9 uutta testiä (`highscores.test.ts`): yhteensä 51.
 
 ## [0.1.0] – 2026-06-05
 

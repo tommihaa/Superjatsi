@@ -34,19 +34,19 @@ Loppusumma = sarakkeiden summa, eli pelin tulos. Tarkat säännöt: [SUPERJATSI.
 - Heitetyt nopat "sekamelskana", lukitut suorassa rivissä.
 - **localStorage**-tallennus: kesken jäänyt peli palautuu sivun latauksessa;
   pelaajien nimet ja määrä muistetaan seuraavaan peliin.
-- **Ennätykset (top 10)** per variantti — vain laitteen omaan localStorageen, ei verkkoon.
+- **Ennätykset (top 10)** per variantti: vain laitteen omaan localStorageen, ei verkkoon.
 - **Responsiivinen:** pysty = pino, vaaka (puhelin) = kaksipalstainen (ohjaimet + vierivä tulokortti).
 
 ## Arkkitehtuuri
 
-Pelitila (domain) on tiukasti irti käyttöliittymästä — yksisuuntainen datavirta.
+Pelitila (domain) on tiukasti irti käyttöliittymästä, yksisuuntainen datavirta.
 
-- `src/domain/` — puhdas pelilogiikka, ei DOMia: `dice`, `scoring`, `columns`
+- `src/domain/`: puhdas pelilogiikka, ei DOMia: `dice`, `scoring`, `columns`
   (sarakerajoitteet strategiakuviona), `scorecard`, `game` (GameState), `storage` (localStorage),
   `highscores` (ennätyslista).
-- `src/ui/` — tyhmät Web Componentit, jotka lukevat domainista johdetun näkymämallin
+- `src/ui/`: tyhmät Web Componentit, jotka lukevat domainista johdetun näkymämallin
   (`view.ts` → GameView) ja emittoivat eventtejä ylös. Tekstit keskitetty `strings.ts`:ään.
-- `test/` — Vitest-testit (domain).
+- `test/`: Vitest-testit (domain).
 
 ## Kehitys
 

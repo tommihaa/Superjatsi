@@ -1,4 +1,4 @@
-# Superjatsi — säännöt (sopimus)
+# Superjatsi: säännöt (sopimus)
 
 Tämä on pelin **sopimusdokumentti** (Anti-slop: sopimus ennen toteutusta). Domain-koodi
 toteuttaa nämä säännöt; jos sääntö muuttuu, se muutetaan ensin tähän ja vahvistetaan.
@@ -36,7 +36,7 @@ kun pelaaja kirjaa tuloksen johonkin avoimeen soluun (tai polttaa rivin).
 ## Rivit (kategoriat)
 
 ### Yläosa
-Ykköset, Kakkoset, Kolmoset, Neloset, Vitoset, Kutoset — pisteet = täsmäävien noppien summa.
+Ykköset, Kakkoset, Kolmoset, Neloset, Vitoset, Kutoset: pisteet = täsmäävien noppien summa.
 
 **Yläbonus (per sarake):** kynnys = `silmäluku × k` summattuna (k = 3 viidellä nopalla → 63;
 k = 4 kuudella nopalla → 84). Kynnyksen täyttyessä **+50** (5 noppaa) tai **+100**
@@ -70,7 +70,7 @@ poltto kohdistuu järjestyksen seuraavaan riviin ja vie järjestystä eteenpäin
 
 **Anti-jumi-sääntö:** jos heittojen jälkeen mikään kirjaus ei ole sallittu (jäljellä on
 vain I/II-soluja ja sarakkeen heittoraja on ylittynyt), avoimet solut saa silti polttaa.
-Pelaajalla on siis aina vähintään yksi laillinen siirto — peli ei voi jumittua.
+Pelaajalla on siis aina vähintään yksi laillinen siirto, peli ei voi jumittua.
 
 ## Pelin kulku
 

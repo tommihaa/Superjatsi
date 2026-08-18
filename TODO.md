@@ -8,7 +8,7 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] Asetukset-overlayn laajennus: noppateema (ääniteema toteutettu 0.10.0:ssa).
 
 ## Tekninen
-- [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään — kielituki myöhemmin.
+- [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään, kielituki myöhemmin.
 - [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
@@ -27,7 +27,7 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
       ratasnappeineen (äänet päälle/pois, persistoituu).
 - [x] 0.8.0: keskiarvoseuranta (per nimi + variantti; keskeytys kirjautuu
       kertyneellä summalla; koko historia + viimeisten 20 liukuva keskiarvo
-      rinnakkain; kaikki pelit ja pelaajat mukaan — designpäätökset 5.7).
+      rinnakkain; kaikki pelit ja pelaajat mukaan, designpäätökset 5.7).
 - [x] 0.7.0: loppunäytön tulostaulukko kaikille pelaajille (voittaja korostettuna,
       tasapisteet jakavat sijan) ja näppäimistösaavutettavuus (solut role="button"
       + tabindex + Enter/Space, focus-visible-tyylit, fokus Vahvista-nappiin
