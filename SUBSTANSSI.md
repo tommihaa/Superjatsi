@@ -59,13 +59,17 @@ erässä 6 perusteluna sille miksi nimeksi tuli Superjatsi eikä maratonjatsi, j
 kokoavaksi lauseeksi kolme erää myöhemmin ilman että sitä kysyttiin uudelleen. Pelin nimi ja sen
 teesi lepäävät siis samalla sanalla.
 
-**Avoin päätös 21.8.2026 (erä 9): teesi tulee myös GitHubin repokuvaukseksi, mutta muoto on
-auki.** Tommi: *tarkempi muoto pitää miettiä, mutta haluan sen myös githubiin kuvaukseksi.*
-Nykyinen kuvaus on `Noppapeli (jatsi/yatzy), 5 tai 6 noppaa`, eli se nimeää välineen ja
-variantit muttei sitä kenelle peli on. Kuvausta ei ole muutettu, koska muoto on päättämättä ja
-koska repon kuvaus on ulospäin näkyvää tekstiä. Kun muoto on valittu, se kirjataan tähän ja
-`README.md` tarkistetaan samalla, jotta kolme pintaa (repokuvaus, README, tämä teesi) eivät
-sano kolmea eri asiaa.
+**Teesi vietiin GitHubin repokuvaukseksi 21.8.2026 (erät 9 ja 10).** Tommi erässä 9: *tarkempi
+muoto pitää miettiä, mutta haluan sen myös githubiin kuvaukseksi*, ja erässä 10 hän valitsi
+kolmesta ehdotetusta muodosta kolmannen. Kuvaus on nyt:
+
+> `Noppapeli jatsin moniottelijalle, 5 tai 6 noppaa`
+
+Aiempi kuvaus oli `Noppapeli (jatsi/yatzy), 5 tai 6 noppaa`, eli se nimesi välineen ja variantit
+muttei sitä kenelle peli on. Valittu muoto säilyttää hakusanan *noppapeli* ja lisää teesin
+ytimen; se on typistys Tommin lauseesta eikä uusi väite. `README.md`:n oma kuvaus (*Web-pohjainen
+maxi-jatsi (5 tai 6 noppaa) yksinpelinä*) jätettiin ennalleen, koska se kuvaa toteutusta eikä
+kohdeyleisöä, eivätkä ne ole ristiriidassa.
 
 ---
 
@@ -1023,3 +1027,45 @@ kapealla näytöllä. Kohdan 29 mukaan kuutta noppaa kuitenkin pelataan enemmän
 oletus ei osu kapean näytön haaraan. Oletus koskee siis sitä laitetta jolla peliä pelataan
 vähiten, eikä se ole ristiriita vaan sen vahvistus että kapea näyttö on tälle pelille
 poikkeustapaus.
+
+## 42. Tuloskuvassa ensisijaista on pistemäärän koostumus, ei ennätys
+
+Tommi 21.8.2026 (erä 10), kysyttäessä tuliko sovelluksen *Lataa kuva tuloksesta* siitä että
+projekti itse alkoi kuvasta hänen ennätyksestään:
+
+> *ennätys oli toissijainen, sen koostumus eri luvuista ensisijainen*
+
+**Seuraus, ja se kaataa kirjoittajan oletuksen ennen kuin se ehti kirjaukseksi.** Kysymys oletti
+että kuvatoiminto periytyy aloitussyötteestä (kohta 23), ja vastaus siirtää painopisteen
+kokonaan: kuvassa kiinnostava asia ei ole saavutettu luku vaan se, **mistä luku koostuu**.
+Viiden sarakkeen ja viidentoista rivin tulokortti on kuva jota ei voi tiivistää yhdeksi
+luvuksi, ja juuri siksi siitä otetaan kuva.
+
+**Seuraus:** tämä on sama asia jonka teesi sanoo (*moniottelijalle*) ja jonka kohta 26 antaa
+nimen perusteeksi (paljon kenttiä ja strategioita). Kolme eri kysymystä kolmessa eri erässä ovat
+tuottaneet saman vastauksen eri sanoin, eikä yhdessäkään niistä kysytty moniottelusta.
+Toistuvuus on painavampi näyttö kuin yksikään niistä erikseen.
+
+**Seuraus:** aloitussyötteen ja kuvatoiminnon yhteys jää siis kirjaamatta yhteytenä. Se että
+projekti alkoi kuvasta (kohta 23) ja että projektissa on kuvatoiminto, ovat molemmat totta, ja
+sama syy voi olla molempien takana (tulokortti on katsottava kokonaisuutena), mutta toinen ei
+periydy toisesta.
+
+## 43. Oma ennätys kuuden nopan varianttina on 1550 ja 1600 välillä
+
+Tommi 21.8.2026 (erä 10), kysyttäessä hänen omaa ennätystään:
+
+> *se oli välillä 1550-1600*
+
+Luku on muistinvarainen haarukka eikä tarkka lukema, ja se koskee kuuden nopan varianttia eli
+sitä jota hän pelaa enemmän (kohta 29).
+
+**Seuraus:** vertailu esikuvaan ei ole suoraan mahdollinen, ja syy on kohdassa 7. Esikuvan
+kuvassa loppusumma on 1102 viidellä nopalla ja pisteytyksellä jossa yläosan koko panos on 50
+plus poikkeama; Superjatsissa yläosa tuottaa noppien summan ja kuudella nopalla kategorioita on
+enemmän. Luvut ovat siis eri asteikolla, eikä suurempi luku tarkoita parempaa suoritusta.
+
+**Seuraus:** ennätys elää vain laitteen omassa localStoragessa, joten se on olemassa yhdessä
+paikassa ilman varmuuskopiota. Kohta 38 nimeää globaalit ennätykset maksullisen version osaksi,
+ja tämä on sen konkreettinen puuttuva puoli: kokoelman ainoa kirjattu ennätystulos on nyt
+tässä dokumentissa haarukkana, koska sitä ei ole missään muualla luettavassa muodossa.
