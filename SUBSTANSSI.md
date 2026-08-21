@@ -1069,3 +1069,89 @@ enemmän. Luvut ovat siis eri asteikolla, eikä suurempi luku tarkoita parempaa 
 paikassa ilman varmuuskopiota. Kohta 38 nimeää globaalit ennätykset maksullisen version osaksi,
 ja tämä on sen konkreettinen puuttuva puoli: kokoelman ainoa kirjattu ennätystulos on nyt
 tässä dokumentissa haarukkana, koska sitä ei ole missään muualla luettavassa muodossa.
+
+## 44. Matriisimuoto tuli bridge-piireistä, ja se on nyt neljättä sukupolvea
+
+Tommi 21.8.2026 (erä 11), oma-aloitteisesti kysymysten jälkeen:
+
+> *vielä esikuvasta, siis etuyatzy:n tekijä oli oppinut bridge-piireistä tämän pelimuodon, joku
+> oli paperille tulostellut matriisia*
+
+**Seuraus, ja se on koko dokumentin pisin ketju:** viiden sarakkeen matriisi ei ole työkaverin
+keksintö vaan hänenkin lainaamansa muoto, ja lähde on bridge-piirit. Ennen ohjelmaa se eli
+paperilla, jonne joku oli tulostanut matriisin. Sukupolvia on siis vähintään neljä:
+
+| Sukupolvi | Muoto | Kirjattu |
+|---|---|---|
+| 1 | Bridge-piireissä kiertänyt pelimuoto | tämä kohta |
+| 2 | Paperille tulostettu matriisi | tämä kohta |
+| 3 | Työkaverin ohjelma, taulukko 2002 ja kuvallinen versio myöhemmin | kohdat 6, 8, 31 |
+| 4 | Superjatsi 2026 | koko dokumentti |
+
+**Seuraus:** kohta 2 (*esikuvana työkaverin tekemä htm*) pitää edelleen paikkansa mutta ei ole
+enää alkupää. Superjatsi ei siis ole uudelleentoteutus yhden ihmisen ohjelmasta vaan neljäs
+kirjattu muoto pelitavalle jota ei ole omistanut kukaan. Se on sama kuvio kuin Jakon
+korttipeleissä, joissa peli siirtyy pöydästä pöytään ilman tekijää, mutta tässä ketju kulkee
+kortti- ja noppapelien välillä: bridge on korttipeli, ja sen piireissä levisi noppapelin muoto.
+
+**Seuraus:** paperitulostus selittää miksi muoto on juuri tällainen. Viisi saraketta ja
+viisitoista riviä on taulukko joka on tehty käsin täytettäväksi, ja rajoitteet (I, II, III,
+ALAS, YLÖS) ovat sääntöjä jotka pelaaja pitää itse mielessään ilman että mikään valvoo niitä.
+Superjatsin `availableMoves()` valvoo nyt sitä mitä paperi ei voinut valvoa, samalla tavalla
+kuin Itun DAWG tekee sen mitä pöydän sanakirja ei tehnyt (`SanaMix/SUBSTANSSI.md` kohta 24).
+
+**Avoin:** miten muoto kulki bridge-piireistä työkaverille, ja tiedetäänkö kuka matriisin
+paperille tulosti. Ei kysytty.
+
+## 45. Esikuvaa pelattiin satoja pelejä
+
+Tommi 21.8.2026 (erä 11), kysyttäessä kuinka paljon ja kuinka pitkään esikuvaa tuli pelattua
+työpaikalla:
+
+> *satoja pelejä*
+
+**Seuraus:** tämä on suurin kirjattu pelimäärä missään kokoelman substanssidokumentissa, ja se
+koskee esikuvaa eikä omaa peliä. Se selittää miksi tulokortin muoto oli muistissa niin tarkasti
+että kohdan 6 vertailu täsmää sarakenimiä myöten: kyse ei ole nähdystä ohjelmasta vaan
+satoja kertoja pelatusta.
+
+**Seuraus:** kohdan 15 Lovable-yritys asettuu tätä vasten ymmärrettäväksi. Peli jota on pelattu
+satoja kertoja on luonteva ensimmäinen kohde, koska tekijä tuntee sen ulkoa eikä sääntöjä
+tarvitse selvittää mistään.
+
+## 46. Peli ei ole jäänyt hiertämään, koska korjaustarpeet toteutettiin ripeästi
+
+Tommi 21.8.2026 (erä 11), kysyttäessä onko Superjatsissa jotain joka on jäänyt hiertämään:
+
+> *ei, korjaustarpeita nousi esiin mutta ne myös toteutettiin ripeästi*
+
+**Seuraus:** kohta 37 (peli tuntui valmiilta) saa tästä mekanismin. Valmiuden tuntu ei syntynyt
+siitä ettei vikoja löytynyt vaan siitä että löydetyt korjattiin ennen kuin ne ehtivät jäädä
+vaivaamaan. `CHANGELOG.md` ja `TODO.md` tukevat tätä sikäli että versioita on kertynyt
+0.17.0:aan asti ja valmiiden lista on pitkä.
+
+**Seuraus:** tämä eroaa Itusta, jossa kehitysaikainen pelaaminen ei tuottanut muutoksia
+lainkaan (`SanaMix/SUBSTANSSI.md` kohta 18). Superjatsissa pelaaminen tuotti korjaustarpeita,
+eli koetin toimi kuten sen piti. Uskottava syy erolle on kohdassa 4: Itu peri ydinmekaniikkansa
+valmiiksi koeteltuna, kun taas Superjatsin kuuden nopan variantti ja sen kategoriat rakennettiin
+itse. Tämä on kirjoittajan päätelmä ja saa kaatua.
+
+## 47. Torvi ja kantele ovat Tommin omia soittimia
+
+Tommi 21.8.2026 (erä 11), kysyttäessä onko kolmikolle yhteisen torvi ja kantele -ääniteeman
+valinnassa substanssia vai oliko se tekninen ratkaisu:
+
+> *en soita enää mutta joskus olleet tuttuja soittimia*
+
+**Seuraus:** ääniteema ei ole poimittu vapaiden näytteiden joukosta sen mukaan mikä kuulostaa
+hyvältä, vaan se nimeää kaksi soitinta jotka Tommi on itse soittanut. Se on ensimmäinen kerta
+kun mikään kokoelman substanssidokumentti kirjaa tekijän oman musiikkitaustan, ja teema on
+kolmelle pelille yhteinen eli laajemmalle levinnyt kuin yksikään muu tämän dokumentin havainto.
+
+**Seuraus:** valinta on samaa lajia kuin `laituri`-nimiryhmä Jakossa (`Jako-pelini/CLAUDE.md`:
+kunnianosoitus oikeille ihmisille eikä arkkityyppiryhmä). Molemmissa sovelluksen pinnalla on
+jotain joka on peräisin tekijän omasta elämästä eikä pelin maailmasta, eikä kumpaakaan näe
+käyttäjälle päin.
+
+**Rajaus:** *en soita enää* on kirjattu koska se annettiin, mutta miksi ja milloin soittaminen
+loppui, ei ole kysytty eikä kuulu tähän dokumenttiin ilman että sitä kysytään.
