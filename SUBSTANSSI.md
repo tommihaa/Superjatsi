@@ -718,3 +718,119 @@ teoreettiseksi vaan toteutui käytössä.
 **Seuraus:** tämä selittää myös kohdan 20 keston. Kuuden nopan peli on se joka kestää
 kaksikymmentä minuuttia, eli useammin pelattu variantti on samalla se raskaampi. Peli ei siis
 ole pitkä vahingossa vaan siksi että sitä pelataan sen laajimmassa muodossa.
+
+## 30. Sovellus selitti uudet kentät, ja Tommin työ oli näyttää mistä
+
+Tommi 21.8.2026 (erä 7), kysyttäessä selittikö sovellus uudet kentät vieraalle pelaajalle vai
+selittikö hän ne itse:
+
+> *näytin mistä sovellus selittää*
+
+Selityksen antoi siis sovellus, ja ihmisen osuus oli osoittaa mistä se löytyy.
+
+**Seuraus, ja se tarkentaa kohtaa 27:** `SanaMix/SUBSTANSSI.md` kohta 26 sanoo että sovelluksen
+on tehtävä ohjaajan työ, eli selitettävä säännöt sille jolla ei ole ohjaajaa. Tässä työnjako
+näkyy mitattuna: sisällön puolesta sovellus riitti, mutta **löydettävyyden puolesta ei**, koska
+paikalla ollut ihminen joutui osoittamaan sen. Ohjaajan kaksi tehtävää eivät siis jakaudu
+tasan, ja jälkimmäinen on se jota ilman ohjaajaa oleva pelaaja ei saa.
+
+## 31. Vuoden 2002 ennätyksistä ei tiedetä, ja kuvallinen versio oli myöhempi
+
+Tommi 21.8.2026 (erä 7), kysyttäessä säilyttikö vuoden 2002 ohjelma ennätyksiä:
+
+> *en tiedä, se myöhempi kuvallinen versio täydensi*
+
+**Seuraus, ja se erottaa kaksi asiakirjalähdettä toisistaan:** kohdan 6 taulukko (2002) ja
+kohdan 8 kuvakaappaus eivät ole saman ohjelman kaksi kuvaa vaan **kaksi sukupolvea**. Kuvallinen
+noppaversio on myöhempi ja täydempi, ja kohdan 9 kysymys ennätyksistä koskee vain varhaisempaa.
+Tätä ei ollut kirjattu aiemmin, ja se selittää myös miksi kuvassa on `Peru`-nappi ja dialogeja
+joita taulukossa ei ole.
+
+**Kohta 9 jää siis avoimeksi vuoden 2002 osalta**, eikä sitä voi enää täyttää tästä
+haastattelusta. Myöhemmän version osalta se sulkeutuu kohdassa 34.
+
+## 32. Kirjoittajan kysymys lepäsi väärällä premissillä, eikä vastausta kirjata substanssiksi
+
+Erässä 7 kysyttiin, onko sääntönäkymän puuttuminen tietoinen valinta, ja Tommi vastasi:
+
+> *tietoisesti jäi tekemättä ja on se tehtävä*
+
+**Premissi oli väärä. Superjatsissa on Säännöt-overlay.** Tarkistus koodista samassa erässä
+vastauksen jälkeen: `src/ui/strings.ts` sisältää avaimet `rules: "Säännöt"` ja `rulesLines`,
+`src/ui/glossary-view.ts` vie `rulesListHtml`-renderöijän, ja `src/ui/app.ts` tuntee overlayn
+`"rules"` tapahtumalla `open-rules`. `TODO.md` kirjaa saman toteutuneeksi versiossa 0.17.0.
+
+**Miksi virhe syntyi, koska muoto on kokoelmassa nimetty.** Hain sääntönäkymää grepillä joka
+etsi suomenkielisiä sanoja (`sääntö`, `ohje`, `opas`) tiedostosta jonka **avaimet ovat
+englanniksi** ja vain arvot suomeksi. Komento onnistui, palautti yhden osuman ja vastasi eri
+kysymykseen kuin luulin. Se on `koetin`-termin työkalumaasto (`Kaanon/KÄSITTEISTÖ.md` §0.2) ja
+sama väärä nolla kuin juuresta ajetussa haussa: tulos oli kelvollisen näköinen eikä mitään
+puuttunut näkyvästi.
+
+**Miksi tämä on oma kohtansa eikä korjaus.** Kysymys esitettiin muodossa jossa myöntävä vastaus
+vahvisti väärän premissin, ja vastaus annettiin sen mukaisesti. Sama vikamuoto on kokoelmassa
+kirjattu kerran aiemmin (`Kaanon/TYÖTAVAT.md`, 16.8.2026: kysymys jonka molemmat vaihtoehdot
+lepäsivät väärällä premissillä), ja tämä on sen toinen esiintymä. Vastausta **ei kirjata
+substanssiksi**, koska ei tiedetä mihin se kohdistui: sääntönäkymään joka on olemassa, sen
+laajuuteen, vai johonkin muuhun puuttuvaan.
+
+**Avoin:** mikä on se joka jäi tietoisesti tekemättä ja on tehtävä. Kysytty erässä 8, ja
+`TODO.md`:hen ei lisätty mitään ennen vastausta.
+
+## 33. Verkkomoninpeli olisi maksullinen, ja Tommi epäilee kysyntää
+
+Tommi 21.8.2026 (erä 7), kysyttäessä onko verkkomoninpeli asia jonka hän haluaa tehdä vai
+domainiin jätetty varaus:
+
+> *maksullisen version, mutta en tiedä kuka haluaa pelata noin pitkää peliä reaaliaikaisesti,
+> suuria kynnyksiä*
+
+Moninpeli ei ole pelkkä varaus vaan liittyy maksulliseen versioon, mutta samassa lauseessa on
+epäilys: kuka haluaa pelata näin pitkää peliä reaaliaikaisesti, ja kynnykset ovat suuria.
+
+**Seuraus:** tämä on kolmikon dokumenteissa ensimmäinen kirjattu maininta maksullisuudesta
+minkään pelin kohdalla. Aiemmin kaupallisuus on esiintynyt vain Pelit-portaalin kohdalla
+mahdollisena vastineena Lahjalle (muistimerkintä `project_pelit.md`), eikä kertaakaan
+substanssidokumentissa.
+
+**Seuraus:** epäilys osuu samaan kohtaan kuin kohdat 20 ja 25. Kesto on pelin luonteenomainen
+piirre, ja juuri se tekee reaaliaikaisesta moninpelistä vaikean: kaksikymmentä minuuttia yksin
+on pitkä, ja kahden ihmisen yhtäaikainen kaksikymmentä minuuttia on enemmän kuin kaksinkertainen
+vaatimus. `SUPERJATSI.md`:n oma perustelu pass-and-playn poistolle sanoo saman toisin sanoin.
+
+**Seuraus, ja se on ehdotus eikä kirjaus:** asynkroninen moninpeli (kumpikin pelaa omalla
+ajallaan, tulokset verrataan) väistäisi juuri sen kynnyksen jota vastaus epäilee, ja se on sama
+ratkaisu joka on Itussa varattu siemenpohjaisella arvonnalla. Tätä ei ole ehdotettu eikä
+päätetty, ja se saa kaatua.
+
+## 34. Esikuva on yhä verkossa ja sitä pelataan edelleen
+
+Tommi 21.8.2026 (erä 7), kysyttäessä onko esikuvan ohjelma yhä olemassa:
+
+> *on olemassa ja tilastosivun mukaan [tekijä] pelaa sitä edelleen*
+
+(vastauksessa oli tekijän etunimi ja osoite; molemmat on rajattu pois, ks. alla)
+
+**Väite tarkistettiin hakemalla sivu, ja se pitää paikkansa.** Sivu vastaa, ja se on pelattava
+jatsi jossa on kaksi pelaajaprofiilia, erilliset harjoitusversiot ilman tulosten tallennusta,
+tilastosivu ja tietokanta johon pelaajatiedot ja tulokset tallennetaan. Sivu ilmoittaa
+vaatimukseksi vähintään Internet Explorer 5.0:n ja mainitsee mobiiliversion. Sivulta ei kerätty
+henkilötietoja eikä yksittäisten pelaajien tuloksia.
+
+**Seuraus:** esikuva ei ole historiallinen jäänne vaan **elävä ohjelma**, ja se on ollut
+käytössä yhtäjaksoisesti pidempään kuin mikään kokoelman oma projekti on ollut olemassa.
+Kohdan 31 sukupolvista uusin on siis yhä ajossa.
+
+**Seuraus, ja se sulkee kohdan 28 avoimen myöhemmän version osalta:** tulokset tallennetaan
+tietokantaan ja tilastosivu on olemassa, joten ennätyksiä säilytetään. Vuoden 2002 taulukon
+osalta kysymys jää auki (kohta 31).
+
+**Seuraus:** Superjatsi ja sen esikuva ovat nyt olemassa yhtä aikaa, eri osoitteissa ja eri
+pisteytyksellä (kohta 7). Kolmikon muut pelit korvasivat pöydän jota ei enää ole; tämä on
+rinnakkainen toisinto ohjelmasta joka toimii yhä.
+
+**Yksityisyysrajaus, ja se odottaa päätöstä.** Vastauksessa oli ohjelman osoite ja tekijän
+etunimi. Kumpaakaan ei kirjattu tähän, koska repo on julkinen ja osoite yksilöi saman henkilön
+jonka nimi poistettiin arkistoidusta tiedostosta kohdassa 10. Rajaus on tässä tiukempi kuin
+Tommin vastaus, koska hän antoi tiedon haastatteluun eikä julkaisuun, eikä eroa voi olettaa.
+Kysytty erässä 8.
