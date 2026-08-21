@@ -1213,3 +1213,62 @@ eikä hiivu. Tämä on kirjoittajan luenta kahdesta havainnosta, ja se saa kaatu
 
 **Rajaus:** Age of Conan on tässä mainittu koska se annettiin vastauksessa. Verkkoroolipelaaminen
 ei ole tämän dokumentin aihe, eikä siitä kysytä lisää ilman että sillä on kohde.
+
+## 50. Oma pelikausi oli noin 2002 ja 2008 välillä, ja peli on yhä pelattavissa
+
+Tommi 21.8.2026 (erä 13), kysyttäessä miltä vuosilta esikuvan pelikausi oli:
+
+> *se on vieläkin promanner.com saitilla pelattavana, itse pelasin noin 2002-2008*
+
+Oma pelikausi kesti siis noin kuusi vuotta, ja se alkoi samana vuonna josta arkistoitu
+taulukko on peräisin (kohta 6).
+
+**Seuraus:** kohdan 45 *satoja pelejä* saa mittakaavan. Kuudessa vuodessa satoja pelejä on
+muutamia kymmeniä vuodessa, eli säännöllistä muttei päivittäistä. Se sopii kohdan 49 kuvaan
+pelistä joka jakautui työajan ja vapaan kesken.
+
+**Seuraus:** aukko esikuvan ja Superjatsin välillä on siis noin kahdeksantoista vuotta
+(2008 ja 2026), ei kaksikymmentäneljä kuten kohdan 6 päiväyksestä laskisi. Sovellus rakennettiin
+pelistä jota tekijä oli pelannut satoja kertoja mutta ei lähes kahteen vuosikymmeneen, ja
+tulokortin muoto tuli silti oikein sarakenimiä myöten (kohta 6). Muoto oli siis muistissa
+pelaamisen kautta eikä tiedoston.
+
+**Rajaus:** vuosiluvut ovat muistinvaraisia (*noin*), ja sivuston nimi on rajattu pois samalla
+perusteella kuin osoite kohdassa 34.
+
+## 51. Pass-and-playta ei ehditty pelata ennen kuin se poistettiin
+
+Tommi 21.8.2026 (erä 13), kysyttäessä ehdittiinkö Superjatsin pass-and-playta pelata ennen sen
+poistoa heinäkuussa 2026:
+
+> *ei*
+
+**Seuraus:** `SUPERJATSI.md`:n perustelu poistolle (*yksikin peli kestää n. 20 min, joten monen
+pelaajan hot-seat ei tule loppuun pelatuksi*) ei siis lepää kokeilulla vaan päättelyllä omasta
+mitatusta kestosta (kohta 40). Päättely on hyvä ja mittaus on aito, mutta poistettu ominaisuus
+ei ehtinyt kaatua käytössä. Tämä on kirjattu koska ero on juuri se jota tämä dokumentti muualla
+vaatii: mitattu ja pääteltyä ei sekoiteta toisiinsa.
+
+**Seuraus:** `SUPERJATSI.md` sanoo että hot-seat on git-historiassa palautettavissa, joten
+päätös on peruttavissa jos se joskus halutaan koetella oikeasti. Tätä ei ehdoteta.
+
+## 52. Haastattelun ensimmäinen jakso päättyi tähän
+
+Tommi 21.8.2026 (erä 13), kysyttäessä onko vielä jotain olennaista jota ei ole osattu kysyä:
+
+> *eipä taida olla*
+
+Sama kysymys tuotti Itussa vielä yhden kohdan (pahviversio, `SanaMix/SUBSTANSSI.md` kohta 34),
+tässä ei. Jakso päättyy siis kolmeentoista erään ja tähän kohtaan.
+
+**Mitä jäi auki, jotta seuraava lukija ei etsi turhaan:**
+
+- Vuoden 2002 taulukon tulos ja se listattiinko ennätyksiä silloin (kohdat 9 ja 31). Tätä ei
+  voi täyttää Tommilta, koska hän ei tiedä.
+- Miten matriisimuoto kulki bridge-piireistä työkaverille (kohta 44). Sen tietäisi vain
+  esikuvan tekijä.
+- Saako esikuvan osoite ja tekijän etunimi olla tässä julkisessa dokumentissa (kohta 34).
+  Odottaa kolmannen osapuolen vastausta, ei Tommin päätöstä (`Kaanon/YHTEYDENOTOT.md`).
+
+Kaikki kolme kysyttäisiin samalta ihmiseltä, ja hän on tavoitettavissa (kohta 34). Jos yhteys
+joskus otetaan, tämä dokumentti saa kerralla kolme vastausta.
