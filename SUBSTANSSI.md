@@ -699,11 +699,20 @@ sanalla tai lauseella, eikä kumpaakaan ollut kirjattu ennen haastattelua.
 
 Tommi 21.8.2026 (erä 6), kysyttäessä kuka Superjatsia pelasi kun kestoa mitattiin:
 
-> *nainen, ahkera viiden nopan paperi-jatsin pelaaja jo vuosia, uudet kentät ei olleet tuttuja*
+> *[tunnistetieto poistettu], ahkera viiden nopan paperi-jatsin pelaaja jo vuosia, uudet kentät
+> ei olleet tuttuja*
 
 Pelaajaa ei nimetä tässä dokumentissa, koska Tommi ei nimennyt häntä ja repo on julkinen.
 Olennaista on pelaajan tausta: vuosien kokemus viiden nopan paperijatsista, ja uudet kentät
 olivat vieraita.
+
+**Yksityisyysrajaus tiukkeni 21.8.2026, ja se on Tommin päätös.** Vastaus alkoi pelaajan
+sukupuolella, ja se on nyt poistettu sitaatista. Nimeämättömyys ei riittänyt: yksi
+tunnistetieto yhdessä pelitaustan kanssa (vuosien paperijatsi) rajaa lähipiirissä hyvin pienen
+joukon, ja tunnistaminen on yhdistelmän eikä yksittäisen tiedon ominaisuus. Sama rajaus tehtiin
+samana päivänä `SanaMix/SUBSTANSSI.md` kohtaan 17 ja `Jako-pelini/SUBSTANSSI.md` kohtaan 41.
+Kohtien 24, 27, 30 ja 40 päätelmät eivät kaadu, koska ne lepäävät pelaajan **pelitaustalla**
+(kokenut jatsinpelaaja, jolle uudet kentät olivat vieraita) eivätkä siitä kuka hän on.
 
 **Seuraus, ja se on kohdan 24 tärkein tarkennus:** mittaus tehtiin pelaajalla joka osasi pelin
 mutta ei tätä versiota. Kaksikymmentäviisi minuuttia ei siis ole kokeneen Superjatsi-pelaajan
@@ -1218,7 +1227,7 @@ ei ole tämän dokumentin aihe, eikä siitä kysytä lisää ilman että sillä 
 
 Tommi 21.8.2026 (erä 13), kysyttäessä miltä vuosilta esikuvan pelikausi oli:
 
-> *se on vieläkin promanner.com saitilla pelattavana, itse pelasin noin 2002-2008*
+> *se on vieläkin [osoite poistettu] saitilla pelattavana, itse pelasin noin 2002-2008*
 
 Oma pelikausi kesti siis noin kuusi vuotta, ja se alkoi samana vuonna josta arkistoitu
 taulukko on peräisin (kohta 6).
@@ -1233,8 +1242,20 @@ pelistä jota tekijä oli pelannut satoja kertoja mutta ei lähes kahteen vuosik
 tulokortin muoto tuli silti oikein sarakenimiä myöten (kohta 6). Muoto oli siis muistissa
 pelaamisen kautta eikä tiedoston.
 
-**Rajaus:** vuosiluvut ovat muistinvaraisia (*noin*), ja sivuston nimi on rajattu pois samalla
-perusteella kuin osoite kohdassa 34.
+**Rajaus:** vuosiluvut ovat muistinvaraisia (*noin*).
+
+**Yksityisyysrajaus, ja se korjattiin 21.8.2026 jälkikäteen.** Vastauksessa oli sivuston osoite,
+ja se on nyt poistettu sitaatista merkinnällä `[osoite poistettu]` samalla perusteella kuin
+tekijän etunimi ja osoite kohdassa 34: osoite yksilöi saman kolmannen osapuolen, jonka lupaa
+kohta 34 vielä odottaa.
+
+**Rajaus oli kirjoitettu tähän ennen kuin se oli tehty, ja se jätetään näkyviin virheenä.**
+Tämä rivi sanoi 21.8.2026 asti että sivuston nimi *on rajattu pois*, vaikka se luki kahtatoista
+riviä ylempänä sitaatin sisällä. Vikamuoto on nimettävä, koska se on eri kuin dokumentin
+aiemmat: kohtien 6, 8 ja 12 kaatumiset olivat vääriä päätelmiä ja havaintoja, ja tämä oli
+**oikea päätös jota ei toteutettu**. Syy on tunnistettavissa: rajaus kirjoitettiin kirjoittajan
+omaan tekstiin, ja sitaatti on eri pinta jota sama silmäys ei kata. Sama tarkistus on siis
+tehtävä erikseen lainaukselle aina kun rajaus koskee kolmatta osapuolta.
 
 ## 51. Pass-and-playta ei ehditty pelata ennen kuin se poistettiin
 
