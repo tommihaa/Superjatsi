@@ -554,11 +554,18 @@ on 6.5.2026, ja kaksi kuukautta myöhemmin repossa oli yhdeksän peliä; koko ko
 kuudessa viikossa (6.5., 5.6. ja 17.6.2026). Tahdin muutos ei siis ole vaikutelma vaan näkyy
 historiassa.
 
-**Jännite, jota ei ratkaista tässä.** Kohta 17 sanoo Superjatsin olleen se idea jolla
-ohjelmistoprojekti aiottiin aloittaa tekoälyn kanssa, ja tämä kohta nimeää ensimmäisiksi
-kandidaateiksi Kasinon ja Seiskan. Molemmat voivat olla tosia, jos kandidaatit olivat ideoita
-ja Superjatsi se joka ensimmäisenä oikeasti yritettiin (Lovable, lokakuu 2025). Kysytty
-erässä 6.
+~~**Jännite, jota ei ratkaista tässä.**~~ **Jännite ratkesi erässä 6, ja luenta oli oikea.**
+Kohta 17 sanoo Superjatsin olleen se idea jolla ohjelmistoprojekti aiottiin aloittaa tekoälyn
+kanssa, ja tämä kohta nimeää ensimmäisiksi kandidaateiksi Kasinon ja Seiskan. Molemmat ovat
+tosia, koska kandidaatit olivat ideoita ja Superjatsi se joka ensimmäisenä oikeasti yritettiin.
+Tommi 21.8.2026 (erä 6), kysyttäessä yritettiinkö Kasinoa ja Seiskaa jollain työkalulla ennen
+lokakuuta 2025:
+
+> *kandidaatteja jotka jäivät ideoiksi*
+
+**Seuraus:** Superjatsi on siis kokoelman ensimmäinen peli jota on **yritetty rakentaa**, ei
+vain ensimmäinen idea. Kasino ja Seiska ehtivät kandidaateiksi mutta eivät koodiksi, ja
+molemmat päätyivät lopulta Jakoon eli sen kokoelman osaksi joka rakennettiin ensimmäisenä.
 
 ## 23. Lovable-yrityksestä ei jäänyt mitään, ja Superjatsi alkoi ennätyskuvaa näyttämällä
 
@@ -628,3 +635,86 @@ mukainen Superjatsi, eikä valinnan perustetta ole kysytty. Kysytty erässä 6.
 **Sanaero jätetään näkyviin:** Tommi kirjoitti *marathon-jatsi* englannin kirjoitusasulla, ja
 suomenkielisessä tekstissä se on *maratonjatsi*. Vastaus on siteerattu sillä asulla jolla se
 annettiin, ja kirjoittajan oma teksti käyttää suomalaista muotoa.
+
+## 26. Super voitti maratonin, koska peli on moniottelu eikä pitkä juoksu
+
+Tommi 21.8.2026 (erä 6), kysyttäessä miksi peli sai nimekseen Superjatsi eikä maratonjatsi:
+
+> *niin paljon kenttiä, strategioita että moniottelu kuvaa paremmin ja super sopii siksi
+> marathonia paremmin etuliitteeksi*
+
+Peruste on siis se **mitä nimi kuvaa**: maraton kuvaisi kestoa, mutta peli on luonteeltaan
+moniottelu, ja monen lajin kokonaisuutta kuvaa paremmin etuliite super.
+
+**Seuraus:** kohdan 25 vastaus (kesto on pelin luonteenomainen piirre) ja tämä eivät ole
+ristiriidassa vaan asettavat keston paikalleen. Kesto on pelin piirre mutta ei sen ydin, eikä
+sitä siksi haluttu nimeen. Ydin on kenttien ja strategioiden määrä, eli sama asia joka kohdassa
+5 vetää puoleensa (todennäköisyyksien pohtiminen) ja jonka kohdan 14 nyrkkisäännöt kuvaavat.
+
+**Seuraus:** nimenvalinnan peruste on eri lajia kuin Itussa. Itu voitti Verson
+ytimekkyydellään eli nimen omalla ominaisuudella (`SanaMix/SUBSTANSSI.md` kohta 19), tässä
+peruste on kuvaavuus eli nimen suhde peliin. Molemmissa tapauksissa perustelu annettiin yhdellä
+sanalla tai lauseella, eikä kumpaakaan ollut kirjattu ennen haastattelua.
+
+## 27. Kestomittauksen pelaaja oli kokenut paperijatsin pelaaja, jolle uudet kentät olivat vieraita
+
+Tommi 21.8.2026 (erä 6), kysyttäessä kuka Superjatsia pelasi kun kestoa mitattiin:
+
+> *nainen, ahkera viiden nopan paperi-jatsin pelaaja jo vuosia, uudet kentät ei olleet tuttuja*
+
+Pelaajaa ei nimetä tässä dokumentissa, koska Tommi ei nimennyt häntä ja repo on julkinen.
+Olennaista on pelaajan tausta: vuosien kokemus viiden nopan paperijatsista, ja uudet kentät
+olivat vieraita.
+
+**Seuraus, ja se on kohdan 24 tärkein tarkennus:** mittaus tehtiin pelaajalla joka osasi pelin
+mutta ei tätä versiota. Kaksikymmentäviisi minuuttia ei siis ole kokeneen Superjatsi-pelaajan
+aika vaan kokeneen jatsinpelaajan aika vieraalla tulokortilla, ja osa siitä on uusien kenttien
+opettelua. Kesto ja oppimiskynnys sekoittuvat mittauksessa, eikä niitä voi erottaa jälkikäteen.
+
+**Seuraus:** *uudet kentät ei olleet tuttuja* on dokumentin ensimmäinen kirjattu havainto siitä
+miten peli otetaan vastaan, ja se osuu täsmälleen siihen mikä Superjatsissa on esikuvan omaa
+(viisi saraketta, kohta 6) ja mikä sovelluksen omaa (kuuden nopan kategoriat, kohta 4). Molemmat
+ovat vieraita sille joka on pelannut tavallista jatsia, eli juuri sitä muotoa jota Laiturillakin
+pelattiin (kohta 18).
+
+**Seuraus:** `SanaMix/SUBSTANSSI.md` kohta 26 kirjaa että sovelluksen on tehtävä ohjaajan työ,
+eli selittää säännöt ja katsoa perään sille jolla ei ole ohjaajaa. Tämä kohta on ensimmäinen
+mitattu tapaus jossa se työ oli oikeasti tarpeen Superjatsissa. Onko sovellus siinä
+onnistunut, ei käy vastauksesta ilmi. Kysytty erässä 7.
+
+## 28. Vuoden 2002 ohjelmassa oli rekisteröityneitä pelaajia, alle kymmenen
+
+Tommi 21.8.2026 (erä 6), kysyttäessä pelattiinko työpaikalla jatsia työkavereiden kesken vai
+oliko työkaverin htm lähinnä ohjelmointiharrastusta:
+
+> *oli joitakin (alle 10) pelaajaa rekisteröityneenä*
+
+**Seuraus:** esikuva ei ollut yhden ihmisen harjoitustyö vaan **käytössä ollut moninpeli**.
+Rekisteröityminen tarkoittaa että ohjelma tunsi pelaajansa ja erotti heidät toisistaan, ja
+alle kymmenen pelaajaa on työpaikan kokoinen joukko. Tämä selittää kohdan 13 otsikkorivin
+(`tommi | Joensuu`, pelaaja ja paikkakunta) rakenteellisesti: paikkakunta on kenttä siksi että
+pelaajia oli useita.
+
+**Seuraus:** kohdan 9 avoin kysymys (oliko tulos sen aikainen ennätys, listattiinko ennätyksiä)
+saa tästä tukea muttei vastausta. Rekisteröityneet pelaajat tekevät tuloslistasta luontevan,
+ja kuvan dialogi sanoo `Siirrytään tuloksiin` (kohta 8), mutta kumpikaan ei todista että
+ennätyksiä olisi säilytetty. Tätä ei päätellä, ja se on kysytty erässä 7.
+
+**Seuraus:** Superjatsin oma yksinpelimuoto on siis kaventuma esikuvaansa nähden, ei
+laajennus. `SUPERJATSI.md` kirjaa domainin olevan N-pelaajakykyinen verkkomoninpeliä varten,
+ja tämän valossa se palaisi siihen mitä esikuva oli jo vuonna 2002.
+
+## 29. Sovelluksessa on tullut pelattua enemmän kuutta noppaa
+
+Tommi 21.8.2026 (erä 6), kysyttäessä kumpaa varianttia on tullut pelattua enemmän:
+
+> *6*
+
+**Seuraus:** kohta 4 sulkeutuu kaarena. Kuuden nopan variantti otettiin sovellukseen juuri
+siksi että sitä oli pöydässä pelattu todella harvoin, ja sovelluksessa siitä tuli se jota
+pelataan enemmän. Perustelu (harvoin pelattu on ilmainen sovelluksessa) ei siis jäänyt
+teoreettiseksi vaan toteutui käytössä.
+
+**Seuraus:** tämä selittää myös kohdan 20 keston. Kuuden nopan peli on se joka kestää
+kaksikymmentä minuuttia, eli useammin pelattu variantti on samalla se raskaampi. Peli ei siis
+ole pitkä vahingossa vaan siksi että sitä pelataan sen laajimmassa muodossa.
