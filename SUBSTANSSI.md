@@ -774,8 +774,28 @@ lepäsivät väärällä premissillä), ja tämä on sen toinen esiintymä. Vast
 substanssiksi**, koska ei tiedetä mihin se kohdistui: sääntönäkymään joka on olemassa, sen
 laajuuteen, vai johonkin muuhun puuttuvaan.
 
-**Avoin:** mikä on se joka jäi tietoisesti tekemättä ja on tehtävä. Kysytty erässä 8, ja
-`TODO.md`:hen ei lisätty mitään ennen vastausta.
+~~**Avoin:** mikä on se joka jäi tietoisesti tekemättä ja on tehtävä.~~ **Suljettu erässä 8, ja
+vastaus on että mitään ei jäänyt.** Tommi 21.8.2026, kysyttäessä mikä se tekemätön on:
+
+> *minäkin muistin väärin enkä käynyt katsomassa*
+
+Kysymys ei siis johtanut vastaajaa harhaan tiedosta jonka hän tiesi, vaan **osui samaan
+muistivirheeseen jonka kirjoittajalla oli.** Sääntönäkymä on olemassa, kumpikaan ei muistanut
+sitä, eikä kumpikaan tarkistanut ennen kuin väite oli jo tehty.
+
+**Seuraus, ja tämä on dokumentin painavin menetelmähavainto:** haastattelun perusrakenne on
+että koetin on Tommi eikä testi, ja tässä koetin ei toiminut. Se ei toiminut siksi, että
+kysymys koski **koodin tilaa** eikä maailmaa. Substanssikysymyksissä (mitä pöydässä pelattiin,
+mikä veti puoleensa, miten pisteet laskettiin) Tommi on ainoa lähde eikä häntä voi tarkistaa
+muualta; koodia koskevissa kysymyksissä hän on muistin varassa siinä missä kirjoittajakin, ja
+git ja tiedostot ovat molempia luotettavampia. `Kaanon/TYÖTAVAT.md` sanoo saman yleisenä
+sääntönä: totuus on gitissä, ei muistissa. **Ihmiskoetin ei siis kata sitä osaa haastattelusta
+joka koskee omaa koodia.**
+
+**Seuraus:** kaksi samansuuntaista muistivirhettä ei tuota kahta signaalia vaan yhden
+vahvistuksen, ja se tuntuu varmemmalta kuin yksi. Tämä on sama vika kuin kohdassa 21
+(muistikuva valmistumisjärjestyksestä), mutta pahempi muoto: siellä git kaatoi vastauksen heti,
+tässä väite olisi jäänyt voimaan jos `TODO.md`:tä ei olisi luettu muusta syystä.
 
 ## 33. Verkkomoninpeli olisi maksullinen, ja Tommi epäilee kysyntää
 
@@ -829,8 +849,67 @@ osalta kysymys jää auki (kohta 31).
 pisteytyksellä (kohta 7). Kolmikon muut pelit korvasivat pöydän jota ei enää ole; tämä on
 rinnakkainen toisinto ohjelmasta joka toimii yhä.
 
-**Yksityisyysrajaus, ja se odottaa päätöstä.** Vastauksessa oli ohjelman osoite ja tekijän
-etunimi. Kumpaakaan ei kirjattu tähän, koska repo on julkinen ja osoite yksilöi saman henkilön
-jonka nimi poistettiin arkistoidusta tiedostosta kohdassa 10. Rajaus on tässä tiukempi kuin
-Tommin vastaus, koska hän antoi tiedon haastatteluun eikä julkaisuun, eikä eroa voi olettaa.
-Kysytty erässä 8.
+**Yksityisyysrajaus, ja se jää voimaan.** Vastauksessa oli ohjelman osoite ja tekijän etunimi.
+Kumpaakaan ei kirjattu tähän, koska repo on julkinen ja osoite yksilöi saman henkilön jonka nimi
+poistettiin arkistoidusta tiedostosta kohdassa 10. Rajaus on tässä tiukempi kuin Tommin vastaus,
+koska hän antoi tiedon haastatteluun eikä julkaisuun, eikä eroa voi olettaa. Tommi 21.8.2026
+(erä 8), kysyttäessä saako osoite ja etunimi olla julkisessa dokumentissa:
+
+> *en tiedä, pitänee kysyä asiaa*
+
+**Rajaus pysyy siis toistaiseksi, ja sen purkaminen odottaa kolmannen osapuolen omaa
+vastausta** eikä Tommin päätöstä. Tämä on koko kokoelmassa ensimmäinen kerta kun kirjaus jää
+odottamaan jonkun muun kuin Tommin kuittausta.
+
+## 35. Esikuvan tekijä ei tiedä Superjatsista
+
+Tommi 21.8.2026 (erä 8), kysyttäessä onko hän kertonut esikuvan tekijälle Superjatsista:
+
+> *en*
+
+**Seuraus:** kehä jää tässä sulkeutumatta, ja se erottaa Superjatsin Itusta ja Jakosta.
+`SanaMix/SUBSTANSSI.md` kohdat 17 ja 20 kirjaavat että koko kolmikko lähetettiin Laiturin
+ohjaajille eli takaisin sinne mistä pelit tulivat, mutta Superjatsin varsinainen lähde ei ole
+Laituri vaan vuoden 2002 työpaikka (kohta 18), eikä sinne ole lähetetty mitään. Peli on siis
+palautettu yhteen alkukotiinsa ja toiseen ei.
+
+**Seuraus:** tämä on sama kysymys kuin edellisen kohdan yksityisyysrajaus, toisesta suunnasta.
+Molemmat ratkeaisivat samalla teolla, eli ottamalla yhteyttä, ja kumpikin on Tommin oma valinta
+eikä tämän dokumentin tehtävä. Sama rajaus on kirjattu Itussa palautteen pyytämisestä
+(`SanaMix/SUBSTANSSI.md` kohta 39: palautteessa uskotaan vapaaehtoisuuteen).
+
+## 36. Ohjelman jatkuva olemassaolo selvisi vasta haastattelussa
+
+Tommi 21.8.2026 (erä 8), kysyttäessä tiesikö hän ohjelman olevan yhä ajossa kun Superjatsi
+aloitettiin kesäkuussa 2026:
+
+> *en tiennyt, se selvisi juuri kun muistelin www-osoitteen oikein*
+
+**Seuraus:** Superjatsi rakennettiin siis siinä uskossa että esikuva on mennyttä, ja tieto sen
+elämästä syntyi vasta tämän haastattelun aikana. Kohdan 34 seuraus (kaksi ohjelmaa olemassa yhtä
+aikaa) ei ole ollut tekijän tiedossa kertaakaan projektin aikana.
+
+**Seuraus, ja se koskee tämän dokumentin lajia:** substanssihaastattelu on tähän asti kirjannut
+sitä mitä Tommi tietää. Tämä on ensimmäinen kohta jossa haastattelu **tuotti uutta tietoa**
+kysyjän ja vastaajan välissä sen sijaan että olisi siirtänyt sitä. Muoto on merkille pantava,
+koska menetelmän koko rakenne on suunniteltu estämään keksitty substanssi, ei tuottamaan uutta.
+
+## 37. Peli tuntui valmiilta ja on maksuttomana täysin pelattavissa
+
+Tommi 21.8.2026 (erä 8), kysyttäessä onko Superjatsi hänen mielestään valmis:
+
+> *pelaaminen jäi ja tuntui valmiilta, maksuttomaksi peliksi täysin pelattavissa*
+
+Valmius on siis tuntuma eikä kriteeri, ja se on rajattu: **maksuttomana pelinä** täysin
+pelattavissa.
+
+**Seuraus:** vastaus on lähes sama kuin Itussa (`SanaMix/SUBSTANSSI.md` kohta 18: *siitä tuli
+valmis yllättävän nopeasti ja siirryin eteenpäin*), ja sama menetelmä on kirjattu kolmelle
+pelille yhteisenä (kohta 15 samassa dokumentissa: pelattiin kyllästymiseen asti jotta pelistä
+tulisi mieleinen). Superjatsissa päätepiste oli sama: pelaaminen loppui kun peli oli mieleinen.
+
+**Seuraus, ja se on rajauksen tärkein puoli:** *maksuttomaksi peliksi* jättää auki sen mitä
+maksullisuus vaatisi. Kohta 33 nimeää verkkomoninpelin maksullisen version yhteyteen, joten
+valmius ja maksullisuus ovat samassa kysymyksessä: peli on valmis siinä muodossa jossa se on
+julkaistu, eikä siinä muodossa jota ei ole rakennettu. Mitä maksullinen versio sisältäisi
+moninpelin lisäksi, ei ole kysytty.
