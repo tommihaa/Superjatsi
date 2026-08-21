@@ -378,3 +378,136 @@ sattuu sopimaan, eli ne kilpailevat jokaisesta heitosta vapaiden sarakkeiden kan
 sellainen joskus tehdään. Jakossa on Mestarin neuvo (`Jako-pelini/docs/MESTARIN_NEUVO.md`) ja
 Itussa Sanapoliisi, eikä Superjatsissa ole kumpaakaan vastaavaa. Tämä saa kaatua, koska
 neuvotoimintoa ei ole ehdotettu eikä päätetty.
+
+## 15. Ensimmäinen yritys tehtiin Lovablella, ja se kaatui käyttörajaan parissa promptissa
+
+Tommi 21.8.2026 (erä 4), kysyttäessä missä vaiheessa Superjatsi rakennettiin:
+
+> *yritin sitä aiemmin lovablen kanssa tehdä ehkä marraskuussa 2025, mutta ilman maksettua
+> tilausta se ei juuri alusta edennyt, koska käyttöraja meni umpeen parissa promptissa*
+
+Ajankohta oli vastauksessa muistinvarainen (*ehkä*), ja se on noin puoli vuotta ennen kokoelman
+ensimmäistäkään repoa. Yritys ei kaatunut ideaan, työkaluun eikä osaamiseen vaan
+**käyttörajaan**: ilmainen taso loppui parissa promptissa.
+
+**Päiväys tarkentui samassa erässä asiakirjalähteestä, ja se on kuukautta aiempi kuin
+muistikuva.** Tommi toimitti kuvakaappauksen Lovablen tervetuloviestistä (`Welcome to Lovable`,
+lähettäjä `hi@lovable.dev`), ja viesti on päivätty **28.10.2025 klo 19.50**. Käyttö alkoi siis
+lokakuun lopussa eikä marraskuussa. Vastaus ei kaadu vaan tarkentuu: *ehkä marraskuussa* on
+muistikuvaksi lähellä oikeaa, ja dokumentti antaa päivän.
+
+**Seuraus:** tilipäivä ei kerro milloin Superjatsia yritettiin, vain milloin työkalu otettiin
+käyttöön. Nämä kaksi voivat olla sama ilta tai eri viikko, eikä eroa päätellä. Voimaan jää että
+yritys tehtiin 28.10.2025 tai sen jälkeen.
+
+**Seuraus, ja se on kokoelmatason havainto eikä vain tämän projektin:** `Kaanon/TYÖTAVAT.md`
+kirjaa kulutusrajan työtä muokkaavaksi voimaksi ja päivää sen varhaisimman esiintymän
+27.4.2026:n virheilmoitukseen. Tämä on samaa ilmiötä noin viisi kuukautta aiemmin ja eri
+muodossa: siellä raja katkaisi työn kesken, tässä se esti työn alkamisen kokonaan. Havaintoa ei
+viedä `TYÖTAVAT.md`:hen tämän dokumentin sivutuotteena, koska kokoelmatason kirjaus on Tommin
+päätös. Se on tässä nostettuna eikä kirjattuna sinne.
+
+**Seuraus:** tämä on ainoa kirjattu tapaus kokoelmassa, jossa jokin näistä peleistä on yritetty
+tehdä muulla työkalulla kuin Clauden kanssa. Se antaa kolmikolle vertailukohdan jota niillä ei
+aiemmin ollut.
+
+## 16. Tommi muistaa Superjatsin viimeiseksi, ja git sanoo sen olleen toinen
+
+Tommi 21.8.2026 (erä 4), samassa vastauksessa kuin kohta 15:
+
+> *jakon ja itun jälkeen*
+
+**Väite tarkistettiin gitistä, eikä se pidä siinä muodossa.** Repojen ensimmäiset commitit:
+
+| Repo | Ensimmäinen commit |
+|---|---|
+| `Jako-pelini` | 6.5.2026 |
+| `Superjatsi` | 5.6.2026 |
+| `SanaMix` (Itu) | 17.6.2026 |
+
+Superjatsin ensimmäinen commit on siis kaksitoista päivää **ennen** Itun ensimmäistä committia.
+Jakon osalta vastaus pitää paikkansa, Itun osalta järjestys on päinvastainen kuin muistikuva.
+
+**Mitä tästä ei seuraa.** Git kertoo milloin koodia kirjoitettiin, ei milloin peli syntyi
+ajatuksena. Itun idea on huhtikuulta 2026 eli Superjatsia varhaisempi (muistimerkintä
+`history_genesis.md`, ja `SanaMix/SUBSTANSSI.md` kohta 29 päivää toteutuksen alkuun 17.6.2026),
+joten *Itun jälkeen* voi olla tosi ideoiden järjestyksestä ja epätosi rakentamisen
+järjestyksestä. Kumpaa vastaus tarkoitti, ei päätellä tässä.
+
+**Avoin:** tarkoittiko *jakon ja itun jälkeen* rakentamisen vai idean järjestystä. Kysytty
+erässä 5.
+
+## 17. Superjatsi oli se idea jolla ohjelmistoprojekti aiottiin aloittaa tekoälyn kanssa
+
+Tommi 21.8.2026 (erä 4), kysyttäessä mikä sai palaamaan vuoden 2002 esikuvaan ja miten tiedosto
+oli tallessa:
+
+> *arkistoista löytyy kaikenlaista. se nyt vaan oli idea mistä aloitella tehdä
+> ohjemistoprojekti yhdessä ai:n kanssa*
+
+(vastauksen *ohjemistoprojekti* siteerattu tässä korjattuna muotoon *ohjelmistoprojekti*)
+
+Tiedoston säilyminen ei ole tarina vaan arkiston ominaisuus, ja esikuvan valinta oli
+aloituskohta eikä paluu. Superjatsi ei siis ollut projekti johon vanha tiedosto löydettiin,
+vaan **se idea jolla koko yhteistyö tekoälyn kanssa aiottiin aloittaa.**
+
+**Seuraus, ja se on tämän erän painavin:** kolmikon syntyjärjestys kääntyy tässä ympäri
+merkitykseltään. Superjatsi on kohdan 16 mittauksen mukaan toinen valmistunut ja Tommin
+muistikuvan mukaan viimeinen, mutta ideana se oli **ensimmäinen** (kohta 15: yritys marraskuussa
+2025, noin puoli vuotta ennen Jakon ensimmäistä committia). Ensimmäinen idea tuli siis valmiiksi
+vasta muiden jälkeen, ja syy siihen on kirjattu: käyttöraja kaatoi ensimmäisen yrityksen.
+
+**Seuraus:** valinta on ymmärrettävä aloitusprojektiksi. Jatsin säännöt ovat suljetut ja
+tarkistettavat, esikuva oli olemassa konkreettisena tiedostona, eikä pelissä ole vastustajaa
+jonka tekoäly pitäisi rakentaa. Se on kolmesta pelistä ainoa jossa ei ole botteja lainkaan.
+Tämä on kirjoittajan luenta eikä Tommin perustelu, ja se saa kaatua.
+
+## 18. Laiturilla pelattiin tavallista yhden sarakkeen jatsia
+
+Tommi 21.8.2026 (erä 4), kysyttäessä oliko Laiturin jatsi matriisimuotoista vai tavallista:
+
+> *tavallista yhden sarakkeen jatsia*
+
+**Seuraus:** matriisitulokortti tulee siis yksinomaan vuoden 2002 esikuvasta, eikä sillä ole
+kosketuspintaa Laiturin pöytään. Tämä erottaa Superjatsin taustan lopullisesti kahdesta
+sisarprojektistaan: Jakon yhdeksästä pelistä viisi on opittu Laiturilla ja Itun esikuva oli
+Laiturin hyllyn sanamix, mutta Superjatsin määräävä muoto on peräisin työpaikalta
+kaksikymmentä vuotta aiemmin. Laiturilla pelattiin jatsia, muttei tätä jatsia.
+
+## 19. Kuuden nopan +100 on omaa suunnittelua, koska bonus on vaikeampi saavuttaa
+
+Tommi 21.8.2026 (erä 4), kysyttäessä mistä kuuden nopan bonus +100 tuli, kun kynnykset seuraavat
+noppamäärästä muttei bonuksen kaksinkertaistaminen:
+
+> *omaa suunnittelua, koska bonus on vaikeampi saavuttaa*
+
+**Seuraus:** peruste on vaikeus eikä symmetria. Kuudella nopalla kynnys 84 vaatii keskimäärin
+neljä osumaa per silmäluku, ja se on harvinaisempi saavutus kuin viiden nopan 63, joten palkkio
+skaalattiin vaikeuden mukaan. Sama ajattelu näkyy jo `SUPERJATSI.md`:ssä täyssuoran kohdalla
+(25 pistettä = 21 plus 4 harvinaisuusbonusta), eli harvinaisuuden palkitseminen on Superjatsin
+oma linja eikä yksittäinen ratkaisu.
+
+**Seuraus:** kohta 11 saa toisen esimerkin. Sovelluksen pisteytys on tekijän omaa työtä myös
+siellä missä rakenne on lainaa, ja kummassakin tapauksessa (poikkeamasta summiin, +50:stä
++100:aan) muutos on tietoinen ja perusteltu.
+
+## 20. Tommi ei pelaa Superjatsia, ja syy on kesto
+
+Tommi 21.8.2026 (erä 4), kysyttäessä pelaako hän Superjatsia ja onko hänellä siinä ennätystä:
+
+> *en, kuuden nopan peli kestää noin 20 minuuttia*
+
+**Seuraus:** kolmesta pelistä on nyt kysytty sama kysymys ja saatu kolmas eri vastaus samaan
+suuntaan. Itua ei pelata koska muut projektit vievät ajan (`SanaMix/SUBSTANSSI.md` kohta 13),
+ja Superjatsia ei pelata koska yksi peli vie kaksikymmentä minuuttia. Kesto on siis este
+itsessään eikä kilpailu ajasta.
+
+**Seuraus:** sama kesto on `SUPERJATSI.md`:ssä perusteena sille että pass-and-play poistettiin
+käyttöliittymästä 16.7.2026. Perustelu koski silloin monen pelaajan hot-seatia, mutta tämä
+vastaus laajentaa sen yhteen pelaajaan: kaksikymmentä minuuttia on pitkä myös yksin.
+
+**Seuraus:** `SanaMix/SUBSTANSSI.md` kohta 38 kirjaa että englanninkieliset sanapeliapit olivat
+puuhaa radion rinnalle ja että Itu on tietoisesti eri peli eri hetkeen. Superjatsi on tällä
+mittarilla kolmikon vaativin: se ei vaadi vain jakamatonta huomiota vaan pitkän yhtäjaksoisen
+hetken. Onko tämä tietoinen valinta samalla tavalla kuin Itussa, ei ole kysytty. Tämä saa
+kaatua.
