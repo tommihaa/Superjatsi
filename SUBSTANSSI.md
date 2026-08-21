@@ -1272,3 +1272,15 @@ tässä ei. Jakso päättyy siis kolmeentoista erään ja tähän kohtaan.
 
 Kaikki kolme kysyttäisiin samalta ihmiseltä, ja hän on tavoitettavissa (kohta 34). Jos yhteys
 joskus otetaan, tämä dokumentti saa kerralla kolme vastausta.
+
+**Neljäs avoin löytyi vasta session lopputarkistuksessa, ja se koskee ajoitusta.** Muistiin on
+kirjattu 2.8.2026, että Superjatsin idean alkuperä on Evernote-muistiinpano *AI Jatsipeli*
+20.–22.5.2024 eli AI Bootcampin ajalta, ja että se on ajallisesti Tommin **ensimmäinen**
+peli-idea. Tämä dokumentti ei tunne sitä: kohdat 15 ja 17 päiväävät ensimmäisen yrityksen
+lokakuuhun 2025, ja kohta 22 sanoo vain että toteutettavia ideoita alkoi kehkeytyä *ehkä ai
+bootcampin jälkeen*.
+
+**Väitettä ei kirjata kohdaksi, koska muisti on johdettu kopio** (`KÄSITTEISTÖ.md` §0.2), eikä
+Evernote-muistiinpano ole tässä kokoelmassa tarkistettavissa. Jos se pitää paikkansa, kohtien
+15 ja 17 kaari pitenee puolellatoista vuodella ja idean ensimmäisyys saa päiväyksen. Kysyttävä
+Tommilta, ei pääteltävä.
