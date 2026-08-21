@@ -35,8 +35,37 @@ Jako, Superjatsi ja Itu (saman dokumentin kohta 20).
 Repo on julkinen, joten tämä tiedosto on ulospäin näkyvää tekstiä. Se on tiedossa ja se on
 päätöksen sisältö eikä sen sivuvaikutus, sama valinta kuin Jakossa ja Itussa.
 
-Teesiä ei ole vielä kirjattu, koska sellaista ei ole annettu. Itussa se lausuttiin erässä 8 ja
-kuitattiin erässä 9, eikä sitä sepitetä tänne etukäteen.
+## Tiivistelmä: teesi on yksi lause, ja se on Tommin
+
+Lause annettiin erässä 9 (21.8.2026) vastauksena suoraan kysymykseen siitä, onko haastattelussa
+tullut lause joka kokoaa Superjatsin:
+
+> **"muotoilematta ja kaunistelematta Superjatsi on jatsin moniottelijalle suunnattu"**
+
+(vastauksen *moni-ottelijalle* siteerattu tässä korjattuna muotoon *moniottelijalle*)
+
+Kaikki alla oleva asettuu tämän ympärille: mistä moniottelu tuli (kohdat 2, 6, 18), mikä siinä
+veti (5, 14, 26), mitä siihen lisättiin (4, 11, 19, 29) ja kenelle se osoittautui vaativaksi
+(24, 27, 30).
+
+**Teesin syntytapa eroaa Itun teesistä, ja ero kirjataan koska se koskee menetelmää.** Itussa
+lause lausuttiin oma-aloitteisesti kysymysten ohi ja kuitattiin vasta jälkeenpäin; tässä se
+annettiin pyydettäessä. Pyydetty teesi on alttiimpi muotoutumaan kysymyksen mukaan, ja siksi se
+on tässä siteerattu kokonaisena eikä tiivistettynä. Sanavalinta *muotoilematta ja
+kaunistelematta* on vastaajan oma varaus, ja se jätetään lauseeseen.
+
+**Teesi vahvistaa kohdan 26 nimiperustelun toisesta suunnasta.** Sana *moniottelu* annettiin
+erässä 6 perusteluna sille miksi nimeksi tuli Superjatsi eikä maratonjatsi, ja sama sana palaa
+kokoavaksi lauseeksi kolme erää myöhemmin ilman että sitä kysyttiin uudelleen. Pelin nimi ja sen
+teesi lepäävät siis samalla sanalla.
+
+**Avoin päätös 21.8.2026 (erä 9): teesi tulee myös GitHubin repokuvaukseksi, mutta muoto on
+auki.** Tommi: *tarkempi muoto pitää miettiä, mutta haluan sen myös githubiin kuvaukseksi.*
+Nykyinen kuvaus on `Noppapeli (jatsi/yatzy), 5 tai 6 noppaa`, eli se nimeää välineen ja
+variantit muttei sitä kenelle peli on. Kuvausta ei ole muutettu, koska muoto on päättämättä ja
+koska repon kuvaus on ulospäin näkyvää tekstiä. Kun muoto on valittu, se kirjataan tähän ja
+`README.md` tarkistetaan samalla, jotta kolme pintaa (repokuvaus, README, tämä teesi) eivät
+sano kolmea eri asiaa.
 
 ---
 
@@ -606,9 +635,15 @@ pelaamana**. Jakolla on koneellinen mittari (`docs/BOTBENCH.md`) ja Itulla kehit
 kyllästymiseen asti pelaaminen, mutta kummassakaan ei ole otettu aikaa. Mittaus oli myös
 tarkoituksellinen eikä sivutuote: haluttiin tietää kuinka kauan peli kestää.
 
-**Seuraus:** mitattu luku on suurempi kuin dokumentoitu. `SUPERJATSI.md` perustelee
+~~**Seuraus:** mitattu luku on suurempi kuin dokumentoitu. `SUPERJATSI.md` perustelee
 pass-and-playn poiston sillä että yksikin peli kestää noin 20 minuuttia, ja mitattu peli kesti
-noin 25. Ero on pieni eikä kumoa perustelua, vaan vahvistaa sen suuntaa.
+noin 25. Ero on pieni eikä kumoa perustelua, vaan vahvistaa sen suuntaa.~~
+
+**Tarkentui erässä 9, ja luvut ovat kahden eri pelaajan** (kohta 40). Kaksikymmentäviisi
+minuuttia on kestomittauksen pelaajan **toinen** peli, hänen ensimmäistään ei mitattu, ja Tommin
+omat pelit ovat noin kaksikymmentä minuuttia. `SUPERJATSI.md`:n luku ei siis ole dokumentoitu
+arvio jonka mittaus ylitti, vaan tekijän oma mitattu aika. Kirjoittajan päätelmä *mitattu luku
+on suurempi kuin dokumentoitu* vertasi kahta eri pelaajaa toisiinsa.
 
 **Seuraus:** *ei kommentteja mitä jäisi mieleen* on eri asia kuin *ei kysytty*.
 `SanaMix/SUBSTANSSI.md` kohta 39 kirjaa periaatteen että palautetta ei pyydetä vaan otetaan
@@ -911,5 +946,80 @@ tulisi mieleinen). Superjatsissa päätepiste oli sama: pelaaminen loppui kun pe
 **Seuraus, ja se on rajauksen tärkein puoli:** *maksuttomaksi peliksi* jättää auki sen mitä
 maksullisuus vaatisi. Kohta 33 nimeää verkkomoninpelin maksullisen version yhteyteen, joten
 valmius ja maksullisuus ovat samassa kysymyksessä: peli on valmis siinä muodossa jossa se on
-julkaistu, eikä siinä muodossa jota ei ole rakennettu. Mitä maksullinen versio sisältäisi
-moninpelin lisäksi, ei ole kysytty.
+julkaistu, eikä siinä muodossa jota ei ole rakennettu. ~~Mitä maksullinen versio sisältäisi
+moninpelin lisäksi, ei ole kysytty.~~ *(Kysytty erässä 9, ks. kohta 38.)*
+
+## 38. Maksullinen versio olisi moninpeli, globaalit ennätykset ja koukku jota ei ole keksitty
+
+Tommi 21.8.2026 (erä 9), kysyttäessä mitä maksullinen versio sisältäisi moninpelin lisäksi:
+
+> *moninpeli, globaalit ennätykset, koukku mitä en ole keksinyt*
+
+Kolmesta osasta kaksi on nimettyä ja kolmas on nimetty puuttuvaksi.
+
+**Seuraus:** vastaus on rehellinen tavalla joka on itsessään substanssia. Kaksi ensimmäistä
+ovat teknisiä laajennuksia jotka seuraavat suoraan nykyisestä rakenteesta (domain on
+N-pelaajakykyinen, ennätykset ovat jo olemassa mutta vain laitteen omassa muistissa), ja
+kumpikin olisi rakennettavissa ilman uutta ideaa. **Kolmas on se joka puuttuu**, ja sen
+puuttuminen on nimetty ilman että sille tarjotaan sijaista.
+
+**Seuraus:** koukun puute selittää miksi maksullinen versio ei ole työjonossa vaan puheena.
+Kohta 33 kirjaa epäilyn siitä kuka haluaa pelata näin pitkää peliä reaaliaikaisesti, ja tämä
+kohta nimeää saman aukon toisesta suunnasta: moninpeli ja globaalit ennätykset eivät yksin tee
+pelistä maksamisen arvoista, eikä sitä mikä tekisi, ole vielä keksitty.
+
+**Seuraus:** globaalit ennätykset olisivat suora paluu esikuvaan. Vuoden 2002 ohjelmassa oli
+rekisteröityneitä pelaajia (kohta 28) ja sen elävässä versiossa on tilastosivu ja tietokanta
+tuloksille (kohta 34), eli juuri se mitä tässä nimetään maksulliseksi ominaisuudeksi, oli
+esikuvassa olemassa jo silloin. Tämä on kirjoittajan luenta eikä Tommin sanoma, ja se saa
+kaatua.
+
+## 39. Jatsin opettajaa ei muisteta
+
+Tommi 21.8.2026 (erä 9), kysyttäessä kuka opetti jatsin lapsena:
+
+> *en muista*
+
+Kohta 1 jää siis siihen mihin se jäi: peli opittiin lapsena kodin ja kyläilyn piirissä, muttei
+tiedetä keneltä.
+
+**Seuraus:** tämä on odotettava tulos eikä puute. Jako-kokoelman peleistä osa on opittu
+nimettävissä olevassa paikassa nimettävissä olevilta ihmisiltä, ja lapsuudessa opitulta pelilta
+opettaja katoaa juuri siksi että peli on ollut olemassa niin kauan kuin muistaa. Kysymystä ei
+palauteta, koska muistamatonta ei voi kysyä uudelleen.
+
+## 40. Kaksi pelaajaa, kaksi mitattua aikaa: noin 20 ja noin 25 minuuttia
+
+Tommi 21.8.2026 (erä 9), kysyttäessä paljonko kestomittauksen ensimmäinen peli kesti:
+
+> *hänen toisen pelinsä kesto mitattiin 25 minuutiksi, ensimmäistä ei mitattu, oman pelini olen
+> mitannut noin 20 minuuttisiksi*
+
+Mittauksia on siis kaksi eri pelaajalta: vieraan pelaajan toinen peli noin 25 minuuttia, ja
+Tommin omat pelit noin 20 minuuttia. Vieraan ensimmäistä peliä ei mitattu.
+
+**Seuraus:** `SUPERJATSI.md`:n perustelu pass-and-playn poistolle nojaa Tommin omaan mittaukseen
+eikä arvioon, ja se on kokoelman ainoa dokumentoitu sääntömuutos joka lepää kellotetulla ajalla.
+Kohdan 24 kirjoittajan päätelmä kaatui tässä, koska se vertasi kahta eri pelaajaa toisiinsa.
+
+**Seuraus:** viiden minuutin ero on samaa suuruusluokkaa kuin kohdan 27 nimeämä
+oppimiskynnys (uudet kentät eivät olleet tuttuja), joten se sopii yhteen sen kanssa. Ero on
+kuitenkin yhden pelin havainto kummaltakin, eikä siitä voi laskea mitään. Tämä saa kaatua.
+
+## 41. Superjatsia on pelattu eniten tabletilla
+
+Tommi 21.8.2026 (erä 9), kysyttäessä millä laitteella peliä on tullut pelattua eniten:
+
+> *tablet*
+
+**Seuraus:** sama laite on kirjattu kohdassa 24 kestomittauksen laitteeksi, joten tabletti on
+sekä tekijän että vieraan pelaajan käyttämä pinta. Se sopii pelin muotoon: viisi saraketta ja
+viisitoista riviä on taulukko joka vaatii tilaa, ja `SUPERJATSI.md`:n oma
+responsiivisuusratkaisu (vaakapuhelimessa kaksipalstainen, vierivä tulokortti) on nimenomaan
+kiertotie pienelle näytölle.
+
+**Seuraus:** `TODO.md` kirjaa version 0.12.0 muutoksena että aloitusnäyttö olettaa viisi noppaa
+kapealla näytöllä. Kohdan 29 mukaan kuutta noppaa kuitenkin pelataan enemmän, ja tabletilla
+oletus ei osu kapean näytön haaraan. Oletus koskee siis sitä laitetta jolla peliä pelataan
+vähiten, eikä se ole ristiriita vaan sen vahvistus että kapea näyttö on tälle pelille
+poikkeustapaus.
