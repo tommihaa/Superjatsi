@@ -434,8 +434,8 @@ ajatuksena. Itun idea on huhtikuulta 2026 eli Superjatsia varhaisempi (muistimer
 joten *Itun jälkeen* voi olla tosi ideoiden järjestyksestä ja epätosi rakentamisen
 järjestyksestä. Kumpaa vastaus tarkoitti, ei päätellä tässä.
 
-**Avoin:** tarkoittiko *jakon ja itun jälkeen* rakentamisen vai idean järjestystä. Kysytty
-erässä 5.
+~~**Avoin:** tarkoittiko *jakon ja itun jälkeen* rakentamisen vai idean järjestystä. Kysytty
+erässä 5.~~ *(Suljettu erässä 5, ks. kohta 21.)*
 
 ## 17. Superjatsi oli se idea jolla ohjelmistoprojekti aiottiin aloittaa tekoälyn kanssa
 
@@ -509,5 +509,122 @@ vastaus laajentaa sen yhteen pelaajaan: kaksikymmentä minuuttia on pitkä myös
 **Seuraus:** `SanaMix/SUBSTANSSI.md` kohta 38 kirjaa että englanninkieliset sanapeliapit olivat
 puuhaa radion rinnalle ja että Itu on tietoisesti eri peli eri hetkeen. Superjatsi on tällä
 mittarilla kolmikon vaativin: se ei vaadi vain jakamatonta huomiota vaan pitkän yhtäjaksoisen
-hetken. Onko tämä tietoinen valinta samalla tavalla kuin Itussa, ei ole kysytty. Tämä saa
-kaatua.
+hetken. ~~Onko tämä tietoinen valinta samalla tavalla kuin Itussa, ei ole kysytty.~~
+*(Kysytty ja vastattu erässä 5, ks. kohta 25.)*
+
+## 21. Muistikuva järjestyksestä korjautui, ja git oli oikeassa
+
+Tommi 21.8.2026 (erä 5), kysyttäessä tarkoittiko *Jakon ja Itun jälkeen* rakentamisen vai
+ideoiden järjestystä:
+
+> *ehkä muistelin itun valmistuneen ennen superjatsia*
+
+**Kohdan 16 avoin sulkeutuu, ja se sulkeutuu mittauksen hyväksi.** Kyse ei ollut ideoiden
+järjestyksestä vaan muistikuvasta valmistumisjärjestyksestä, ja se oli väärä. Rakentamisen
+järjestys on Jako, Superjatsi, Itu.
+
+**Seuraus:** muistikuvalle on uskottava syy, eikä se ole unohdus. Itun idea on huhtikuulta 2026
+ja Superjatsin idea lokakuulta 2025, mutta Itun idean ja toteutuksen väli oli lyhyt kun taas
+Superjatsin väli oli seitsemän kuukautta ja sisälsi epäonnistuneen yrityksen. Peli jonka
+tekeminen venyi, muistuu myöhemmäksi kuin peli joka valmistui ripeästi. Tämä on kirjoittajan
+luenta eikä Tommin sanoma, ja se saa kaatua.
+
+**Seuraus menetelmään:** tämä on dokumentin ensimmäinen kohta jossa koneellinen tarkistus
+kaatoi vastauksen eikä kirjoittajan päätelmän. Kolme aiempaa kaatumista olivat kirjoittajan
+omia (kohdat 6, 8 ja 12). Tarkistus tehtiin, koska järjestys oli ainoa erän 4 vastauksista joka
+oli gitistä luettavissa, eikä tarkistamatta jättäminen olisi ollut halvempaa.
+
+## 22. Ensimmäiset toteutuskandidaatit olivat Kasino ja Seiska, ja Jako kasautui vähitellen
+
+Tommi 21.8.2026 (erä 5), kysyttäessä miksi juuri Superjatsi valikoitui aloitusprojektiksi
+tekoälyn kanssa:
+
+> *Kasino ja seiska olivat ensimmäiset kandidaatit, ehkä ai bootcampin jälkeen alkoi
+> kehkeytymään toteutettavia ideoita. kokoelma Jako kasautui pikkuhiljaa huhtikuuhun 2026 ja
+> sitten claude coden kanssa yhteistyötä opetellessa ripeään tahtiin*
+
+Vastaus kertoo kolme asiaa. Ensimmäiset toteutuskandidaatit olivat kaksi korttipeliä, Kasino ja
+Seiska. Toteutettavien ideoiden kehkeytyminen ajoittuu AI Bootcampin jälkeiseen aikaan
+(toukokuu 2024, muistimerkintä `history_ai_bootcamp.md`). Ja Jako ei syntynyt kokoelmana vaan
+kasautui vähitellen huhtikuuhun 2026 asti, minkä jälkeen tahti muuttui ripeäksi Claude Coden
+kanssa työskentelyä opetellessa.
+
+**Seuraus:** *ripeään tahtiin* on mitattavissa ja se pitää paikkansa. Jakon ensimmäinen commit
+on 6.5.2026, ja kaksi kuukautta myöhemmin repossa oli yhdeksän peliä; koko kolmikko rakennettiin
+kuudessa viikossa (6.5., 5.6. ja 17.6.2026). Tahdin muutos ei siis ole vaikutelma vaan näkyy
+historiassa.
+
+**Jännite, jota ei ratkaista tässä.** Kohta 17 sanoo Superjatsin olleen se idea jolla
+ohjelmistoprojekti aiottiin aloittaa tekoälyn kanssa, ja tämä kohta nimeää ensimmäisiksi
+kandidaateiksi Kasinon ja Seiskan. Molemmat voivat olla tosia, jos kandidaatit olivat ideoita
+ja Superjatsi se joka ensimmäisenä oikeasti yritettiin (Lovable, lokakuu 2025). Kysytty
+erässä 6.
+
+## 23. Lovable-yrityksestä ei jäänyt mitään, ja Superjatsi alkoi ennätyskuvaa näyttämällä
+
+Tommi 21.8.2026 (erä 5), kysyttäessä jäikö Lovable-yrityksestä mitään käyttöön:
+
+> *ei, se jäi ja superjatsi alkoi tyhjältä pöydältä se jpg ennätyksestäni näyttämällä*
+
+Lovable-yrityksestä ei siis jäänyt koodia eikä muutakaan, ja kesäkuussa 2026 aloitettiin
+tyhjältä pöydältä. Aloitussyöte oli **kuva**, ja se on kohdan 8 kuvakaappaus.
+
+**Seuraus, ja se muuttaa kohdan 8 luonteen:** kuvakaappaus ei ole vain dokumentaatiota
+esikuvasta vaan projektin ensimmäinen syöte. Superjatsi alkoi siitä että Tommi näytti mallille
+kuvan pelistä, ja sovellus rakennettiin sen pohjalta. Se selittää myös miksi tulokortin muoto
+periytyi niin tarkasti kuin kohta 6 osoittaa: malli näki kortin, se ei kuullut kuvausta siitä.
+
+**Seuraus, ja se sulkee kohdan 9 kysymyksen puoliksi:** Tommi kutsuu kuvaa *ennätyksekseni*,
+joten kuvan tulos 1102 on hänen oma ennätyksensä. Kohdan 9 avoin koski kohdan 6 tiedostoa
+(vuosi 2002, tulos 1010) eikä tätä kuvaa, joten se jää auki siltä osin; mutta kysymys siitä
+oliko kyse ennätystuloksesta saa myönteisen vastauksen ainakin kuvan osalta.
+
+**Seuraus:** kohdan 15 arvio siitä että Lovable-yritys ei kaatunut ideaan vaan käyttörajaan,
+vahvistuu tästä. Sama idea toteutettiin myöhemmin toisella työkalulla samasta lähtökohdasta ja
+se valmistui, joten este oli työkalussa eikä työssä.
+
+## 24. Superjatsia on pelattu, ja pelin kesto mitattiin kellolla
+
+Tommi 21.8.2026 (erä 5), kysyttäessä onko Superjatsia pelannut kukaan muu:
+
+> *kyllä, silloin otettiin aikaa paljonko peli kesti, mitattu toinen peli oli noin 25 minuuttia
+> tablet-ruudulla, ei kommentteja mitä jäisi mieleen*
+
+Peliä on pelattu, ja pelaamisen yhteydessä mitattiin kello kädessä kuinka kauan peli kestää.
+Mitattuja pelejä oli ainakin kaksi, ja toinen niistä kesti noin 25 minuuttia tabletilla.
+Kommentteja ei jäänyt mieleen.
+
+**Seuraus:** tämä on kokoelman ainoa kirjattu tapaus jossa peliä on **mitattu ihmisen
+pelaamana**. Jakolla on koneellinen mittari (`docs/BOTBENCH.md`) ja Itulla kehitysaikainen
+kyllästymiseen asti pelaaminen, mutta kummassakaan ei ole otettu aikaa. Mittaus oli myös
+tarkoituksellinen eikä sivutuote: haluttiin tietää kuinka kauan peli kestää.
+
+**Seuraus:** mitattu luku on suurempi kuin dokumentoitu. `SUPERJATSI.md` perustelee
+pass-and-playn poiston sillä että yksikin peli kestää noin 20 minuuttia, ja mitattu peli kesti
+noin 25. Ero on pieni eikä kumoa perustelua, vaan vahvistaa sen suuntaa.
+
+**Seuraus:** *ei kommentteja mitä jäisi mieleen* on eri asia kuin *ei kysytty*.
+`SanaMix/SUBSTANSSI.md` kohta 39 kirjaa periaatteen että palautetta ei pyydetä vaan otetaan
+vastaan, ja tämä on sen tulos toisessa pelissä: pelaaja oli, palautetta ei tullut.
+
+## 25. Kesto on pelin luonteenomainen piirre, ja toinen nimi-idea oli maratonjatsi
+
+Tommi 21.8.2026 (erä 5), kysyttäessä onko kahdenkymmenen minuutin kesto ongelma jonka hän
+haluaisi ratkaista vai pelin luonne:
+
+> *kesto on pelin luonteenomainen piirre, marathon-jatsi on toinen nimi-idea pelille*
+
+**Seuraus:** tämä sulkee ehdotusluokan ennen kuin sitä ehdotettiin, samalla tavalla kuin
+`SanaMix/SUBSTANSSI.md` kohta 38 sulki Itun kohdalla. Lyhyempi pelimuoto, sarakkeiden
+vähentäminen tai pikatila olisivat kaikki Superjatsin muuttamista siihen suuntaan josta tässä
+sanotaan että se on pelin luonne. Ehdotukset eivät ole kiellettyjä, mutta ne eivät voi nojata
+siihen että kesto olisi vika.
+
+**Seuraus:** nimi-idea *maratonjatsi* on toinen kirjattu nimiehdokas tälle pelille, ja se
+nimeäisi juuri keston. Itun kohdalla vastaava kilpailija oli Verso (`SanaMix/SUBSTANSSI.md`
+kohta 16), ja siellä voittanut nimi valittiin ytimekkyydellä. Tässä nimeksi tuli pistekategorian
+mukainen Superjatsi, eikä valinnan perustetta ole kysytty. Kysytty erässä 6.
+
+**Sanaero jätetään näkyviin:** Tommi kirjoitti *marathon-jatsi* englannin kirjoitusasulla, ja
+suomenkielisessä tekstissä se on *maratonjatsi*. Vastaus on siteerattu sillä asulla jolla se
+annettiin, ja kirjoittajan oma teksti käyttää suomalaista muotoa.
