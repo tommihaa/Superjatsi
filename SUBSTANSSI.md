@@ -1100,8 +1100,11 @@ ALAS, YLÖS) ovat sääntöjä jotka pelaaja pitää itse mielessään ilman ett
 Superjatsin `availableMoves()` valvoo nyt sitä mitä paperi ei voinut valvoa, samalla tavalla
 kuin Itun DAWG tekee sen mitä pöydän sanakirja ei tehnyt (`SanaMix/SUBSTANSSI.md` kohta 24).
 
-**Avoin:** miten muoto kulki bridge-piireistä työkaverille, ja tiedetäänkö kuka matriisin
-paperille tulosti. Ei kysytty.
+~~**Avoin:** miten muoto kulki bridge-piireistä työkaverille, ja tiedetäänkö kuka matriisin
+paperille tulosti. Ei kysytty.~~ **Kysytty erässä 12, ja vastaus on** *en*. Ketju katkeaa siis
+tähän: sukupolvet 1 ja 2 tiedetään olemassa oleviksi muttei sen tarkemmin, eikä tietoa ole
+saatavilla tästä haastattelusta. Sen voisi tietää vain esikuvan tekijä, ja hän on
+`Kaanon/YHTEYDENOTOT.md`:n ensimmäinen kohta.
 
 ## 45. Esikuvaa pelattiin satoja pelejä
 
@@ -1153,5 +1156,60 @@ kunnianosoitus oikeille ihmisille eikä arkkityyppiryhmä). Molemmissa sovelluks
 jotain joka on peräisin tekijän omasta elämästä eikä pelin maailmasta, eikä kumpaakaan näe
 käyttäjälle päin.
 
-**Rajaus:** *en soita enää* on kirjattu koska se annettiin, mutta miksi ja milloin soittaminen
-loppui, ei ole kysytty eikä kuulu tähän dokumenttiin ilman että sitä kysytään.
+**Rajaus, ja se on nyt Tommin vahvistama.** *En soita enää* on kirjattu koska se annettiin,
+eikä siitä kirjata enempää. Tommi 21.8.2026 (erä 12), kysyttäessä kirjataanko soittamisesta
+enemmän:
+
+> *ei enempää, en harrasta mutta pidän äänimaailmoista*
+
+Jälkiosa on silti substanssia ja kirjataan: **kiinnostus on äänimaailmoihin eikä soittamiseen.**
+Se selittää ääniteeman aseman kolmessa pelissä paremmin kuin soittotausta yksin. Teema on
+huolella tehty (`TODO.md`: 0.13.0 vaihtoi synteesin oikeisiin ääninäytteisiin) mutta oletuksena
+pois päältä kaikissa kolmessa, eli äänimaailma on tekijälle tärkeä muttei pelaajalle pakotettu.
+
+## 48. Korjaustarpeet olivat väärä sarakevalinta ja liian nopeat noppien heitot
+
+Tommi 21.8.2026 (erä 12), kysyttäessä esimerkkiä pelatessa nousseista korjaustarpeista:
+
+> *väärä sarakevalinta pisteille, liian nopeat noppien heitot*
+
+Kaksi esimerkkiä, ja ne ovat eri lajia: ensimmäinen on virhe pelin logiikassa tai sen
+käyttöliittymässä, toinen on tuntuma.
+
+**Seuraus:** väärä sarakevalinta on juuri se virhe jonka matriisitulokortti tekee mahdolliseksi
+ja jonka paperi ei estäisi sen paremmin (kohta 44). Viisi saraketta tarkoittaa että jokaiselle
+kirjaukselle on viisi mahdollista kohdetta, ja väärä osuma on yksi klikkaus. `SUPERJATSI.md`:n
+kaksivaiheinen kirjaus (Vahvista ja Peru) on tämän suora vastine, ja `CLAUDE.md` kertoo että
+kulta on varattu pending-tilalle, eli väliaikainen kirjaus erottuu värillä.
+
+**Seuraus:** liian nopeat noppien heitot ovat esimerkki korjaustarpeesta joka ei näy
+säännöissä. Peli oli oikein mutta tuntui väärältä, ja `TODO.md` kirjaa heittoanimaation
+versioon 0.5.0. Tämä on ainoa kohta jossa Superjatsin substanssi koskee tempoa, ja se on
+kiinnostava rinnastus kohtaan 25: kokonaispituus on pelin luonteenomainen piirre, mutta yhden
+heiton pituus oli korjattava.
+
+## 49. Esikuvaa pelattiin sekä työajalla että vapaalla, ja pelaaminen loppui backgammoniin
+
+Tommi 21.8.2026 (erä 12), kysyttäessä pelattiinko esikuvaa työajalla vai vapaa-ajalla ja
+jatkuiko pelaaminen työpaikan jälkeen:
+
+> *sekä että ja ei, koska backgammon tuli intohimokseni ja pelasin myös age of conan-mmorpg
+> aktiivisesti*
+
+Pelaaminen jakautui työajan ja vapaa-ajan kesken, eikä se jatkunut työpaikan jälkeen. Syy ei
+ollut kyllästyminen vaan kaksi muuta peliä: backgammonista tuli intohimo, ja Age of Conan
+-verkkoroolipeliä pelattiin aktiivisesti.
+
+**Seuraus, ja se yhdistää kaksi kokoelman projektia toisiinsa:** se sama harrastus joka lopetti
+esikuvan pelaamisen, on `DGAndroid`in aihe. Superjatsin esikuvakausi päättyi siihen mistä
+DailyGammon-asiakassovellus sai aiheensa, eli kokoelman kaksi projektia ovat saman elämänvaiheen
+kaksi peräkkäistä puolta. Kumpaakaan ei ole kirjattu toisen yhteyteen ennen tätä.
+
+**Seuraus:** *satoja pelejä* (kohta 45) sijoittuu siis rajattuun jaksoon eikä hajalle vuosien
+varrelle. Peliä pelattiin paljon niin kauan kuin sitä pelattiin, ja sitten se loppui kokonaan.
+Sama kuvio toistuu Itussa englanninkielisten sanapeliappien kohdalla
+(`SanaMix/SUBSTANSSI.md` kohta 32: *jäi pois*), eli Tommin pelaamisessa laji vaihtuu kerralla
+eikä hiivu. Tämä on kirjoittajan luenta kahdesta havainnosta, ja se saa kaatua.
+
+**Rajaus:** Age of Conan on tässä mainittu koska se annettiin vastauksessa. Verkkoroolipelaaminen
+ei ole tämän dokumentin aihe, eikä siitä kysytä lisää ilman että sillä on kohde.
