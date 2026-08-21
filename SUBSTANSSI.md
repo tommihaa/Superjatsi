@@ -256,14 +256,125 @@ vahvistuu näkyvänä. Esikuvassa oli molemmat puolet, eli heittäminen ja kirja
 selaimessa widgetinä. Superjatsi ei siis ole ensimmäinen kerta kun tämä peli on ollut selaimessa
 tässä muodossa, vaan toinen.
 
-**Seuraus:** noppia näkyy heittoalueella kahdeksan, mikä on enemmän kuin viisi tai kuusi.
-Kuvasta ei voi päätellä montako noppaa peli käytti, koska osa voi olla koristetta tai
-edellisen heiton jäänteitä; ylälaidan ja vasemman reunan noppanauhat ovat selvästi taustaa.
-Tätä ei arvata, ja se on kysytty erässä 3.
+~~**Seuraus:** noppia näkyy heittoalueella kahdeksan, mikä on enemmän kuin viisi tai kuusi.~~
+*(Luku oli väärä, ks. kohta 12.)* Kuvasta ei voi päätellä montako noppaa peli käytti, koska osa
+voi olla koristetta tai edellisen heiton jäänteitä; ylälaidan ja vasemman reunan noppanauhat
+ovat selvästi taustaa. Tätä ei arvata, ja se on kysytty erässä 3.
 
 **Avoin:** otsikkorivin `tommi | Joensuu` merkitys ei käy kuvasta ilmi. Se voi olla pelaajan
 nimi ja paikkakunta, kaksi pelaajaa, tai jotain muuta. Kysytty erässä 3.
 
-**Avoin:** vastaus annettiin kysymykseen tiedoston arkistoinnista, mutta se on lisäys eikä
+~~**Avoin:** vastaus annettiin kysymykseen tiedoston arkistoinnista, mutta se on lisäys eikä
 päätös arkistoinnista. Kysymys esitetään uudelleen erässä 3, koska arkistointi on Tommin
-päätös eikä kirjoittajan.
+päätös eikä kirjoittajan.~~ *(Päätetty erässä 3, ks. kohta 10.)*
+
+## 9. Vuoden 2002 tiedosto ei ollut Tommin muunnelma, eikä konteksti muistu
+
+Tommi 21.8.2026 (erä 3), kysyttäessä onko kyseessä edelleenlähetys vai hänen oma muunnelmansa,
+koska otsikkotietojen mukaan viesti kulki häneltä työkaverille:
+
+> *ei ollut oma muunnelma enkä muista kontekstia. oliko sen aikainen ennätystulos, oliko
+> ennätykset silloin listattuina*
+
+Vastaus sulkee yhden vaihtoehdon (oma muunnelma) ja jättää loput auki. Miksi tiedosto kulki
+tähän suuntaan, ei siis tiedetä, eikä sitä täytetä päättelemällä.
+
+**Avoin, ja kysymys on Tommin oma:** oliko tiedoston tulos sen aikainen ennätys, ja listattiinko
+ennätyksiä jonnekin. Tähän ei ole vastaajaa tässä dokumentissa. Ainoa vihje on tiedoston nimi
+`Yatzy-enkka.xls.htm`, jossa *enkka* on ennätyksen puhekielinen muoto, mutta nimi ei kerro
+kenen tai minkä tason ennätyksestä on kyse eikä siitä pidettiinkö listaa.
+
+**Seuraus:** jos tulos oli ennätys, tiedoston lähetyssuunta selittyisi luonnollisesti (tuloksen
+näyttäminen tekijälle), ja se sopisi yhteen kohdan 5 kanssa jossa uusi ennätys on toinen
+vetävistä asioista. Tämä on kirjoittajan luenta eikä Tommin sanoma, se lepää arvauksen varassa
+ja se saa kaatua.
+
+## 10. Lähdetiedosto arkistoidaan repoon nimet poistettuina
+
+Tommi 21.8.2026 (erä 3), kysyttäessä mihin lähdetiedostot arkistoidaan:
+
+> *arkistoi docsiin nimet poistettuina*
+
+**Tehty samassa erässä.** Tiedosto on nyt `docs/Yatzy-enkka.xls.htm`. Sähköpostiotsikon kaksi
+henkilönimeä on korvattu merkinnällä `[nimi poistettu]`, ja päiväys `28. tammikuuta 2002 12:05`
+on jätetty paikalleen, koska se on kohdan 6 päiväyksen ainoa lähde. Tiedosto kopioitiin
+tavutasolla, joten sen alkuperäinen merkistö (`iso-8859-1`) ja rakenne säilyivät ennallaan.
+Poiston jälkeen tiedostosta haettiin molemmat nimet, sana `author` ja merkki `@`: nimiä ei
+löytynyt, ja ainoa `@` on Officen sisäinen `cid:`-tunniste eikä sähköpostiosoite.
+
+**Rajaus:** kohdan 8 kuvakaappausta ei arkistoitu, koska sitä ei ole tiedostona käytettävissä.
+Sen sisältö elää siis vain tämän dokumentin kuvauksena.
+
+## 11. Pisteytystavan muutos oli tietoinen, ja Superjatsi on siltä osin oma muunnelma
+
+Tommi 21.8.2026 (erä 3), kysyttäessä oliko siirtymä poikkeamapisteytyksestä noppien summiin
+tietoinen valinta vai seurasiko se yleisemmästä tavasta pelata:
+
+> *tietoinen, tämä oli oma muunnelma*
+
+**Seuraus:** kohdan 7 löydös saa tekijän. Superjatsi ei peri esikuvaltaan pisteytystä vaan
+rakenteen, ja pisteytys on tietoinen poikkeama siitä. Yhdessä kohdan 9 kanssa syntyy selvä
+työnjako: sarakkeet ja tulokortin muoto ovat lainaa, pisteytys on omaa.
+
+**Sanaero jätetään näkyviin, koska se on erotettava kohdasta 9.** Siellä *ei ollut oma
+muunnelma* koskee vuoden 2002 tiedostoa, tässä *tämä oli oma muunnelma* koskee vastauksen
+kohdetta eli pisteytystapaa. Kirjoittaja luki *tämän* pisteytysmuutokseksi, koska kysymys
+koski sitä. Jos vastaus tarkoitti jotain muuta (esimerkiksi kohdan 8 widgetiä, joka on eri
+ohjelma kuin kohdan 6 taulukko), tämä kohta on väärin luettu.
+
+## 12. Heittoalueella on viisi noppaa, ja kirjoittajan laskema kahdeksan oli väärin
+
+Tommi 21.8.2026 (erä 3), kysyttäessä montako noppaa esikuvassa oli käytössä:
+
+> *missä? kuvan heittoalueella lasken olevan viisi noppaa*
+
+**Kirjoittajan havainto kaatui, ja se jätetään näkyviin** (kohta 8). Laskin heittoalueelle
+kahdeksan noppaa, ja niitä on viisi. Vika ei ollut päätelmässä vaan havainnossa: kuvan
+reunoilla ja taustalla on noppakuvia, ja osa niistä tuli lasketuksi mukaan pelialueeseen.
+Vastauksen ensimmäinen sana (*missä?*) on itsessään merkki siitä, että väärä luku oli
+välittömästi tunnistettavissa sille joka katsoi samaa kuvaa.
+
+**Seuraus:** esikuva oli viiden nopan jatsi. Kohta 4 saa siis vahvistuksen toisesta suunnasta:
+kuuden nopan variantti ei ole esikuvasta peritty vaan sovelluksen lisäys, ja sen peruste on
+edelleen se että sitä on pelattu todella harvoin.
+
+**Seuraus menetelmään, koska tämä on eri vikamuoto kuin dokumentin aiemmat.** Kohdissa 6 ja 8
+kaatui kirjoittajan päätelmä, tässä kaatui kirjoittajan **havainto**. Päätelmä on merkitty
+dokumentissa erikseen ja se saa kaatua, mutta havainto kirjoitettiin asiakirjalähteen
+kuvaukseksi eli sinne missä lukija olettaa lukevansa faktaa. Laskettu luku kuvasta on siis
+tarkistettava samalla tavalla kuin päätelmä, eikä sitä erota muodosta.
+
+## 13. Otsikkorivi on pelaaja ja paikkakunta
+
+Tommi 21.8.2026 (erä 3), kysyttäessä mitä `tommi | Joensuu` tarkoittaa:
+
+> *pelaaja, paikkakunta*
+
+**Seuraus:** esikuva tunsi pelaajan nimen ja paikkakunnan, eli se oli tehty ihmisille joiden
+tulokset erotetaan toisistaan. Superjatsi tuntee nimimerkin ennätyslistallaan mutta ei
+paikkakuntaa, ja ennätykset ovat vain laitteen omassa muistissa. Tämä saa kaatua.
+
+## 14. Kolme nyrkkisääntöä pöydästä
+
+Tommi 21.8.2026 (erä 3), kysyttäessä onko hänellä ollut jatsia pelatessa nyrkkisääntöjä:
+
+> *suoria kannattaa yrittää, jos päistä auki*
+> *alas ja ylös-pelaaminen aina kun järkevää*
+> *jatsia kannattaa yrittää, jos epäonnistuneen yrityksen voi merkitä jonnekin onnistumisena*
+
+Kolme sääntöä, ja kaikki kolme ovat riskin hallintaa eivätkä pistemaksimointia.
+
+**Seuraus:** kolmas sääntö on niistä yleisin ja se nimeää koko matriisipelin logiikan.
+Viiden sarakkeen kortissa yksi heitto voi kelvata moneen paikkaan, joten kannattava yritys
+ei ole se jonka onnistumistodennäköisyys on suurin vaan se jonka **epäonnistuminen on
+halvinta**. Tämä on kohdan 5 *pitkässä juoksussa hyötyminen* lausuttuna konkreettisena
+päätössääntönä.
+
+**Seuraus:** toinen sääntö selittää miksi ALAS ja YLÖS ovat pelissä mukana eivätkä vain
+lisävaikeutta. Pakotettu järjestys tekee niistä sarakkeita joita on pelattava silloin kun heitto
+sattuu sopimaan, eli ne kilpailevat jokaisesta heitosta vapaiden sarakkeiden kanssa.
+
+**Seuraus, ja se on ehdotus eikä kirjaus:** nämä kolme ovat valmis pohja neuvotoiminnolle, jos
+sellainen joskus tehdään. Jakossa on Mestarin neuvo (`Jako-pelini/docs/MESTARIN_NEUVO.md`) ja
+Itussa Sanapoliisi, eikä Superjatsissa ole kumpaakaan vastaavaa. Tämä saa kaatua, koska
+neuvotoimintoa ei ole ehdotettu eikä päätetty.
