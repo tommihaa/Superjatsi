@@ -175,11 +175,17 @@ Suuri suora, `Piensuora` → Pieni suora, `Kaksiparia` → Kaksi paria, `Yatzy` 
 ei ole erillistä bonusriviä eikä lainkaan kuuden nopan kategorioita, ja kortin yläosan luvuissa
 on negatiivisia arvoja (`-1`, `-2`, `-4`), joita Superjatsin tulokortti ei tunne soluarvoina.
 
-**Mitä ei väitetä.** Tiedoston näkyvät luvut eivät muodosta johdonmukaista yhden pelin
+~~**Mitä ei väitetä.** Tiedoston näkyvät luvut eivät muodosta johdonmukaista yhden pelin
 tilannetta: sarakkeiden I ja II yläosa on kokonaan täyttämättä (`---`) mutta molempien
 `Yhteensä` on 50. Se voi olla keskeneräinen testitila, mallipohja tai jotain muuta, eikä sitä
-päätellä tässä. Sarakesummat sen sijaan täsmäävät loppusummaan (162 + 254 + 243 + 202 + 149 =
-1010).
+päätellä tässä.~~ Sarakesummat täsmäävät loppusummaan (162 + 254 + 243 + 202 + 149 = 1010).
+
+**Yliviivattu kappale kaatui erässä 2, ja se jätetään näkyviin** (kohta 7). Luvut olivat
+johdonmukaisia koko ajan, ja ainoa mitä puuttui oli pisteytyssääntö: yläosan `Yhteensä` on
+50 johon lisätään rivien poikkeamien summa. Sarake I on 50 juuri siksi että se on tyhjä.
+Tämä on hyvä muistutus siitä että *ei muodosta johdonmukaista tilannetta* on väite eikä
+pidättäytyminen väitteestä: se olettaa että lukija tuntee säännön jonka mukaan lukujen pitäisi
+täsmätä. Varovaisuus oli oikeaa, muotoilu ei.
 
 **Yksityisyysrajaus.** Tiedoston sähköpostiotsikossa on kaksi henkilönimeä, joista toinen on
 kolmannen osapuolen. Tämä repo on julkinen, joten nimiä ei kirjata tänne. Rajaus tehdään samalla
@@ -193,3 +199,71 @@ arkistoitu tähän repoon. Kysymys arkistoinnista ja sen muodosta on esitetty er
 kertoo että viesti on lähetetty Tommilta työkaverille eikä toisin päin. Ero voi selittyä
 monella tavalla (edelleenlähetys, Tommin oma muunnelma, saman tiedoston paluu), eikä sitä
 päätellä. Kysytty erässä 2.
+
+## 7. Yläosa pisteytettiin poikkeamana, ja bonus oli sen koko panos loppusummaan
+
+Tommi toimitti 21.8.2026 (erä 2) kuvakaappauksen esikuvan käyttöliittymästä (kohta 8). Tämä
+kohta on luettu siitä ja edellisen kohdan tiedostosta laskemalla, ei haastatteluvastauksesta.
+
+Kuvakaappauksen tulokortissa yläosan rivit näyttävät etumerkillisiä lukuja (`-2`, `+1`, `+5`,
+`+6`) ja tyhjät solut merkkiä `---`. **Yläosan `Yhteensä` on jokaisessa sarakkeessa 50 johon
+on lisätty sarakkeen poikkeamien summa**, ja tämä pitää kaikissa viidessä sarakkeessa:
+
+| Sarake | Poikkeamat | Summa | `Yhteensä` |
+|---|---|---|---|
+| I | (tyhjä) | 0 | 50 |
+| II | (tyhjä) | 0 | 50 |
+| III | -2, -2, +5 | +1 | 51 |
+| ALAS | -4, +6 | +2 | 52 |
+| YLÖS | +1 | +1 | 51 |
+
+Sama sääntö selittää myös kohdan 6 tiedoston vuodelta 2002 (sarake III: -1 +2 +3 -4 +12 = 12,
+`Yhteensä` 62). Molemmissa tiedostoissa `Summa` on yläosan `Yhteensä` plus alaosan `Yhteensä`,
+ja kuvakaappauksen kaikki viisi saraketta täsmäävät laskettuina (esimerkiksi I: 50 + 171 = 221,
+kokonaisuus 254 + 848 = 1102).
+
+**Seuraus, ja se on erän painavin:** esikuvan pisteytys eroaa Superjatsin pisteytyksestä
+periaatteessa eikä numeroissa. Superjatsissa yläosan rivit tuottavat täsmäävien noppien summan
+ja bonus (+50 tai +100) tulee päälle jos kynnys (63 tai 84) ylittyy. Esikuvassa yläosan rivit
+eivät tuota loppusummaan mitään omaa: ne liikuttavat vain poikkeamaa, ja **yläosan koko panos
+loppusummaan on 50 plus tai miinus se poikkeama.** Kirjattu tapa on tiiviimpi mutta myös
+armottomampi, koska yksi vajaa rivi syö suoraan bonusta.
+
+**Seuraus:** Superjatsin README mainitsee `juokseva poikkeama` yhtenä ominaisuutena. Tämän
+valossa se ei ole apuominaisuus jonka sovellus lisäsi pelaajan avuksi, vaan esikuvan
+pisteytystavan jäänne: siinä poikkeama oli pisteytys itse, tässä se on näytettävä luku
+varsinaisen pisteytyksen rinnalla. Sovellus siis säilytti mittarin ja vaihtoi sen alta säännön.
+Tämä saa kaatua, koska muutosta ei ole kysytty päätöksenä.
+
+**Avoin:** oliko pisteytystavan muutos tietoinen valinta sovellusta tehtäessä vai seurasiko se
+siitä että jatsia pelataan yleisemmin summat kirjaten. Kysytty erässä 3.
+
+## 8. Toinen asiakirjalähde: esikuva oli Opera-widget, ja se näyttää pelin toisen puolen
+
+Tommi toimitti 21.8.2026 (erä 2) kuvakaappauksen esikuvan käyttöliittymästä vastauksena
+kysymykseen tiedoston arkistoinnista. Mitä kuvassa näkyy:
+
+- Ikkunan otsikko on `Yatzy -- Web-valintaikkuna`, oikeassa yläkulmassa lukee `Opera Widgets`,
+  ja päällimmäisenä on Internet Explorerin dialogi tekstillä `Siirrytään tuloksiin`.
+- Tulokortti on rakenteeltaan sama kuin kohdan 6 tiedostossa: samat viisi saraketta ja
+  `=`-sarake, samat rivinimet, ja lisäksi otsikkorivi `tommi | Joensuu`.
+- Ikkunan oikealla puolella on noppien heittoalue: kahdeksan noppaa sirotellen, `Peru`-nappi,
+  ja ylälaidassa sekä vasemmassa reunassa rivi noppakuvia.
+- Loppusumma kuvassa on 1102.
+
+**Seuraus:** kohdan 6 arvio siitä että ohjelma on ollut isompi kuin yksi viety taulukko,
+vahvistuu näkyvänä. Esikuvassa oli molemmat puolet, eli heittäminen ja kirjaaminen, ja se ajoi
+selaimessa widgetinä. Superjatsi ei siis ole ensimmäinen kerta kun tämä peli on ollut selaimessa
+tässä muodossa, vaan toinen.
+
+**Seuraus:** noppia näkyy heittoalueella kahdeksan, mikä on enemmän kuin viisi tai kuusi.
+Kuvasta ei voi päätellä montako noppaa peli käytti, koska osa voi olla koristetta tai
+edellisen heiton jäänteitä; ylälaidan ja vasemman reunan noppanauhat ovat selvästi taustaa.
+Tätä ei arvata, ja se on kysytty erässä 3.
+
+**Avoin:** otsikkorivin `tommi | Joensuu` merkitys ei käy kuvasta ilmi. Se voi olla pelaajan
+nimi ja paikkakunta, kaksi pelaajaa, tai jotain muuta. Kysytty erässä 3.
+
+**Avoin:** vastaus annettiin kysymykseen tiedoston arkistoinnista, mutta se on lisäys eikä
+päätös arkistoinnista. Kysymys esitetään uudelleen erässä 3, koska arkistointi on Tommin
+päätös eikä kirjoittajan.
