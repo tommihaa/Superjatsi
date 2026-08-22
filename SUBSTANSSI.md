@@ -1301,7 +1301,49 @@ peli-idea. Tämä dokumentti ei tunne sitä: kohdat 15 ja 17 päiväävät ensim
 lokakuuhun 2025, ja kohta 22 sanoo vain että toteutettavia ideoita alkoi kehkeytyä *ehkä ai
 bootcampin jälkeen*.
 
-**Väitettä ei kirjata kohdaksi, koska muisti on johdettu kopio** (`KÄSITTEISTÖ.md` §0.2), eikä
-Evernote-muistiinpano ole tässä kokoelmassa tarkistettavissa. Jos se pitää paikkansa, kohtien
-15 ja 17 kaari pitenee puolellatoista vuodella ja idean ensimmäisyys saa päiväyksen. Kysyttävä
-Tommilta, ei pääteltävä.
+~~**Väitettä ei kirjata kohdaksi, koska muisti on johdettu kopio** (`KÄSITTEISTÖ.md` §0.2), eikä
+Evernote-muistiinpano ole tässä kokoelmassa tarkistettavissa.~~ Jos se pitää paikkansa, kohtien
+15 ja 17 kaari pitenee puolellatoista vuodella ja idean ensimmäisyys saa päiväyksen. ~~Kysyttävä
+Tommilta, ei pääteltävä.~~
+
+*Kysytty ja kuitattu ehdollisena 22.8.2026 (erä 14), ks. kohta 53. Väite on nyt kirjattu
+kohdaksi, koska sillä on lähteen kuittaus; muistimerkintä yksin ei olisi riittänyt.*
+
+
+## 53. AI Bootcampin muistiinpano on todennäköisesti idean ensimmäinen päiväys
+
+Tommi 22.8.2026 (erä 14), kohdan 52 neljänteen avoimeen:
+
+> *toukokuun 2024 ai bootcampin ajalle osunut muistiinpano on todennäköisesti idean
+> ensimmäinen päiväys*
+
+**Kuittaus on ehdollinen, ja se säilytetään ehdollisena.** Sana *todennäköisesti* on Tommin,
+eikä sitä pudoteta pois: Evernote-muistiinpano *AI Jatsipeli* 20.–22.5.2024 ei ole tässä
+kokoelmassa tarkistettavissa, joten väite lepää muistin varassa kahdesti, muistimerkinnässä ja
+lähteen omassa muistikuvassa. Kohta kirjataan siis lähteen kuittauksena eikä asiakirjanäyttönä,
+toisin kuin kohtien 6, 8 ja 15 päiväykset.
+
+**Mitä tästä seuraa kohtiin 15, 17 ja 22.** Kohta 22 sanoo toteutettavien ideoiden alkaneen
+kehkeytyä *ehkä ai bootcampin jälkeen*, ja tämä tarkentaa Superjatsin osalta: idea ei syntynyt
+bootcampin jälkeen vaan sen aikana. Kaari saa kolme päiväystä ja pitenee puolellatoista
+vuodella:
+
+| Vaihe | Päiväys | Lähde |
+|---|---|---|
+| Idea | 20.–22.5.2024 | muistiinpano, kuitattu ehdollisena |
+| Ensimmäinen toteutusyritys | 28.10.2025 tai sen jälkeen | Lovablen tervetuloviesti, kohta 15 |
+| Ensimmäinen commit | 5.6.2026 | git, kohta 16 |
+
+**Seuraus, ja se koskee kohtaa 15 eniten:** kulutusraja ei estänyt tuoreen idean toteutusta
+vaan puolitoista vuotta vanhan. Kohta 15 sanoo että este oli työkalussa eikä työssä, ja tämä
+lisää siihen mittakaavan: idea oli ehtinyt odottaa pidempään kuin koko kokoelman rakentaminen
+kesti. Sama havainto on `Kaanon/TYÖTAVAT.md`:ssä kirjattuna kokoelmatasolle 21.8.2026, ja
+tämä kohta antaa sille alkupään päiväyksen.
+
+**Seuraus:** kohdan 17 väite *Superjatsi oli se idea jolla ohjelmistoprojekti aiottiin aloittaa
+tekoälyn kanssa* vahvistuu ja saa syyn. Idea syntyi tekoälykurssilla, joten se oli tekoälyn
+kanssa tehtäväksi tarkoitettu alusta asti eikä vasta työkalua valittaessa. Tämä on kirjoittajan
+päätelmä eikä Tommin lause.
+
+**Rajaus:** vastaus päivää idean, ei sitä milloin vuoden 2002 esikuva palautui mieleen. Ne
+voivat olla sama hetki tai eri, eikä sitä päätellä.
