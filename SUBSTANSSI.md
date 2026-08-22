@@ -268,8 +268,11 @@ pisteytystavan jäänne: siinä poikkeama oli pisteytys itse, tässä se on näy
 varsinaisen pisteytyksen rinnalla. Sovellus siis säilytti mittarin ja vaihtoi sen alta säännön.
 Tämä saa kaatua, koska muutosta ei ole kysytty päätöksenä.
 
-**Avoin:** oliko pisteytystavan muutos tietoinen valinta sovellusta tehtäessä vai seurasiko se
-siitä että jatsia pelataan yleisemmin summat kirjaten. Kysytty erässä 3.
+~~**Avoin:** oliko pisteytystavan muutos tietoinen valinta sovellusta tehtäessä vai seurasiko se
+siitä että jatsia pelataan yleisemmin summat kirjaten. Kysytty erässä 3.~~
+
+*Sulkeutui erässä 15, ks. kohta 54: poikkeama oli mielessä ja jätettiin pois epäilyksen vuoksi,
+eli kumpikaan tarjottu vaihtoehto ei ollut vastaus.*
 
 ## 8. Toinen asiakirjalähde: esikuva oli Opera-widget, ja se näyttää pelin toisen puolen
 
@@ -1347,3 +1350,64 @@ päätelmä eikä Tommin lause.
 
 **Rajaus:** vastaus päivää idean, ei sitä milloin vuoden 2002 esikuva palautui mieleen. Ne
 voivat olla sama hetki tai eri, eikä sitä päätellä.
+
+
+## 54. Poikkeama oli mielessä sovellusta tehtäessä, ja epäilys koski kuutta noppaa
+
+Tommi 22.8.2026 (erä 15), kohdan 7 avoimeen:
+
+> *sovellusta tehtäessä oli poikkeama mielessä, mutta mielessä epäilys toimiiko se yhtä hyvin
+> kuuden nopan pelissä*
+
+**Kohdan 7 avoin sulkeutuu, ja vastaus on kolmas vaihtoehto.** Kysymys tarjosi kahta: oliko
+siirtymä summiin tietoinen valinta vai seurasiko se yleisemmästä tavasta kirjata summat.
+Kumpikaan ei ollut vastaus. Poikkeama oli mielessä eli se harkittiin, ja se jätettiin pois
+**epäilyksen vuoksi**, ei unohduksena eikä tavan mukana. Siirtymä oli siis punnittu muttei
+ratkaistu.
+
+**Seuraus:** kohdan 7 päätelmä `juokseva poikkeama` -ominaisuudesta vahvistuu ja saa syyn. Se ei
+ole jäänne joka jäi vahingossa vaan mittari joka jätettiin näkyviin kun sen alta vaihdettiin
+sääntö, ja vaihdon syy oli epäilys eikä hylkäys. Sovellus siis kantaa molempia: kirjattu
+pisteytys on summat, ja esikuvan mittari on rinnalla luettavana.
+
+**Seuraus:** kohta 19 kertoo että kuuden nopan bonus kaksinkertaistettiin koska kynnys on
+vaikeampi saavuttaa. Se ja tämä epäilys ovat sama havainto kahdesta suunnasta: kuudella nopalla
+yläosa käyttäytyy toisin kuin viidellä, ja Tommi reagoi siihen kahdesti eri kohdissa.
+
+### Kirjoittajan vastaus epäilykseen, ja se saa kaatua
+
+Tämä osio on pyydetty näkemys eikä substanssia. Se ei ole Tommin sanoma, eikä siitä seuraa
+muutosta peliin.
+
+**Epäilys on aiheellinen, mutta syy ei ole noppien määrä vaan pariteetin ja katon suhde.**
+Poikkeamamallissa yläosan koko panos on `50 + Σ(osumat − pari) × silmäluku`, ja kuudella nopalla
+sama malli olisi `100 + Σ(osumat − 4) × silmäluku`. Kaksi asiaa muuttuu yhtä aikaa:
+
+**1. Alaraja syvenee, yläraja ei nouse.** Viidellä nopalla rivin poikkeama on välillä
+−3 ... +2 silmälukua (0 osumaa ... 5 osumaa, pari 3). Kuudella nopalla pari on 4 ja rivi on
+välillä −4 ... +2 (0 osumaa ... 6 osumaa). Ylijäämän katto pysyy siis kahdessa, ja vajeen
+pohja putoaa yhdellä. Kuutosrivillä se on ero −18:n ja −24:n välillä, kun ylälaita on
+molemmissa +12.
+
+**2. Pari on suhteessa kauempana saavutettavasta.** Jos kaikki kolme heittoa käytetään yhteen
+silmälukuun ja osumat pidetään, yksi noppa osuu todennäköisyydellä `1 − (5/6)³ = 0,42`, joten
+odotettu osumamäärä on viidellä nopalla 2,11 ja kuudella 2,53. Pari on 3 ja 4. Suhde pari
+jaettuna odotuksella on siis 1,42 viidellä ja 1,58 kuudella. Luku on karkea, koska kukaan ei
+pelaa kaikkia heittoja yhteen riviin, mutta vertailu on sama molemmilla.
+
+**Ratkaiseva kohta on se, ettei bonuksen korotus auta poikkeamamallissa.** Kynnysmallissa
+vaikeampi kynnys voidaan kompensoida maksamalla enemmän sen ylittämisestä, ja juuri niin kohta
+19 kertoo tehdyn. Poikkeamamallissa ei ole ylittämistä: 50 tai 100 on **perustaso joka
+maksetaan aina**, ja sen korottaminen lisää kaikkien pisteisiin saman vakion muuttamatta
+tasapainoa lainkaan. Kuudella nopalla poikkeamamalli tekisi siis yläosasta järjestelmällisen
+miinuksen eikä neutraalia ankkuria, eikä siihen olisi käytettävissä sitä työkalua jolla ongelma
+tosiasiassa ratkaistiin.
+
+**Näkemys:** nykyinen ratkaisu on oikea, eikä epäilys ollut turha vaan se joka johti siihen.
+Poikkeama toimisi kuudella nopalla vain jos pari laskettaisiin alemmas tai ylijäämä
+hinnoiteltaisiin vajetta kalliimmaksi, ja kumpikin on isompi muutos kuin se mitä se ostaisi.
+
+**Mitä tästä voisi mitata, jos joskus halutaan.** Kysymys on itsepeluulla ratkaistavissa: aja
+sama joukko pelejä ja laske kuinka usein yläosa jää perustason alle kummallakin mallilla.
+Tässä ei ehdoteta sitä tehtäväksi, ja se on kirjattu vain jotta väitteen tarkistustapa on
+tiedossa.
