@@ -1411,3 +1411,39 @@ hinnoiteltaisiin vajetta kalliimmaksi, ja kumpikin on isompi muutos kuin se mit�
 sama joukko pelejä ja laske kuinka usein yläosa jää perustason alle kummallakin mallilla.
 Tässä ei ehdoteta sitä tehtäväksi, ja se on kirjattu vain jotta väitteen tarkistustapa on
 tiedossa.
+
+## 55. Vuoden 2002 tiedoston konteksti ei muistu, mutta ohjelma oli hänen projektinsa ja Tommi testasi sitä
+
+Tommi 23.8.2026, kysyttäessä yhteydenottoluonnoksen yhteydessä onko *sain sinulta* oikea
+sanamuoto vuoden 2002 tiedostosta:
+
+> *2002 tiedostosta en muista tarkkaa kontekstia, se oli hänen projektinsa ja autoin ainakin
+> testaamaan myöhemmin kun se oli pelattava*
+
+Kolme asiaa erikseen, koska ne ovat eri varmuudella sanottuja. **Konteksti ei muistu**, eli
+kohdan 6 avoin kysymys tiedoston kulkusuunnasta jää auki eikä sitä täytetä päättelemällä.
+**Omistajuus on varma:** ohjelma oli työkaverin projekti, mikä vahvistaa kohdan 2 ja sulkee
+pois lukutavan jossa Tommi olisi ollut tekijä. **Oma rooli on uusi tieto:** hän auttoi ainakin
+testaamisessa, ja sana *ainakin* jättää tilaa sille että rooli oli laajempi eikä sitä
+täsmennetä tässä.
+
+**Seuraus:** kohtien 45, 49 ja 50 pelimäärä saa toisen luennan alkupäästään. Satoja pelejä
+vuosina 2002–2008 on kirjattu pelaamisena, ja tämä kohta sanoo että ainakin osa alkupään
+peleistä oli testaamista. Ero on merkityksellinen vain siltä osin kuin se koskee *miksi*
+pelattiin, eikä se muuta yhtään lukua.
+
+**Seuraus, ja tämä on kirjoittajan päätelmä joka saa kaatua:** ajoitus sopii siihen että
+tammikuun 2002 taulukko on ohjelmaa varhaisempi vaihe. Testaaminen tapahtui *myöhemmin kun se
+oli pelattava*, eli pelattavuus on tiedostoa myöhempi tila, ja kohdan 6 tiedosto on Excelistä
+viety tulokortti jonka JavaScript-funktiot puuttuvat. Se sopii kuvaan kortista joka on ollut
+olemassa ennen valmista ohjelmaa. Päätelmä ei ratkaise kulkusuuntaa eikä sitä käytetä siihen.
+
+**Seuraus:** kohdan 52 avointen lista lyhenee yhdellä puolikkaalla. Vuoden 2002 taulukon
+kontekstia ei voi täyttää Tommilta, mikä oli jo tiedossa, mutta nyt tiedetään myös **miksi**:
+kyse ei ole unohtuneesta omasta työstä vaan toisen ihmisen projektin varhaisesta vaiheesta,
+jota Tommi ei ole itse tehnyt. Kysymys kuuluu siis samalle ihmiselle kuin kolme muutakin.
+
+**Seuraus yhteydenottoon:** luonnoksen ensimmäinen kappale kirjoitettiin uudelleen tämän
+mukaan (`Kaanon/docs/superjatsi-esikuva-yhteydenotto-luonnos.md`). Sanamuoto *sain sinulta*
+poistettiin, ja tilalle tuli tulokortti jonka Tommilla on tammikuulta 2002 sekä maininta
+testaajan roolista, koska se on totta ja koska se antaa vastaanottajalle muistin tarttumapinnan.
