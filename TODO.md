@@ -3,15 +3,15 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## UI / UX
-- [ ] Pelin sisäinen muutosloki (kuten Jako-projektissa). Sääntö-overlayn laajennus
-      toteutui 0.17.0:ssa termimoduulina, muutosloki on siitä erillinen kohta.
 - [ ] Asetukset-overlayn laajennus: noppateema (ääniteema toteutettu 0.10.0:ssa).
 
 ## Tekninen
 - [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään, kielituki myöhemmin.
-- [ ] Mahdollinen pelin sisäinen versionäyttö (`__APP_VERSION__`) buildista.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.18.0: pelin sisäinen muutosloki Tietoja-näkymään (data pelaajan kielellä,
+      `src/ui/changelog.ts`). Versionäyttö buildista oli jo tehty 0.16.0:ssa
+      (versioleima aloitusnäytöllä ja Tietoja-näkymässä); TODO-rivi oli jäänyt auki.
 - [x] 0.17.0: termimoduuli sääntöikkunaan (moottori + sääntöteksti dataksi + renderöijä +
       23 testiä), 24 termiä kolmessa kategoriassa ja sanasto-listanäkymä.
 - [x] 0.13.0: torvi & kantele -teema synteesistä oikeisiin ääninäytteisiin (CC0 kantele +

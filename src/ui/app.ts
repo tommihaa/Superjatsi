@@ -11,6 +11,7 @@ import { SetupPrefs, SoundPrefs, type SoundTheme } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
+import { CHANGELOG } from "./changelog";
 import { findTerm } from "./glossary";
 import { glossaryListHtml, rulesListHtml, termNoteHtml } from "./glossary-view";
 import { buildView, type GameView } from "./view";
@@ -23,7 +24,7 @@ import type { StatusBar } from "./status-bar";
 import type { DiceTray } from "./dice-tray";
 import type { ScorecardView } from "./scorecard-view";
 
-type Overlay = "rules" | "about" | "scores" | "settings" | null;
+type Overlay = "rules" | "about" | "scores" | "settings" | "changelog" | null;
 
 // Versioleima: Vite `define` syöttää nämä build-aikana (ks. vite.config.ts).
 declare const __APP_VERSION__: string;
@@ -353,10 +354,11 @@ export class App extends HTMLElement {
     return ov;
   }
 
-  private infoOverlay(kind: "rules" | "about" | "scores" | "settings"): HTMLElement {
+  private infoOverlay(kind: "rules" | "about" | "scores" | "settings" | "changelog"): HTMLElement {
     if (kind === "scores") return this.highscoreOverlay();
     if (kind === "settings") return this.settingsOverlay();
     if (kind === "about") return this.aboutOverlay();
+    if (kind === "changelog") return this.changelogOverlay();
     const body =
       `<h2>${T.rules}</h2>` +
       rulesListHtml(T.rulesLines, T.terms) +
@@ -409,12 +411,37 @@ export class App extends HTMLElement {
             `<a class="other-game" href="${g.url}" target="_blank" rel="noopener"><b>${esc(g.name)}</b><span>${esc(g.blurb)}</span></a>`,
         )
         .join("")}</div>`;
-    const version = `<p class="about-version">${esc(T.version(__APP_VERSION__, __BUILD_DATE__))}</p>`;
-    return this.overlayEl(
+    const version = `<p class="about-version">${esc(T.version(__APP_VERSION__, __BUILD_DATE__))}
+      <button class="linklike" data-act="changelog">${esc(T.changelog)}</button></p>`;
+    const ov = this.overlayEl(
       `<h2>${esc(T.aboutTitle)}</h2>${paras}${links}${otherGames}${install}${version}` +
         `<div class="actions"><button class="primary" data-close="x">${T.close}</button></div>`,
       true,
     );
+    ov.querySelector('[data-act="changelog"]')?.addEventListener("click", () => this.setOverlay("changelog"));
+    return ov;
+  }
+
+  /** Muutosloki pelaajan kielellä (data changelog.ts:ssä, uusin ensin).
+   *  Avataan Tietoja-näkymän versioleiman vierestä; Takaisin palaa Tietoja-näkymään. */
+  private changelogOverlay(): HTMLElement {
+    const esc = (s: string) =>
+      s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!);
+    const entries = CHANGELOG.map(
+      (e) =>
+        `<div class="cl-entry"><h4>${esc(T.changelogVersion(e.version, e.date))}</h4>
+         <ul>${e.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul></div>`,
+    ).join("");
+    const ov = this.overlayEl(
+      `<h2>${esc(T.changelog)}</h2><p class="cl-intro">${esc(T.changelogIntro)}</p>${entries}
+       <div class="actions">
+         <button class="secondary" data-act="back">${T.backToAbout}</button>
+         <button class="primary" data-close="x">${T.close}</button>
+       </div>`,
+      true,
+    );
+    ov.querySelector('[data-act="back"]')?.addEventListener("click", () => this.setOverlay("about"));
+    return ov;
   }
 
   /** Asetukset: äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */

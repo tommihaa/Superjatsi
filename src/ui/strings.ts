@@ -380,4 +380,10 @@ export const T = {
     },
   ] as readonly { title: string; rows: readonly (readonly [string, string])[] }[],
   version: (v: string, date: string) => `Superjatsi v${v} · ${date}`,
+
+  // Muutosloki (data src/ui/changelog.ts:ssä, pelaajan kielellä)
+  changelog: "Muutosloki",
+  changelogIntro: "Mitä pelissä on muuttunut ja miksi. Uusin ensin.",
+  changelogVersion: (v: string, date: string) => `v${v} · ${date}`,
+  backToAbout: "Takaisin",
 } as const;

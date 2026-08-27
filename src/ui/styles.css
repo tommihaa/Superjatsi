@@ -713,6 +713,37 @@ button.term.open {
   text-align: center;
 }
 
+/* ---------- Muutosloki ---------- */
+/* Versioleiman viereinen avauspainike: näyttää linkiltä, on nappi (ei navigointia). */
+.linklike {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 0.5rem;
+  color: var(--text-dim);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.linklike:hover {
+  color: var(--text);
+}
+.cl-intro {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.cl-entry {
+  margin-top: 1rem;
+}
+.cl-entry ul {
+  margin: 0.3rem 0 0;
+}
+.cl-entry li {
+  margin-bottom: 0.45rem;
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
 /* ---------- Juhlaefektit (erinomainen heitto) ---------- */
 .star-storm {
   position: fixed;

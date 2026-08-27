@@ -3,6 +3,16 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.18.0] – 2026-08-28
+
+### Lisätty
+- **Pelin sisäinen muutosloki** (Jakon malli: mekanismi jaettu, data oma). Data
+  `src/ui/changelog.ts` pelaajan kielellä, vain suomeksi; ei CHANGELOG.md:n kopio vaan
+  pelaajalle näkyvät muutokset perusteluineen, vanhat julkaisut koottu jälkikäteen.
+  Avataan Tietoja-näkymän versioleiman vierestä (linkinnäköinen nappi), oma overlay
+  jossa Takaisin palaa Tietoja-näkymään. TODO:n versionäyttökohta todettiin samalla
+  jo tehdyksi 0.16.0:ssa (versioleima aloitusnäytöllä ja Tietoja-näkymässä).
+
 ## [0.17.0] – 2026-08-16
 
 ### Lisätty
