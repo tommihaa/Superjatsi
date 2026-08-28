@@ -7,7 +7,7 @@ import "./scorecard-view";
 import { AverageStore, type AverageEntry } from "../domain/averages";
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
-import { SetupPrefs, SoundPrefs, type SoundTheme } from "../domain/prefs";
+import { DiceThemePrefs, SetupPrefs, SoundPrefs, type DiceTheme, type SoundTheme } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
@@ -57,6 +57,7 @@ export class App extends HTMLElement {
   private readonly averages = new AverageStore(window.localStorage);
   private readonly setupPrefs = new SetupPrefs(window.localStorage);
   private readonly soundPrefs = new SoundPrefs(window.localStorage);
+  private readonly diceThemePrefs = new DiceThemePrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
   /** Soitetaanko ennätysääni: vain kun listalle päässeellä pelaajalla on takanaan
@@ -75,6 +76,7 @@ export class App extends HTMLElement {
     const sound = this.soundPrefs.load();
     setSfxEnabled(sound.enabled);
     setTheme(sound.theme);
+    this.applyDiceTheme(this.diceThemePrefs.load());
     this.bindEvents();
     this.game = this.persistence.load();
     if (this.game?.isOver()) {
@@ -444,15 +446,29 @@ export class App extends HTMLElement {
     return ov;
   }
 
-  /** Asetukset: äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */
+  /** Noppateema koko sovellukselle data-attribuuttina: styles.css lukee sen.
+   *  Jalometalli on oletus eikä tarvitse attribuuttia. */
+  private applyDiceTheme(theme: DiceTheme): void {
+    if (theme === "puu") this.dataset.diceTheme = "puu";
+    else delete this.dataset.diceTheme;
+  }
+
+  /** Asetukset: noppateema + äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */
   private settingsOverlay(): HTMLElement {
     const sound = this.soundPrefs.load();
+    const diceTheme = this.diceThemePrefs.load();
     const btn = (value: boolean, label: string) =>
       `<button class="choice${value === sound.enabled ? " selected" : ""}" data-snd="${value ? "on" : "off"}">${label}</button>`;
     const themeBtn = (value: SoundTheme, label: string) =>
       `<button class="choice${value === sound.theme ? " selected" : ""}" data-theme="${value}">${label}</button>`;
+    const diceBtn = (value: DiceTheme, label: string) =>
+      `<button class="choice${value === diceTheme ? " selected" : ""}" data-dice="${value}">${label}</button>`;
     const ov = this.overlayEl(
       `<h2>${T.settings}</h2>
+       <div class="settings-row">
+         <span class="settings-label">${T.diceTheme}</span>
+         <div class="choice-row">${diceBtn("jalometalli", T.diceThemeMetal)}${diceBtn("puu", T.diceThemeWood)}</div>
+       </div>
        <div class="settings-row">
          <span class="settings-label">${T.sounds}</span>
          <div class="choice-row">${btn(true, T.soundsOn)}${btn(false, T.soundsOff)}</div>
@@ -492,6 +508,14 @@ export class App extends HTMLElement {
         this.soundPrefs.save({ ...sound, theme: chosen });
         setTheme(chosen);
         sfx.confirm(); // ääninäyte uudella teemalla
+        this.render();
+      }),
+    );
+    ov.querySelectorAll<HTMLButtonElement>("[data-dice]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const chosen = b.dataset.dice as DiceTheme;
+        this.diceThemePrefs.save(chosen);
+        this.applyDiceTheme(chosen);
         this.render();
       }),
     );

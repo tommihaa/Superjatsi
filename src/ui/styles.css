@@ -385,6 +385,28 @@ button:focus-visible {
 .die.held {
   border-color: var(--gold);
 }
+/* Puunoppateema (valinnainen, asetuksista): yhtenäinen vaalea puu kaikilla
+   silmäluvuilla, tummat "poltetut" pipit. Syykuvio piirretään gradientilla,
+   ei kuvatiedostoja. Valitsin sj-app[data-dice-theme] on spesifimpi kuin
+   .die.v1..v6, joten järjestyksellä ei ole väliä. */
+sj-app[data-dice-theme="puu"] .die.v1,
+sj-app[data-dice-theme="puu"] .die.v2,
+sj-app[data-dice-theme="puu"] .die.v3,
+sj-app[data-dice-theme="puu"] .die.v4,
+sj-app[data-dice-theme="puu"] .die.v5,
+sj-app[data-dice-theme="puu"] .die.v6 {
+  background:
+    repeating-linear-gradient(100deg, rgba(112, 76, 40, 0.14) 0 2px, transparent 2px 7px),
+    linear-gradient(160deg, #d9ba8e, #b78d5a);
+  border-color: #8a6238;
+}
+sj-app[data-dice-theme="puu"] .die .pip {
+  background: #3a2410;
+}
+/* Lukituksen kulta voittaa myös puuteeman reunan. */
+sj-app[data-dice-theme="puu"] .die.held {
+  border-color: var(--gold);
+}
 .die .pip {
   width: 10px;
   height: 10px;

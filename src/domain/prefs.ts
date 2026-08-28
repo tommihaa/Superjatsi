@@ -13,6 +13,7 @@ export interface SetupDefaults {
 
 const DEFAULT_KEY = "superjatsi:setup";
 const SOUND_KEY = "superjatsi:sound";
+const DICE_THEME_KEY = "superjatsi:dice-theme";
 const DATA_VERSION = 1;
 const MAX_PLAYERS = 6;
 
@@ -46,6 +47,33 @@ export class SetupPrefs {
 }
 
 export type SoundTheme = "oletus" | "torvi-kannel";
+export type DiceTheme = "jalometalli" | "puu";
+
+/** Noppateeman persistointi. Oletus = "jalometalli" (myös puuttuva/rikkinäinen
+ *  tallennus): nykyinen ilme säilyy, "puu" on valinnainen (Tommin kuittaus
+ *  28.8.2026). Sama kaava kuin SoundPrefs. */
+export class DiceThemePrefs {
+  constructor(
+    private readonly backend: StorageLike,
+    private readonly key: string = DICE_THEME_KEY,
+  ) {}
+
+  save(theme: DiceTheme): void {
+    this.backend.setItem(this.key, JSON.stringify({ version: DATA_VERSION, theme }));
+  }
+
+  load(): DiceTheme {
+    const raw = this.backend.getItem(this.key);
+    if (!raw) return "jalometalli";
+    try {
+      const data = JSON.parse(raw) as { version?: number; theme?: unknown };
+      if (data.version !== DATA_VERSION) return "jalometalli";
+      return data.theme === "puu" ? "puu" : "jalometalli";
+    } catch {
+      return "jalometalli";
+    }
+  }
+}
 
 export interface SoundSettings {
   enabled: boolean;

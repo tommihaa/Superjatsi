@@ -3,6 +3,17 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.19.0] – 2026-08-28
+
+### Lisätty
+- **Noppateema asetuksiin** (TODO-kohta, sama valitsinkuvio kuin ääniteemalla 0.10.0:ssa).
+  Kaksi teemaa: Jalometalli (nykyinen ilme, oletus) ja uusi Puu, jossa kaikilla
+  silmäluvuilla on yhtenäinen vaalea puusävy, gradientilla piirretty syykuvio ja tummat
+  pipit; ei kuvatiedostoja. Persistointi `DiceThemePrefs` (`superjatsi:dice-theme`,
+  SoundPrefsin kaava: puuttuva tai rikkinäinen tallennus antaa oletuksen), teema
+  sovelletaan `sj-app`-elementin data-attribuuttina jonka styles.css lukee. Lukituksen
+  kultareuna voittaa puuteeman reunan kuten jalometallinkin. 3 uutta testiä (129 yht.).
+
 ## [0.18.0] – 2026-08-28
 
 ### Lisätty

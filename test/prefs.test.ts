@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SetupPrefs, SoundPrefs } from "../src/domain/prefs";
+import { DiceThemePrefs, SetupPrefs, SoundPrefs } from "../src/domain/prefs";
 import type { StorageLike } from "../src/domain/storage";
 
 class MockStorage implements StorageLike {
@@ -95,5 +95,29 @@ describe("SoundPrefs", () => {
     const backend = new MockStorage();
     backend.setItem("superjatsi:sound", JSON.stringify({ version: 1, enabled: true, theme: "roska" }));
     expect(new SoundPrefs(backend).load()).toEqual({ enabled: true, theme: "oletus" });
+  });
+});
+
+describe("DiceThemePrefs", () => {
+  it("oletus on jalometalli kun tallennusta ei ole", () => {
+    expect(new DiceThemePrefs(new MockStorage()).load()).toBe("jalometalli");
+  });
+
+  it("tallennus → lataus säilyttää teeman (round-trip)", () => {
+    const p = new DiceThemePrefs(new MockStorage());
+    p.save("puu");
+    expect(p.load()).toBe("puu");
+    p.save("jalometalli");
+    expect(p.load()).toBe("jalometalli");
+  });
+
+  it("rikkinäinen tai vääränmuotoinen tallennus → jalometalli, ei kaatumista", () => {
+    const backend = new MockStorage();
+    backend.setItem("superjatsi:dice-theme", "{ rikki");
+    expect(new DiceThemePrefs(backend).load()).toBe("jalometalli");
+    backend.setItem("superjatsi:dice-theme", JSON.stringify({ version: 99, theme: "puu" }));
+    expect(new DiceThemePrefs(backend).load()).toBe("jalometalli");
+    backend.setItem("superjatsi:dice-theme", JSON.stringify({ version: 1, theme: "roska" }));
+    expect(new DiceThemePrefs(backend).load()).toBe("jalometalli");
   });
 });

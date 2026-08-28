@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.19.0",
+    date: "28.8.2026",
+    items: [
+      "Asetuksiin tuli noppateema. Uusi Puu-vaihtoehto näyttää nopat vaaleana puuna, jossa silmäluvut erottuvat tummista pisteistä. Tuttu Jalometalli säilyy oletuksena, ja valintasi muistetaan tällä laitteella.",
+    ],
+  },
+  {
     version: "0.18.0",
     date: "28.8.2026",
     items: [

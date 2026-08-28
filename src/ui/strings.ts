@@ -247,6 +247,9 @@ export const T = {
   soundTheme: "Ääniteema",
   soundThemeDefault: "Oletus",
   soundThemeHornKantele: "Torvi & kantele",
+  diceTheme: "Noppateema",
+  diceThemeMetal: "Jalometalli",
+  diceThemeWood: "Puu",
   trySounds: "🔊 Kokeile ääniä",
   muteSounds: "🔇 Hiljennä äänet",
   sfxLabels: {
