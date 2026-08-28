@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DiceThemePrefs, SetupPrefs, SoundPrefs } from "../src/domain/prefs";
+import { DICE_THEMES, DiceThemePrefs, SetupPrefs, SoundPrefs } from "../src/domain/prefs";
 import type { StorageLike } from "../src/domain/storage";
 
 class MockStorage implements StorageLike {
@@ -103,12 +103,12 @@ describe("DiceThemePrefs", () => {
     expect(new DiceThemePrefs(new MockStorage()).load()).toBe("jalometalli");
   });
 
-  it("tallennus → lataus säilyttää teeman (round-trip)", () => {
+  it("tallennus → lataus säilyttää teeman, kaikki tunnetut arvot (round-trip)", () => {
     const p = new DiceThemePrefs(new MockStorage());
-    p.save("puu");
-    expect(p.load()).toBe("puu");
-    p.save("jalometalli");
-    expect(p.load()).toBe("jalometalli");
+    for (const theme of DICE_THEMES) {
+      p.save(theme);
+      expect(p.load()).toBe(theme);
+    }
   });
 
   it("rikkinäinen tai vääränmuotoinen tallennus → jalometalli, ei kaatumista", () => {

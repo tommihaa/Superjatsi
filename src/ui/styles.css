@@ -403,8 +403,51 @@ sj-app[data-dice-theme="puu"] .die.v6 {
 sj-app[data-dice-theme="puu"] .die .pip {
   background: #3a2410;
 }
-/* Lukituksen kulta voittaa myös puuteeman reunan. */
-sj-app[data-dice-theme="puu"] .die.held {
+/* Norsunluu: klassinen vaalea noppa, tummat pipit. */
+sj-app[data-dice-theme="norsunluu"] .die.v1,
+sj-app[data-dice-theme="norsunluu"] .die.v2,
+sj-app[data-dice-theme="norsunluu"] .die.v3,
+sj-app[data-dice-theme="norsunluu"] .die.v4,
+sj-app[data-dice-theme="norsunluu"] .die.v5,
+sj-app[data-dice-theme="norsunluu"] .die.v6 {
+  background: linear-gradient(160deg, #f2ead8, #d6cbb1);
+  border-color: #b3a685;
+}
+sj-app[data-dice-theme="norsunluu"] .die .pip {
+  background: #26221a;
+}
+/* Kivi: graniitinharmaa, pilkkutekstuuri radial-gradienteilla. */
+sj-app[data-dice-theme="kivi"] .die.v1,
+sj-app[data-dice-theme="kivi"] .die.v2,
+sj-app[data-dice-theme="kivi"] .die.v3,
+sj-app[data-dice-theme="kivi"] .die.v4,
+sj-app[data-dice-theme="kivi"] .die.v5,
+sj-app[data-dice-theme="kivi"] .die.v6 {
+  background:
+    radial-gradient(circle at 30% 35%, rgba(255, 255, 255, 0.2) 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 62%, rgba(0, 0, 0, 0.25) 0 2px, transparent 3px),
+    radial-gradient(circle at 55% 20%, rgba(0, 0, 0, 0.18) 0 1px, transparent 2px),
+    linear-gradient(160deg, #9aa0a8, #6c727c);
+  border-color: #4c525c;
+}
+sj-app[data-dice-theme="kivi"] .die .pip {
+  background: #1d2026;
+}
+/* Yö: obsidiaanintumma runko, vaaleat pipit; reuna erottaa nopan tummasta pöydästä. */
+sj-app[data-dice-theme="yo"] .die.v1,
+sj-app[data-dice-theme="yo"] .die.v2,
+sj-app[data-dice-theme="yo"] .die.v3,
+sj-app[data-dice-theme="yo"] .die.v4,
+sj-app[data-dice-theme="yo"] .die.v5,
+sj-app[data-dice-theme="yo"] .die.v6 {
+  background: linear-gradient(160deg, #33333f, #191920);
+  border-color: #5a5a68;
+}
+sj-app[data-dice-theme="yo"] .die .pip {
+  background: #e6e6f2;
+}
+/* Lukituksen kulta voittaa myös teemojen reunan (kaikki data-dice-theme-arvot). */
+sj-app[data-dice-theme] .die.held {
   border-color: var(--gold);
 }
 .die .pip {

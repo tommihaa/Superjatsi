@@ -1,6 +1,7 @@
 // Kaikki UI-tekstit keskitetysti. i18n lisätään myöhemmin korvaamalla tämä
 // kieliriippuvaisella haulla; komponentit eivät sisällä kovakoodattuja merkkijonoja.
 
+import type { DiceTheme } from "../domain/prefs";
 import type { TermEntry } from "./glossary";
 
 export const T = {
@@ -248,8 +249,14 @@ export const T = {
   soundThemeDefault: "Oletus",
   soundThemeHornKantele: "Torvi & kantele",
   diceTheme: "Noppateema",
-  diceThemeMetal: "Jalometalli",
-  diceThemeWood: "Puu",
+  /** Avaimet = DiceTheme-tallennusarvot (domain/prefs.ts DICE_THEMES). */
+  diceThemeNames: {
+    jalometalli: "Jalometalli",
+    puu: "Puu",
+    norsunluu: "Norsunluu",
+    kivi: "Kivi",
+    yo: "Yö",
+  } satisfies Record<DiceTheme, string>,
   trySounds: "🔊 Kokeile ääniä",
   muteSounds: "🔇 Hiljennä äänet",
   sfxLabels: {

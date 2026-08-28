@@ -7,7 +7,7 @@ import "./scorecard-view";
 import { AverageStore, type AverageEntry } from "../domain/averages";
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
-import { DiceThemePrefs, SetupPrefs, SoundPrefs, type DiceTheme, type SoundTheme } from "../domain/prefs";
+import { DICE_THEMES, DiceThemePrefs, SetupPrefs, SoundPrefs, type DiceTheme, type SoundTheme } from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
 import { T } from "./strings";
@@ -449,7 +449,7 @@ export class App extends HTMLElement {
   /** Noppateema koko sovellukselle data-attribuuttina: styles.css lukee sen.
    *  Jalometalli on oletus eikä tarvitse attribuuttia. */
   private applyDiceTheme(theme: DiceTheme): void {
-    if (theme === "puu") this.dataset.diceTheme = "puu";
+    if (theme !== "jalometalli") this.dataset.diceTheme = theme;
     else delete this.dataset.diceTheme;
   }
 
@@ -461,13 +461,15 @@ export class App extends HTMLElement {
       `<button class="choice${value === sound.enabled ? " selected" : ""}" data-snd="${value ? "on" : "off"}">${label}</button>`;
     const themeBtn = (value: SoundTheme, label: string) =>
       `<button class="choice${value === sound.theme ? " selected" : ""}" data-theme="${value}">${label}</button>`;
-    const diceBtn = (value: DiceTheme, label: string) =>
-      `<button class="choice${value === diceTheme ? " selected" : ""}" data-dice="${value}">${label}</button>`;
+    const diceBtns = DICE_THEMES.map(
+      (value) =>
+        `<button class="choice${value === diceTheme ? " selected" : ""}" data-dice="${value}">${T.diceThemeNames[value]}</button>`,
+    ).join("");
     const ov = this.overlayEl(
       `<h2>${T.settings}</h2>
        <div class="settings-row">
          <span class="settings-label">${T.diceTheme}</span>
-         <div class="choice-row">${diceBtn("jalometalli", T.diceThemeMetal)}${diceBtn("puu", T.diceThemeWood)}</div>
+         <div class="choice-row">${diceBtns}</div>
        </div>
        <div class="settings-row">
          <span class="settings-label">${T.sounds}</span>

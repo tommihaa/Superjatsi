@@ -7,12 +7,16 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 
 ### Lisätty
 - **Noppateema asetuksiin** (TODO-kohta, sama valitsinkuvio kuin ääniteemalla 0.10.0:ssa).
-  Kaksi teemaa: Jalometalli (nykyinen ilme, oletus) ja uusi Puu, jossa kaikilla
-  silmäluvuilla on yhtenäinen vaalea puusävy, gradientilla piirretty syykuvio ja tummat
-  pipit; ei kuvatiedostoja. Persistointi `DiceThemePrefs` (`superjatsi:dice-theme`,
-  SoundPrefsin kaava: puuttuva tai rikkinäinen tallennus antaa oletuksen), teema
-  sovelletaan `sj-app`-elementin data-attribuuttina jonka styles.css lukee. Lukituksen
-  kultareuna voittaa puuteeman reunan kuten jalometallinkin. 3 uutta testiä (129 yht.).
+  Viisi teemaa: Jalometalli (nykyinen ilme, oletus) sekä uudet Puu (yhtenäinen vaalea
+  puusävy, gradientilla piirretty syykuvio, tummat pipit), Norsunluu (klassinen vaalea,
+  tummat pipit), Kivi (graniitinharmaa, pilkkutekstuuri radial-gradienteilla) ja Yö
+  (obsidiaanintumma, vaaleat pipit); ei kuvatiedostoja. Persistointi `DiceThemePrefs`
+  (`superjatsi:dice-theme`, SoundPrefsin kaava: puuttuva tai rikkinäinen tallennus antaa
+  oletuksen), teema sovelletaan `sj-app`-elementin data-attribuuttina jonka styles.css
+  lukee; validit arvot yhdestä `DICE_THEMES`-listasta, josta myös valitsimen napit ja
+  testien round-trip generoituvat. Lukituksen kultareuna voittaa kaikkien teemojen reunan.
+  3 uutta testiä (129 yht.). Uuden teeman lisäysresepti: skill `noppateema`
+  (Projects/.claude/skills).
 
 ## [0.18.0] – 2026-08-28
 

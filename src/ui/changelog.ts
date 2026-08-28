@@ -15,7 +15,7 @@ export const CHANGELOG: readonly ChangelogEntry[] = [
     version: "0.19.0",
     date: "28.8.2026",
     items: [
-      "Asetuksiin tuli noppateema. Uusi Puu-vaihtoehto näyttää nopat vaaleana puuna, jossa silmäluvut erottuvat tummista pisteistä. Tuttu Jalometalli säilyy oletuksena, ja valintasi muistetaan tällä laitteella.",
+      "Asetuksiin tuli noppateema. Tutun Jalometallin rinnalle tulivat Puu, Norsunluu, Kivi ja Yö, joista voit valita nopille mieleisesi ulkoasun. Jalometalli säilyy oletuksena, ja valintasi muistetaan tällä laitteella.",
     ],
   },
   {

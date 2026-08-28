@@ -47,10 +47,13 @@ export class SetupPrefs {
 }
 
 export type SoundTheme = "oletus" | "torvi-kannel";
-export type DiceTheme = "jalometalli" | "puu";
+/** Tallennusarvot ASCII-muodossa ("yo" = Yö): arvo päätyy data-attribuuttiin ja
+ *  localStorageen, pelaajalle näkyvä nimi tulee strings.ts:stä. */
+export const DICE_THEMES = ["jalometalli", "puu", "norsunluu", "kivi", "yo"] as const;
+export type DiceTheme = (typeof DICE_THEMES)[number];
 
 /** Noppateeman persistointi. Oletus = "jalometalli" (myös puuttuva/rikkinäinen
- *  tallennus): nykyinen ilme säilyy, "puu" on valinnainen (Tommin kuittaus
+ *  tallennus): nykyinen ilme säilyy, muut ovat valinnaisia (Tommin kuittaus
  *  28.8.2026). Sama kaava kuin SoundPrefs. */
 export class DiceThemePrefs {
   constructor(
@@ -68,7 +71,7 @@ export class DiceThemePrefs {
     try {
       const data = JSON.parse(raw) as { version?: number; theme?: unknown };
       if (data.version !== DATA_VERSION) return "jalometalli";
-      return data.theme === "puu" ? "puu" : "jalometalli";
+      return DICE_THEMES.includes(data.theme as DiceTheme) ? (data.theme as DiceTheme) : "jalometalli";
     } catch {
       return "jalometalli";
     }
