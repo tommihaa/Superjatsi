@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.19.1",
+    date: "30.8.2026",
+    items: [
+      "Pieni kielenhuolto: ennätysnäkymän kehote päättyy nyt pisteeseen eikä huutomerkkiin.",
+    ],
+  },
+  {
     version: "0.19.0",
     date: "28.8.2026",
     items: [

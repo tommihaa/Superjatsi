@@ -3,6 +3,13 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.19.1] – 2026-08-30
+
+### Muutettu
+- **Huutomerkki pois ennätysten tyhjätekstistä** (Tommin kirjoitustyylilinjaus 30.8.2026,
+  `Kaanon/TYÖTAVAT.md`: Clauden kirjoittama käskylause tai kehote ei pääty huutomerkkiin).
+  "Ei vielä ennätyksiä: pelaa peli loppuun." päättyy nyt pisteeseen.
+
 ## [0.19.0] – 2026-08-28
 
 ### Lisätty
