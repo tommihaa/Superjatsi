@@ -1678,8 +1678,16 @@ ollut vastaus.
 yläosan riviksi, kuten kohdassa 60 jossa *neljä samaa* kuitattiin yläosan riviksi, eikä
 alaosan Kolme samaa- tai Neljä samaa -riviksi. Luennan puolesta puhuu kohta 57: vapaat
 sarakkeet säästetään yläbonuksen takia. Sarakkeen I bonuksen ainoa raaka-aine on
-ensimmäinen heitto jossa on rivin silmälukua vähintään kolme. Jos Tommi tarkoitti alaosan
-rivejä, luenta kaatuu ja sarake I on niiden paikka.
+ensimmäinen heitto jossa on rivin silmälukua vähintään kolme. ~~Jos Tommi tarkoitti alaosan
+rivejä, luenta kaatuu ja sarake I on niiden paikka.~~
+
+*Kysytty ja kuitattu samana iltana.* Tommi 2.9.2026 (erä 17), kun kaksi luentaa esitettiin
+rinnakkain:
+
+> *yläosan*
+
+Luenta piti. Sarake I ottaa yläosan rivin jossa ensimmäinen heitto näyttää rivin silmälukua
+kolme tai neljä kertaa.
 
 **Seuraus:** sarake I on kortin ainoa sarake jossa heittoa ei voi parantaa, joten valinta on
 siellä kahtia: kelpaa tai ei. Tommin kynnys on kolme. Se on sama luku kuin viiden nopan
@@ -1728,6 +1736,11 @@ Mittaus on `docs/ylabonus-mittaus.md` ja skripti `scripts/mittaa_ylabonus.py`.
 **Kirjoittajan luenta, saa kaatua:** *laskea* tarkoittaa kynnyksen (84) alentamista eikä
 laskutapaa. Mittaus palvelee molempia luentoja, koska se laskee kuinka usein kynnys ylittyy
 eri arvoilla.
+
+*Luenta piti. Päätös tehtiin samana iltana.* Tommi valitsi mittauksen kolmesta
+vaihtoehdosta kynnyksen 76 (per noppa skaalattu 63) ja bonukseksi +50 kuten viidellä
+nopalla. Päätös on kirjattu `SUPERJATSI.md` › Yläbonus ja toteutettu versiossa 0.20.0.
+Tämä kohta ei toista perusteluja, ne ovat sopimuksessa ja `docs/ylabonus-mittaus.md`:ssä.
 
 
 ## 65. Neuvotoiminto jää dokumenttiin

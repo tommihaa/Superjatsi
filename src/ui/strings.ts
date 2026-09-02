@@ -40,7 +40,7 @@ export const T = {
     { label: "Heitot", text: "3 per vuoro, nopat saa lukita klikkaamalla." },
     {
       label: "Yläbonus",
-      text: "yläosa ylittää kynnyksen 63 (5 noppaa) → +50, tai 84 (6 noppaa) → +100.",
+      text: "yläosa ylittää kynnyksen 63 (5 noppaa) tai 76 (6 noppaa) → +50.",
     },
     {
       label: "Kombot",
@@ -96,9 +96,9 @@ export const T = {
     {
       term: "Yläbonus",
       selitys:
-        "Kun sarakkeen yläosa yltää kynnykseen, sarake saa lisäpisteet: 63 p viidellä " +
-        "nopalla → +50 p, 84 p kuudella nopalla → +100 p. Kynnys vastaa keskimäärin kolmea " +
-        "(5 noppaa) tai neljää (6 noppaa) samaa per rivi.",
+        "Kun sarakkeen yläosa yltää kynnykseen, sarake saa +50 p: kynnys on 63 p viidellä " +
+        "nopalla ja 76 p kuudella. Kynnys vastaa keskimäärin kolmea (5 noppaa) tai noin " +
+        "kolmea ja puolta (6 noppaa) samaa per rivi.",
       match: ["yläbonus*", "bonuksen", "bonus"],
       kategoria: "Tulokortti",
     },
@@ -316,7 +316,7 @@ export const T = {
   bonusInfo: (threshold: number, value: number) =>
     `Sarakkeen yläosa yhteensä vähintään ${threshold} p → +${value} p`,
   upperSum: "Yläsumma",
-  upperSumInfo: (k: number, threshold: number) =>
+  upperSumInfo: (k: string, threshold: number) =>
     `Vihreä +/punainen - näyttää eron bonustahtiin: bonus vaatii keskimäärin ${k} samaa per rivi. ` +
     `Jos luku on lopussa vähintään 0, yläosa ylsi kynnykseen ${threshold} p.`,
   lowerSum: "Alasumma",

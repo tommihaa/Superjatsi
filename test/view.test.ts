@@ -63,9 +63,9 @@ describe("buildView — juhlaportaat (celebration)", () => {
     expect(v.celebrationCells.some((c) => c.rowId === "threePairs")).toBe(true);
   });
 
-  it("yläbonuksen varmistava kirjaus → GREAT; yhden pisteen vajaus → ei juhlaa", () => {
+  it("yläbonuksen varmistava kirjaus → GREAT; vajaus → ei juhlaa", () => {
     // Kaikki muut solut täyteen paitsi III/neloset; III-sarakkeen muu yläosa
-    // säädetään niin, että kuusi nelosta (24 p) joko ylittää kynnyksen 84 tai ei.
+    // säädetään niin, että kuusi nelosta (24 p) joko ylittää kynnyksen 76 tai ei.
     const setup = (upperOthers: number): GameState => {
       const g = new GameState(["A"], 6, rng4);
       const card = g.players[0].card;
@@ -79,11 +79,11 @@ describe("buildView — juhlaportaat (celebration)", () => {
       g.roll(); // kuusi nelosta → III/neloset 24 p
       return g;
     };
-    // 5 muuta ylärkiviä à 12 = 60; 60 + 24 = 84 = kynnys → bonus varmistuu.
-    const v = buildView(setup(12));
+    // 5 muuta ylärkiviä à 11 = 55; 55 + 24 = 79 ≥ 76 → bonus varmistuu.
+    const v = buildView(setup(11));
     expect(v.celebration).toBe("great");
     expect(v.celebrationCells).toEqual([{ columnId: "III", rowId: "fours" }]);
-    // à 11 = 55; 55 + 24 = 79 < 84 → ei juhlaa.
-    expect(buildView(setup(11)).celebration).toBeNull();
+    // à 10 = 50; 50 + 24 = 74 < 76 → ei juhlaa.
+    expect(buildView(setup(10)).celebration).toBeNull();
   });
 });

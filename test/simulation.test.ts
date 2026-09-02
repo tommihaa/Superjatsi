@@ -66,8 +66,8 @@ describe("Superjatsi — satunnaisbottisimulaatio", () => {
           expect(card.columnTotal(col)).toBe(expected);
 
           // 4) Yläbonus: oikea kynnys ja arvo per variantti.
-          const threshold = dice === 6 ? 84 : 63;
-          const value = dice === 6 ? 100 : 50;
+          const threshold = dice === 6 ? 76 : 63;
+          const value = 50;
           const bonus = card.upperSubtotal(col) >= threshold ? value : 0;
           expect(card.upperBonus(col)).toBe(bonus);
         }

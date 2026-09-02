@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.20.0",
+    date: "2.9.2026",
+    items: [
+      "Kuuden nopan yläbonus muuttui: kynnys laski 84:stä 76:een ja bonus on nyt +50 kuten viidellä nopalla. Mittaus osoitti, että vanha kynnys oli noin viisi kertaa viiden nopan kynnystä vaikeampi. Yläsumman +/- seuraa uutta tahtia, noin 3,6 samaa per rivi.",
+    ],
+  },
+  {
     version: "0.19.1",
     date: "30.8.2026",
     items: [

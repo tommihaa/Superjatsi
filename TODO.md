@@ -6,6 +6,8 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
 - [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään, kielituki myöhemmin.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.20.0: kuuden nopan yläbonus 84/+100 → 76/+50 mittauksen perusteella
+      (`docs/ylabonus-mittaus.md`), poikkeaman rivitahti pyöristettynä (summa = kynnys).
 - [x] 0.19.0: noppateema asetuksiin (Jalometalli oletuksena + Puu, Norsunluu, Kivi ja Yö;
       sama valitsinkuvio kuin ääniteemalla 0.10.0:ssa, valinta muistetaan laitteella;
       lisäysresepti skillissä `noppateema`).

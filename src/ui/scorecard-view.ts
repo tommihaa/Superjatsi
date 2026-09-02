@@ -156,8 +156,10 @@ export class ScorecardView extends HTMLElement {
         })
         .join("");
 
-    // Bonustahti k samaa per rivi: domainin invariantti kynnys = k×21 (scorecard.ts).
-    const bonusPace = b.bonusThreshold / 21;
+    // Bonustahti keskimäärin kynnys/21 samaa per rivi: 3 viidellä nopalla, noin 3,6
+    // kuudella (kynnys 76). Tarkka rivitahti on domainissa (scorecard.ts upperPace).
+    const pace = b.bonusThreshold / 21;
+    const bonusPace = Number.isInteger(pace) ? String(pace) : pace.toFixed(1).replace(".", ",");
     const subtotalRow =
       `<tr class="subtotal"><td class="row-label has-info" ${this.info(T.upperSumInfo(bonusPace, b.bonusThreshold))}>${T.upperSum}</td>` +
       b.columns

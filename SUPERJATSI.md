@@ -38,9 +38,18 @@ kun pelaaja kirjaa tuloksen johonkin avoimeen soluun (tai polttaa rivin).
 ### Yläosa
 Ykköset, Kakkoset, Kolmoset, Neloset, Vitoset, Kutoset: pisteet = täsmäävien noppien summa.
 
-**Yläbonus (per sarake):** kynnys = `silmäluku × k` summattuna (k = 3 viidellä nopalla → 63;
-k = 4 kuudella nopalla → 84). Kynnyksen täyttyessä **+50** (5 noppaa) tai **+100**
-(6 noppaa, kynnys 84).
+**Yläbonus (per sarake):** kynnys on **63** viidellä nopalla (3 × silmäluku summattuna) ja
+**76** kuudella nopalla. Kynnyksen täyttyessä **+50** kummassakin variantissa.
+
+*Päätös 2.9.2026 (Tommi):* kuuden nopan kynnys oli 84 (4 × silmäluku) ja bonus +100.
+Mittaus (`docs/ylabonus-mittaus.md`) osoitti 84:n noin viisi kertaa 63:a vaikeammaksi;
+viiden nopan 63:a vastaava kynnys on 73 ja per noppa skaalattu 75,6. Tommi valitsi 76 ja
++50, koska +100:n peruste (vaikeus, `SUBSTANSSI.md` kohta 19) putosi kynnyksen mukana.
+
+**Juokseva poikkeama** (yläsumman +/−) lasketaan rivitahdista `round(silmäluku × kynnys / 21)`:
+viidellä nopalla 3, 6, 9, 12, 15, 18 (summa 63) ja kuudella 4, 7, 11, 14, 18, 22 (summa 76).
+Tahtien summa on täsmälleen kynnys, joten poikkeama on kokonaisluku ja lopussa vähintään 0
+täsmälleen silloin kun bonus tulee.
 
 ### Alaosa
 | Kategoria | Ehto | Pisteet |

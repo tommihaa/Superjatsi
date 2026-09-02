@@ -27,7 +27,7 @@ Loppusumma = sarakkeiden summa, eli pelin tulos. Tarkat säännöt: [SUPERJATSI.
 - **5 / 6 nopan variantti** valittavissa aloitusnäytöllä (6 = Superjatsi).
 - **Yksinpeli:** oma tulos vastaan omat ennätykset. Domain on N-pelaajakykyinen tulevaa
   verkko-moninpeliä varten, mutta käyttöliittymä ajaa yhtä pelaajaa (0.16.0).
-- 5 sarakerajoitetta + yläbonus per sarake (kynnys 63 / 84, +50) ja juokseva poikkeama.
+- 5 sarakerajoitetta + yläbonus per sarake (kynnys 63 / 76, +50) ja juokseva poikkeama.
 - Alaosa: Pari, Kaksi paria, **Kolme paria** (6 noppaa), Kolme/Neljä samaa, Täyskäsi,
   Pieni/Suuri/**Täys**suora, Sattuma, Jatsi (50) ja **Superjatsi** (100, 6 noppaa).
 - **Kaksivaiheinen kirjaus:** klikkaus = väliaikainen, **Vahvista** siirtää vuoron, **Peru** peruu.

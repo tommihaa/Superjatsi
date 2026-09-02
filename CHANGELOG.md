@@ -3,6 +3,24 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.20.0] – 2026-09-02
+
+### Muutettu
+- **Kuuden nopan yläbonus: kynnys 84 → 76, arvo +100 → +50** (Tommin päätös 2.9.2026,
+  `SUPERJATSI.md` › Yläbonus). Mittaus `docs/ylabonus-mittaus.md` osoitti että 84 on noin
+  viisi kertaa viiden nopan 63:a vaikeampi (paras tahko -mallissa 4 % vs 23 % sarakkeista);
+  76 on 63 skaalattuna per noppa (75,6). +100:n peruste oli vaikeus (`SUBSTANSSI.md`
+  kohta 19), joten se putosi kynnyksen mukana. Viisi noppaa ennallaan (63, +50).
+- **Poikkeaman rivitahti** on nyt `round(silmäluku × kynnys / 21)` (`Scorecard.upperPace`):
+  kuudella nopalla 4, 7, 11, 14, 18, 22, summa täsmälleen 76, joten poikkeama pysyy
+  kokonaislukuna ja on lopussa ≥ 0 täsmälleen silloin kun bonus tulee. Viidellä nopalla
+  sama kuin ennen (3 × silmäluku). Yläsumman selite näyttää tahdin "3,6".
+- Sääntöteksti, termimoduulin Yläbonus-termi, bonusrivin selite ja README päivitetty.
+  Testit: 3 uutta tai muutettua scorecard-testiä, simulaation ja juhlan kynnykset.
+- *Mitä ei tehty:* kuuden nopan vanhat ennätykset jäävät listaan sellaisenaan
+  (migraatiokoneistoa ei rakenneta, `Kaanon/HAUTAKIVET.md`). Kesken oleva tallennettu
+  kuuden nopan peli saa uuden kynnyksen latauksessa, koska bonus lasketaan lennossa.
+
 ## [0.19.1] – 2026-08-30
 
 ### Muutettu

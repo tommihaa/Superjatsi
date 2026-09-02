@@ -6,16 +6,18 @@ import type { CellValue, ColumnId, DiceCount, RowDef, RowId } from "./types";
 // yläbonuksellaan; pelin loppusumma on sarakkeiden summa.
 export class Scorecard {
   readonly rows: readonly RowDef[];
-  /** Yläbonuksen kynnys: k×21, missä k=3 (5 noppaa) tai k=4 (6 noppaa). */
+  /** Yläbonuksen kynnys: 63 viidellä nopalla (3×21), 76 kuudella (Tommin päätös
+   *  2.9.2026 mittauksen docs/ylabonus-mittaus.md perusteella; aiemmin 4×21 = 84). */
   readonly bonusThreshold: number;
-  /** Yläbonuksen arvo: 6 nopalla (kynnys 84) korotettu 100:aan, muuten 50. */
+  /** Yläbonuksen arvo: +50 kummassakin variantissa (6 nopalla aiemmin 100, kun
+   *  kynnys oli 84). */
   readonly bonusValue: number;
   private readonly cells = new Map<ColumnId, Map<RowId, CellValue>>();
 
   constructor(readonly diceCount: DiceCount) {
     this.rows = rowsForVariant(diceCount);
-    this.bonusThreshold = (diceCount === 6 ? 4 : 3) * 21;
-    this.bonusValue = diceCount === 6 ? 100 : 50;
+    this.bonusThreshold = diceCount === 6 ? 76 : 63;
+    this.bonusValue = 50;
     for (const col of COLUMN_IDS) {
       const m = new Map<RowId, CellValue>();
       for (const r of this.rows) m.set(r.id, null);
@@ -62,13 +64,20 @@ export class Scorecard {
     return this.upperSubtotal(col) >= this.bonusThreshold ? this.bonusValue : 0;
   }
 
-  /** Juokseva poikkeama odotusarvosta: Σ(kirjattu − silmäluku×k) täytetyille yläsoluille. */
+  /** Poikkeaman rivitahti: silmäluku × kynnys/21 pyöristettynä kokonaisluvuksi.
+   *  Viidellä nopalla 3×silmäluku (summa 63), kuudella 4, 7, 11, 14, 18, 22
+   *  (summa 76). Tahtien summa on täsmälleen kynnys, joten poikkeama pysyy
+   *  kokonaislukuna ja on lopussa ≥ 0 täsmälleen silloin kun bonus tulee. */
+  upperPace(face: number): number {
+    return Math.round((face * this.bonusThreshold) / 21);
+  }
+
+  /** Juokseva poikkeama odotusarvosta: Σ(kirjattu − rivitahti) täytetyille yläsoluille. */
   upperDeviation(col: ColumnId): number {
-    const k = this.diceCount === 6 ? 4 : 3;
     let dev = 0;
     for (const r of this.upperRows()) {
       const v = this.get(col, r.id);
-      if (v !== null) dev += v - r.face! * k;
+      if (v !== null) dev += v - this.upperPace(r.face!);
     }
     return dev;
   }
