@@ -1,4 +1,4 @@
-import { T } from "./strings";
+import { LANGS, LANG_NAMES, T, getLang } from "./strings";
 import type { DiceCount } from "../domain/types";
 
 // Versioleima: Vite `define` syöttää nämä build-aikana (ks. vite.config.ts).
@@ -44,6 +44,15 @@ export class Setup extends HTMLElement {
       )
       .join("");
 
+    // Kielivalinta myös aloitusnäytöllä: asetusten ratas on vasta pelinäkymässä, ja
+    // vieraskielinen pelaaja ei pääse sinne ymmärtämättä aloitusnäyttöä. Nimet ovat
+    // kielten omia (LANG_NAMES), nykyinen kieli ei ole linkki.
+    const langLinks = LANGS.map((l) =>
+      l === getLang()
+        ? `<span class="current" aria-current="true">${LANG_NAMES[l]}</span>`
+        : `<button type="button" class="linklike" data-lang="${l}">${LANG_NAMES[l]}</button>`,
+    ).join(" · ");
+
     this.innerHTML = `
       <div class="setup">
         <div class="setup-head">
@@ -66,6 +75,7 @@ export class Setup extends HTMLElement {
         </fieldset>
         <button class="primary start">${T.start}</button>
         <p class="setup-version">${T.version(__APP_VERSION__, __BUILD_DATE__)}</p>
+        <p class="setup-lang">${langLinks}</p>
       </div>`;
 
     this.querySelectorAll<HTMLButtonElement>("[data-dice]").forEach((b) =>
@@ -77,6 +87,11 @@ export class Setup extends HTMLElement {
     this.querySelector<HTMLInputElement>("[data-name]")!.addEventListener("input", (e) => {
       this.playerName = (e.target as HTMLInputElement).value;
     });
+    this.querySelectorAll<HTMLButtonElement>("[data-lang]").forEach((b) =>
+      b.addEventListener("click", () => {
+        this.dispatchEvent(new CustomEvent("set-lang", { bubbles: true, detail: { lang: b.dataset.lang } }));
+      }),
+    );
     this.querySelector('[data-act="scores"]')!.addEventListener("click", () => {
       this.dispatchEvent(new CustomEvent("open-highscores", { bubbles: true }));
     });

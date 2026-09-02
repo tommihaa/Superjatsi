@@ -14,6 +14,7 @@ export interface SetupDefaults {
 const DEFAULT_KEY = "superjatsi:setup";
 const SOUND_KEY = "superjatsi:sound";
 const DICE_THEME_KEY = "superjatsi:dice-theme";
+const LANG_KEY = "superjatsi:lang";
 const DATA_VERSION = 1;
 const MAX_PLAYERS = 6;
 
@@ -108,6 +109,38 @@ export class SoundPrefs {
       return { enabled, theme };
     } catch {
       return { enabled: false, theme: "oletus" };
+    }
+  }
+}
+
+/** Tuetut kielet tallennusarvoina. Suomi on totuuden lähde (ui/locales/fi.ts),
+ *  ruotsi lisättiin kokeena 3.9.2026 (mekanismi + yksi kieli, ei vielä päätös
+ *  laajemmasta kielituesta). */
+export const LANGS = ["fi", "sv"] as const;
+export type Lang = (typeof LANGS)[number];
+
+/** Kielivalinnan persistointi. Poikkeaa muista prefseistä siinä että oletus on
+ *  null: puuttuva tai rikkinäinen tallennus tarkoittaa "ei valittu", jolloin
+ *  sovellus päättelee kielen selaimesta (ui/strings.ts › resolveInitialLang). */
+export class LangPrefs {
+  constructor(
+    private readonly backend: StorageLike,
+    private readonly key: string = LANG_KEY,
+  ) {}
+
+  save(lang: Lang): void {
+    this.backend.setItem(this.key, JSON.stringify({ version: DATA_VERSION, lang }));
+  }
+
+  load(): Lang | null {
+    const raw = this.backend.getItem(this.key);
+    if (!raw) return null;
+    try {
+      const data = JSON.parse(raw) as { version?: number; lang?: unknown };
+      if (data.version !== DATA_VERSION) return null;
+      return LANGS.includes(data.lang as Lang) ? (data.lang as Lang) : null;
+    } catch {
+      return null;
     }
   }
 }

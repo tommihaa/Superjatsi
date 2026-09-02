@@ -3,7 +3,9 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## Tekninen
-- [ ] i18n: tekstit ovat keskitetty `strings.ts`:ään, kielituki myöhemmin.
+- [ ] Kielituki: mekanismi ja ruotsi ovat koodissa (Unreleased), julkaisu ja laajempi
+      kielivalikoima ovat Tommin päätös. Natiivitarkistus puuttuu; manifest ja meta-kuvaus
+      ovat suomeksi.
 
 ## Valmis (ks. CHANGELOG)
 - [x] 0.20.0: kuuden nopan yläbonus 84/+100 → 76/+50 mittauksen perusteella

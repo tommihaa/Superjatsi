@@ -7,10 +7,19 @@ import "./scorecard-view";
 import { AverageStore, type AverageEntry } from "../domain/averages";
 import { GameState } from "../domain/game";
 import { HighscoreStore } from "../domain/highscores";
-import { DICE_THEMES, DiceThemePrefs, SetupPrefs, SoundPrefs, type DiceTheme, type SoundTheme } from "../domain/prefs";
+import {
+  DICE_THEMES,
+  DiceThemePrefs,
+  LangPrefs,
+  SetupPrefs,
+  SoundPrefs,
+  type DiceTheme,
+  type Lang,
+  type SoundTheme,
+} from "../domain/prefs";
 import { GamePersistence } from "../domain/storage";
 import type { DiceCount } from "../domain/types";
-import { T } from "./strings";
+import { LANGS, LANG_NAMES, T, getLang, resolveInitialLang, setLang } from "./strings";
 import { CHANGELOG } from "./changelog";
 import { findTerm } from "./glossary";
 import { glossaryListHtml, rulesListHtml, termNoteHtml } from "./glossary-view";
@@ -58,6 +67,7 @@ export class App extends HTMLElement {
   private readonly setupPrefs = new SetupPrefs(window.localStorage);
   private readonly soundPrefs = new SoundPrefs(window.localStorage);
   private readonly diceThemePrefs = new DiceThemePrefs(window.localStorage);
+  private readonly langPrefs = new LangPrefs(window.localStorage);
   /** Juuri päättyneen pelin listalle päässeet sijoitukset (korostusta varten). */
   private newRanks: number[] = [];
   /** Soitetaanko ennätysääni: vain kun listalle päässeellä pelaajalla on takanaan
@@ -73,6 +83,14 @@ export class App extends HTMLElement {
   private lastRollAt = 0;
 
   connectedCallback(): void {
+    // Kieli ennen ensimmäistä renderiä: URL-parametri > tallennettu valinta > selain.
+    setLang(
+      resolveInitialLang(
+        new URLSearchParams(window.location.search).get("lang"),
+        this.langPrefs.load(),
+        navigator.language,
+      ),
+    );
     const sound = this.soundPrefs.load();
     setSfxEnabled(sound.enabled);
     setTheme(sound.theme);
@@ -140,6 +158,7 @@ export class App extends HTMLElement {
     this.addEventListener("open-about", () => this.setOverlay("about"));
     this.addEventListener("open-highscores", () => this.setOverlay("scores"));
     this.addEventListener("open-settings", () => this.setOverlay("settings"));
+    this.addEventListener("set-lang", (e) => this.changeLang((e as CustomEvent).detail.lang as Lang));
     this.addEventListener("new-game", () => {
       // Kesken olevan pelin hylkääminen on peruuttamaton → varmistus
       // (symmetrisesti ennätysten tyhjennyksen kanssa).
@@ -446,6 +465,15 @@ export class App extends HTMLElement {
     return ov;
   }
 
+  /** Kielen vaihto: tallenna, vaihda ja piirrä koko sovellus uusiksi. Sivua ei ladata,
+   *  koska render() rakentaa DOM:n muutenkin tyhjästä ja `T` lukee hetken kielen. */
+  private changeLang(lang: Lang): void {
+    if (!LANGS.includes(lang) || lang === getLang()) return;
+    this.langPrefs.save(lang);
+    setLang(lang);
+    this.render();
+  }
+
   /** Noppateema koko sovellukselle data-attribuuttina: styles.css lukee sen.
    *  Jalometalli on oletus eikä tarvitse attribuuttia. */
   private applyDiceTheme(theme: DiceTheme): void {
@@ -453,7 +481,7 @@ export class App extends HTMLElement {
     else delete this.dataset.diceTheme;
   }
 
-  /** Asetukset: noppateema + äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */
+  /** Asetukset: kieli + noppateema + äänikytkin + ääniteema (ratas palasi headeriin tämän myötä). */
   private settingsOverlay(): HTMLElement {
     const sound = this.soundPrefs.load();
     const diceTheme = this.diceThemePrefs.load();
@@ -465,8 +493,15 @@ export class App extends HTMLElement {
       (value) =>
         `<button class="choice${value === diceTheme ? " selected" : ""}" data-dice="${value}">${T.diceThemeNames[value]}</button>`,
     ).join("");
+    const langBtns = LANGS.map(
+      (l) => `<button class="choice${l === getLang() ? " selected" : ""}" data-lang="${l}">${LANG_NAMES[l]}</button>`,
+    ).join("");
     const ov = this.overlayEl(
       `<h2>${T.settings}</h2>
+       <div class="settings-row">
+         <span class="settings-label">${T.language}</span>
+         <div class="choice-row">${langBtns}</div>
+       </div>
        <div class="settings-row">
          <span class="settings-label">${T.diceTheme}</span>
          <div class="choice-row">${diceBtns}</div>
@@ -512,6 +547,9 @@ export class App extends HTMLElement {
         sfx.confirm(); // ääninäyte uudella teemalla
         this.render();
       }),
+    );
+    ov.querySelectorAll<HTMLButtonElement>("[data-lang]").forEach((b) =>
+      b.addEventListener("click", () => this.changeLang(b.dataset.lang as Lang)),
     );
     ov.querySelectorAll<HTMLButtonElement>("[data-dice]").forEach((b) =>
       b.addEventListener("click", () => {

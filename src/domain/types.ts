@@ -32,15 +32,13 @@ export type DiceCount = 5 | 6;
 /** Rivin metatieto. */
 export interface RowDef {
   id: RowId;
-  /** Suomenkielinen otsikko (i18n myöhemmin keskitetysti). */
-  label: string;
+  /** Rivin nimi ja selite eivät ole täällä: ne ovat kieltä ja asuvat
+   *  ui/locales/*.ts:n `rows`-taulussa rivin tunnisteella. */
   section: "upper" | "lower";
   /** Yläosan riveillä silmäluku 1..6, muuten undefined. */
   face?: number;
   /** Vain 6 nopan variantissa mukana. */
   sixOnly?: boolean;
-  /** Lyhyt kombivaatimuksen selite hover-tooltipiä varten (alaosan rivit). */
-  description?: string;
 }
 
 /** Yhden solun tila: null = tyhjä, luku = kirjattu (0 = poltettu). */

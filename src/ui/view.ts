@@ -2,6 +2,7 @@ import { COLUMN_IDS, OrderedColumn } from "../domain/columns";
 import type { GameState } from "../domain/game";
 import { maxScoreFor } from "../domain/scoring";
 import type { ColumnId, DiceCount, Move, RowId } from "../domain/types";
+import { T } from "./strings";
 
 // Domainista johdettu, serialisoitava näkymämalli. UI-komponentit lukevat vain tätä
 // eivätkä koskaan kutsu domainia suoraan (yksisuuntainen datavirta).
@@ -170,9 +171,9 @@ export function buildView(game: GameState): GameView {
     }
     return {
       id: r.id,
-      label: r.label,
+      label: T.rows[r.id].label,
       section: r.section,
-      ...(r.description !== undefined ? { description: r.description } : {}),
+      ...(T.rows[r.id].description !== undefined ? { description: T.rows[r.id].description } : {}),
       cells,
       sum: card.rowSum(r.id),
     };

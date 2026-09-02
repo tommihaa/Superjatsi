@@ -3,6 +3,37 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Lisätty
+- **Kielituki ja ruotsi, koe** (Tommin päätös 3.9.2026: mekanismi + yksi kieli, ei vielä
+  julkaisua eikä päätöstä laajemmasta kielituesta). Mekanismi on portattu Jakon
+  `i18n.jsx`:stä porttaa-skillin periaatteella (mekanismi jaetaan, data ei): moduulitason
+  aktiivinen kieli ja elävä `T` (`src/ui/strings.ts`, Proxy), suomi totuuden lähteenä
+  (`src/ui/locales/fi.ts`, tyyppi `Strings`) ja ruotsi sen toteutuksena
+  (`src/ui/locales/sv.ts`). Pariteetti on tsc:n työ, ei ajonaikaisen vertailun. Pois jäi
+  React-hook, lazy-chunkit ja monikkoapurit: ne olivat 23 kielen taakkaa. Kielen vaihto
+  renderöi sovelluksen uusiksi ilman sivun latausta.
+- Kielivalinta asetuksiin (sama valitsinkuvio kuin teemoilla) ja aloitusnäytön
+  versioleiman alle, koska ratas on vasta pelinäkymässä. Persistointi `LangPrefs`
+  (`superjatsi:lang`); puuttuva valinta päätellään selaimesta (vain sv-etuliite, muu on
+  suomi), ja `?lang=sv`-parametri voittaa tallennetun muttei tallennu (Jakon linjaus).
+  Dokumentin `lang`-attribuutti seuraa valintaa.
+- Rivien nimet ja selitteet siirtyivät domainista (`categories.ts`) localeen (`rows`),
+  koska ne ovat kieltä eivätkä sääntöä; `RowDef` on nyt vain id, osa, silmäluku ja
+  sixOnly. Nopan tyhjäpaikan aria-label oli ainoa kovakoodattu teksti komponenteissa.
+- Ruotsin termistö: Maxi Yatzyn vakiintuneet nimet (Kåk, Villa, Torn, Chans, stege).
+  Erisnimet Superjatsi ja Jatsi pysyvät kielestä riippumatta (brändi ja tavaramerkkipinta,
+  `Kaanon/HAUTAKIVET.md`). Sarakkeet NER ja UPP ovat termejä, joten sääntöteksti käyttää
+  suuntasanoja nedåt/uppåt (sama ansa kuin suomen alas/ylös). Pelin sisäinen muutosloki
+  jää suomeksi ja ruotsin esittelyrivi sanoo sen.
+- Testit: 13 uutta (`test/i18n.test.ts`: LangPrefs, alkukielen päättely, elävä T,
+  localejen pariteetti, NER/UPP-osumat) ja termistötestit ajetaan nyt kummallekin
+  kielelle (`describe.each`). Yhteensä 150.
+- *Mitä ei tehty:* natiivitarkistusta ei ole (sama varaus kuin Jakossa), manifest ja
+  index.html:n meta-kuvaus ovat yhä suomeksi, tuloskuvan päiväys ja ennätysten päiväys
+  ovat kielineutraaleja ISO-muotoja.
+
 ## [0.20.0] – 2026-09-02
 
 ### Muutettu

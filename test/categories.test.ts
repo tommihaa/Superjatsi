@@ -28,7 +28,7 @@ describe("categories — variantin rivit", () => {
   });
 
   it("rowDef palauttaa oikean määritelmän ja heittää tuntemattomalla", () => {
-    expect(rowDef("fours")).toEqual({ id: "fours", label: "Neloset", section: "upper", face: 4 });
+    expect(rowDef("fours")).toEqual({ id: "fours", section: "upper", face: 4 });
     expect(rowDef("superyatzy").sixOnly).toBe(true);
     // @ts-expect-error tarkoituksellinen tuntematon id ajonaikaista tarkistusta varten
     expect(() => rowDef("eiOle")).toThrow();

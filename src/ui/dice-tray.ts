@@ -65,7 +65,7 @@ export class DiceTray extends HTMLElement {
     const rowDice: string[] = [];
     v.dice.forEach((d, i) => {
       if (d.value === 0) {
-        rowDice.push(`<button class="die empty" disabled aria-label="tyhjä noppa"></button>`);
+        rowDice.push(`<button class="die empty" disabled aria-label="${T.emptyDie}"></button>`);
         return;
       }
       const pips = PIPS[d.value].map((p) => `<span class="pip ${p}"></span>`).join("");

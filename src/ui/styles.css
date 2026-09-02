@@ -777,6 +777,20 @@ button.term.open {
   font-size: 0.85rem;
   text-align: center;
 }
+/* Aloitusnäytön kielivalinta versioleiman alla: muut kielet linkkimäisinä
+   nappeina, nykyinen kieli tekstinä ilman alleviivausta. */
+.setup-lang {
+  margin-top: 0.4rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.setup-lang .linklike {
+  margin: 0;
+}
+.setup-lang .current {
+  color: var(--text);
+}
 
 /* ---------- Muutosloki ---------- */
 /* Versioleiman viereinen avauspainike: näyttää linkiltä, on nappi (ei navigointia). */

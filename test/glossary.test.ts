@@ -6,7 +6,8 @@ import {
   splitWithGlossary,
   type TermEntry,
 } from "../src/ui/glossary";
-import { T } from "../src/ui/strings";
+import { fi } from "../src/ui/locales/fi";
+import { sv } from "../src/ui/locales/sv";
 
 // Testit on kirjoitettu Kaanon/TERMIMODUULI.md:n moottorikontraktia vasten
 // (kuusi kohtaa), ei sisarkopioita lukemalla.
@@ -85,7 +86,10 @@ describe("splitWithGlossary — kontrakti", () => {
   });
 });
 
-describe("Superjatsin termistö", () => {
+describe.each([
+  ["fi", fi],
+  ["sv", sv],
+] as const)("Superjatsin termistö (%s)", (_lang, T) => {
   it("skeemaversio on 1 ja jokaisella termillä on pakolliset kentät", () => {
     expect(TERM_SCHEMA_VERSION).toBe(1);
     for (const t of T.terms) {
@@ -117,21 +121,24 @@ describe("Superjatsin termistö", () => {
   });
 
   it("kombot-rivi korostaa kaikki neljätoista alaosan kategoriaa", () => {
-    const line = T.rulesLines.find((l) => l.label === "Kombot")!;
+    // Kombot on neljäs sääntörivi ja kolmas kategoria kummallakin kielellä;
+    // nimet ovat kieltä, paikka ei.
+    const line = T.rulesLines[3];
+    const comboCat = groupByCategory(T.terms)[2].kategoria;
     const hit = new Set(
       splitWithGlossary(line.text, T.terms)
         .filter((p) => p.isTerm)
         .map((p) => p.term),
     );
-    for (const t of T.terms.filter((x) => x.kategoria === "Kombot")) {
+    for (const t of T.terms.filter((x) => x.kategoria === comboCat)) {
       expect(hit.has(t.term), t.term).toBe(true);
     }
-    expect(T.terms.filter((x) => x.kategoria === "Kombot")).toHaveLength(14);
+    expect(T.terms.filter((x) => x.kategoria === comboCat)).toHaveLength(14);
   });
 
-  it("ryhmittely säilyttää kaikki termit ja kategorioiden esiintymisjärjestyksen", () => {
+  it("ryhmittely säilyttää kaikki termit ja kolme kategoriaa esiintymisjärjestyksessä", () => {
     const groups = groupByCategory(T.terms);
-    expect(groups.map((g) => g.kategoria)).toEqual(["Tulokortti", "Vuoro", "Kombot"]);
+    expect(groups).toHaveLength(3);
     expect(groups.reduce((n, g) => n + g.terms.length, 0)).toBe(T.terms.length);
   });
 });

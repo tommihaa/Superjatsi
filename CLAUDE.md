@@ -22,7 +22,10 @@ Vite + TypeScript + Web Components (light DOM). **Ei Reactia, ei ajonaikaisia ri
 - `src/ui/`: tyhmät Web Componentit. Datavirta yksisuuntainen: domain → `buildView()`
   (`view.ts`) → GameView propsina alas, CustomEvent-eventit ylös `sj-app`:iin, joka
   omistaa GameStaten ja persistoinnin.
-- Kaikki UI-tekstit `src/ui/strings.ts`:ssä: ei kovakoodattuja merkkijonoja komponentteihin.
+- Kaikki UI-tekstit localeissa: `src/ui/locales/fi.ts` on totuuden lähde ja `Strings`-tyyppi,
+  `sv.ts` toteuttaa sen, komponentit lukevat `src/ui/strings.ts`:n elävää `T`:tä. Ei
+  kovakoodattuja merkkijonoja komponentteihin. Rivien nimet ovat localen `rows`-taulussa,
+  eivät domainissa. Erisnimet (Superjatsi, Jatsi) eivät käänny.
 
 ## Sopimus ennen toteutusta
 

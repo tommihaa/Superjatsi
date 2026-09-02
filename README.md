@@ -45,7 +45,8 @@ Pelitila (domain) on tiukasti irti käyttöliittymästä, yksisuuntainen datavir
   (sarakerajoitteet strategiakuviona), `scorecard`, `game` (GameState), `storage` (localStorage),
   `highscores` (ennätyslista).
 - `src/ui/`: tyhmät Web Componentit, jotka lukevat domainista johdetun näkymämallin
-  (`view.ts` → GameView) ja emittoivat eventtejä ylös. Tekstit keskitetty `strings.ts`:ään.
+  (`view.ts` → GameView) ja emittoivat eventtejä ylös. Tekstit luetaan `strings.ts`:n
+  elävästä `T`:stä; kielet ovat `locales/fi.ts` (totuuden lähde) ja `locales/sv.ts`.
 - `test/`: Vitest-testit (domain).
 
 ## Kehitys
