@@ -412,8 +412,9 @@ sattuu sopimaan, eli ne kilpailevat jokaisesta heitosta vapaiden sarakkeiden kan
 
 **Seuraus, ja se on ehdotus eikä kirjaus:** nämä kolme ovat valmis pohja neuvotoiminnolle, jos
 sellainen joskus tehdään. Jakossa on Mestarin neuvo (`Jako-pelini/docs/MESTARIN_NEUVO.md`) ja
-Itussa Sanapoliisi, eikä Superjatsissa ole kumpaakaan vastaavaa. Tämä saa kaatua, koska
-neuvotoimintoa ei ole ehdotettu eikä päätetty.
+Itussa Sanapoliisi, eikä Superjatsissa ole kumpaakaan vastaavaa. ~~Tämä saa kaatua, koska
+neuvotoimintoa ei ole ehdotettu eikä päätetty.~~ *Kysytty ja päätetty 2.9.2026 (erä 17):
+pelitapa jää dokumenttiin, kohta 65.*
 
 ## 15. Ensimmäinen yritys tehtiin Lovablella, ja se kaatui käyttörajaan parissa promptissa
 
@@ -1660,3 +1661,88 @@ kertoo yhden syyn miksi kokenut pelaaja pelaa nopeasti: ensimmäinen päätös o
 tehty. Kohdan 27 kestomittauksen pelaajalle uudet kentät olivat vieraita, ja tämän kohdan
 sääntö on juuri sellainen jota ei voi tietää ennen kuin YLÖS-sarakkeen logiikan on kerran
 kokenut.
+
+
+## 62. Sarakkeeseen I menee ensimmäinen heitto jossa on kolme tai neljä samaa
+
+Tommi 2.9.2026 (erä 17), kysyttäessä millainen ensimmäinen heitto menee sarakkeeseen I, vai
+päättääkö hän sen vasta kun kortti on muuten täynnä:
+
+> *kolme tai neljä samaa*
+
+Vastaus on heiton muoto eikä ajoitus. Sarake I ottaa ensimmäisen heiton kun siinä on kolme
+tai neljä samaa silmälukua. Kysymyksen toinen vaihtoehto, sarakkeen täyttäminen lopussa, ei
+ollut vastaus.
+
+**Seuraus, ja tämä on kirjoittajan luenta joka saa kaatua:** *kolme tai neljä samaa* luetaan
+yläosan riviksi, kuten kohdassa 60 jossa *neljä samaa* kuitattiin yläosan riviksi, eikä
+alaosan Kolme samaa- tai Neljä samaa -riviksi. Luennan puolesta puhuu kohta 57: vapaat
+sarakkeet säästetään yläbonuksen takia. Sarakkeen I bonuksen ainoa raaka-aine on
+ensimmäinen heitto jossa on rivin silmälukua vähintään kolme. Jos Tommi tarkoitti alaosan
+rivejä, luenta kaatuu ja sarake I on niiden paikka.
+
+**Seuraus:** sarake I on kortin ainoa sarake jossa heittoa ei voi parantaa, joten valinta on
+siellä kahtia: kelpaa tai ei. Tommin kynnys on kolme. Se on sama luku kuin viiden nopan
+bonuskynnys per rivi (63 = 3 × 21). Sarakkeen I heitto kelpaa siis kun se pitää bonustahdin.
+
+
+## 63. Sattuma on kaatopaikka
+
+Tommi 2.9.2026 (erä 17), kysyttäessä onko Sattuma tavoite hyvälle summalle vai kaatopaikka
+heitolle joka ei sovi mihinkään:
+
+> *kaatopaikka*
+
+**Seuraus:** Sattuma on polton (kohta 56) lievempi muoto. Se ottaa heiton joka ei sovi
+mihinkään ja maksaa siitä noppien summan. Viidessä sarakkeessa on viisi Sattumaa eli viisi
+pehmeää polttoa ennen kuin ensimmäinen kova poltto on pakollinen. Kohdan 56 *vaikea ruutu
+ensin* ja tämä kohta ovat saman päätöksen kaksi porrasta, ensin Sattuma ja sitten vaikea
+ruutu.
+
+**Seuraus:** Sattuma-rivin pisteet eivät kerro pelaajan taidosta vaan siitä mitä muualle ei
+mahtunut. Se kannattaa tietää ennen kuin tuloskuvasta (kohta 42) päätellään mitään
+sattumariveistä.
+
+
+## 64. Kuudella nopalla ALAS-sarakkeen bonus tulee harvoin
+
+Tommi 2.9.2026 (erä 17), kysyttäessä saako hän ALAS-bonuksen kuudella nopalla käytännössä
+koskaan, kun kohdan 60 päätelmä sanoo että kuudella nopalla neljä samaa on kynnys eikä
+ylijäämä:
+
+> *harvoin*
+
+Kohdan 60 päätelmä piti. Viidellä nopalla ALAS-bonus on saavutettavissa (kohta 60), kuudella
+harvoin.
+
+**Seuraus:** kohta 19 (bonus kaksinkertaistettiin koska se on vaikeampi saavuttaa) saa
+pelaajan vahvistuksen. Vaikeus ei ole vain laskennallinen vaan koettu. Se koskee myös sitä
+saraketta jossa bonus viidellä nopalla on ohjattavissa.
+
+Tommi jatkoi samassa vastauksessa ilman kysymystä:
+
+> *Kuudella nopalla yläbonus on vaikeampi saavuttaa ja siksi mittaa miten sitä voisi laskea*
+
+Tämä on toimeksianto eikä substanssia. Se on kirjattu tähän koska se on vastauksen jatko.
+Mittaus on `docs/ylabonus-mittaus.md` ja skripti `scripts/mittaa_ylabonus.py`.
+**Kirjoittajan luenta, saa kaatua:** *laskea* tarkoittaa kynnyksen (84) alentamista eikä
+laskutapaa. Mittaus palvelee molempia luentoja, koska se laskee kuinka usein kynnys ylittyy
+eri arvoilla.
+
+
+## 65. Neuvotoiminto jää dokumenttiin
+
+Tommi 2.9.2026 (erä 17), kysyttäessä haluaako hän Superjatsiin neuvon Jakon Mestarin neuvon
+tapaan vai jääkö pelitapa dokumenttiin:
+
+> *jätä dokumenttiin*
+
+Kohdan 14 ehdotus kaatui. Se on kirjattu hautakiveksi (`Kaanon/HAUTAKIVET.md` › Superjatsi).
+
+**Seuraus:** pelitapa (kohdat 14, 56, 57, 60, 61, 62 ja 63) on tästä eteenpäin dokumentin
+sisältöä eikä ominaisuuden speksi. Se ei tarkoita ettei sitä voisi lukea kuin speksiä, vaan
+ettei sitä lueta niin ilman uutta pyyntöä.
+
+**Seuraus, ja se on kirjoittajan päätelmä:** Superjatsi on kolmesta pelistä ainoa jolla ei ole
+neuvojaa. Se on nyt päätös eikä puute. Kohta 5 sanoo että pelissä vetää oma
+todennäköisyyksien pohtiminen ja neuvoja veisi juuri sen.
