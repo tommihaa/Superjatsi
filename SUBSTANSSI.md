@@ -1563,8 +1563,17 @@ este oli pelin kesto, tässä muiden pelien vetovoima.
 **Seuraus:** noppateemat ovat siis ominaisuus jota tekijä ei ole itse käyttänyt. Se on eri
 asema kuin äänillä: kohta 47 sanoo että torvi ja kantele ovat Tommin omia soittimia, eli
 ääniteemalla on henkilökohtainen lähde, ja noppateemoilla sellaista ei tähän mennessä ole.
-Kysymys esikuvasta on kysytty muttei vastattu, ja se jää auki eikä sitä täytetä
-päättelemällä.
+~~Kysymys esikuvasta on kysytty muttei vastattu, ja se jää auki eikä sitä täytetä
+päättelemällä.~~
+
+*Kysytty uudelleen ja vastattu.* Tommi 2.9.2026 (erä 16), kysyttäessä onko hänellä tai oliko
+Laiturilla tai lapsuudessa noppia joiden ulkonäkö vastaa jotakin neljästä teemasta:
+
+> *ei ole ollut esikuvanoppia*
+
+Noppateemoilla ei siis ole henkilökohtaista lähdettä, ja ero ääniteemaan on nyt kirjattu
+vastauksena eikä puutteena. Puu, Norsunluu, Kivi ja Yö ovat kirjoittajan ehdotuksia jotka
+Tommi hyväksyi, eivät muistoja.
 
 **Seuraus:** *muut pelit vievät huomioni* on kolmas muotoilu samasta ilmiöstä. Itua ei pelata
 koska muut projektit vievät ajan (`SanaMix/SUBSTANSSI.md` kohta 13), Superjatsia ei pelata
@@ -1596,9 +1605,16 @@ kummasta päästä se alkaa.
 riviksi jossa neljä noppaa näyttää rivin silmälukua. Viidellä nopalla bonuksen kynnys on
 kolme per rivi (`SUPERJATSI.md`, kynnys 63), joten neljä samaa antaa yhden silmäluvun
 ylijäämän, joka kattaa jonkin toisen rivin vajeen. Neljän samaan pyrkiminen ALAS-sarakkeen
-yläosassa on siis bonuksen varmistamista etukäteen, ei tavoittelua lopussa. Jos Tommi
+yläosassa on siis bonuksen varmistamista etukäteen, ei tavoittelua lopussa. ~~Jos Tommi
 tarkoitti alaosan neljän samaa -riviä, luenta kaatuu, mutta silloin vastaus ei selittäisi
-bonusta, joten yläosan luenta on todennäköisempi.
+bonusta, joten yläosan luenta on todennäköisempi.~~
+
+*Kysytty ja kuitattu.* Tommi 2.9.2026 (erä 16), kun kaksi luentaa esitettiin rinnakkain:
+
+> *yläosan rivi*
+
+Luenta piti. Neljä samaa tarkoittaa yläosan riviä jossa neljä noppaa näyttää rivin
+silmälukua, ja se on ALAS-sarakkeen bonuksen keino.
 
 **Seuraus:** kohta 4 sanoo että kuudella nopalla on pelattu harvoin ja kohta 19 että kuuden
 nopan bonus kaksinkertaistettiin, koska kynnys on vaikeampi. Tämä kohta on viiden nopan
