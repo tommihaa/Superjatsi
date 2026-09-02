@@ -46,14 +46,14 @@ describe("LangPrefs", () => {
 });
 
 describe("alkukielen päättely", () => {
-  it("selaimen kieli: sv- ja en-etuliitteet tunnistetaan, muu putoaa suomeen", () => {
+  it("selaimen kieli: fi ja sv tunnistetaan, muu ja puuttuva putoaa englantiin", () => {
+    expect(detectLang("fi-FI")).toBe("fi");
+    expect(detectLang("fi")).toBe("fi");
     expect(detectLang("sv-SE")).toBe("sv");
     expect(detectLang("sv")).toBe("sv");
     expect(detectLang("en-US")).toBe("en");
-    expect(detectLang("en")).toBe("en");
-    expect(detectLang("fi-FI")).toBe("fi");
-    expect(detectLang("de-DE")).toBe("fi");
-    expect(detectLang(undefined)).toBe("fi");
+    expect(detectLang("de-DE")).toBe("en");
+    expect(detectLang(undefined)).toBe("en");
   });
 
   it("URL-parametri voittaa tallennetun, tallennettu selaimen", () => {
@@ -61,6 +61,7 @@ describe("alkukielen päättely", () => {
     expect(resolveInitialLang(null, "sv", "fi-FI")).toBe("sv");
     expect(resolveInitialLang(null, null, "sv-FI")).toBe("sv");
     expect(resolveInitialLang("de", null, "fi-FI")).toBe("fi");
+    expect(resolveInitialLang(null, null, "de-DE")).toBe("en");
     expect(resolveInitialLang("en", "sv", "fi-FI")).toBe("en");
   });
 });

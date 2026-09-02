@@ -38,14 +38,15 @@ export function setLang(lang: Lang): void {
 
 export const isLang = (x: unknown): x is Lang => LANGS.includes(x as Lang);
 
-/** Selaimen kieli → tuettu kieli. Ruotsin ja englannin etuliitteet tunnistetaan;
- *  kaikki muu putoaa suomeen, koska suomi on totuuden lähde. Muille kielille ei
- *  oleteta englantia: se olisi arvaus jota vierailija ei ole pyytänyt. */
+/** Selaimen kieli → tuettu kieli. Suomen ja ruotsin etuliitteet tunnistetaan; kaikki
+ *  muu, myös puuttuva tieto, putoaa englantiin (Tommin päätös 3.9.2026: englanti
+ *  palvelee tuntematonta vierailijaa paremmin kuin suomi). Tallennettu valinta ja
+ *  URL-parametri menevät tämän edelle (resolveInitialLang). */
 export function detectLang(navLang: string | undefined): Lang {
   const l = navLang ?? "";
+  if (/^fi/i.test(l)) return "fi";
   if (/^sv/i.test(l)) return "sv";
-  if (/^en/i.test(l)) return "en";
-  return "fi";
+  return "en";
 }
 
 /** Alkukieli: URL-parametri voittaa tallennetun valinnan, tallennettu selaimen.

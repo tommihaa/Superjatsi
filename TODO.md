@@ -3,9 +3,15 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## Tekninen
-- [ ] Kielituki: mekanismi, ruotsi ja englanti ovat koodissa (Unreleased), julkaisu ja laajempi
-      kielivalikoima ovat Tommin päätös. Natiivitarkistus puuttuu; manifest ja meta-kuvaus
-      ovat suomeksi.
+- [ ] Kielituki: mekanismi, ruotsi ja englanti ovat koodissa (Unreleased), julkaisu on
+      Tommin päätös. Natiivitarkistus puuttuu; manifest ja meta-kuvaus ovat suomeksi.
+- [ ] Kielivalikoima ei ole lukittu (Tommin päätös 3.9.2026): uusi kieli on yksi
+      `locales/xx.ts`, LANGS-rivi, LANG_NAMES-nimi ja detectLang-haara; tsc kertoo puutteet.
+      Ei siis Jakon kaltaista parkkia, mutta ei myöskään oma-aloitteista lisäystä.
+- [ ] Erisnimet käännöksissä, päätettävä erikseen (3.9.2026): sv ja en käyttävät nyt nimiä
+      Jatsi ja Superjatsi. Vaihtoehto Yatzy ja Maxi Yatzy kytkeytyy parkissa olevaan
+      jatsi-kanonisointiin (`Kaanon/HAUTAKIVET.md`, tavaramerkkisyy), joten päätös koskee
+      molempia yhtä aikaa.
 
 ## Valmis (ks. CHANGELOG)
 - [x] 0.20.0: kuuden nopan yläbonus 84/+100 → 76/+50 mittauksen perusteella

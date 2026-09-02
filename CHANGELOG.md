@@ -16,8 +16,8 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
   renderöi sovelluksen uusiksi ilman sivun latausta.
 - Kielivalinta asetuksiin (sama valitsinkuvio kuin teemoilla) ja aloitusnäytön
   versioleiman alle, koska ratas on vasta pelinäkymässä. Persistointi `LangPrefs`
-  (`superjatsi:lang`); puuttuva valinta päätellään selaimesta (sv- ja en-etuliitteet, muu
-  on suomi eikä englanti, koska arvausta ei ole pyydetty), ja `?lang=sv`-parametri voittaa tallennetun muttei tallennu (Jakon linjaus).
+  (`superjatsi:lang`); puuttuva valinta päätellään selaimesta (fi- ja sv-etuliitteet, kaikki
+  muu on englanti, Tommin päätös 3.9.2026), ja `?lang=sv`-parametri voittaa tallennetun muttei tallennu (Jakon linjaus).
   Dokumentin `lang`-attribuutti seuraa valintaa.
 - Rivien nimet ja selitteet siirtyivät domainista (`categories.ts`) localeen (`rows`),
   koska ne ovat kieltä eivätkä sääntöä; `RowDef` on nyt vain id, osa, silmäluku ja
@@ -32,6 +32,9 @@ Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 - Testit: 16 uutta (`test/i18n.test.ts`: LangPrefs, alkukielen päättely, elävä T,
   localejen pariteetti, suuntasarakkeiden osumat) ja termistötestit ajetaan nyt kaikille
   kolmelle kielelle (`describe.each`). Yhteensä 160.
+- Kaksi hautakiveä `Kaanon/HAUTAKIVET.md` › Superjatsi: Jakon koneiston loput osat ei
+  tuoda, muutoslokia ei käännetä. Kielivalikoimaa ei lukittu ja erisnimet päätetään
+  erikseen (`TODO.md`).
 - *Mitä ei tehty:* natiivitarkistusta ei ole (sama varaus kuin Jakossa), manifest ja
   index.html:n meta-kuvaus ovat yhä suomeksi, tuloskuvan päiväys ja ennätysten päiväys
   ovat kielineutraaleja ISO-muotoja.
