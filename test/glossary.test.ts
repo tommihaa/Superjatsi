@@ -8,6 +8,7 @@ import {
 } from "../src/ui/glossary";
 import { fi } from "../src/ui/locales/fi";
 import { sv } from "../src/ui/locales/sv";
+import { en } from "../src/ui/locales/en";
 
 // Testit on kirjoitettu Kaanon/TERMIMODUULI.md:n moottorikontraktia vasten
 // (kuusi kohtaa), ei sisarkopioita lukemalla.
@@ -89,6 +90,7 @@ describe("splitWithGlossary — kontrakti", () => {
 describe.each([
   ["fi", fi],
   ["sv", sv],
+  ["en", en],
 ] as const)("Superjatsin termistö (%s)", (_lang, T) => {
   it("skeemaversio on 1 ja jokaisella termillä on pakolliset kentät", () => {
     expect(TERM_SCHEMA_VERSION).toBe(1);

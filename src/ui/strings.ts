@@ -13,14 +13,15 @@
 import { LANGS, type Lang } from "../domain/prefs";
 import { fi, type Strings } from "./locales/fi";
 import { sv } from "./locales/sv";
+import { en } from "./locales/en";
 
 export type { Strings };
 export { LANGS, type Lang };
 
-const LOCALES: Record<Lang, Strings> = { fi, sv };
+const LOCALES: Record<Lang, Strings> = { fi, sv, en };
 
 /** Kielen oma nimi valitsimiin. Ei käännetä: valitsija ei vielä osaa kohdekieltä. */
-export const LANG_NAMES: Record<Lang, string> = { fi: "Suomi", sv: "Svenska" };
+export const LANG_NAMES: Record<Lang, string> = { fi: "Suomi", sv: "Svenska", en: "English" };
 
 let current: Lang = "fi";
 
@@ -37,10 +38,14 @@ export function setLang(lang: Lang): void {
 
 export const isLang = (x: unknown): x is Lang => LANGS.includes(x as Lang);
 
-/** Selaimen kieli → tuettu kieli. Vain ruotsin etuliite tunnistetaan; kaikki muu
- *  putoaa suomeen, koska suomi on totuuden lähde eikä englantia ole. */
+/** Selaimen kieli → tuettu kieli. Ruotsin ja englannin etuliitteet tunnistetaan;
+ *  kaikki muu putoaa suomeen, koska suomi on totuuden lähde. Muille kielille ei
+ *  oleteta englantia: se olisi arvaus jota vierailija ei ole pyytänyt. */
 export function detectLang(navLang: string | undefined): Lang {
-  return /^sv/i.test(navLang ?? "") ? "sv" : "fi";
+  const l = navLang ?? "";
+  if (/^sv/i.test(l)) return "sv";
+  if (/^en/i.test(l)) return "en";
+  return "fi";
 }
 
 /** Alkukieli: URL-parametri voittaa tallennetun valinnan, tallennettu selaimen.

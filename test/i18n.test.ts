@@ -5,6 +5,7 @@ import type { StorageLike } from "../src/domain/storage";
 import { splitWithGlossary } from "../src/ui/glossary";
 import { fi } from "../src/ui/locales/fi";
 import { sv } from "../src/ui/locales/sv";
+import { en } from "../src/ui/locales/en";
 import { T, detectLang, getLang, resolveInitialLang, setLang } from "../src/ui/strings";
 
 // Kielikerros (3.9.2026): tallennus, alkukielen päättely, elävä T ja localejen
@@ -37,7 +38,7 @@ describe("LangPrefs", () => {
 
   it("tuntematon kieli tai rikkinäinen JSON → null", () => {
     const backend = new MockStorage();
-    backend.setItem("superjatsi:lang", JSON.stringify({ version: 1, lang: "en" }));
+    backend.setItem("superjatsi:lang", JSON.stringify({ version: 1, lang: "de" }));
     expect(new LangPrefs(backend).load()).toBeNull();
     backend.setItem("superjatsi:lang", "{rikki");
     expect(new LangPrefs(backend).load()).toBeNull();
@@ -45,11 +46,13 @@ describe("LangPrefs", () => {
 });
 
 describe("alkukielen päättely", () => {
-  it("selaimen kieli: vain sv-etuliite tunnistetaan, muu putoaa suomeen", () => {
+  it("selaimen kieli: sv- ja en-etuliitteet tunnistetaan, muu putoaa suomeen", () => {
     expect(detectLang("sv-SE")).toBe("sv");
     expect(detectLang("sv")).toBe("sv");
+    expect(detectLang("en-US")).toBe("en");
+    expect(detectLang("en")).toBe("en");
     expect(detectLang("fi-FI")).toBe("fi");
-    expect(detectLang("en-US")).toBe("fi");
+    expect(detectLang("de-DE")).toBe("fi");
     expect(detectLang(undefined)).toBe("fi");
   });
 
@@ -57,7 +60,8 @@ describe("alkukielen päättely", () => {
     expect(resolveInitialLang("sv", "fi", "fi-FI")).toBe("sv");
     expect(resolveInitialLang(null, "sv", "fi-FI")).toBe("sv");
     expect(resolveInitialLang(null, null, "sv-FI")).toBe("sv");
-    expect(resolveInitialLang("en", null, "fi-FI")).toBe("fi");
+    expect(resolveInitialLang("de", null, "fi-FI")).toBe("fi");
+    expect(resolveInitialLang("en", "sv", "fi-FI")).toBe("en");
   });
 });
 
@@ -80,53 +84,59 @@ describe("elävä T", () => {
   });
 
   it("erisnimet pysyvät kielestä riippumatta", () => {
-    setLang("sv");
-    expect(T.title).toBe("Superjatsi");
-    expect(T.rows.yatzy.label).toBe("Jatsi");
-    expect(T.rows.superyatzy.label).toBe("Superjatsi");
+    for (const lang of ["sv", "en"] as const) {
+      setLang(lang);
+      expect(T.title).toBe("Superjatsi");
+      expect(T.rows.yatzy.label).toBe("Jatsi");
+      expect(T.rows.superyatzy.label).toBe("Superjatsi");
+    }
   });
 });
 
 describe("localejen pariteetti", () => {
-  const locales = { fi, sv } as const;
+  const locales = { fi, sv, en } as const;
+  const others = [
+    ["sv", sv],
+    ["en", en],
+  ] as const;
 
   it("LANGS ja localet vastaavat toisiaan", () => {
     expect(Object.keys(locales).sort()).toEqual([...LANGS].sort());
   });
 
-  it("sv:llä on täsmälleen suomen avaimet samoin tyypein", () => {
+  it.each(others)("%s: täsmälleen suomen avaimet samoin tyypein", (_lang, L) => {
     const fiKeys = Object.keys(fi).sort();
-    const svKeys = Object.keys(sv).sort();
-    expect(svKeys).toEqual(fiKeys);
+    expect(Object.keys(L).sort()).toEqual(fiKeys);
     for (const k of fiKeys) {
       const key = k as keyof typeof fi;
-      expect(typeof sv[key], key).toBe(typeof fi[key]);
+      expect(typeof L[key], key).toBe(typeof fi[key]);
     }
   });
 
-  it("jokaisella rivillä on nimi kummallakin kielellä", () => {
+  it.each(others)("%s: jokaisella rivillä on nimi ja selite samoilla riveillä kuin suomessa", (_lang, L) => {
     for (const r of ALL_ROWS) {
       expect(fi.rows[r.id].label.length, r.id).toBeGreaterThan(0);
-      expect(sv.rows[r.id].label.length, r.id).toBeGreaterThan(0);
+      expect(L.rows[r.id].label.length, r.id).toBeGreaterThan(0);
       // Selite on alaosan riveillä, ei yläosan.
-      expect(sv.rows[r.id].description !== undefined).toBe(fi.rows[r.id].description !== undefined);
+      expect(L.rows[r.id].description !== undefined, r.id).toBe(fi.rows[r.id].description !== undefined);
     }
   });
 
-  it("sääntörivien, termien ja asennusohjeiden määrät täsmäävät", () => {
-    expect(sv.rulesLines).toHaveLength(fi.rulesLines.length);
-    expect(sv.terms).toHaveLength(fi.terms.length);
-    expect(sv.aboutParas).toHaveLength(fi.aboutParas.length);
-    expect(sv.installGroups.map((g) => g.rows.length)).toEqual(fi.installGroups.map((g) => g.rows.length));
-    expect(Object.keys(sv.sfxLabels)).toEqual(Object.keys(fi.sfxLabels));
+  it.each(others)("%s: sääntörivien, termien ja asennusohjeiden määrät täsmäävät", (_lang, L) => {
+    expect(L.rulesLines).toHaveLength(fi.rulesLines.length);
+    expect(L.terms).toHaveLength(fi.terms.length);
+    expect(L.aboutParas).toHaveLength(fi.aboutParas.length);
+    expect(L.installGroups.map((g) => g.rows.length)).toEqual(fi.installGroups.map((g) => g.rows.length));
+    expect(Object.keys(L.sfxLabels)).toEqual(Object.keys(fi.sfxLabels));
   });
 
-  it("sv: sarakkeet NER ja UPP osuvat sääntötekstissä vain isoina kirjoitettuina", () => {
-    // Ruotsin "upp" ja "ner" ovat tavallisia sanoja; moottori on case-insensitive,
-    // joten suuntasana proosassa korostuisi sarakkeena (suomen alas/ylös-ansa).
-    for (const line of sv.rulesLines) {
-      const hits = splitWithGlossary(line.text, sv.terms).filter((p) => p.isTerm);
-      for (const col of ["NER", "UPP"]) {
+  it.each(others)("%s: suuntasarakkeet osuvat sääntötekstissä vain isoina kirjoitettuina", (_lang, L) => {
+    // Ruotsin "upp"/"ner" ja englannin "up"/"down" ovat tavallisia sanoja; moottori
+    // on case-insensitive, joten suuntasana proosassa korostuisi sarakkeena
+    // (suomen alas/ylös-ansa).
+    for (const line of L.rulesLines) {
+      const hits = splitWithGlossary(line.text, L.terms).filter((p) => p.isTerm);
+      for (const col of [L.colLabel.ALAS, L.colLabel.YLOS]) {
         const asTerm = hits.filter((p) => p.term === col).length;
         const literal = (line.text.match(new RegExp(`\\b${col}\\b`, "g")) ?? []).length;
         expect(asTerm, `${line.label}: ${col}`).toBe(literal);

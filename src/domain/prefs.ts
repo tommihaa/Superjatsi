@@ -114,9 +114,9 @@ export class SoundPrefs {
 }
 
 /** Tuetut kielet tallennusarvoina. Suomi on totuuden lähde (ui/locales/fi.ts),
- *  ruotsi lisättiin kokeena 3.9.2026 (mekanismi + yksi kieli, ei vielä päätös
- *  laajemmasta kielituesta). */
-export const LANGS = ["fi", "sv"] as const;
+ *  ruotsi ja englanti lisättiin kokeena 3.9.2026 (ei vielä päätös laajemmasta
+ *  kielituesta). Järjestys on valitsimien järjestys. */
+export const LANGS = ["fi", "sv", "en"] as const;
 export type Lang = (typeof LANGS)[number];
 
 /** Kielivalinnan persistointi. Poikkeaa muista prefseistä siinä että oletus on

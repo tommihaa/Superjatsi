@@ -3,7 +3,7 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## Tekninen
-- [ ] Kielituki: mekanismi ja ruotsi ovat koodissa (Unreleased), julkaisu ja laajempi
+- [ ] Kielituki: mekanismi, ruotsi ja englanti ovat koodissa (Unreleased), julkaisu ja laajempi
       kielivalikoima ovat Tommin päätös. Natiivitarkistus puuttuu; manifest ja meta-kuvaus
       ovat suomeksi.
 
