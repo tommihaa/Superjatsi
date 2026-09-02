@@ -1447,3 +1447,105 @@ jota Tommi ei ole itse tehnyt. Kysymys kuuluu siis samalle ihmiselle kuin kolme 
 mukaan (`Kaanon/docs/superjatsi-esikuva-yhteydenotto-luonnos.md`). Sanamuoto *sain sinulta*
 poistettiin, ja tilalle tuli tulokortti jonka Tommilla on tammikuulta 2002 sekä maininta
 testaajan roolista, koska se on totta ja koska se antaa vastaanottajalle muistin tarttumapinnan.
+
+
+## 56. Poltto kohdistuu vaikeaan ruutuun, ja ALAS ja YLÖS pidetään liikkeessä
+
+Tommi 2.9.2026 (erä 16), kysyttäessä mikä ruutu poltetaan ensimmäisenä kun mitään ei voi
+merkitä, ja onko siinä sääntö vai tuntuma:
+
+> *vaikea ruutu ensin, alas ja ylös-sarakkeissa pitää päästä likkumaan*
+
+Kaksi osaa, ja ne koskevat eri sarakkeita. Vapaan rivijärjestyksen sarakkeissa (I, II, III)
+poltetaan vaikea ruutu, ja pakotetun järjestyksen sarakkeissa (ALAS, YLÖS) poltto on keino
+päästä eteenpäin.
+
+**Seuraus:** ensimmäinen osa on riskinhallintaa samalla logiikalla kuin kohdan 14 kolmas
+nyrkkisääntö. Vaikea ruutu on se jonka odotusarvo on pienin, joten sen polttaminen maksaa
+vähiten menetettyä odotusta. Sääntö on siis odotusarvon suojaaminen eikä pistemaksimointi,
+ja se on lausuttu tavalla jonka voisi laskea.
+
+**Seuraus:** toinen osa on `SUPERJATSI.md`:n polttosäännön pelaajan puoli. Sääntö sanoo että
+ALAS- ja YLÖS-sarakkeissa poltto kohdistuu järjestyksen seuraavaan riviin ja vie järjestystä
+eteenpäin, ja Tommin lause kertoo miksi sitä käytetään: jumissa oleva pakotettu sarake ei
+kilpaile heitoista lainkaan (kohta 14, toinen sääntö), joten sen avaaminen on arvokkaampaa
+kuin yksittäisen rivin nolla. Sääntö ja pelitapa sanovat saman asian eri suunnista.
+
+**Seuraus:** kysymys tarjosi kahta, sääntöä tai tuntumaa, ja vastaus on sääntö kummassakin
+osassa. Tommilla on siis polttoon yhtä selkeä päätössääntö kuin yrityksiin kohdassa 14, ja
+molemmat ovat samaa lajia: ne kertovat mitä tehdään kun heitto ei ole hyvä.
+
+
+## 57. Pakotetut sarakkeet täytetään ensin ja vapaa viimeiseksi, lähes säännönomaisesti
+
+Tommi 2.9.2026 (erä 16), kysyttäessä täyttyvätkö viisi saraketta tyypillisesti jossain
+järjestyksessä vai ohjaako heitto joka kerta:
+
+> *pakotetut ensin, vapaa viimeiseksi lähes säännönomaisesti*
+
+Järjestys on olemassa ja se on lähes sääntö. Kysymyksen toinen vaihtoehto, heiton ohjaama
+täyttö, ei ollut vastaus.
+
+**Seuraus:** tämä on kohdan 14 toisen nyrkkisäännön (*alas ja ylös-pelaaminen aina kun
+järkevää*) järjestyksellinen muoto. Pakotettu sarake ottaa heiton vain kun heitto sattuu
+järjestyksen kohdalle, joten sen tilaisuudet ovat harvinaisempia kuin vapaan sarakkeen, ja
+harvinainen tilaisuus käytetään ennen yleistä. Vapaa sarake on pelin puskuri: se ottaa
+lopussa sen mitä pakotetut eivät ehtineet ottaa.
+
+**Seuraus, ja tämä on kirjoittajan luenta joka saa kaatua:** *vapaa* luetaan tässä
+sarakkeiksi I, II ja III, joiden rivijärjestys on vapaa, eikä yksin sarakkeeksi III. Jos
+Tommi tarkoitti vain kolmen heiton saraketta, järjestys on hienojakoisempi kuin tässä on
+kirjattu, ja I ja II asettuvat jonnekin väliin.
+
+**Seuraus:** kohdat 14, 56 ja tämä muodostavat yhdessä kolmiosaisen pelitavan, joka on
+kokonaan Tommin sanomaa: mitä yritetään (14), mitä poltetaan (56) ja missä järjestyksessä
+kortti täyttyy (57). Kohdan 14 ehdotus neuvotoiminnon pohjaksi saa tästä kaksi osaa lisää,
+eikä ehdotuksen luonne muutu.
+
+
+## 58. Superjatsia ei pelaa suuremmin kukaan muu, eikä palautetta ole tullut
+
+Tommi 2.9.2026 (erä 16), kysyttäessä pelaako Superjatsia tällä hetkellä kukaan muu kuin hän,
+ja ovatko he samoja ihmisiä joiden kanssa esikuvaa pelattiin:
+
+> *ei ainakaan suuremmin, palautetta ei ole tullut*
+
+Vastaus on varovainen kieltö, ja sen peruste on palautteen puute eikä tieto pelaajista.
+Kysymyksen jälkiosaan (samat ihmiset kuin esikuvan aikaan) ei tullut vastausta, koska
+etuosaan vastattiin kieltävästi.
+
+**Seuraus:** peli on kohdan 37 mukaan valmis ja täysin pelattavissa, ja tämä kohta sanoo että
+valmis peli ei tuottanut pelaajakuntaa. Kohta 20 kertoo ettei Tommi itse pelaa sitä keston
+takia, joten Superjatsilla ei tällä hetkellä ole tiedossa yhtään säännöllistä pelaajaa.
+Se ei ole ristiriita vaan kohdan 33 epäilyn (kuka haluaa pelata näin pitkää peliä)
+toteutuma lahjapuolella.
+
+**Seuraus:** mittari on palaute, ja palautetta ei voi tulla pelaajalta joka ei tiedä pelistä.
+Kohta 35 kirjaa ettei esikuvan tekijä tiedä Superjatsista, ja `Kaanon/YHTEYDENOTOT.md`:n
+luonnos on yhä lähettämättä. Tämän kohdan kieltö voi siis muuttua yhdellä kirjeellä, ja se on
+sama kirje joka vastaisi kohdan 52 kolmeen avoimeen.
+
+
+## 59. Uusia noppateemoja ei ole pelattu, koska muut pelit vievät huomion
+
+Tommi 2.9.2026 (erä 16), kysyttäessä kumpaa noppateemaa hän käyttää itse ja oliko jollakin
+0.19.0:n teemalla (Puu, Norsunluu, Kivi, Yö) esikuva oikeissa nopissa samaan tapaan kuin
+torvi ja kantele ovat omia soittimiaan (kohta 47):
+
+> *en ole pelannut uusilla nopilla, muut pelit vievät huomioni*
+
+Kumpaankaan osaan ei tullut vastausta: teemaa ei ole valittu koska ei ole pelattu, ja
+esikuvakysymys jäi avoimeksi. Syy on sama kuin kohdassa 20 mutta toisin lausuttuna: siellä
+este oli pelin kesto, tässä muiden pelien vetovoima.
+
+**Seuraus:** noppateemat ovat siis ominaisuus jota tekijä ei ole itse käyttänyt. Se on eri
+asema kuin äänillä: kohta 47 sanoo että torvi ja kantele ovat Tommin omia soittimia, eli
+ääniteemalla on henkilökohtainen lähde, ja noppateemoilla sellaista ei tähän mennessä ole.
+Kysymys esikuvasta on kysytty muttei vastattu, ja se jää auki eikä sitä täytetä
+päättelemällä.
+
+**Seuraus:** *muut pelit vievät huomioni* on kolmas muotoilu samasta ilmiöstä. Itua ei pelata
+koska muut projektit vievät ajan (`SanaMix/SUBSTANSSI.md` kohta 13), Superjatsia ei pelata
+keston takia (kohta 20), ja tässä muut pelit vievät huomion. Tekijä on siis pelaajana
+tavoittamattomissa kaikille kolmelle omalle pelilleen, eri syistä, ja Superjatsin kohdalla
+tämä koskee myös niiden ominaisuuksien todennusta joita hänelle tehdään.
