@@ -1609,3 +1609,38 @@ onnenkantamoista. Tämä on päätelmä eikä kysytty, ja se saa kaatua.
 **Seuraus:** kohdat 14, 56, 57 ja 60 ovat nyt neljä osaa samaa pelitapaa, ja tämä on
 ensimmäinen joka erottaa kaksi pakotettua saraketta toisistaan. Kohta 14 puhui niistä yhdessä
 (*alas ja ylös-pelaaminen*), kohta 56 samoin, ja vasta bonuskysymys toi eron esiin.
+
+
+## 61. YLÖS-sarakkeen jatsi on ensimmäisiä polttoja
+
+Tommi 2.9.2026 (erä 16), jatkona kohtaan 60 ilman erillistä kysymystä:
+
+> *ylös-sarakkeen jatsi tai superjatsi on ensimmäisiä polttoja mitä teen*
+
+YLÖS-sarake täytetään alhaalta ylös, ja sen alin rivi on Jatsi viidellä nopalla ja
+Superjatsi kuudella (`SUPERJATSI.md` › Rivit). Sarakkeen ensimmäinen ruutu on siis pelin
+vaikein, ja se poltetaan pelin alussa.
+
+**Seuraus:** tämä on kohdan 56 polttosäännön konkreettinen tapaus, ja siinä säännön molemmat
+osat osuvat samaan ruutuun. Vaikea ruutu ensin: jatsi on kortin epätodennäköisin rivi.
+ALAS ja YLÖS pitää saada liikkumaan: jatsi on YLÖS-sarakkeen tulppa, jonka takana koko sarake
+odottaa. Yksi poltto maksaa 50 tai 100 pistettä jotka olisi saatu harvoin, ja ostaa sarakkeen
+jossa on neljätoista muuta riviä pelattavaksi.
+
+**Seuraus:** kohdan 60 ero saa tästä alkukohdan. YLÖS-sarakkeen bonus on onnenkantamoinen
+myös siksi, että sarake avataan uhraamalla ja sen yläosa on matkan päässä, kun ALAS-sarakkeen
+yläosa on sarakkeen alussa ja avoinna ensimmäisestä heitosta lähtien. Ero ei siis ole vain
+siinä mistä päästä sarake alkaa vaan siinä, että toinen alkaa lahjasta ja toinen laskusta.
+
+**Seuraus, ja tämä on kirjoittajan päätelmä joka saa kaatua:** polton ajoitus on
+todennäköisesti aikainen myös siksi, että aikaisin poltettu jatsi ei maksa mitään verrattuna
+myöhään poltettuun. Jatsin todennäköisyys ei riipu siitä missä vaiheessa peliä sitä
+tavoitellaan, mutta lukittu sarake maksaa jokaisella vuorolla jonka se on kiinni. Sääntö
+*ensimmäisiä polttoja* on siis kustannuksen minimointia ajassa, sama laji kuin kohdan 14
+kolmas nyrkkisääntö.
+
+**Seuraus:** kohdan 25 mukaan pelin kesto on sen luonteenomainen piirre, ja tämä kohta
+kertoo yhden syyn miksi kokenut pelaaja pelaa nopeasti: ensimmäinen päätös on valmiiksi
+tehty. Kohdan 27 kestomittauksen pelaajalle uudet kentät olivat vieraita, ja tämän kohdan
+sääntö on juuri sellainen jota ei voi tietää ennen kuin YLÖS-sarakkeen logiikan on kerran
+kokenut.
