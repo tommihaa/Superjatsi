@@ -1492,10 +1492,32 @@ järjestyksen kohdalle, joten sen tilaisuudet ovat harvinaisempia kuin vapaan sa
 harvinainen tilaisuus käytetään ennen yleistä. Vapaa sarake on pelin puskuri: se ottaa
 lopussa sen mitä pakotetut eivät ehtineet ottaa.
 
-**Seuraus, ja tämä on kirjoittajan luenta joka saa kaatua:** *vapaa* luetaan tässä
+~~**Seuraus, ja tämä on kirjoittajan luenta joka saa kaatua:** *vapaa* luetaan tässä
 sarakkeiksi I, II ja III, joiden rivijärjestys on vapaa, eikä yksin sarakkeeksi III. Jos
 Tommi tarkoitti vain kolmen heiton saraketta, järjestys on hienojakoisempi kuin tässä on
-kirjattu, ja I ja II asettuvat jonnekin väliin.
+kirjattu, ja I ja II asettuvat jonnekin väliin.~~
+
+*Kysytty ja vastattu samassa erässä.* Tommi 2.9.2026 (erä 16), kysyttäessä tarkoittiko hän
+kaikkia kolmea vapaan rivijärjestyksen saraketta vai vain saraketta III:
+
+> *haluan yläbonukset joten kaikkia kolmea*
+
+Luenta piti, ja vastaus antoi sille syyn jota ei kysytty. Vapaa tarkoittaa sarakkeita I, II
+ja III, ja ne jätetään viimeiseksi yläbonuksen takia.
+
+**Seuraus:** syy on rakenteellinen. `SUPERJATSI.md`:n mukaan jokainen sarake on oma
+minijatsinsa omalla yläbonuksellaan, ja bonus vaatii yläosan rivien summalta kynnyksen.
+Vapaassa sarakkeessa yläosan rivit voi täyttää silloin kun heitto on niihin hyvä, joten
+bonus on siellä saavutettavissa valinnalla. Pakotetussa sarakkeessa yläosan rivit otetaan
+järjestyksen kohdalla sillä mitä sattuu tulemaan, joten bonus on siellä enemmän onnen
+varassa. Vapaat sarakkeet säästetään viimeiseksi, koska ne ovat ainoat joissa bonus on
+pelattavissa eikä vain toivottavissa, ja jäljellä olevat heitot käytetään siihen.
+
+**Seuraus:** kohta 7 sanoo että esikuvassa bonus oli yläosan koko panos loppusummaan, ja kohta
+19 että kuuden nopan bonus kaksinkertaistettiin kynnyksen vaikeuden takia. Tämä kohta kertoo
+että bonus ohjaa myös pelijärjestystä eikä vain pisteytystä: se on syy sille miksi kortti
+täyttyy tässä järjestyksessä. Bonuksen paino on siis pelissä kolmella tasolla, pisteissä,
+säännössä ja pelitavassa, ja kaikki kolme ovat Tommin sanomaa.
 
 **Seuraus:** kohdat 14, 56 ja tämä muodostavat yhdessä kolmiosaisen pelitavan, joka on
 kokonaan Tommin sanomaa: mitä yritetään (14), mitä poltetaan (56) ja missä järjestyksessä
