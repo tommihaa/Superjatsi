@@ -1759,3 +1759,90 @@ ettei sitä lueta niin ilman uutta pyyntöä.
 **Seuraus, ja se on kirjoittajan päätelmä:** Superjatsi on kolmesta pelistä ainoa jolla ei ole
 neuvojaa. Se on nyt päätös eikä puute. Kohta 5 sanoo että pelissä vetää oma
 todennäköisyyksien pohtiminen ja neuvoja veisi juuri sen.
+
+
+## 66. Sarake I ottaa kolme samaa silmäluvusta riippumatta
+
+Tommi 2.9.2026 (erä 18), kysyttäessä kelpaako sarakkeeseen I myös kolme ykköstä tai kolme
+kakkosta, kolmella vaihtoehdolla (kelpaa silmäluvusta riippumatta, pienet rivit odottavat
+parempaa, riippuu tyhjistä ruuduista):
+
+> *a*
+
+Vastaus on ensimmäinen vaihtoehto. Kynnys on osumien määrä eikä pisteet, joten kolme ykköstä
+menee sarakkeeseen I samalla perusteella kuin kolme kuutosta.
+
+**Seuraus:** kohdan 62 luenta bonustahdista pitää myös alarivillä. Kolme per rivi on tahti
+kynnykselle 63 silmäluvusta riippumatta. Kolme ykköstä (3 pistettä) pitää tahdin siinä
+missä kolme kuutosta (18 pistettä). Sarakkeen I valinta on siis aidosti kahtia (kelpaa tai
+ei), eikä siihen sekoitu rivikohtaista harkintaa.
+
+**Seuraus, ja se on kirjoittajan päätelmä:** sarake I on kortin ainoa sarake jossa ykkösrivi
+on yhtä arvokas kuin kuutosrivi. Muissa sarakkeissa ykkösrivi on poltto- tai kaatopaikkaehdokas
+(kohdat 56 ja 63), sarakkeessa I se on bonuksen rakennuspala.
+
+
+## 67. Pakotetuissa sarakkeissa Sattuma on kaatopaikka, mutta ei yhtä selvästi
+
+Tommi 2.9.2026 (erä 18), kysyttäessä onko Sattuma kaatopaikka myös ALAS- ja YLÖS-sarakkeissa,
+joissa se tulee vuorollaan eikä silloin kun heitto ei sovi mihinkään. Toinen vaihtoehto oli heittää siihen
+tavoitteena hyvä summa:
+
+> *kaatopaikka mutta ei niin selkeästi*
+
+Vastaus on varauksellinen. Varaus kirjataan sellaisenaan. Kohta 63 (Sattuma on
+kaatopaikka) pitää, mutta pakotetuissa sarakkeissa vähemmän jyrkästi.
+
+**Seuraus, ja tämä on kirjoittajan luenta joka saa kaatua:** *ei niin selkeästi* luetaan
+niin että pakotetussa sarakkeessa Sattuma on samalla kertaa kaatopaikka ja vuoro. Vapaassa
+sarakkeessa ja sarakkeessa I Sattuma valitaan heiton mukaan. Pakotetussa heitto tulee
+Sattuman vuorolle ja siihen heitetään mitä tulee. Kaatopaikka-luonne säilyy siinä, ettei
+heittoa yritetä parantaa Sattumaa varten. Jos Tommi tarkoitti että pakotetussa sarakkeessa
+Sattumaan tähdätään hyvä summa, luenta kaatuu.
+
+**Seuraus:** kohdan 63 porrastus (ensin Sattuma, sitten vaikea ruutu) koskee täydellä
+painolla vain kahta sarakketta viidestä. Kolmessa muussa Sattuman paikka on sidottu, joten
+pehmeitä polttoja on vähemmän kuin viisi.
+
+
+## 68. ALAS-sarakkeen jatsi täyttyy yleensä poltolla
+
+Tommi 2.9.2026 (erä 18), kysyttäessä täyttyykö ALAS-sarakkeen viimeinen ruutu eli jatsi
+yleensä jatsilla vai poltolla:
+
+> *poltolla*
+
+**Seuraus:** molempien pakotettujen sarakkeiden jatsi on tyypillisesti poltto. YLÖS-sarakkeessa
+se on ensimmäisiä (kohta 61), ALAS-sarakkeessa viimeinen. Ero on ajoituksessa eikä
+lopputuloksessa. ALAS-sarakkeen lopussa poltto on lisäksi pakotettu valinta, koska muita
+ruutuja ei ole jäljellä, joten se ei ole kohdan 56 tarkoittama vaikean ruudun valinta vaan
+sarakkeen sulkeminen.
+
+**Seuraus, ja se on kirjoittajan päätelmä:** jatsi pisteytetään pääosin vapaassa sarakkeessa.
+Sarakkeeseen I se osuu vain ensimmäisellä heitolla, mikä on harvinaista. Pakotetuissa se
+palaa. Jatsin arvo kortilla on siis suurelta osin yhden sarakkeen varassa.
+
+
+## 69. Hyvä peli viidellä nopalla on kolme yläbonusta viidestä
+
+Tommi 2.9.2026 (erä 18), kysyttäessä montako yläbonusta viidestä sarakkeesta on hänelle hyvä
+peli:
+
+> *4*
+
+*Korjattu samassa erässä.* Tommi keskeytti kirjaamisen ja korjasi luvun ennen kuin se ehti
+dokumenttiin:
+
+> *korjaan 3 yläbonusta viidestä on hyvä peli*
+
+Hyvä peli on siis **kolme yläbonusta viidestä**. Ensimmäinen luku jätetään näkyviin, koska
+lähde korjasi itseään ja se on menetelmän kannalta tietoa (`DGAndroid/SUBSTANSSI.md`:n
+haastattelussa sama ilmiö kirjattiin ensimmäisenä).
+
+**Seuraus:** hyvän pelin yläbonukset ovat 150 pistettä eikä 250. Kolme viidestä sopii yhteen
+kohtien 60, 61 ja 64 kanssa. Niissä YLÖS-sarakkeen bonus on onnenkantamoinen, sen jatsi
+palaa alussa ja kuudella nopalla ALAS-bonus tulee harvoin. Ne kaksi saraketta jotka hyvässä pelissä jäävät ilman bonusta
+ovat kirjoittajan luennan mukaan YLÖS ja yksi muu, eikä luentaa ole kysytty.
+
+**Seuraus:** mitta on bonusten lukumäärä eikä loppusumma, mikä on sama asia kuin kohdan 42
+koostumus. Tuloskuvassa (kohta 42) bonusten määrä on siis se luku jonka Tommi lukee ensin.
