@@ -1505,7 +1505,7 @@ kaikkia kolmea vapaan rivijärjestyksen saraketta vai vain saraketta III:
 Luenta piti, ja vastaus antoi sille syyn jota ei kysytty. Vapaa tarkoittaa sarakkeita I, II
 ja III, ja ne jätetään viimeiseksi yläbonuksen takia.
 
-**Seuraus:** syy on rakenteellinen. `SUPERJATSI.md`:n mukaan jokainen sarake on oma
+**Seuraus, ja se kaatui puoliksi kohdassa 60:** syy on rakenteellinen. `SUPERJATSI.md`:n mukaan jokainen sarake on oma
 minijatsinsa omalla yläbonuksellaan, ja bonus vaatii yläosan rivien summalta kynnyksen.
 Vapaassa sarakkeessa yläosan rivit voi täyttää silloin kun heitto on niihin hyvä, joten
 bonus on siellä saavutettavissa valinnalla. Pakotetussa sarakkeessa yläosan rivit otetaan
@@ -1571,3 +1571,41 @@ koska muut projektit vievät ajan (`SanaMix/SUBSTANSSI.md` kohta 13), Superjatsi
 keston takia (kohta 20), ja tässä muut pelit vievät huomion. Tekijä on siis pelaajana
 tavoittamattomissa kaikille kolmelle omalle pelilleen, eri syistä, ja Superjatsin kohdalla
 tämä koskee myös niiden ominaisuuksien todennusta joita hänelle tehdään.
+
+
+## 60. YLÖS-sarakkeen bonus on onnenkantamoinen, ALAS-sarakkeen ei
+
+Tommi 2.9.2026 (erä 16), kysyttäessä saako hän ALAS- tai YLÖS-sarakkeessa yläbonuksen
+käytännössä koskaan:
+
+> *ylös on onnenkantamoinen, alas ei niin vaikea - laitan siihen sarakkeeseen monesti neljä
+> samaa*
+
+Kaksi pakotettua saraketta eivät ole bonuksen suhteen sama asia. YLÖS-sarakkeessa bonus on
+onnea, ALAS-sarakkeessa se on saavutettavissa, ja keino on nimetty: neljä samaa.
+
+**Seuraus:** kohdan 57 päätelmä kaatuu puoliksi. Siellä sanottiin että pakotetussa
+sarakkeessa bonus on onnen varassa, ja se pätee vain YLÖS-sarakkeeseen. Ero seuraa
+järjestyksestä: ALAS alkaa yläosasta, joten sen ensimmäiset rivit ovat juuri ne joista
+bonus lasketaan, ja pelaaja on pelin alussa vapaa ohjaamaan heittoja niihin. YLÖS alkaa
+alaosasta ja saapuu yläosaan viimeisenä, kun muut sarakkeet ovat jo vieneet parhaat heitot ja
+jäljellä on vähemmän valinnanvaraa. Sama pakko tuottaa siis kaksi eri peliä sen mukaan
+kummasta päästä se alkaa.
+
+**Seuraus, ja tämä on kirjoittajan luenta joka saa kaatua:** *neljä samaa* luetaan yläosan
+riviksi jossa neljä noppaa näyttää rivin silmälukua. Viidellä nopalla bonuksen kynnys on
+kolme per rivi (`SUPERJATSI.md`, kynnys 63), joten neljä samaa antaa yhden silmäluvun
+ylijäämän, joka kattaa jonkin toisen rivin vajeen. Neljän samaan pyrkiminen ALAS-sarakkeen
+yläosassa on siis bonuksen varmistamista etukäteen, ei tavoittelua lopussa. Jos Tommi
+tarkoitti alaosan neljän samaa -riviä, luenta kaatuu, mutta silloin vastaus ei selittäisi
+bonusta, joten yläosan luenta on todennäköisempi.
+
+**Seuraus:** kohta 4 sanoo että kuudella nopalla on pelattu harvoin ja kohta 19 että kuuden
+nopan bonus kaksinkertaistettiin, koska kynnys on vaikeampi. Tämä kohta on viiden nopan
+pelaajan sanomaa, ja se osoittaa mistä kuuden nopan vaikeus tuntuu: jos kynnys on neljä per
+rivi, *neljä samaa* on kynnys eikä ylijäämä, ja ALAS-sarakkeen bonus lähestyy YLÖS-sarakkeen
+onnenkantamoista. Tämä on päätelmä eikä kysytty, ja se saa kaatua.
+
+**Seuraus:** kohdat 14, 56, 57 ja 60 ovat nyt neljä osaa samaa pelitapaa, ja tämä on
+ensimmäinen joka erottaa kaksi pakotettua saraketta toisistaan. Kohta 14 puhui niistä yhdessä
+(*alas ja ylös-pelaaminen*), kohta 56 samoin, ja vasta bonuskysymys toi eron esiin.
