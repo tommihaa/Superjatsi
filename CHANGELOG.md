@@ -3,7 +3,7 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
-## [Unreleased]
+## [0.21.0] – 2026-09-03
 
 ### Lisätty
 - **Kielituki, ruotsi ja englanti, koe** (Tommin päätös 3.9.2026: mekanismi + ruotsi, sitten

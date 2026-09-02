@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.21.0",
+    date: "3.9.2026",
+    items: [
+      "Peli on nyt myös ruotsiksi ja englanniksi. Kielen voi vaihtaa aloitusnäytön alareunasta tai asetuksista, ja valinta muistetaan laitteella. Tulokortin rivien nimet seuraavat kieltä, pelin nimi ei. Tämä muutosloki pysyy suomeksi.",
+    ],
+  },
+  {
     version: "0.20.0",
     date: "2.9.2026",
     items: [

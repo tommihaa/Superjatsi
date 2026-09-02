@@ -3,8 +3,6 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## Tekninen
-- [ ] Kielituki: mekanismi, ruotsi ja englanti ovat koodissa (Unreleased), julkaisu on
-      Tommin päätös. Natiivitarkistus puuttuu; manifest ja meta-kuvaus ovat suomeksi.
 - [ ] Kielivalikoima ei ole lukittu (Tommin päätös 3.9.2026): uusi kieli on yksi
       `locales/xx.ts`, LANGS-rivi, LANG_NAMES-nimi ja detectLang-haara; tsc kertoo puutteet.
       Ei siis Jakon kaltaista parkkia, mutta ei myöskään oma-aloitteista lisäystä.
@@ -14,6 +12,10 @@ Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANG
       molempia yhtä aikaa.
 
 ## Valmis (ks. CHANGELOG)
+- [x] 0.21.0: kielituki (elävä `T`, `locales/fi.ts` totuuden lähteenä, `Strings`-tyyppi tekee
+      pariteetin) sekä ruotsi ja englanti; kielivalinta asetuksiin ja aloitusnäytölle,
+      rivinimet domainista localeen. Natiivitarkistus puuttuu; manifest ja meta-kuvaus
+      ovat suomeksi.
 - [x] 0.20.0: kuuden nopan yläbonus 84/+100 → 76/+50 mittauksen perusteella
       (`docs/ylabonus-mittaus.md`), poikkeaman rivitahti pyöristettynä (summa = kynnys).
 - [x] 0.19.0: noppateema asetuksiin (Jalometalli oletuksena + Puu, Norsunluu, Kivi ja Yö;
