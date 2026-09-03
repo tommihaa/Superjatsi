@@ -11,6 +11,12 @@ import type { TermEntry } from "../glossary";
 export const fi = {
   title: "Superjatsi",
   tagline: "Noppapeli yhdelle pelaajalle",
+  // Sivun meta-kuvaus ja PWA-manifest. Manifest on staattinen tiedosto
+  // (public/manifest*.webmanifest), joten sama teksti on kahdessa paikassa ja
+  // testi vartioi pariteetin (test/i18n.test.ts).
+  metaDescription:
+    "Superjatsi on web-pohjainen maxi-jatsi yksinpelinä. Offline, ei mainoksia eikä tiliä.",
+  manifestName: "Superjatsi · maxi-jatsi",
 
   // Setup
   newGame: "Uusi peli",

@@ -10,7 +10,16 @@
 //
 // CACHE-versio bumpataan kun offline-logiikka muuttuu → vanhat puhdistetaan.
 const CACHE = "taysi-v1";
-const APP_SHELL = ["/", "/index.html", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
+// Kielimanifestit mukana, jotta asennusnimi seuraa kieltä myös offline (strings.ts › manifestHref).
+const APP_SHELL = [
+  "/",
+  "/index.html",
+  "/manifest.webmanifest",
+  "/manifest.sv.webmanifest",
+  "/manifest.en.webmanifest",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

@@ -1,8 +1,8 @@
 {
-  "name": "Superjatsi · maxi-jatsi",
+  "name": "Superjatsi · dice game",
   "short_name": "Superjatsi",
-  "description": "Superjatsi on web-pohjainen maxi-jatsi yksinpelinä. Offline, ei mainoksia eikä tiliä.",
-  "lang": "fi",
+  "description": "Superjatsi is a web-based dice game for one player. Offline, no ads and no account.",
+  "lang": "en",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

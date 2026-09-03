@@ -12,6 +12,9 @@ import type { Strings } from "./fi";
 export const sv: Strings = {
   title: "Superjatsi",
   tagline: "Tärningsspel för en spelare",
+  metaDescription:
+    "Superjatsi är ett webbaserat tärningsspel för en spelare. Offline, ingen reklam och inget konto.",
+  manifestName: "Superjatsi · tärningsspel",
 
   // Setup
   newGame: "Nytt spel",

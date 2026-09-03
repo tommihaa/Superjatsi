@@ -3,6 +3,11 @@
 Suunnitellut ja harkinnassa olevat asiat. Tehdyt siirtyvät [CHANGELOG.md](CHANGELOG.md):hen.
 
 ## Tekninen
+- [ ] Staattisen index.html:n kieli, päätettävä (3.9.2026): meta-kuvaus ja `lang="fi"` ovat
+      suomeksi, koska hakukone ja jakoesikatselu eivät aja `setLang`ia. Pelin oma oletus
+      tuntemattomalle selainkielelle on englanti, joten staattinen pinta ja peli sanovat
+      vierailijalle eri asian. Vaihtoehto: englanti staattiseksi oletukseksi ja suomi
+      valinnaksi.
 - [ ] Kielivalikoima ei ole lukittu (Tommin päätös 3.9.2026): uusi kieli on yksi
       `locales/xx.ts`, LANGS-rivi, LANG_NAMES-nimi ja detectLang-haara; tsc kertoo puutteet.
       Ei siis Jakon kaltaista parkkia, mutta ei myöskään oma-aloitteista lisäystä.

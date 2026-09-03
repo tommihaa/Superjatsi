@@ -6,7 +6,14 @@ import { splitWithGlossary } from "../src/ui/glossary";
 import { fi } from "../src/ui/locales/fi";
 import { sv } from "../src/ui/locales/sv";
 import { en } from "../src/ui/locales/en";
-import { T, detectLang, getLang, resolveInitialLang, setLang } from "../src/ui/strings";
+// Tiedostot luetaan Viten ?raw-importilla (vite/client-tyypit), ei node:fs:llä, jotta
+// tsc:n lib pysyy DOM + ES2022 ilman node-tyyppejä.
+import indexHtml from "../index.html?raw";
+import manifestFi from "../public/manifest.webmanifest?raw";
+import manifestSv from "../public/manifest.sv.webmanifest?raw";
+import manifestEn from "../public/manifest.en.webmanifest?raw";
+import swJs from "../public/sw.js?raw";
+import { T, detectLang, getLang, manifestHref, resolveInitialLang, setLang } from "../src/ui/strings";
 
 // Kielikerros (3.9.2026): tallennus, alkukielen päättely, elävä T ja localejen
 // pariteetti. Pariteetin varsinainen portti on tsc (`Strings`-tyyppi); tässä
@@ -143,5 +150,48 @@ describe("localejen pariteetti", () => {
         expect(asTerm, `${line.label}: ${col}`).toBe(literal);
       }
     }
+  });
+});
+
+describe("meta-kuvaus ja manifest seuraavat kieltä", () => {
+  // Manifest on staattinen tiedosto public/-kansiossa ja index.html:n kuvaus staattinen
+  // oletus, joten teksti on kahdessa paikassa. Tämä on se portti joka pitää ne samana.
+  const locales = { fi, sv, en } as const;
+  const manifests = { fi: manifestFi, sv: manifestSv, en: manifestEn } as const;
+
+  it("manifestin polku: suomi on nimetön oletus, muut kielet omina tiedostoinaan", () => {
+    expect(manifestHref("fi")).toBe("/manifest.webmanifest");
+    expect(manifestHref("sv")).toBe("/manifest.sv.webmanifest");
+    expect(manifestHref("en")).toBe("/manifest.en.webmanifest");
+  });
+
+  it.each(LANGS)("%s: manifestin nimi, kuvaus ja lang ovat localen mukaiset", (lang) => {
+    const m = JSON.parse(manifests[lang]) as Record<string, unknown>;
+    expect(m.name).toBe(locales[lang].manifestName);
+    expect(m.description).toBe(locales[lang].metaDescription);
+    expect(m.lang).toBe(lang);
+    expect(m.short_name).toBe("Superjatsi");
+  });
+
+  it("kielimanifestit eroavat suomesta vain tekstikentissä", () => {
+    const strip = (lang: (typeof LANGS)[number]) => {
+      const m = JSON.parse(manifests[lang]) as Record<string, unknown>;
+      delete m.name;
+      delete m.description;
+      delete m.lang;
+      return m;
+    };
+    for (const lang of LANGS) expect(strip(lang), lang).toEqual(strip("fi"));
+  });
+
+  it("index.html:n staattinen kuvaus on suomen locale", () => {
+    const html = indexHtml;
+    expect(html).toContain(`content="${fi.metaDescription}"`);
+    expect(html).toContain(`href="${manifestHref("fi")}"`);
+  });
+
+  it("service workerin app shell kattaa jokaisen kielen manifestin", () => {
+    const sw = swJs;
+    for (const lang of LANGS) expect(sw, lang).toContain(`"${manifestHref(lang)}"`);
   });
 });

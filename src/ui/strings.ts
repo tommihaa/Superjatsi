@@ -29,11 +29,25 @@ export function getLang(): Lang {
   return current;
 }
 
-/** Vaihtaa aktiivisen kielen ja päivittää dokumentin lang-attribuutin
- *  (ruudunlukija, tavutus). Kutsuja renderöi itse uudelleen. */
+/** Kielen manifest-tiedosto. Suomi on nimetön oletus (index.html:n staattinen linkki
+ *  ja SW:n app shell), muut kielet omina tiedostoinaan public/-kansiossa. */
+export function manifestHref(lang: Lang): string {
+  return lang === "fi" ? "/manifest.webmanifest" : `/manifest.${lang}.webmanifest`;
+}
+
+/** Vaihtaa aktiivisen kielen ja päivittää dokumentin pään: lang-attribuutti
+ *  (ruudunlukija, tavutus), meta-kuvaus ja manifest-linkki (asennusnimi ja -kuvaus
+ *  pelaajan kielellä; selain lukee manifestin uudelleen kun linkki vaihtuu).
+ *  Kutsuja renderöi itse uudelleen. */
 export function setLang(lang: Lang): void {
   current = lang;
-  if (typeof document !== "undefined") document.documentElement.lang = lang;
+  if (typeof document === "undefined") return;
+  document.documentElement.lang = lang;
+  document
+    .querySelector<HTMLMetaElement>('meta[name="description"]')
+    ?.setAttribute("content", LOCALES[lang].metaDescription);
+  const link = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
+  if (link && link.getAttribute("href") !== manifestHref(lang)) link.setAttribute("href", manifestHref(lang));
 }
 
 export const isLang = (x: unknown): x is Lang => LANGS.includes(x as Lang);

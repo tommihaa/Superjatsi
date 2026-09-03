@@ -11,6 +11,9 @@ import type { Strings } from "./fi";
 export const en: Strings = {
   title: "Superjatsi",
   tagline: "A dice game for one player",
+  metaDescription:
+    "Superjatsi is a web-based dice game for one player. Offline, no ads and no account.",
+  manifestName: "Superjatsi · dice game",
 
   // Setup
   newGame: "New game",

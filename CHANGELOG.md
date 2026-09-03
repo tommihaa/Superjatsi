@@ -3,6 +3,22 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Lisätty
+- Sivun meta-kuvaus ja PWA-manifest seuraavat pelaajan kieltä. 0.21.0 jätti ne suomeksi;
+  nyt `setLang` vaihtaa `<meta name="description">`-tekstin ja manifest-linkin
+  (`/manifest.webmanifest` suomeksi, `/manifest.sv.webmanifest` ja `/manifest.en.webmanifest`
+  muille), joten asennettu sovellus saa nimen ja kuvauksen valitulla kielellä. Tekstit ovat
+  localeissa (`metaDescription`, `manifestName`), ja koska manifest on staattinen tiedosto,
+  testi vartioi että tiedostot, index.html ja localet sanovat samaa. Manifestin nimi
+  kiertää Yatzy-sanan (erisnimipäätös on auki, `TODO.md`): ruotsiksi tärningsspel,
+  englanniksi dice game. Service workerin app shell kattaa kielimanifestit, jotta nimi
+  seuraa kieltä myös offline.
+- Staattinen index.html on yhä suomeksi (hakukone ja jakoesikatselu näkevät sen), vaikka
+  tuntematon selainkieli putoaa pelissä englantiin. Oletuskielen valinta on `TODO.md`:ssä
+  päätettävänä.
+
 ## [0.21.0] – 2026-09-03
 
 ### Lisätty

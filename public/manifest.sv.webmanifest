@@ -1,8 +1,8 @@
 {
-  "name": "Superjatsi · maxi-jatsi",
+  "name": "Superjatsi · tärningsspel",
   "short_name": "Superjatsi",
-  "description": "Superjatsi on web-pohjainen maxi-jatsi yksinpelinä. Offline, ei mainoksia eikä tiliä.",
-  "lang": "fi",
+  "description": "Superjatsi är ett webbaserat tärningsspel för en spelare. Offline, ingen reklam och inget konto.",
+  "lang": "sv",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
