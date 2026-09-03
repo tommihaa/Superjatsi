@@ -3,7 +3,7 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
-## [Unreleased]
+## [0.21.1] – 2026-09-03
 
 ### Lisätty
 - Sivun meta-kuvaus ja PWA-manifest seuraavat pelaajan kieltä. 0.21.0 jätti ne suomeksi;
