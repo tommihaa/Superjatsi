@@ -8,7 +8,7 @@ ei kanna sitä mitä alla on.
 Se on kokoelmatasolla nimetty kolmas akseli: `Kaanon/KÄSITTEISTÖ.md` kertoo mitä teokset
 pitävät totena ja `Kaanon/TYÖTAVAT.md` miten niiden parissa työskennellään, mutta kumpikaan ei
 kanna sitä mitä maailmasta tiedetään. Sisardokumentit ovat `DGAndroid/SUBSTANSSI.md`,
-`Jako-pelini/SUBSTANSSI.md` ja `SanaMix/SUBSTANSSI.md`, ja ne on kirjoitettu ensin.
+`Jako/SUBSTANSSI.md` ja `SanaMix/SUBSTANSSI.md`, ja ne on kirjoitettu ensin.
 
 **Lukija on malli, ja tiedosto noudetaan kun aihe tulee vastaan.** Muoto on siksi väitelauseita
 eikä proosaa.
@@ -27,7 +27,7 @@ että vastaus kaatuu sen mukana.
 
 **Jo kirjattua ei kysytä uudelleen.** Kolme asiaa oli tiedossa ennen ensimmäistä kysymystä,
 eikä niitä kysytty: Yatzy oli Laiturin talon peli jota pelattiin yhteisessä puolessa tunnissa
-kortin, sanamixin, Aliaksen ja tietokilpailujen rinnalla (`Jako-pelini/SUBSTANSSI.md` kohdat
+kortin, sanamixin, Aliaksen ja tietokilpailujen rinnalla (`Jako/SUBSTANSSI.md` kohdat
 25 ja 26), Superjatsi pelattiin kehitysvaiheessa kyllästymiseen asti jotta siitä tulisi
 mieleinen (`SanaMix/SUBSTANSSI.md` kohta 15), ja se lähti Laiturin ohjaajille osana kolmikkoa
 Jako, Superjatsi ja Itu (saman dokumentin kohta 20).
@@ -87,7 +87,7 @@ tutut, sukulaiset ja ystävät.
 **Seuraus:** jatsi on kokoelman peleistä samaa lajia kuin Paskahousu, eli lapsuudesta eikä
 Laiturilta. Laituri on siis jatsin kohdalla yksi paikka jossa peliä pelattiin, ei se paikka
 josta se opittiin. Tämä erottaa Superjatsin taustan Jakon yhdeksän pelin taustasta, joista
-viisi opittiin nimenomaan Laiturilla (`Jako-pelini/SUBSTANSSI.md` kohta 1).
+viisi opittiin nimenomaan Laiturilla (`Jako/SUBSTANSSI.md` kohta 1).
 
 **Seuraus:** sama piiri (koti, kyläily, tutut ja sukulaiset) kantaa nyt kaksi kokoelman
 kolmesta pelistä, koska `SanaMix/SUBSTANSSI.md` kohta 6 kirjaa Scrabblesta saman ympäristön.
@@ -119,7 +119,7 @@ Kirjanpito oli paperinen, eikä laskijan rooli ollut kenenkään vaan aina jonku
 
 **Seuraus:** tämä on kolmas eri vastaus samaan kysymykseen kolmessa dokumentissa, ja ero on
 merkille pantava. Laiturin korttipelien turnaussarjan pisteet kirjattiin paperille
-(`Jako-pelini/SUBSTANSSI.md` kohta 41), sanamixistä ei pidetty tilastoja lainkaan
+(`Jako/SUBSTANSSI.md` kohta 41), sanamixistä ei pidetty tilastoja lainkaan
 (`SanaMix/SUBSTANSSI.md` kohta 31), ja jatsissa paperi oli osa peliä itseään eikä sarjan
 kirjanpitoa: tulokorttia ei voi pelata ilman että joku täyttää sen. Superjatsin ennätyslista
 on siis lähempänä esikuvaansa kuin Itun, koska jatsissa kirjattu tulos oli olemassa jo
@@ -411,7 +411,7 @@ lisävaikeutta. Pakotettu järjestys tekee niistä sarakkeita joita on pelattava
 sattuu sopimaan, eli ne kilpailevat jokaisesta heitosta vapaiden sarakkeiden kanssa.
 
 **Seuraus, ja se on ehdotus eikä kirjaus:** nämä kolme ovat valmis pohja neuvotoiminnolle, jos
-sellainen joskus tehdään. Jakossa on Mestarin neuvo (`Jako-pelini/docs/MESTARIN_NEUVO.md`) ja
+sellainen joskus tehdään. Jakossa on Mestarin neuvo (`Jako/docs/MESTARIN_NEUVO.md`) ja
 Itussa Sanapoliisi, eikä Superjatsissa ole kumpaakaan vastaavaa. ~~Tämä saa kaatua, koska
 neuvotoimintoa ei ole ehdotettu eikä päätetty.~~ *Kysytty ja päätetty 2.9.2026 (erä 17):
 pelitapa jää dokumenttiin, kohta 65.*
@@ -458,7 +458,7 @@ Tommi 21.8.2026 (erä 4), samassa vastauksessa kuin kohta 15:
 
 | Repo | Ensimmäinen commit |
 |---|---|
-| `Jako-pelini` | 6.5.2026 |
+| `Jako` | 6.5.2026 |
 | `Superjatsi` | 5.6.2026 |
 | `SanaMix` (Itu) | 17.6.2026 |
 
@@ -714,7 +714,7 @@ olivat vieraita.
 sukupuolella, ja se on nyt poistettu sitaatista. Nimeämättömyys ei riittänyt: yksi
 tunnistetieto yhdessä pelitaustan kanssa (vuosien paperijatsi) rajaa lähipiirissä hyvin pienen
 joukon, ja tunnistaminen on yhdistelmän eikä yksittäisen tiedon ominaisuus. Sama rajaus tehtiin
-samana päivänä `SanaMix/SUBSTANSSI.md` kohtaan 17 ja `Jako-pelini/SUBSTANSSI.md` kohtaan 41.
+samana päivänä `SanaMix/SUBSTANSSI.md` kohtaan 17 ja `Jako/SUBSTANSSI.md` kohtaan 41.
 Kohtien 24, 27, 30 ja 40 päätelmät eivät kaadu, koska ne lepäävät pelaajan **pelitaustalla**
 (kokenut jatsinpelaaja, jolle uudet kentät olivat vieraita) eivätkä siitä kuka hän on.
 
@@ -1164,7 +1164,7 @@ hyvältä, vaan se nimeää kaksi soitinta jotka Tommi on itse soittanut. Se on 
 kun mikään kokoelman substanssidokumentti kirjaa tekijän oman musiikkitaustan, ja teema on
 kolmelle pelille yhteinen eli laajemmalle levinnyt kuin yksikään muu tämän dokumentin havainto.
 
-**Seuraus:** valinta on samaa lajia kuin `laituri`-nimiryhmä Jakossa (`Jako-pelini/CLAUDE.md`:
+**Seuraus:** valinta on samaa lajia kuin `laituri`-nimiryhmä Jakossa (`Jako/CLAUDE.md`:
 kunnianosoitus oikeille ihmisille eikä arkkityyppiryhmä). Molemmissa sovelluksen pinnalla on
 jotain joka on peräisin tekijän omasta elämästä eikä pelin maailmasta, eikä kumpaakaan näe
 käyttäjälle päin.
