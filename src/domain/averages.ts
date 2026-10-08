@@ -72,6 +72,15 @@ export class AverageStore {
       .sort((x, y) => y.average - x.average);
   }
 
+  /** Kaikki nimet joilla tällä laitteella on pelattu, kummastakin variantista, aakkosjärjestyksessä.
+   *  Aloitusnäytön nimivalikon lähde: jokainen aloitettu peli kirjautuu tänne. */
+  names(): string[] {
+    const { players } = this.read();
+    return [...new Set([...Object.keys(players[5]), ...Object.keys(players[6])])].sort((a, b) =>
+      a.localeCompare(b, "fi"),
+    );
+  }
+
   clear(): void {
     this.backend.removeItem(this.key);
   }

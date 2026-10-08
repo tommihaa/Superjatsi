@@ -10,13 +10,23 @@ declare const __BUILD_DATE__: string;
 const narrowScreen = (): boolean =>
   typeof window !== "undefined" && window.matchMedia("(max-width: 560px)").matches;
 
+// Nimet ovat pelaajan kirjoittamia, joten ne escapetaan ennen innerHTML:ää.
+const esc = (s: string): string =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
 // <sj-setup>: aloitusnäyttö. Yksinpeli: valitaan noppamäärä (5/6) ja nimi.
 // Emittoi "start" detaililla { diceCount, names } (names on aina yhden mittainen).
 // Domain säilyy monipelikykyisenä (GameState hyväksyy N pelaajaa) tulevaa
 // verkko-moninpeliä varten, mutta paikallinen UI ajaa aina yhtä pelaajaa.
+// Nimi valitaan valikosta jos laitteella on pelattu (Tommin toive 8.10.2026), muuten
+// kirjoitetaan. Valikon viimeinen valinta "Uusi nimi…" tuo tekstikentän.
 export class Setup extends HTMLElement {
   private diceCount: DiceCount = narrowScreen() ? 5 : 6;
   private playerName = "";
+  /** Nimet joilla laitteella on pelattu (app lukee keskiarvoista). */
+  private known: string[] = [];
+  /** "Uusi nimi…" valittu: tekstikenttä näkyy valikon alla. */
+  private typingNew = false;
 
   /** Edellisen pelin valinnat esitäyttöön (app lataa localStoragesta). */
   set defaults(d: { names: string[]; diceCount?: DiceCount } | null) {
@@ -24,6 +34,37 @@ export class Setup extends HTMLElement {
     this.playerName = d.names[0] ?? "";
     if (d.diceCount !== undefined) this.diceCount = d.diceCount;
     if (this.isConnected) this.render();
+  }
+
+  /** Laitteella pelanneet nimet valikkoon. */
+  set knownNames(names: string[]) {
+    this.known = names;
+    if (this.isConnected) this.render();
+  }
+
+  /** Valikon nimet: pelanneet ja viimeksi pelannut, vaikka keskiarvot olisi tyhjennetty. */
+  private menuNames(): string[] {
+    const last = this.playerName.trim();
+    return last && !this.typingNew && !this.known.includes(last)
+      ? [...this.known, last].sort((a, b) => a.localeCompare(b, "fi"))
+      : this.known;
+  }
+
+  private nameField(): string {
+    const input = `<input type="text" maxlength="14" data-name aria-label="${T.nameLabel}" placeholder="${T.playerName(
+      1,
+    )}" value="${esc(this.playerName)}" />`;
+    const names = this.menuNames();
+    if (names.length === 0) return input;
+    const selected = this.typingNew ? "" : this.playerName.trim();
+    const options = names
+      .map((n) => `<option value="${esc(n)}"${n === selected ? " selected" : ""}>${esc(n)}</option>`)
+      .join("");
+    // Tyhjä arvo on uusi nimi: tallennettu nimi ei voi olla tyhjä (record ohittaa sen).
+    const select = `<select data-name-select aria-label="${T.nameLabel}">${options}<option value=""${
+      this.typingNew ? " selected" : ""
+    }>${T.newName}</option></select>`;
+    return this.typingNew ? select + input : select;
   }
 
   connectedCallback(): void {
@@ -67,11 +108,7 @@ export class Setup extends HTMLElement {
         </fieldset>
         <fieldset>
           <legend>${T.nameLabel}</legend>
-          <div class="names">
-            <input type="text" maxlength="14" data-name aria-label="${T.nameLabel}" placeholder="${T.playerName(
-              1,
-            )}" value="${this.playerName.replace(/"/g, "&quot;")}" />
-          </div>
+          <div class="names">${this.nameField()}</div>
         </fieldset>
         <button class="primary start">${T.start}</button>
         <p class="setup-version">${T.version(__APP_VERSION__, __BUILD_DATE__)}</p>
@@ -84,8 +121,15 @@ export class Setup extends HTMLElement {
         this.render();
       }),
     );
-    this.querySelector<HTMLInputElement>("[data-name]")!.addEventListener("input", (e) => {
+    this.querySelector<HTMLInputElement>("[data-name]")?.addEventListener("input", (e) => {
       this.playerName = (e.target as HTMLInputElement).value;
+    });
+    this.querySelector<HTMLSelectElement>("[data-name-select]")?.addEventListener("change", (e) => {
+      const value = (e.target as HTMLSelectElement).value;
+      this.typingNew = value === "";
+      this.playerName = value;
+      this.render();
+      if (this.typingNew) this.querySelector<HTMLInputElement>("[data-name]")?.focus();
     });
     this.querySelectorAll<HTMLButtonElement>("[data-lang]").forEach((b) =>
       b.addEventListener("click", () => {

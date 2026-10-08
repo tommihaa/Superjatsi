@@ -24,6 +24,7 @@ export const sv: Strings = {
   diceHintMobile: "📱 På telefonen ryms 5 tärningar bäst på skärmen",
   nameLabel: "Namn",
   playerName: (i: number) => `Spelare ${i}`,
+  newName: "Nytt namn…",
   start: "Starta spelet",
 
   // Header

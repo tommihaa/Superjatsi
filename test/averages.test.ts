@@ -91,6 +91,19 @@ describe("AverageStore", () => {
     expect(entries[0].average).toBe(250);
   });
 
+  it("names antaa kummankin variantin nimet kerran, aakkosjärjestyksessä", () => {
+    const store = makeStore();
+    store.record(6, [{ name: "Örkki", score: 200 }]);
+    store.record(5, [{ name: "Hilma", score: 150 }]);
+    store.record(6, [{ name: "Hilma", score: 250 }]);
+    store.record(5, [{ name: "Aapo", score: 100 }]);
+    expect(store.names()).toEqual(["Aapo", "Hilma", "Örkki"]);
+  });
+
+  it("names on tyhjä kun pelejä ei ole", () => {
+    expect(makeStore().names()).toEqual([]);
+  });
+
   it("clear tyhjentää kaiken", () => {
     const store = makeStore();
     store.record(6, [{ name: "Tommi", score: 200 }]);

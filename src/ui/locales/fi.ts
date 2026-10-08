@@ -26,6 +26,8 @@ export const fi = {
   diceHintMobile: "📱 Puhelimessa 5 noppaa istuu näytölle mukavimmin",
   nameLabel: "Nimi",
   playerName: (i: number) => `Pelaaja ${i}`,
+  // Nimivalikon viimeinen valinta: tuo tekstikentän uudelle nimelle.
+  newName: "Uusi nimi…",
   start: "Aloita peli",
 
   // Header

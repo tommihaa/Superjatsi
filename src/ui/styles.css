@@ -210,7 +210,8 @@ button:focus-visible {
   gap: 8px;
   margin: 0 0 18px;
 }
-.names input {
+.names input,
+.names select {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;

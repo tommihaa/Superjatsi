@@ -3,6 +3,16 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.22.0] – 2026-10-08
+
+### Lisätty
+- Aloitusnäytön nimi valitaan valikosta, jos laitteella on jo pelattu. Valikossa ovat kaikki
+  nimet joilla on pelattu (`AverageStore.names()`, kummastakin variantista,
+  aakkosjärjestyksessä), ja viimeksi pelannut on valmiiksi valittuna. Viimeinen valinta
+  "Uusi nimi…" tuo tekstikentän. Ilman aiempia pelejä näkyy pelkkä tekstikenttä kuten ennen.
+  Viimeksi pelannut pysyy valikossa, vaikka ennätykset ja keskiarvot olisi tyhjennetty.
+  Nimet escapetaan ennen HTML:ää, koska ne ovat pelaajan kirjoittamia.
+
 ## [0.21.1] – 2026-09-03
 
 ### Lisätty

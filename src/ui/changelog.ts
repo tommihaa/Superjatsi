@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.22.0",
+    date: "8.10.2026",
+    items: [
+      "Nimen voi nyt valita valikosta: siinä ovat kaikki nimet joilla tällä laitteella on pelattu, ja viimeksi pelannut on valmiiksi valittuna. Uuden nimen saa valikon viimeisestä kohdasta.",
+    ],
+  },
+  {
     version: "0.21.0",
     date: "3.9.2026",
     items: [

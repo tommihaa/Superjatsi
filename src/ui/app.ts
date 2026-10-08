@@ -293,6 +293,7 @@ export class App extends HTMLElement {
 
     if (!this.game) {
       const setup = document.createElement("sj-setup") as Setup;
+      setup.knownNames = this.averages.names();
       setup.defaults = this.setupPrefs.load();
       main.append(setup);
       this.append(main);

@@ -23,6 +23,7 @@ export const en: Strings = {
   diceHintMobile: "📱 On a phone, 5 dice fit the screen best",
   nameLabel: "Name",
   playerName: (i: number) => `Player ${i}`,
+  newName: "New name…",
   start: "Start game",
 
   // Header
