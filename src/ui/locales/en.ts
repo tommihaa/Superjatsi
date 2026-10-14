@@ -283,7 +283,7 @@ export const en: Strings = {
   // Dice tray
   emptyDie: "empty die",
   a11y: {
-    die: (v: number, held: boolean) => (held ? `die ${v}, held` : `die ${v}`),
+    die: (v: number) => `die ${v}`,
     rolled: (n: number, free: string, held: string) =>
       `Roll ${n}/3: ${free}${held ? `. Held ${held}` : ""}`,
     held: (v: number) => `${v} held`,

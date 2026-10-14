@@ -71,17 +71,19 @@ export class DiceTray extends HTMLElement {
       const pips = PIPS[d.value].map((p) => `<span class="pip ${p}"></span>`).join("");
       // Jalometalli-ilme: sävy tummasta puusta kultaan silmäluvun mukaan (v1..v6).
       const tone = `v${d.value}`;
+      // Lukitus on napin tila (aria-pressed, APG toggle button) eikä osa nimeä, jotta
+      // nimi pysyy samana (docs/AUDITOINTI-RUUDUNLUKIJA.md › SJ-3).
       if (d.held) {
         thrown.push(`<span class="die ghost" aria-hidden="true"></span>`);
         rowDice.push(
-          `<button class="die held ${tone}" data-die="${i}"${dis} aria-label="${T.a11y.die(d.value, true)}">${pips}<span class="held-tag">${T.held}</span></button>`,
+          `<button class="die held ${tone}" data-die="${i}"${dis} aria-pressed="true" aria-label="${T.a11y.die(d.value)}">${pips}<span class="held-tag">${T.held}</span></button>`,
         );
       } else {
         // Heiton porrastus: nopat "laskeutuvat" pöytään pienellä viiveellä toisistaan.
         const cls = `die ${tone}${justRolled ? " rolling" : ""}`;
         const delay = justRolled ? `animation-delay:${i * 40}ms;` : "";
         thrown.push(
-          `<button class="${cls}" data-die="${i}"${dis} style="${delay}${this.jitter(i, d.value)}" aria-label="${T.a11y.die(d.value, false)}">${pips}</button>`,
+          `<button class="${cls}" data-die="${i}"${dis} style="${delay}${this.jitter(i, d.value)}" aria-pressed="false" aria-label="${T.a11y.die(d.value)}">${pips}</button>`,
         );
       }
     });

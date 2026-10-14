@@ -284,7 +284,7 @@ export const sv: Strings = {
   // Dice tray
   emptyDie: "tom tärning",
   a11y: {
-    die: (v: number, held: boolean) => (held ? `tärning ${v}, låst` : `tärning ${v}`),
+    die: (v: number) => `tärning ${v}`,
     rolled: (n: number, free: string, held: string) =>
       `Slag ${n}/3: ${free}${held ? `. Låsta ${held}` : ""}`,
     held: (v: number) => `${v} låst`,

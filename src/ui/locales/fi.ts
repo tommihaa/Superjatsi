@@ -299,7 +299,7 @@ export const fi = {
   // Ruudunlukija (DGAndroid/docs/YHTEYDENOTTO_NKL.md › Grillaus 14.10.2026): lyhyt ja
   // sijainti ennen sisältöä. Näitä ei näytetä näkevälle.
   a11y: {
-    die: (v: number, held: boolean) => (held ? `noppa ${v}, lukittu` : `noppa ${v}`),
+    die: (v: number) => `noppa ${v}`,
     rolled: (n: number, free: string, held: string) =>
       `Heitto ${n}/3: ${free}${held ? `. Lukitut ${held}` : ""}`,
     held: (v: number) => `${v} lukittu`,

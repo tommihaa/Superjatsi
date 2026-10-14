@@ -24,12 +24,13 @@ export class ScorecardView extends HTMLElement {
     this.closeInfo();
   }
 
-  /** Attribuutit napautettavalle info-elementille: title = hover-bonus työpöydällä,
-   *  data-info kantaa selitteen kosketuksen popoveria varten, aria-label vie sen
-   *  ruudunlukijalle. Lainausmerkit escapetaan attribuuttien rikkoutumisen varalta. */
-  private info(text: string): string {
+  /** Napautettava selite otsikkosolun sisällä natiivina nappina, jotta `<th>` pysyy
+   *  taulukon otsikkona (docs/AUDITOINTI-RUUDUNLUKIJA.md › SJ-1). Napin nimi on näkyvä
+   *  otsikko, ja title on työpöydän hover sekä ruudunlukijan kuvaus. data-info kantaa
+   *  selitteen kosketuksen popoveria varten. Lainausmerkit escapetaan. */
+  private info(label: string, text: string): string {
     const esc = text.replace(/"/g, "&quot;");
-    return `data-info="${esc}" title="${esc}" tabindex="0" role="button" aria-label="${esc}"`;
+    return `<button type="button" class="has-info" data-info="${esc}" title="${esc}">${label}</button>`;
   }
 
   /** Näytä selite kohteen lähellä kelluvana popoverina. Sama kohde uudelleen sulkee. */
@@ -108,7 +109,8 @@ export class ScorecardView extends HTMLElement {
       const max = c.isMax ? " max" : "";
       const text = c.score > 0 ? c.score : "";
       const aria = T.cellCommitLabel(rowLabel, T.colLabel[col], c.score);
-      return `<td class="cell avail${scored}${max}" data-col="${col}" data-row="${rowId}" role="button" tabindex="0" aria-label="${aria}" title="${c.isMax ? T.maxScore : ""}">${text}</td>`;
+      // Natiivi nappi solun sisällä: `<td>` pysyy taulukon soluna (SJ-1).
+      return `<td class="cell avail${scored}${max}" data-col="${col}" data-row="${rowId}"><button type="button" class="cell-btn" aria-label="${aria}" title="${c.isMax ? T.maxScore : ""}">${text}</button></td>`;
     }
     const dim = dimmed ? " dim" : "";
     if (c.value !== null) {
@@ -137,11 +139,11 @@ export class ScorecardView extends HTMLElement {
     const isDim = (c: ColumnId) => b.dimmedColumns.includes(c);
 
     const head =
-      `<th class="row-label"></th>` +
+      `<td class="row-label"></td>` +
       b.columns
-        .map((c) => `<th class="${isDim(c) ? "dim has-info" : "has-info"}" ${this.info(T.colInfo[c])}>${T.colLabel[c]}</th>`)
+        .map((c) => `<th scope="col"${isDim(c) ? ' class="dim"' : ""}>${this.info(T.colLabel[c], T.colInfo[c])}</th>`)
         .join("") +
-      `<th>${T.colSum}</th>`;
+      `<th scope="col">${T.colSum}</th>`;
 
     const rowHtml = (section: "upper" | "lower") =>
       b.rows
@@ -150,9 +152,9 @@ export class ScorecardView extends HTMLElement {
           const cells = b.columns.map((c) => this.cellHtml(r.id, r.label, c, r.cells[c], isDim(c))).join("");
           // Yhdistelmävaatimuksen selite napautettavaksi (hover-tooltip ei näy
           // kosketusnäytöllä) — sama napauta-paljastaaksesi-malli kuin muissa peleissä.
-          const labelCls = r.description ? "row-label has-info" : "row-label";
-          const labelAttrs = r.description ? ` ${this.info(r.description)}` : "";
-          return `<tr class="section-${section}"><td class="${labelCls}"${labelAttrs}>${r.label}</td>${cells}<td class="cell colsum">${r.sum}</td></tr>`;
+          // Rivin nimi on rivin otsikko, jotta taulukkonavigointi sanoo sen solussa (SJ-2).
+          const label = r.description ? this.info(r.label, r.description) : r.label;
+          return `<tr class="section-${section}"><th scope="row" class="row-label">${label}</th>${cells}<td class="cell colsum">${r.sum}</td></tr>`;
         })
         .join("");
 
@@ -161,19 +163,19 @@ export class ScorecardView extends HTMLElement {
     const pace = b.bonusThreshold / 21;
     const bonusPace = Number.isInteger(pace) ? String(pace) : pace.toFixed(1).replace(".", ",");
     const subtotalRow =
-      `<tr class="subtotal"><td class="row-label has-info" ${this.info(T.upperSumInfo(bonusPace, b.bonusThreshold))}>${T.upperSum}</td>` +
+      `<tr class="subtotal"><th scope="row" class="row-label">${this.info(T.upperSum, T.upperSumInfo(bonusPace, b.bonusThreshold))}</th>` +
       b.columns
         .map((c) => `<td>${b.summary[c].subtotal}${this.devHtml(b.summary[c].deviation)}</td>`)
         .join("") +
       `<td></td></tr>`;
 
     const bonusRow =
-      `<tr class="subtotal"><td class="row-label has-info" ${this.info(T.bonusInfo(b.bonusThreshold, b.bonusValue))}>${T.bonus}</td>` +
+      `<tr class="subtotal"><th scope="row" class="row-label">${this.info(T.bonus, T.bonusInfo(b.bonusThreshold, b.bonusValue))}</th>` +
       b.columns.map((c) => `<td>${b.summary[c].bonus || ""}</td>`).join("") +
       `<td></td></tr>`;
 
     const totalRow =
-      `<tr class="total"><td class="row-label">${T.grandTotal}</td>` +
+      `<tr class="total"><th scope="row" class="row-label">${T.grandTotal}</th>` +
       b.columns.map((c) => `<td>${b.summary[c].total}</td>`).join("") +
       `<td>${b.grandTotal}</td></tr>`;
 
@@ -191,16 +193,9 @@ export class ScorecardView extends HTMLElement {
 
     // Napautettavat selitteet (sarakeotsikot, Yläsumma/Bonus, yhdistelmärivit):
     // sama napauta-paljastaaksesi-malli kuin muissa peleissä, koska hover ei toimi
-    // kosketusnäytöllä. Enter/Väli aktivoi näppäimistöltä.
+    // kosketusnäytöllä. Natiivi nappi aktivoituu Enterillä ja välilyönnillä itse.
     this.querySelectorAll<HTMLElement>(".has-info").forEach((el) => {
-      const show = () => this.showInfo(el, el.dataset.info ?? "");
-      el.addEventListener("click", show);
-      el.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          show();
-        }
-      });
+      el.addEventListener("click", () => this.showInfo(el, el.dataset.info ?? ""));
     });
 
     this.querySelectorAll<HTMLTableCellElement>(".cell.avail").forEach((td) => {
@@ -212,14 +207,8 @@ export class ScorecardView extends HTMLElement {
           }),
         );
       };
+      // Koko solu on klikattava hiirellä ja kosketuksella, nappi kantaa näppäimistön.
       td.addEventListener("click", emit);
-      // role="button" ei tuo näppäinaktivointia ilmaiseksi — Enter/Space käsin.
-      td.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          emit();
-        }
-      });
     });
   }
 }

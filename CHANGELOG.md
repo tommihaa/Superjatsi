@@ -3,6 +3,17 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Muutettu
+- **Pistetaulukko on ruudunlukijalle taulukko.** Sarakeotsikot ja rivien nimet ovat taulukon
+  otsikoita, joten taulukkonavigoinnissa solu kertoo rivin ja sarakkeen. Kirjattavat solut ja
+  napautettavat selitteet ovat solun sisällä olevia natiiveja nappeja. Ennen otsikot ja solut
+  olivat painikkeita, ja täytetty solu sanoi pelkän luvun (`docs/AUDITOINTI-RUUDUNLUKIJA.md`
+  › SJ-1 ja SJ-2).
+- Lukittu noppa kerrotaan napin tilana (*painettu*) eikä nimessä, joten nimi pysyy samana
+  (SJ-3).
+
 ## [0.23.0] – 2026-10-14
 
 ### Lisätty

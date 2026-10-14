@@ -12,7 +12,14 @@ Pistetaulukko on oikea `<table>`, mikä on hyvä pohja.
 
 ## Löydökset
 
-**SJ-1. Taulukon solut ja otsikot on ylikirjoitettu `role="button"`illa.** Tila: avoin.
+**SJ-1. Taulukon solut ja otsikot on ylikirjoitettu `role="button"`illa.** Tila: korjattu
+14.10.2026. Kirjattava solu on `<td>`, jonka sisällä on natiivi `<button class="cell-btn">`, ja
+selitteet ovat `<th>`:n sisällä natiiveja `<button class="has-info">`-nappeja. Napin nimi on
+näkyvä otsikko ja selite on `title`, joten sarakeotsikko sanoo taulukkonavigoinnissa
+sarakkeen nimen eikä koko selitettä. Käsin tehty Enter/Space-käsittely poistettiin. Todennettu
+selaimessa: ei yhtään `role="button"`ia taulukossa, Enter kirjaa kohdistetun solun ja
+selitekupla aukeaa. Saavutettavuuspuun taulukkorooleja selaintyökalu ei näytä, eikä mitään
+kuunneltu. Alkuperäinen havainto:
 `scorecard-view.ts:111` (vapaat solut), `:142` (sarakeotsikot `this.info()`n kautta, `:32`)
 ja `:155` (rivien nimet): ARIA in HTML ei salli `<td>`:lle eikä `<th>`:lle button-roolia
 taulukon sisällä. Seuraus on se, että taulukkonavigoinnissa (NVDA ja JAWS Ctrl+Alt+nuolet,
@@ -20,12 +27,16 @@ VoiceOverin rootori) sarakeotsikko on painike eikä otsikko, joten solu ei kerro
 Virallinen muoto on solun sisään sijoitettu natiivi `<button>`, jolloin `<td>` ja `<th>` pysyvät
 taulukkona. Näppäinkäsittely (`:216`) poistuu samalla, koska natiivi nappi aktivoituu itse.
 
-**SJ-2. Rivien nimet ovat `<td>` eivätkä rivin otsikoita.** Tila: avoin. `scorecard-view.ts:155`,
+**SJ-2. Rivien nimet ovat `<td>` eivätkä rivin otsikoita.** Tila: korjattu 14.10.2026 samassa
+commitissa: rivien nimet, Yläsumma, Bonus ja Yhteensä ovat `<th scope="row">` ja sarakeotsikot
+`<th scope="col">`. Alkuperäinen havainto: `scorecard-view.ts:155`,
 `:164`, `:171` ja `:176`: kun nimi on `<th scope="row">`, ruudunlukija sanoo solussa rivin nimen
 (esim. "Täyskäsi") ja sarakkeen. Nyt solun `aria-label` kantaa tiedon itse, mutta
 taulukkonavigoinnissa täytetyt solut sanovat pelkän luvun.
 
-**SJ-3. Lukittu noppa kerrotaan nimessä eikä tilana.** Tila: avoin, vähäinen.
+**SJ-3. Lukittu noppa kerrotaan nimessä eikä tilana.** Tila: korjattu 14.10.2026: noppa on
+`aria-pressed`, ja `a11y.die` sanoo kolmella kielellä pelkän nopan ja silmäluvun. Todennettu
+DOMista. Alkuperäinen havainto:
 `dice-tray.ts:77` ja `:84`: APG:n [toggle button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
 -malli on `aria-pressed="true"`, jolloin ruudunlukija sanoo tilan omalla tavallaan ("painettu" tai
 "valittu") ja nimi pysyy samana. Nykyinen tapa toimii, joten tämä on yhdenmukaisuutta eikä vika.
