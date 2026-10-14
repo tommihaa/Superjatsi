@@ -3,7 +3,7 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
-## [Unreleased]
+## [0.23.1] – 2026-10-14
 
 ### Muutettu
 - **Pistetaulukko on ruudunlukijalle taulukko.** Sarakeotsikot ja rivien nimet ovat taulukon
