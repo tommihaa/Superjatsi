@@ -1,0 +1,31 @@
+# Ruudunlukija-auditointi: merkinnät virallisia lähteitä vasten
+
+Ajettu 14.10.2026 Tommin tilauksesta, HEAD `2715e66` (0.23.0). Liipaisin, lähteet ja
+menetelmä ovat samat kuin Itun auditoinnissa (`SanaMix/docs/AUDITOINTI-RUUDUNLUKIJA.md`):
+koodinluku [APG](https://www.w3.org/WAI/ARIA/apg/)n, [WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/)n
+ja [ARIA in HTML](https://www.w3.org/TR/html-aria/)n mukaan, ei kuuntelua ruudunlukijalla.
+Rivinumerot ovat HEAD `2715e66`:n puusta.
+
+Kunnossa: ilmoitusjono (`src/ui/announce.ts`), noppien ja yläpalkin nappien nimet, natiivit
+`<button>`it nopissa ja `<html lang>` joka vaihtuu kielen mukana (`strings.ts:45`).
+Pistetaulukko on oikea `<table>`, mikä on hyvä pohja.
+
+## Löydökset
+
+**SJ-1. Taulukon solut ja otsikot on ylikirjoitettu `role="button"`illa.** Tila: avoin.
+`scorecard-view.ts:111` (vapaat solut), `:142` (sarakeotsikot `this.info()`n kautta, `:32`)
+ja `:155` (rivien nimet): ARIA in HTML ei salli `<td>`:lle eikä `<th>`:lle button-roolia
+taulukon sisällä. Seuraus on se, että taulukkonavigoinnissa (NVDA ja JAWS Ctrl+Alt+nuolet,
+VoiceOverin rootori) sarakeotsikko on painike eikä otsikko, joten solu ei kerro saraketta.
+Virallinen muoto on solun sisään sijoitettu natiivi `<button>`, jolloin `<td>` ja `<th>` pysyvät
+taulukkona. Näppäinkäsittely (`:216`) poistuu samalla, koska natiivi nappi aktivoituu itse.
+
+**SJ-2. Rivien nimet ovat `<td>` eivätkä rivin otsikoita.** Tila: avoin. `scorecard-view.ts:155`,
+`:164`, `:171` ja `:176`: kun nimi on `<th scope="row">`, ruudunlukija sanoo solussa rivin nimen
+(esim. "Täyskäsi") ja sarakkeen. Nyt solun `aria-label` kantaa tiedon itse, mutta
+taulukkonavigoinnissa täytetyt solut sanovat pelkän luvun.
+
+**SJ-3. Lukittu noppa kerrotaan nimessä eikä tilana.** Tila: avoin, vähäinen.
+`dice-tray.ts:77` ja `:84`: APG:n [toggle button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
+-malli on `aria-pressed="true"`, jolloin ruudunlukija sanoo tilan omalla tavallaan ("painettu" tai
+"valittu") ja nimi pysyy samana. Nykyinen tapa toimii, joten tämä on yhdenmukaisuutta eikä vika.
