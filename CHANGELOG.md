@@ -3,6 +3,24 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.23.0] – 2026-10-14
+
+### Lisätty
+- **Ruudunlukijatuki** (Näkövammaisten liiton Ville Lammisen neljä kohtaa,
+  `DGAndroid/docs/YHTEYDENOTTO_NKL.md` › Grillaus 14.10.2026). Live-alue `document.body`n
+  lapsena ilmoittaa heiton (nopat suuruusjärjestyksessä, lukitut erikseen), lukituksen ja
+  vapautuksen, odottavan kirjauksen, vahvistetun kirjauksen yhteispisteineen, perumisen ja
+  pelin tuloksen. Viestit kuuluvat yksi kerrallaan tauon kanssa, sama malli kuin Jaossa ja
+  Itussa. Tilanne-nappi (näkyy vain ruudunlukijalle ja näppäinkohdistuksella) tai H-näppäin
+  kertoo heiton, parhaat vaihtoehdot sijainti edellä (sarake, rivi, pisteet), tyhjät ruudut
+  ja yhteispisteet. Sama rivi samoilla pisteillä usealla sarakkeella sanotaan kerran.
+  Tekstit ovat kolmella kielellä `a11y`-ryhmässä; ruotsin ja englannin muotoilut ovat
+  Clauden eikä kielen osaaja ole tarkistanut niitä.
+
+### Korjattu
+- Nopan ruudunlukijanimi oli kovakoodattu suomeksi (*noppa 3, lukittu*) myös ruotsin ja
+  englannin kielellä. Nimi tulee nyt localesta.
+
 ## [0.22.0] – 2026-10-08
 
 ### Lisätty

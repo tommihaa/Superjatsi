@@ -296,6 +296,27 @@ export const fi = {
 
   // Dice tray
   emptyDie: "tyhjä noppa",
+  // Ruudunlukija (DGAndroid/docs/YHTEYDENOTTO_NKL.md › Grillaus 14.10.2026): lyhyt ja
+  // sijainti ennen sisältöä. Näitä ei näytetä näkevälle.
+  a11y: {
+    die: (v: number, held: boolean) => (held ? `noppa ${v}, lukittu` : `noppa ${v}`),
+    rolled: (n: number, free: string, held: string) =>
+      `Heitto ${n}/3: ${free}${held ? `. Lukitut ${held}` : ""}`,
+    held: (v: number) => `${v} lukittu`,
+    released: (v: number) => `${v} vapautettu`,
+    pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Vahvista tai peru`,
+    committed: (col: string, row: string, score: number, total: number) =>
+      `Kirjattu ${col} ${row} ${score}. Yhteensä ${total}`,
+    cancelled: "Peruttu",
+    notRolled: "Ei heitetty",
+    rollNo: (n: number) => `Heitto ${n}/3`,
+    dice: (list: string) => `Nopat ${list}`,
+    options: (list: string) => `Vaihtoehdot: ${list}`,
+    noOptions: "Ei pisteellisiä vaihtoehtoja",
+    freeCells: (n: number) => `Tyhjiä ruutuja ${n}`,
+    total: (n: number) => `Yhteensä ${n}`,
+    statusButton: "Tilanne",
+  },
   roll: "Heitä",
   rollAgain: "Heitä uudelleen",
   held: "Lukittu",
@@ -390,7 +411,8 @@ export const fi = {
     "Superjatsi on noppapeli. Heität noppia. Kirjaat tulokset kortin ruutuihin.",
     "Pelaat yksin ja omassa tahdissasi. Yksi kuuden nopan peli voi kestää " +
       "20-25 minuuttia. Yrität saada mahdollisimman paljon pisteitä.",
-    "Peli toimii näppäimistöllä, hiirellä ja kosketuksella.",
+    "Peli toimii näppäimistöllä, hiirellä ja kosketuksella. Ruudunlukija kuulee " +
+      "heitot ja kirjaukset. H-näppäin tai Tilanne-nappi kertoo tilanteen.",
     "Peli ei kerää sinusta mitään. Ei tiliä, ei mainoksia. Ennätyksesi tallentuvat " +
       "vain sinun selaimeesi.",
     "Peli on ilmainen ja tehty jaettavaksi. Voit lähettää palautetta. Voit myös " +

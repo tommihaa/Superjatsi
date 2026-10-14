@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.23.0",
+    date: "14.10.2026",
+    items: [
+      "Ruudunlukija kuulee nyt pelin: heiton nopat, lukitukset ja kirjaukset kerrotaan itse. H-näppäin tai ruudunlukijalle näkyvä Tilanne-nappi kertoo heiton, parhaat vaihtoehdot, tyhjät ruudut ja pisteet kerralla.",
+    ],
+  },
+  {
     version: "0.22.0",
     date: "8.10.2026",
     items: [

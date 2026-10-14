@@ -283,6 +283,25 @@ export const sv: Strings = {
 
   // Dice tray
   emptyDie: "tom tärning",
+  a11y: {
+    die: (v: number, held: boolean) => (held ? `tärning ${v}, låst` : `tärning ${v}`),
+    rolled: (n: number, free: string, held: string) =>
+      `Slag ${n}/3: ${free}${held ? `. Låsta ${held}` : ""}`,
+    held: (v: number) => `${v} låst`,
+    released: (v: number) => `${v} upplåst`,
+    pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Bekräfta eller ångra`,
+    committed: (col: string, row: string, score: number, total: number) =>
+      `Inskrivet ${col} ${row} ${score}. Totalt ${total}`,
+    cancelled: "Ångrat",
+    notRolled: "Inte slaget",
+    rollNo: (n: number) => `Slag ${n}/3`,
+    dice: (list: string) => `Tärningar ${list}`,
+    options: (list: string) => `Alternativ: ${list}`,
+    noOptions: "Inga poänggivande alternativ",
+    freeCells: (n: number) => `Tomma rutor ${n}`,
+    total: (n: number) => `Totalt ${n}`,
+    statusButton: "Läge",
+  },
   roll: "Slå",
   rollAgain: "Slå igen",
   held: "Låst",
@@ -372,7 +391,8 @@ export const sv: Strings = {
     "Superjatsi är ett tärningsspel. Du slår tärningar. Du skriver in resultaten i protokollets rutor.",
     "Du spelar ensam och i din egen takt. Ett spel med sex tärningar kan ta " +
       "20-25 minuter. Du försöker få så många poäng som möjligt.",
-    "Spelet fungerar med tangentbord, mus och pekskärm.",
+    "Spelet fungerar med tangentbord, mus och pekskärm. En skärmläsare hör " +
+      "slagen och inskrivningarna. H-tangenten eller knappen Läge berättar läget.",
     "Spelet samlar inget om dig. Inget konto, ingen reklam. Dina rekord sparas " +
       "bara i din egen webbläsare.",
     "Spelet är gratis och gjort för att delas. Du kan skicka respons. Du kan också " +

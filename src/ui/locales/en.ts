@@ -282,6 +282,25 @@ export const en: Strings = {
 
   // Dice tray
   emptyDie: "empty die",
+  a11y: {
+    die: (v: number, held: boolean) => (held ? `die ${v}, held` : `die ${v}`),
+    rolled: (n: number, free: string, held: string) =>
+      `Roll ${n}/3: ${free}${held ? `. Held ${held}` : ""}`,
+    held: (v: number) => `${v} held`,
+    released: (v: number) => `${v} released`,
+    pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Confirm or undo`,
+    committed: (col: string, row: string, score: number, total: number) =>
+      `Scored ${col} ${row} ${score}. Total ${total}`,
+    cancelled: "Undone",
+    notRolled: "Not rolled",
+    rollNo: (n: number) => `Roll ${n}/3`,
+    dice: (list: string) => `Dice ${list}`,
+    options: (list: string) => `Options: ${list}`,
+    noOptions: "No scoring options",
+    freeCells: (n: number) => `Empty boxes ${n}`,
+    total: (n: number) => `Total ${n}`,
+    statusButton: "Status",
+  },
   roll: "Roll",
   rollAgain: "Roll again",
   held: "Held",
@@ -369,7 +388,8 @@ export const en: Strings = {
     "Superjatsi is a dice game. You roll dice. You enter the results in the cells of the score sheet.",
     "You play alone and at your own pace. One six-dice game can take " +
       "20-25 minutes. You try to score as many points as you can.",
-    "The game works with a keyboard, a mouse and touch.",
+    "The game works with a keyboard, a mouse and touch. A screen reader hears " +
+      "the rolls and the scores. The H key or the Status button tells the situation.",
     "The game collects nothing about you. No account, no ads. Your records are stored " +
       "only in your own browser.",
     "The game is free and made to be shared. You can send feedback. You can also " +

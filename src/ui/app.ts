@@ -27,6 +27,7 @@ import { buildView, type GameView } from "./view";
 import { glowCells, starStorm } from "./effects";
 import { setSfxEnabled, setTheme, sfx } from "./sfx";
 import { downloadRecapImage } from "./recap-image";
+import { announce, announceNow, mountAnnouncer } from "./announce";
 import type { AppHeader } from "./header";
 import type { Setup } from "./setup";
 import type { StatusBar } from "./status-bar";
@@ -95,6 +96,7 @@ export class App extends HTMLElement {
     setSfxEnabled(sound.enabled);
     setTheme(sound.theme);
     this.applyDiceTheme(this.diceThemePrefs.load());
+    mountAnnouncer();
     this.bindEvents();
     this.game = this.persistence.load();
     if (this.game?.isOver()) {
@@ -117,6 +119,7 @@ export class App extends HTMLElement {
       this.lastRollAt = now;
       this.mutate((g) => g.roll());
       sfx.roll();
+      if (this.lastView) announceNow(this.rolledSpoken(this.lastView));
       // Juhla vain heiton jälkeen — ei uudelleenrenderöinneissä (lukitus ym.),
       // jottei sama käsi juhli montaa kertaa. TOP = sade + hehku, GREAT = hehku.
       // Juhlaääni rämähdyksen perään pienellä viiveellä, etteivät ne puuroudu.
@@ -130,12 +133,20 @@ export class App extends HTMLElement {
     this.addEventListener("toggle-hold", (e) => {
       const i = (e as CustomEvent).detail.index as number;
       this.mutate((g) => g.toggleHold(i));
-      if (this.game?.dice.held[i]) sfx.hold();
-      else sfx.release();
+      const v = this.game?.dice.values[i] ?? 0;
+      if (this.game?.dice.held[i]) {
+        sfx.hold();
+        announceNow(T.a11y.held(v));
+      } else {
+        sfx.release();
+        announceNow(T.a11y.released(v));
+      }
     });
     this.addEventListener("commit", (e) => {
       const { columnId, rowId } = (e as CustomEvent).detail;
       this.mutate((g) => g.commit(columnId, rowId, {}));
+      const p = this.pendingSpoken();
+      if (p) announceNow(p);
     });
     this.addEventListener("confirm-commit", () => {
       if (!this.game) return;
@@ -143,6 +154,13 @@ export class App extends HTMLElement {
       const bonusSecured = this.bonusJustSecured();
       this.mutate((g) => g.confirm());
       this.playCommitSound(bonusSecured);
+      const lm = this.game.lastMove;
+      if (lm) {
+        announceNow(
+          T.a11y.committed(T.colLabel[lm.columnId], T.rows[lm.rowId].label, lm.score, this.game.currentCard().grandTotal()),
+        );
+      }
+      if (this.game.isOver()) announce(T.soloResult(this.game.players[0].card.grandTotal()));
       if (this.game.isOver()) {
         // Voittofanfaari kuittausäänen jälkeen; ennätyshelähdys fanfaarin perään
         // (vain kokeneelle — ks. recordSoundEligible).
@@ -153,6 +171,7 @@ export class App extends HTMLElement {
     this.addEventListener("cancel-commit", () => {
       this.mutate((g) => g.cancel());
       sfx.cancel();
+      announceNow(T.a11y.cancelled);
     });
     this.addEventListener("open-rules", () => this.setOverlay("rules"));
     this.addEventListener("open-about", () => this.setOverlay("about"));
@@ -168,6 +187,66 @@ export class App extends HTMLElement {
       }
       this.resetToSetup();
     });
+    // Tilanne: H-näppäin (Tommin kuittaus 14.10.2026). Ei tekstikentissä eikä
+    // muokkausnäppäinten kanssa, jottei se syö nimen kirjoitusta tai selaimen pikanäppäimiä.
+    window.addEventListener("keydown", (e) => {
+      if (e.key !== "h" && e.key !== "H") return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (!this.game || !this.lastView) return;
+      e.preventDefault();
+      announceNow(this.statusSpoken(this.lastView));
+    });
+  }
+
+  // --- Ruudunlukija (DGAndroid/docs/YHTEYDENOTTO_NKL.md › Grillaus 14.10.2026) ---
+
+  private rolledSpoken(v: GameView): string {
+    // Suuruusjärjestyksessä, koska kuulija hahmottaa parit ja suorat siitä nopeammin.
+    // Nopan oma nimi (dice-tray) kertoo paikkansa, joten järjestys ei hävitä tietoa.
+    const sorted = (ds: GameView["dice"]) => ds.map((d) => d.value).sort((a, b) => a - b).join(", ");
+    const free = sorted(v.dice.filter((d) => !d.held && d.value > 0));
+    const held = sorted(v.dice.filter((d) => d.held));
+    return T.a11y.rolled(v.rollsUsed, free, held);
+  }
+
+  private pendingSpoken(): string | null {
+    const g = this.game;
+    if (!g?.pending) return null;
+    const { columnId, rowId } = g.pending;
+    const score = g.currentCard().get(columnId, rowId) ?? 0;
+    return T.a11y.pending(T.colLabel[columnId], T.rows[rowId].label, score);
+  }
+
+  /** Tilanne yhdellä komennolla (Villen kohta 4): heitto, nopat, parhaat vaihtoehdot
+   *  sijainti edellä (sarake, rivi, pisteet), tyhjät ruudut ja yhteispisteet. */
+  private statusSpoken(v: GameView): string {
+    const parts: string[] = [];
+    parts.push(v.hasRolled ? this.rolledSpoken(v) : T.a11y.notRolled);
+    const pending = this.pendingSpoken();
+    if (pending) parts.push(pending);
+    else if (v.hasRolled) {
+      // Sama rivi samoilla pisteillä usealla sarakkeella sanotaan kerran (lyhyys, Villen
+      // kohta 2): "I II III Sattuma 28" eikä kolmea erillistä vaihtoehtoa.
+      const opts: { text: string; score: number }[] = [];
+      for (const r of v.board.rows) {
+        const byScore = new Map<number, string[]>();
+        for (const col of v.board.columns) {
+          const c = r.cells[col];
+          if (c.available && c.score > 0) byScore.set(c.score, [...(byScore.get(c.score) ?? []), T.colLabel[col]]);
+        }
+        for (const [score, cols] of byScore) opts.push({ text: `${cols.join(" ")} ${r.label} ${score}`, score });
+      }
+      opts.sort((a, b) => b.score - a.score);
+      parts.push(opts.length ? T.a11y.options(opts.slice(0, 8).map((o) => o.text).join("; ")) : T.a11y.noOptions);
+    }
+    const empty = v.board.rows.reduce(
+      (n, r) => n + v.board.columns.filter((c) => r.cells[c].value === null).length,
+      0,
+    );
+    parts.push(T.a11y.freeCells(empty), T.a11y.total(v.board.grandTotal));
+    return parts.join(". ");
   }
 
   /** Aloita uusi peli annetuilla pelaajilla ja noppamäärällä (aloitusnäytöstä tai
@@ -309,6 +388,14 @@ export class App extends HTMLElement {
     this.lastView = view;
 
     this.append(document.createElement("sj-header") as AppHeader);
+
+    // Tilanne-nappi ruudunlukijalle: näkymätön näkevälle, tulee näkyviin näppäinkohdistuksella.
+    const statusBtn = document.createElement("button");
+    statusBtn.className = "sr-only sr-focusable status-btn";
+    statusBtn.textContent = T.a11y.statusButton;
+    statusBtn.title = "H";
+    statusBtn.addEventListener("click", () => announceNow(this.statusSpoken(view)));
+    this.append(statusBtn);
 
     // Pelialue: vasen sarake = ohjaimet (vuorotila + nopat), oikea = tulokortti.
     // CSS järjestää tämän pystyssä pinoksi ja vaakatasossa kahdeksi palstaksi.

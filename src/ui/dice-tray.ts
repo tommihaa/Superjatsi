@@ -74,14 +74,14 @@ export class DiceTray extends HTMLElement {
       if (d.held) {
         thrown.push(`<span class="die ghost" aria-hidden="true"></span>`);
         rowDice.push(
-          `<button class="die held ${tone}" data-die="${i}"${dis} aria-label="noppa ${d.value}, lukittu">${pips}<span class="held-tag">${T.held}</span></button>`,
+          `<button class="die held ${tone}" data-die="${i}"${dis} aria-label="${T.a11y.die(d.value, true)}">${pips}<span class="held-tag">${T.held}</span></button>`,
         );
       } else {
         // Heiton porrastus: nopat "laskeutuvat" pöytään pienellä viiveellä toisistaan.
         const cls = `die ${tone}${justRolled ? " rolling" : ""}`;
         const delay = justRolled ? `animation-delay:${i * 40}ms;` : "";
         thrown.push(
-          `<button class="${cls}" data-die="${i}"${dis} style="${delay}${this.jitter(i, d.value)}" aria-label="noppa ${d.value}">${pips}</button>`,
+          `<button class="${cls}" data-die="${i}"${dis} style="${delay}${this.jitter(i, d.value)}" aria-label="${T.a11y.die(d.value, false)}">${pips}</button>`,
         );
       }
     });
