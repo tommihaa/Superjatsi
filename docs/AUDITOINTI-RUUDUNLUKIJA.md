@@ -68,3 +68,4 @@ SJ-5 ei toiminut toivotusti: TalkBackin suomen puhe taivuttaa numeron seuraavan 
 joten "Heitto 1 kolmesta" kuuluu "Heitto yhdestä kolmesta".
 Korjattu uudelleen 0.23.3:ssa Tommin valinnalla: järjestysluku sanana ("Ensimmäinen heitto",
 "Toinen heitto", "Kolmas heitto"), jota puhe ei voi taivuttaa väärin. Ei kuunneltu.
+Kuunneltu 0.23.3:ssa 15.10.2026: TalkBack sanoo "Ensimmäinen heitto". SJ-5 toimii.
