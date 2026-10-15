@@ -3,6 +3,14 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.23.3] – 2026-10-15
+
+### Korjattu
+- **Heiton numero järjestyslukuna.** TalkBackin suomen puhe taivutti numeron, ja "Heitto 1
+  kolmesta" kuului "Heitto yhdestä kolmesta". Nyt "Ensimmäinen heitto", "Toinen heitto" ja
+  "Kolmas heitto" (Tommin valinta, SJ-5). Ruotsi ja englanti pysyvät muodossa "Slag 1 av 3" ja
+  "Roll 1 of 3".
+
 ## [0.23.2] – 2026-10-15
 
 ### Korjattu

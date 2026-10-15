@@ -8,6 +8,8 @@ import type { DiceTheme } from "../../domain/prefs";
 import type { RowId } from "../../domain/types";
 import type { TermEntry } from "../glossary";
 
+const ORDINAL: Record<number, string> = { 1: "Ensimmäinen", 2: "Toinen", 3: "Kolmas" };
+
 export const fi = {
   title: "Superjatsi",
   tagline: "Noppapeli yhdelle pelaajalle",
@@ -298,10 +300,12 @@ export const fi = {
   emptyDie: "tyhjä noppa",
   // Ruudunlukija (DGAndroid/docs/YHTEYDENOTTO_NKL.md › Grillaus 14.10.2026): lyhyt ja
   // sijainti ennen sisältöä. Näitä ei näytetä näkevälle.
+  // Heiton numero järjestyslukuna sanana: TalkBackin suomen puhe taivutti numeron
+  // ("Heitto 1 kolmesta" → "yhdestä kolmesta"), ja "1/3" kuului kolmasosana (SJ-5).
   a11y: {
     die: (v: number) => `noppa ${v}`,
     rolled: (n: number, free: string, held: string) =>
-      `Heitto ${n} kolmesta: ${free}${held ? `. Lukitut ${held}` : ""}`,
+      `${ORDINAL[n] ?? n} heitto: ${free}${held ? `. Lukitut ${held}` : ""}`,
     held: (v: number) => `${v} lukittu`,
     released: (v: number) => `${v} vapautettu`,
     pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Vahvista tai peru`,
@@ -309,7 +313,7 @@ export const fi = {
       `Kirjattu ${col} ${row} ${score}. Yhteensä ${total}`,
     cancelled: "Peruttu",
     notRolled: "Ei heitetty",
-    rollNo: (n: number) => `Heitto ${n} kolmesta`,
+    rollNo: (n: number) => `${ORDINAL[n] ?? n} heitto`,
     dice: (list: string) => `Nopat ${list}`,
     options: (list: string) => `Vaihtoehdot: ${list}`,
     noOptions: "Ei pisteellisiä vaihtoehtoja",

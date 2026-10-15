@@ -66,3 +66,5 @@ joten heiton numero jäi kuulumatta. Sama muoto on `rolled`- ja `rollNo`-tekstei
 kirjauksen vahvistuksen jälkeen se siirtyy heittonappiin ("Heitä (3)"). SJ-4 toimii.
 SJ-5 ei toiminut toivotusti: TalkBackin suomen puhe taivuttaa numeron seuraavan sanan mukaan,
 joten "Heitto 1 kolmesta" kuuluu "Heitto yhdestä kolmesta".
+Korjattu uudelleen 0.23.3:ssa Tommin valinnalla: järjestysluku sanana ("Ensimmäinen heitto",
+"Toinen heitto", "Kolmas heitto"), jota puhe ei voi taivuttaa väärin. Ei kuunneltu.

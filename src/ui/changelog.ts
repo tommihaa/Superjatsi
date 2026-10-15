@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.23.3",
+    date: "15.10.2026",
+    items: [
+      "Ruudunlukija sanoo heiton numeron järjestyslukuna: \"Ensimmäinen heitto\", \"Toinen heitto\" ja \"Kolmas heitto\". Edellinen muoto kuului \"Heitto yhdestä kolmesta\".",
+    ],
+  },
+  {
     version: "0.23.2",
     date: "15.10.2026",
     items: [
