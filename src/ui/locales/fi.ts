@@ -301,7 +301,7 @@ export const fi = {
   a11y: {
     die: (v: number) => `noppa ${v}`,
     rolled: (n: number, free: string, held: string) =>
-      `Heitto ${n}/3: ${free}${held ? `. Lukitut ${held}` : ""}`,
+      `Heitto ${n} kolmesta: ${free}${held ? `. Lukitut ${held}` : ""}`,
     held: (v: number) => `${v} lukittu`,
     released: (v: number) => `${v} vapautettu`,
     pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Vahvista tai peru`,
@@ -309,7 +309,7 @@ export const fi = {
       `Kirjattu ${col} ${row} ${score}. Yhteensä ${total}`,
     cancelled: "Peruttu",
     notRolled: "Ei heitetty",
-    rollNo: (n: number) => `Heitto ${n}/3`,
+    rollNo: (n: number) => `Heitto ${n} kolmesta`,
     dice: (list: string) => `Nopat ${list}`,
     options: (list: string) => `Vaihtoehdot: ${list}`,
     noOptions: "Ei pisteellisiä vaihtoehtoja",

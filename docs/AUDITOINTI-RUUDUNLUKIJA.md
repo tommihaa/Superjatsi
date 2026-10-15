@@ -50,7 +50,7 @@ valitsin"), ja taulukko kuuluu taulukkona ("ruudukossa 19 riviä, 7 saraketta").
 kertoo rivin, sarakkeen ja pisteet ("Kirjaa Täyskäsi, sarake I, 7 pistettä"), ja kirjaus
 kulkee Vahvista-nappiin ja ilmoittaa yhteissumman.
 
-**SJ-4. Kohdistus katoaa jokaisen toiminnon jälkeen.** Tila: korjattu 15.10.2026, ei vielä
+**SJ-4. Kohdistus katoaa jokaisen toiminnon jälkeen.** Tila: korjattu 15.10.2026, 0.23.2, ei vielä
 julkaistu. Lukituksen ja kirjauksen jälkeen TalkBack sanoi "Superjatsi, verkkonäkymä", eli
 kohdistus putosi koko sivulle. Syy: `sj-app.render()` rakentaa koko näkymän uusiksi
 (`replaceChildren`), ja kohdistettu nappi tuhoutuu. Korjaus: render tallentaa kohdistetun
@@ -59,5 +59,5 @@ kohdistuksen samaan kohtaan. Kadonneen kohdan (kirjattu solu, Vahvista) tilalle 
 menee heittonappiin. Todennettu dev-previewissä: heiton jälkeen heittonappi, lukituksen
 jälkeen sama noppa, solun jälkeen Vahvista ja vahvistuksen jälkeen heittonappi. Ei kuunneltu.
 
-**SJ-5. "Heitto 1/3" luetaan murtolukuna.** Tila: auki. TalkBack sanoi "Heitto kolmasosa",
+**SJ-5. "Heitto 1/3" luetaan murtolukuna.** Tila: korjattu 15.10.2026 Tommin valinnalla muotoon "Heitto 1 kolmesta" (sv "Slag 1 av 3", en "Roll 1 of 3"), 0.23.2. TalkBack sanoi "Heitto kolmasosa",
 joten heiton numero jäi kuulumatta. Sama muoto on `rolled`- ja `rollNo`-teksteissä.

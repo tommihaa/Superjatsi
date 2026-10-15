@@ -285,7 +285,7 @@ export const en: Strings = {
   a11y: {
     die: (v: number) => `die ${v}`,
     rolled: (n: number, free: string, held: string) =>
-      `Roll ${n}/3: ${free}${held ? `. Held ${held}` : ""}`,
+      `Roll ${n} of 3: ${free}${held ? `. Held ${held}` : ""}`,
     held: (v: number) => `${v} held`,
     released: (v: number) => `${v} released`,
     pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Confirm or undo`,
@@ -293,7 +293,7 @@ export const en: Strings = {
       `Scored ${col} ${row} ${score}. Total ${total}`,
     cancelled: "Undone",
     notRolled: "Not rolled",
-    rollNo: (n: number) => `Roll ${n}/3`,
+    rollNo: (n: number) => `Roll ${n} of 3`,
     dice: (list: string) => `Dice ${list}`,
     options: (list: string) => `Options: ${list}`,
     noOptions: "No scoring options",

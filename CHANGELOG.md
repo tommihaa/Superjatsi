@@ -3,6 +3,16 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.23.2] – 2026-10-15
+
+### Korjattu
+- **Kohdistus säilyy renderin yli.** Näkymä rakennetaan joka toiminnon jälkeen uusiksi, joten
+  kohdistettu nappi tuhoutui ja TalkBack putosi koko sivulle ("verkkonäkymä"). Nyt kohdistus
+  palaa samaan noppaan, soluun tai nappiin, ja kadonneen kohdan tilalle heittonappiin
+  (`docs/AUDITOINTI-RUUDUNLUKIJA.md` › SJ-4).
+- **Heiton numero ei ole murtoluku.** "Heitto 1/3" luettiin "kolmasosaksi", nyt "Heitto 1
+  kolmesta" (ruotsiksi "Slag 1 av 3", englanniksi "Roll 1 of 3"), SJ-5.
+
 ## [0.23.1] – 2026-10-14
 
 ### Muutettu

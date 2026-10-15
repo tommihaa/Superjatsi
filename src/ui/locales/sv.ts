@@ -286,7 +286,7 @@ export const sv: Strings = {
   a11y: {
     die: (v: number) => `tärning ${v}`,
     rolled: (n: number, free: string, held: string) =>
-      `Slag ${n}/3: ${free}${held ? `. Låsta ${held}` : ""}`,
+      `Slag ${n} av 3: ${free}${held ? `. Låsta ${held}` : ""}`,
     held: (v: number) => `${v} låst`,
     released: (v: number) => `${v} upplåst`,
     pending: (col: string, row: string, score: number) => `${col} ${row}: ${score}. Bekräfta eller ångra`,
@@ -294,7 +294,7 @@ export const sv: Strings = {
       `Inskrivet ${col} ${row} ${score}. Totalt ${total}`,
     cancelled: "Ångrat",
     notRolled: "Inte slaget",
-    rollNo: (n: number) => `Slag ${n}/3`,
+    rollNo: (n: number) => `Slag ${n} av 3`,
     dice: (list: string) => `Tärningar ${list}`,
     options: (list: string) => `Alternativ: ${list}`,
     noOptions: "Inga poänggivande alternativ",

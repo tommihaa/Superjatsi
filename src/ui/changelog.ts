@@ -12,6 +12,13 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    version: "0.23.2",
+    date: "15.10.2026",
+    items: [
+      "Ruudunlukijan kohdistus pysyy paikallaan: nopan lukituksen ja kirjauksen jälkeen se jää samaan noppaan tai siirtyy heittonappiin eikä putoa koko sivulle. Heiton numero kuuluu muodossa \"Heitto 1 kolmesta\", koska \"1/3\" luettiin murtolukuna.",
+    ],
+  },
+  {
     version: "0.23.0",
     date: "14.10.2026",
     items: [
