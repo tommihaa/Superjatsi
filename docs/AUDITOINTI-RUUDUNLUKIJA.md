@@ -61,3 +61,8 @@ jälkeen sama noppa, solun jälkeen Vahvista ja vahvistuksen jälkeen heittonapp
 
 **SJ-5. "Heitto 1/3" luetaan murtolukuna.** Tila: korjattu 15.10.2026 Tommin valinnalla muotoon "Heitto 1 kolmesta" (sv "Slag 1 av 3", en "Roll 1 of 3"), 0.23.2. TalkBack sanoi "Heitto kolmasosa",
 joten heiton numero jäi kuulumatta. Sama muoto on `rolled`- ja `rollNo`-teksteissä.
+
+**Kuuntelu korjausten jälkeen (0.23.2):** kohdistus jää lukituksen jälkeen noppaan, ja
+kirjauksen vahvistuksen jälkeen se siirtyy heittonappiin ("Heitä (3)"). SJ-4 toimii.
+SJ-5 ei toiminut toivotusti: TalkBackin suomen puhe taivuttaa numeron seuraavan sanan mukaan,
+joten "Heitto 1 kolmesta" kuuluu "Heitto yhdestä kolmesta".
