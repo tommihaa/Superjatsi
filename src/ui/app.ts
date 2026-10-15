@@ -365,7 +365,37 @@ export class App extends HTMLElement {
     this.render();
   }
 
+  /**
+   * Kohdistetun elementin tunniste, jolla sama kohta löytyy uudesta DOM:sta. Render
+   * rakentaa kaiken uusiksi, joten ilman tätä kohdistus putoaa sivulle ja TalkBack sanoo
+   * "verkkonäkymä" (kuunneltu 15.10.2026, docs/AUDITOINTI-RUUDUNLUKIJA.md › SJ-4).
+   */
+  private focusKey(): string | null {
+    const a = document.activeElement as HTMLElement | null;
+    if (!a || !this.contains(a)) return null;
+    if (a.dataset.die !== undefined) return `[data-die="${a.dataset.die}"]`;
+    const td = a.closest<HTMLElement>("td[data-col][data-row]");
+    if (td) return `td[data-col="${td.dataset.col}"][data-row="${td.dataset.row}"] .cell-btn`;
+    for (const cls of ["roll", "confirm", "cancel", "status-btn"]) {
+      if (a.classList.contains(cls)) return `button.${cls}`;
+    }
+    return "";
+  }
+
+  /** Palauttaa kohdistuksen; kadonneen kohdan (kirjattu solu, Vahvista) tilalle heittonappi. */
+  private restoreFocus(key: string | null): void {
+    if (key === null) return;
+    const usable = (el: HTMLElement | null) =>
+      el && !(el as HTMLButtonElement).disabled ? el : null;
+    const target =
+      (key ? usable(this.querySelector<HTMLElement>(key)) : null) ??
+      usable(this.querySelector<HTMLElement>("button.roll")) ??
+      this.querySelector<HTMLElement>("button.status-btn");
+    target?.focus();
+  }
+
   private render(): void {
+    const focusKey = this.focusKey();
     this.replaceChildren();
 
     const main = document.createElement("main");
@@ -427,6 +457,7 @@ export class App extends HTMLElement {
     else if (this.overlay) this.append(this.infoOverlay(this.overlay));
 
     if (becamePending) this.querySelector<HTMLButtonElement>("button.confirm")?.focus();
+    else if (!view.isOver && !this.overlay) this.restoreFocus(focusKey);
   }
 
   /** Loppunäyttö: tulos, ennätyslista ja jatkonapit. Ei sulkeudu taustaa

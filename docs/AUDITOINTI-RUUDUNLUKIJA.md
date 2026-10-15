@@ -40,3 +40,24 @@ DOMista. Alkuperäinen havainto:
 `dice-tray.ts:77` ja `:84`: APG:n [toggle button](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
 -malli on `aria-pressed="true"`, jolloin ruudunlukija sanoo tilan omalla tavallaan ("painettu" tai
 "valittu") ja nimi pysyy samana. Nykyinen tapa toimii, joten tämä on yhdenmukaisuutta eikä vika.
+
+## Kuuntelu 15.10.2026
+
+Tommi kuunteli tuotantoversion 0.23.1 TalkBackilla Pixelillä, pystytilassa.
+
+*Toimii:* heitto ilmoitetaan, lukittu noppa kertoo tilan ("valittu, päällä, noppa 2,
+valitsin"), ja taulukko kuuluu taulukkona ("ruudukossa 19 riviä, 7 saraketta"). Vapaa solu
+kertoo rivin, sarakkeen ja pisteet ("Kirjaa Täyskäsi, sarake I, 7 pistettä"), ja kirjaus
+kulkee Vahvista-nappiin ja ilmoittaa yhteissumman.
+
+**SJ-4. Kohdistus katoaa jokaisen toiminnon jälkeen.** Tila: korjattu 15.10.2026, ei vielä
+julkaistu. Lukituksen ja kirjauksen jälkeen TalkBack sanoi "Superjatsi, verkkonäkymä", eli
+kohdistus putosi koko sivulle. Syy: `sj-app.render()` rakentaa koko näkymän uusiksi
+(`replaceChildren`), ja kohdistettu nappi tuhoutuu. Korjaus: render tallentaa kohdistetun
+kohdan tunnisteen (noppa `data-die`, solu `data-col`/`data-row`, napin luokka) ja palauttaa
+kohdistuksen samaan kohtaan. Kadonneen kohdan (kirjattu solu, Vahvista) tilalle kohdistus
+menee heittonappiin. Todennettu dev-previewissä: heiton jälkeen heittonappi, lukituksen
+jälkeen sama noppa, solun jälkeen Vahvista ja vahvistuksen jälkeen heittonappi. Ei kuunneltu.
+
+**SJ-5. "Heitto 1/3" luetaan murtolukuna.** Tila: auki. TalkBack sanoi "Heitto kolmasosa",
+joten heiton numero jäi kuulumatta. Sama muoto on `rolled`- ja `rollNo`-teksteissä.
