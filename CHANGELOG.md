@@ -3,6 +3,13 @@
 Kaikki merkittävät muutokset kirjataan tähän. Muoto noudattaa löyhästi
 [Keep a Changelog](https://keepachangelog.com/) -periaatetta. Versiointi: [SemVer](https://semver.org/).
 
+## [0.23.4] – 2026-10-20
+
+### Muutettu
+- **Tietoja kertoo, miten Tilanne toimii NVDA:lla.** NVDA:n selaustilassa H on NVDA:n oma
+  otsikkonäppäin eikä mene pelille. Silloin tilanne kuuluu Tilanne-napista Enterillä, ja
+  kohdistustilassa (NVDA+välilyönti) H toimii. Tommin mittaus NVDA:lla 20.10.2026.
+
 ## [0.23.3] – 2026-10-15
 
 ### Korjattu

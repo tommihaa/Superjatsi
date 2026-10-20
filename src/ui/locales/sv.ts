@@ -393,6 +393,8 @@ export const sv: Strings = {
       "20-25 minuter. Du försöker få så många poäng som möjligt.",
     "Spelet fungerar med tangentbord, mus och pekskärm. En skärmläsare hör " +
       "slagen och inskrivningarna. H-tangenten eller knappen Läge berättar läget.",
+    "I NVDA:s bläddringsläge är H NVDA:s egen tangent och når inte spelet. Använd då " +
+      "knappen Läge med Enter. I fokusläge (NVDA+mellanslag) fungerar H.",
     "Spelet samlar inget om dig. Inget konto, ingen reklam. Dina rekord sparas " +
       "bara i din egen webbläsare.",
     "Spelet är gratis och gjort för att delas. Du kan skicka respons. Du kan också " +

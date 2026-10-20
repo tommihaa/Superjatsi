@@ -417,6 +417,8 @@ export const fi = {
       "20-25 minuuttia. Yrität saada mahdollisimman paljon pisteitä.",
     "Peli toimii näppäimistöllä, hiirellä ja kosketuksella. Ruudunlukija kuulee " +
       "heitot ja kirjaukset. H-näppäin tai Tilanne-nappi kertoo tilanteen.",
+    "NVDA:n selaustilassa H on NVDA:n oma näppäin eikä mene pelille. Käytä silloin " +
+      "Tilanne-nappia Enterillä. Kohdistustilassa (NVDA+välilyönti) H toimii.",
     "Peli ei kerää sinusta mitään. Ei tiliä, ei mainoksia. Ennätyksesi tallentuvat " +
       "vain sinun selaimeesi.",
     "Peli on ilmainen ja tehty jaettavaksi. Voit lähettää palautetta. Voit myös " +

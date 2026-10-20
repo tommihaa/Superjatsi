@@ -390,6 +390,8 @@ export const en: Strings = {
       "20-25 minutes. You try to score as many points as you can.",
     "The game works with a keyboard, a mouse and touch. A screen reader hears " +
       "the rolls and the scores. The H key or the Status button tells the situation.",
+    "In NVDA browse mode, H is NVDA’s own key and does not reach the game. Then use " +
+      "the Status button with Enter. In focus mode (NVDA+Space), H works.",
     "The game collects nothing about you. No account, no ads. Your records are stored " +
       "only in your own browser.",
     "The game is free and made to be shared. You can send feedback. You can also " +
